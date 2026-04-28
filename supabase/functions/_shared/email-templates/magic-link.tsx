@@ -24,12 +24,12 @@ export const MagicLinkEmail = ({
 }: MagicLinkEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>Din inloggningslänk till Klasskassa</Preview>
+    <Preview>Din inloggningslänk till Qlasskassan</Preview>
     <Body style={main}>
       <Container style={container}>
         <Heading style={h1}>Din inloggningslänk</Heading>
         <Text style={text}>
-          Klicka på knappen nedan för att logga in på Klasskassa. Länken
+          Klicka på knappen nedan för att logga in på Qlasskassan. Länken
           gäller en begränsad tid.
         </Text>
         <Button style={button} href={confirmationUrl}>
