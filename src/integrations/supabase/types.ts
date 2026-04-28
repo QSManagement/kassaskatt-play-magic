@@ -179,6 +179,57 @@ export type Database = {
         }
         Relationships: []
       }
+      qlasskassan_leads: {
+        Row: {
+          association_name: string | null
+          bank_account: string | null
+          class_name: string | null
+          created_at: string
+          email: string
+          fundraising_goal: string | null
+          id: string
+          metadata: Json | null
+          name: string | null
+          organization_number: string | null
+          phone: string | null
+          school_name: string | null
+          source: string
+          student_count: number | null
+        }
+        Insert: {
+          association_name?: string | null
+          bank_account?: string | null
+          class_name?: string | null
+          created_at?: string
+          email: string
+          fundraising_goal?: string | null
+          id?: string
+          metadata?: Json | null
+          name?: string | null
+          organization_number?: string | null
+          phone?: string | null
+          school_name?: string | null
+          source: string
+          student_count?: number | null
+        }
+        Update: {
+          association_name?: string | null
+          bank_account?: string | null
+          class_name?: string | null
+          created_at?: string
+          email?: string
+          fundraising_goal?: string | null
+          id?: string
+          metadata?: Json | null
+          name?: string | null
+          organization_number?: string | null
+          phone?: string | null
+          school_name?: string | null
+          source?: string
+          student_count?: number | null
+        }
+        Relationships: []
+      }
       startguide_leads: {
         Row: {
           created_at: string
