@@ -334,7 +334,7 @@ export default function Index() {
           </div>
 
           <div className="text-center mt-10 text-sm text-emerald-900/60">
-            Bönor och fler varianter kommer snart. Maila <span className="font-medium text-emerald-900">info@klasskassa.se</span> för förbeställning.
+            Bönor och fler varianter kommer snart. Maila <span className="font-medium text-emerald-900">info@qlasskassan.se</span> för förbeställning.
           </div>
         </div>
       </section>
@@ -346,7 +346,7 @@ export default function Index() {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
               <div className="inline-flex items-center gap-2 bg-emerald-900 text-amber-100 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
-                <Repeat className="w-4 h-4" /> Bara hos Klasskassa
+                <Repeat className="w-4 h-4" /> Bara hos Qlasskassan
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-emerald-950 mb-6 leading-tight">
                 Klassen får pengar <span className="italic text-amber-700">även</span> efter att försäljningen är slut.
@@ -371,9 +371,7 @@ export default function Index() {
             <div className="relative">
               <div className="bg-white rounded-3xl p-8 shadow-2xl border border-amber-200">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-emerald-900 rounded-full flex items-center justify-center">
-                    <Coffee className="w-6 h-6 text-amber-300" />
-                  </div>
+                  <Logo size="md" variant="dark" showWordmark={false} />
                   <div>
                     <div className="font-bold text-emerald-950">Klass 6B - Lindbladskolan</div>
                     <div className="text-xs text-emerald-900/60">Aktiv återköpsklubb</div>
@@ -420,7 +418,7 @@ export default function Index() {
           <div className="bg-stone-50 rounded-3xl overflow-hidden border border-stone-200">
             <div className="grid grid-cols-4 bg-emerald-950 text-amber-50 text-sm font-semibold">
               <div className="p-5"></div>
-              <div className="p-5 text-center bg-amber-700">Klasskassa</div>
+              <div className="p-5 text-center bg-amber-700">Qlasskassan</div>
               <div className="p-5 text-center">Kakor</div>
               <div className="p-5 text-center">Kryddor</div>
             </div>
@@ -498,13 +496,10 @@ export default function Index() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-9 h-9 bg-amber-300 rounded-full flex items-center justify-center">
-                  <Coffee className="w-5 h-5 text-emerald-950" />
-                </div>
-                <span className="font-bold text-xl text-amber-50">Klasskassa</span>
+              <div className="mb-4">
+                <Logo size="md" variant="light" showTagline />
               </div>
-              <p className="text-sm leading-relaxed">Premium kaffe för klassinsamlingar. Officiell svensk partner till Caffè Gondoliere.</p>
+              <p className="text-sm leading-relaxed">Premium kaffe för klassinsamlingar. Auktoriserad svensk återförsäljare av Caffè Gondoliere.</p>
             </div>
             <div>
               <div className="font-semibold text-amber-50 mb-4 text-sm">Produkter</div>
@@ -526,14 +521,14 @@ export default function Index() {
             <div>
               <div className="font-semibold text-amber-50 mb-4 text-sm">Kontakt</div>
               <ul className="space-y-2 text-sm">
-                <li>info@klasskassa.se</li>
+                <li>info@qlasskassan.se</li>
                 <li>070-123 45 67</li>
                 <li>Vardagar 9-17</li>
               </ul>
             </div>
           </div>
           <div className="pt-8 border-t border-emerald-800 text-xs flex flex-wrap justify-between gap-4">
-            <div>© 2026 Klasskassa · Drivs av Scandinavian Coffee AB</div>
+            <div>© 2026 Qlasskassan · Drivs av Scandinavian Coffee AB</div>
             <div className="flex gap-6">
               <span>Allmänna villkor</span>
               <span>Integritetspolicy</span>

@@ -127,7 +127,7 @@ export function RegistrationDialog({ open, onOpenChange }: Props) {
       <DialogContent className="max-w-xl bg-stone-50 border-stone-200">
         <DialogHeader>
           <DialogTitle className="text-emerald-950 text-2xl font-bold">
-            {step === 4 ? "Välkommen till Klasskassa!" : "Registrera er klass"}
+            {step === 4 ? "Välkommen till Qlasskassan!" : "Registrera er klass"}
           </DialogTitle>
           <DialogDescription className="text-emerald-900/70">
             {step < 4 && `Steg ${step} av 3`}
