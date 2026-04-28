@@ -100,6 +100,23 @@ export function RegistrationDialog({ open, onOpenChange }: Props) {
       });
       if (insertError) throw insertError;
 
+      // Log unified lead (non-blocking, best-effort)
+      supabase.from("qlasskassan_leads").insert({
+        source: "pilot_registration",
+        name: data.contact_name,
+        email: data.contact_email,
+        phone: data.contact_phone,
+        school_name: data.school_name,
+        class_name: data.class_name,
+        student_count: parseInt(data.student_count),
+        association_name: data.association_name,
+        organization_number: data.organization_number,
+        bank_account: data.bank_account,
+        fundraising_goal: data.fundraising_goal || null,
+      }).then(({ error: leadErr }) => {
+        if (leadErr) console.warn("lead insert failed", leadErr);
+      });
+
       // 3. Trigger welcome email (non-blocking)
       supabase.functions.invoke("send-transactional-email", {
         body: {
