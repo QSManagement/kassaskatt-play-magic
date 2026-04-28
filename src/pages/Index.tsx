@@ -46,8 +46,14 @@ export default function Index() {
     <div className="min-h-screen bg-stone-50" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
       {/* Nav */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled > 50 ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
-          <a href="#" aria-label="Qlasskassan – startsida"><Logo size="sm" variant="dark" /></a>
+        <div className="max-w-7xl mx-auto px-6 py-3 md:py-4 flex items-center justify-between gap-4">
+          <a
+            href="#"
+            aria-label="Qlasskassan – startsida"
+            className="relative -my-6 md:-my-8 flex items-center"
+          >
+            <Logo size="sm" variant="dark" />
+          </a>
           <div className="hidden md:flex items-center gap-7 text-sm font-medium text-emerald-950">
             {NAV_LINKS.map((l) => (
               <a key={l.href} href={l.href} className="hover:text-amber-700 transition">{l.label}</a>
