@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Coffee, Calculator, Package, TrendingUp, Heart, ShieldCheck, Truck, Sparkles, ArrowRight, Check, Users, Repeat } from 'lucide-react';
+import { RegistrationDialog } from '@/components/registration/RegistrationDialog';
+import { StartguideDialog } from '@/components/registration/StartguideDialog';
 
 export default function Index() {
   const [students, setStudents] = useState(25);
   const [bagsPerStudent, setBagsPerStudent] = useState(8);
   const [goldRatio, setGoldRatio] = useState(60);
   const [scrolled, setScrolled] = useState(0);
+  const [regOpen, setRegOpen] = useState(false);
+  const [guideOpen, setGuideOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY);
