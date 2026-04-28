@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Anyone can request startguide" ON public.startguide_leads;

@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Coffee, Calculator, Package, TrendingUp, Heart, ShieldCheck, Truck, Sparkles, ArrowRight, Check, Users, Repeat } from 'lucide-react';
+import { RegistrationDialog } from '@/components/registration/RegistrationDialog';
+import { StartguideDialog } from '@/components/registration/StartguideDialog';
 
 export default function Index() {
   const [students, setStudents] = useState(25);
   const [bagsPerStudent, setBagsPerStudent] = useState(8);
   const [goldRatio, setGoldRatio] = useState(60);
   const [scrolled, setScrolled] = useState(0);
+  const [regOpen, setRegOpen] = useState(false);
+  const [guideOpen, setGuideOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY);
@@ -37,7 +41,7 @@ export default function Index() {
             <a href="#kalkylator" className="hover:text-amber-700 transition">Räkna ut</a>
             <a href="#aterkop" className="hover:text-amber-700 transition">Återköpsklubben</a>
           </div>
-          <button className="bg-emerald-900 text-amber-50 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-800 transition shadow-sm">
+          <button onClick={() => setRegOpen(true)} className="bg-emerald-900 text-amber-50 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-800 transition shadow-sm">
             Starta försäljning
           </button>
         </div>
@@ -64,11 +68,11 @@ export default function Index() {
               Glöm trötta kataloger med kakor och kryddor. Klasskassa erbjuder Rainforest Alliance-certifierat premium kaffe från Caffè Gondoliere — produkter folk faktiskt vill köpa, igen och igen.
             </p>
             <div className="flex flex-wrap gap-3 mb-10">
-              <button className="bg-emerald-900 text-amber-50 px-7 py-4 rounded-full font-semibold hover:bg-emerald-800 transition shadow-lg shadow-emerald-900/20 flex items-center gap-2 group">
+              <button onClick={() => setRegOpen(true)} className="bg-emerald-900 text-amber-50 px-7 py-4 rounded-full font-semibold hover:bg-emerald-800 transition shadow-lg shadow-emerald-900/20 flex items-center gap-2 group">
                 Kom igång gratis
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </button>
-              <button className="bg-white text-emerald-950 px-7 py-4 rounded-full font-semibold hover:bg-stone-100 transition border border-stone-200">
+              <button onClick={() => setGuideOpen(true)} className="bg-white text-emerald-950 px-7 py-4 rounded-full font-semibold hover:bg-stone-100 transition border border-stone-200">
                 Få startguide via mail
               </button>
             </div>
@@ -237,7 +241,7 @@ export default function Index() {
                 </div>
               </div>
 
-              <button className="mt-8 bg-amber-300 text-emerald-950 px-6 py-4 rounded-full font-bold hover:bg-amber-200 transition flex items-center justify-center gap-2 group">
+              <button onClick={() => setRegOpen(true)} className="mt-8 bg-amber-300 text-emerald-950 px-6 py-4 rounded-full font-bold hover:bg-amber-200 transition flex items-center justify-center gap-2 group">
                 Starta er försäljning nu
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </button>
@@ -481,11 +485,11 @@ export default function Index() {
               Registrera klassen gratis på 2 minuter — eller få vår startguide skickad till mailen direkt.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
-              <button className="bg-amber-300 text-emerald-950 px-7 py-4 rounded-full font-bold hover:bg-amber-200 transition shadow-xl flex items-center gap-2 group">
+              <button onClick={() => setRegOpen(true)} className="bg-amber-300 text-emerald-950 px-7 py-4 rounded-full font-bold hover:bg-amber-200 transition shadow-xl flex items-center gap-2 group">
                 Kom igång gratis
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </button>
-              <button className="bg-emerald-800 text-amber-50 px-7 py-4 rounded-full font-semibold hover:bg-emerald-700 transition border border-emerald-700">
+              <button onClick={() => setGuideOpen(true)} className="bg-emerald-800 text-amber-50 px-7 py-4 rounded-full font-semibold hover:bg-emerald-700 transition border border-emerald-700">
                 Få startguide via mail
               </button>
             </div>
@@ -541,6 +545,8 @@ export default function Index() {
           </div>
         </div>
       </footer>
+      <RegistrationDialog open={regOpen} onOpenChange={setRegOpen} />
+      <StartguideDialog open={guideOpen} onOpenChange={setGuideOpen} />
     </div>
   );
 }
