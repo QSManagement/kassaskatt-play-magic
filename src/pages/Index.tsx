@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Coffee, Calculator, Package, TrendingUp, Heart, ShieldCheck, Truck, Sparkles, ArrowRight, Check, Users, Repeat } from 'lucide-react';
+import { Calculator, Package, TrendingUp, Heart, ShieldCheck, Truck, Sparkles, ArrowRight, Check, Users, Repeat } from 'lucide-react';
 import { RegistrationDialog } from '@/components/registration/RegistrationDialog';
 import { StartguideDialog } from '@/components/registration/StartguideDialog';
+import { Logo } from '@/components/Logo';
 
 export default function Index() {
   const [students, setStudents] = useState(25);
@@ -29,12 +30,7 @@ export default function Index() {
       {/* Nav */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled > 50 ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-9 h-9 bg-emerald-900 rounded-full flex items-center justify-center">
-              <Coffee className="w-5 h-5 text-amber-300" />
-            </div>
-            <span className="font-bold text-xl text-emerald-950">Klasskassa</span>
-          </div>
+          <Logo size="sm" variant="dark" />
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-emerald-950">
             <a href="#sa-funkar" className="hover:text-amber-700 transition">Så funkar det</a>
             <a href="#produkter" className="hover:text-amber-700 transition">Produkter</a>
@@ -65,7 +61,7 @@ export default function Index() {
               Tjäna <span className="underline decoration-amber-400 decoration-4 underline-offset-4">tusentals</span> till klassen
             </h1>
             <p className="text-lg text-emerald-900/80 mb-8 leading-relaxed">
-              Glöm trötta kataloger med kakor och kryddor. Klasskassa erbjuder Rainforest Alliance-certifierat premium kaffe från Caffè Gondoliere — produkter folk faktiskt vill köpa, igen och igen.
+              Glöm trötta kataloger med kakor och kryddor. Qlasskassan erbjuder Rainforest Alliance-certifierat premium kaffe från Caffè Gondoliere — produkter folk faktiskt vill köpa, igen och igen.
             </p>
             <div className="flex flex-wrap gap-3 mb-10">
               <button onClick={() => setRegOpen(true)} className="bg-emerald-900 text-amber-50 px-7 py-4 rounded-full font-semibold hover:bg-emerald-800 transition shadow-lg shadow-emerald-900/20 flex items-center gap-2 group">
