@@ -39,6 +39,16 @@ export function StartguideDialog({ open, onOpenChange }: Props) {
     }
     setSubmitting(true);
     try {
+      // Log lead (non-blocking, best-effort)
+      supabase.from("qlasskassan_leads").insert({
+        source: "startguide",
+        name: r.data.name,
+        email: r.data.email,
+        school_name: r.data.school_name,
+      }).then(({ error: leadErr }) => {
+        if (leadErr) console.warn("lead insert failed", leadErr);
+      });
+
       const { error } = await supabase.functions.invoke("send-startguide", {
         body: r.data,
       });
