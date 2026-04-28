@@ -24,19 +24,19 @@ export const MagicLinkEmail = ({
 }: MagicLinkEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>Your login link for {siteName}</Preview>
+    <Preview>Din inloggningslänk till Klasskassa</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Heading style={h1}>Your login link</Heading>
+        <Heading style={h1}>Din inloggningslänk</Heading>
         <Text style={text}>
-          Click the button below to log in to {siteName}. This link will expire
-          shortly.
+          Klicka på knappen nedan för att logga in på Klasskassa. Länken
+          gäller en begränsad tid.
         </Text>
         <Button style={button} href={confirmationUrl}>
-          Log In
+          Logga in
         </Button>
         <Text style={footer}>
-          If you didn't request this link, you can safely ignore this email.
+          Om du inte begärt denna länk kan du bortse från detta mail.
         </Text>
       </Container>
     </Body>
