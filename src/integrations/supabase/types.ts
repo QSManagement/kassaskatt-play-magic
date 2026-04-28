@@ -14,7 +14,108 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      class_registrations: {
+        Row: {
+          association_name: string
+          bank_account: string
+          class_name: string
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          created_at: string
+          fundraising_goal: string | null
+          id: string
+          organization_number: string
+          school_name: string
+          status: string
+          student_count: number
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          association_name: string
+          bank_account: string
+          class_name: string
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          created_at?: string
+          fundraising_goal?: string | null
+          id?: string
+          organization_number: string
+          school_name: string
+          status?: string
+          student_count: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          association_name?: string
+          bank_account?: string
+          class_name?: string
+          contact_email?: string
+          contact_name?: string
+          contact_phone?: string
+          created_at?: string
+          fundraising_goal?: string | null
+          id?: string
+          organization_number?: string
+          school_name?: string
+          status?: string
+          student_count?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      startguide_leads: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          school_name: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          school_name: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          school_name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
