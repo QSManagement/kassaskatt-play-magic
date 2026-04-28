@@ -16,9 +16,9 @@ interface LogoProps {
 // Heights chosen so the lockup (moose + wordmark + tagline) stays legible
 // at small sizes in the nav and large sizes in the footer.
 const sizeMap: Record<LogoSize, { height: number }> = {
-  sm: { height: 72 },
-  md: { height: 112 },
-  lg: { height: 160 },
+  sm: { height: 96 },
+  md: { height: 140 },
+  lg: { height: 184 },
 };
 
 /**
