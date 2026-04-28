@@ -50,7 +50,7 @@ export default function Index() {
           <a
             href="#"
             aria-label="Qlasskassan – startsida"
-            className="relative -my-6 md:-my-8 flex items-center"
+            className="relative -mb-8 md:-mb-10 flex items-center"
           >
             <Logo size="sm" variant="dark" />
           </a>
