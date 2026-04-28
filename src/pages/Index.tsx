@@ -6,6 +6,8 @@ import {
 import { RegistrationDialog } from '@/components/registration/RegistrationDialog';
 import { StartguideDialog } from '@/components/registration/StartguideDialog';
 import { Logo } from '@/components/Logo';
+import coffeeClassic from '@/assets/coffee-classic.png';
+import coffeeGold from '@/assets/coffee-gold.png';
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from '@/components/ui/accordion';
@@ -359,15 +361,13 @@ export default function Index() {
           <div className="grid md:grid-cols-2 gap-8">
             {/* Classic */}
             <div className="bg-white rounded-3xl overflow-hidden border border-stone-200 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
-              <div className="bg-gradient-to-br from-emerald-100 to-emerald-50 h-72 flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-40 h-56 bg-gradient-to-b from-emerald-900 to-emerald-950 rounded-lg shadow-2xl flex flex-col items-center justify-center text-amber-50 transform group-hover:scale-105 transition-transform">
-                    <div className="text-xs italic mb-1 text-amber-200">Caffè</div>
-                    <div className="text-2xl font-serif font-bold">Gondoliere</div>
-                    <div className="mt-3 px-3 py-1 bg-emerald-800 rounded text-xs">CLASSIC</div>
-                    <div className="mt-2 text-xs text-amber-200/70">500g · Malet</div>
-                  </div>
-                </div>
+              <div className="bg-gradient-to-br from-stone-100 to-stone-50 h-72 flex items-center justify-center relative overflow-hidden">
+                <img
+                  src={coffeeClassic}
+                  alt="Caffè Gondoliere Classic 500g malet filterkaffe"
+                  className="h-64 w-auto object-contain drop-shadow-xl transform group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
               </div>
               <div className="p-8">
                 <div className="flex items-baseline justify-between mb-2">
@@ -399,14 +399,12 @@ export default function Index() {
                 BÄSTSÄLJARE
               </div>
               <div className="bg-gradient-to-br from-amber-100 to-amber-50 h-72 flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-40 h-56 bg-gradient-to-b from-amber-700 via-amber-800 to-emerald-950 rounded-lg shadow-2xl flex flex-col items-center justify-center text-amber-50 transform group-hover:scale-105 transition-transform">
-                    <div className="text-xs italic mb-1 text-amber-200">Caffè</div>
-                    <div className="text-2xl font-serif font-bold">Gondoliere</div>
-                    <div className="mt-3 px-3 py-1 bg-amber-300 text-emerald-950 rounded text-xs font-bold">GOLD</div>
-                    <div className="mt-2 text-xs text-amber-200/70">500g · Malet</div>
-                  </div>
-                </div>
+                <img
+                  src={coffeeGold}
+                  alt="Caffè Gondoliere Gold 500g malet filterkaffe — 100% Arabica"
+                  className="h-64 w-auto object-contain drop-shadow-xl transform group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
               </div>
               <div className="p-8">
                 <div className="flex items-baseline justify-between mb-2">
