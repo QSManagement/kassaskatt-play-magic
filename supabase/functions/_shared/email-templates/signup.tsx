@@ -29,29 +29,29 @@ export const SignupEmail = ({
 }: SignupEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>Confirm your email for {siteName}</Preview>
+    <Preview>Bekräfta din e-post för Klasskassa</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Heading style={h1}>Confirm your email</Heading>
+        <Heading style={h1}>Bekräfta din e-post</Heading>
         <Text style={text}>
-          Thanks for signing up for{' '}
+          Tack för att du registrerat din klass på{' '}
           <Link href={siteUrl} style={link}>
-            <strong>{siteName}</strong>
+            <strong>Klasskassa</strong>
           </Link>
           !
         </Text>
         <Text style={text}>
-          Please confirm your email address (
+          Bekräfta din e-postadress (
           <Link href={`mailto:${recipient}`} style={link}>
             {recipient}
           </Link>
-          ) by clicking the button below:
+          ) genom att klicka på knappen nedan:
         </Text>
         <Button style={button} href={confirmationUrl}>
-          Verify Email
+          Bekräfta e-post
         </Button>
         <Text style={footer}>
-          If you didn't create an account, you can safely ignore this email.
+          Om du inte registrerat ett konto kan du bortse från detta mail.
         </Text>
       </Container>
     </Body>
