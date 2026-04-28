@@ -24,12 +24,12 @@ export const RecoveryEmail = ({
 }: RecoveryEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>Återställ ditt lösenord för Klasskassa</Preview>
+    <Preview>Återställ ditt lösenord för Qlasskassan</Preview>
     <Body style={main}>
       <Container style={container}>
         <Heading style={h1}>Återställ ditt lösenord</Heading>
         <Text style={text}>
-          Vi fick en begäran om att återställa ditt lösenord för Klasskassa.
+          Vi fick en begäran om att återställa ditt lösenord för Qlasskassan.
           Klicka på knappen nedan för att välja ett nytt lösenord.
         </Text>
         <Button style={button} href={confirmationUrl}>

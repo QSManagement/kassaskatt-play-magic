@@ -29,14 +29,14 @@ export const SignupEmail = ({
 }: SignupEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>Bekräfta din e-post för Klasskassa</Preview>
+    <Preview>Bekräfta din e-post för Qlasskassan</Preview>
     <Body style={main}>
       <Container style={container}>
         <Heading style={h1}>Bekräfta din e-post</Heading>
         <Text style={text}>
           Tack för att du registrerat din klass på{' '}
           <Link href={siteUrl} style={link}>
-            <strong>Klasskassa</strong>
+            <strong>Qlasskassan</strong>
           </Link>
           !
         </Text>
