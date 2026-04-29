@@ -449,7 +449,7 @@ export default function Index() {
           </div>
 
           <div className="text-center mt-10 text-sm text-emerald-900/60">
-            Bönor och fler varianter kommer snart. Maila <span className="font-medium text-emerald-900">info@qlasskassan.se</span> för förbeställning.
+            Bönor och fler varianter kommer snart. Maila <span className="font-medium text-emerald-900">kontakt@scandinaviancoffee.se</span> för förbeställning.
           </div>
         </div>
       </section>
@@ -738,7 +738,7 @@ export default function Index() {
             <div>
               <div className="font-semibold text-amber-50 mb-4 text-sm">Kontakt</div>
               <ul className="space-y-2 text-sm">
-                <li>info@qlasskassan.se</li>
+                <li>kontakt@scandinaviancoffee.se</li>
                 <li>070-123 45 67</li>
                 <li>Vardagar 9-17</li>
               </ul>

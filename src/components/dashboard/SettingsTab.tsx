@@ -94,8 +94,8 @@ export default function SettingsTab({ klass, user }: Props) {
           <CardTitle className="text-emerald-950">Förening (read-only)</CardTitle>
           <p className="text-sm text-stone-600">
             Vi behöver dessa uppgifter för faktureringen. Behöver något ändras — mejla{" "}
-            <a href="mailto:info@qlasskassan.se" className="text-amber-700 hover:underline">
-              info@qlasskassan.se
+            <a href="mailto:kontakt@scandinaviancoffee.se" className="text-amber-700 hover:underline">
+              kontakt@scandinaviancoffee.se
             </a>
           </p>
         </CardHeader>
