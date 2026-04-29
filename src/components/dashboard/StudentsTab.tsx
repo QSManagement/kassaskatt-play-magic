@@ -14,6 +14,7 @@ export default function StudentsTab({ klass }: Props) {
   const [students, setStudents] = useState<any[]>([]);
   const [newName, setNewName] = useState("");
   const [loading, setLoading] = useState(true);
+  const [drafts, setDrafts] = useState<Record<string, { gold: string; crema: string }>>({});
 
   async function loadStudents() {
     setLoading(true);
@@ -22,7 +23,18 @@ export default function StudentsTab({ klass }: Props) {
       .select("*")
       .eq("class_id", klass.id)
       .order("name");
-    setStudents(data || []);
+    const list = data || [];
+    setStudents(list);
+    setDrafts((prev) => {
+      const next: Record<string, { gold: string; crema: string }> = {};
+      for (const s of list) {
+        next[s.id] = prev[s.id] ?? {
+          gold: String(s.sold_gold ?? 0),
+          crema: String(s.sold_crema ?? 0),
+        };
+      }
+      return next;
+    });
     setLoading(false);
   }
 
@@ -44,16 +56,27 @@ export default function StudentsTab({ klass }: Props) {
     loadStudents();
   }
 
-  async function updateStudent(id: string, field: "sold_gold" | "sold_crema", value: number) {
-    const update: { sold_gold?: number; sold_crema?: number } = {
-      [field]: Math.max(0, value),
-    };
+  function setDraft(id: string, field: "gold" | "crema", value: string) {
+    const clean = value.replace(/[^0-9]/g, "");
+    setDrafts((prev) => ({
+      ...prev,
+      [id]: { ...(prev[id] ?? { gold: "0", crema: "0" }), [field]: clean },
+    }));
+  }
+
+  async function commitStudent(id: string, field: "sold_gold" | "sold_crema", raw: string) {
+    const value = Math.max(0, parseInt(raw) || 0);
+    const student = students.find((s) => s.id === id);
+    if (student && student[field] === value) return;
     const { error } = await supabase
       .from("students")
-      .update(update)
+      .update({ [field]: value })
       .eq("id", id);
-    if (error) toast.error("Kunde inte uppdatera");
-    else loadStudents();
+    if (error) {
+      toast.error("Kunde inte uppdatera");
+      return;
+    }
+    setStudents((prev) => prev.map((s) => (s.id === id ? { ...s, [field]: value } : s)));
   }
 
   async function removeStudent(id: string) {
@@ -63,8 +86,14 @@ export default function StudentsTab({ klass }: Props) {
     else loadStudents();
   }
 
-  const totalGold = students.reduce((s, e) => s + (e.sold_gold || 0), 0);
-  const totalCrema = students.reduce((s, e) => s + (e.sold_crema || 0), 0);
+  const totalGold = students.reduce(
+    (s, e) => s + (parseInt(drafts[e.id]?.gold ?? "") || e.sold_gold || 0),
+    0,
+  );
+  const totalCrema = students.reduce(
+    (s, e) => s + (parseInt(drafts[e.id]?.crema ?? "") || e.sold_crema || 0),
+    0,
+  );
 
   return (
     <div className="space-y-6">
@@ -103,8 +132,10 @@ export default function StudentsTab({ klass }: Props) {
                     <Input
                       type="number"
                       min={0}
-                      value={s.sold_gold || 0}
-                      onChange={(e) => updateStudent(s.id, "sold_gold", parseInt(e.target.value) || 0)}
+                      value={drafts[s.id]?.gold ?? ""}
+                      placeholder="0"
+                      onChange={(e) => setDraft(s.id, "gold", e.target.value)}
+                      onBlur={(e) => commitStudent(s.id, "sold_gold", e.target.value)}
                       className="h-8"
                     />
                   </div>
@@ -113,8 +144,10 @@ export default function StudentsTab({ klass }: Props) {
                     <Input
                       type="number"
                       min={0}
-                      value={s.sold_crema || 0}
-                      onChange={(e) => updateStudent(s.id, "sold_crema", parseInt(e.target.value) || 0)}
+                      value={drafts[s.id]?.crema ?? ""}
+                      placeholder="0"
+                      onChange={(e) => setDraft(s.id, "crema", e.target.value)}
+                      onBlur={(e) => commitStudent(s.id, "sold_crema", e.target.value)}
                       className="h-8"
                     />
                   </div>
