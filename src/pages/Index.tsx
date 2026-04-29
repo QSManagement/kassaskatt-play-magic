@@ -374,7 +374,7 @@ export default function Index() {
                   <h3 className="text-2xl font-bold text-emerald-950">Gold</h3>
                   <div className="text-2xl font-bold text-emerald-950">199 kr</div>
                 </div>
-                <p className="text-emerald-900/70 mb-6">Mellanrostat, balanserat och rikt. En smak som passar alla.</p>
+                <p className="text-emerald-900/70 mb-6">Premium 100% Arabica malet filterkaffe. Mjuk, aromatisk och välbalanserad — en klassiker för bryggkaffe hemma och på kontoret.</p>
                 <div className="bg-emerald-50 rounded-2xl p-5 mb-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium text-emerald-900">Klassen tjänar per påse</span>
@@ -386,9 +386,9 @@ export default function Index() {
                   <div className="text-xs text-emerald-700 mt-1">30,2 % av försäljningspriset</div>
                 </div>
                 <ul className="space-y-2 text-sm text-emerald-900/80">
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> 40% Arabica / 60% Robusta</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Vakuumförpackad 500g</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Hållbarhet 18 mån</li>
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> 100% Arabica · malet filterkaffe</li>
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> 500 g påse</li>
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Rainforest Alliance-certifierad</li>
                 </ul>
               </div>
             </div>
