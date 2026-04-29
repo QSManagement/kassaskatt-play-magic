@@ -179,6 +179,9 @@ export default function AdminOrders() {
                     </TableCell>
                     <TableCell className="font-semibold text-emerald-900">
                       {Number(o.total_to_invoice).toLocaleString("sv-SE")} kr
+                      <span className="block italic text-xs font-normal text-stone-500">
+                        varav moms 6 %: {Math.round(Number(o.total_to_invoice) - Number(o.total_to_invoice) / 1.06).toLocaleString("sv-SE")} kr
+                      </span>
                     </TableCell>
                     <TableCell>
                       <Select

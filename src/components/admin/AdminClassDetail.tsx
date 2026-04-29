@@ -396,7 +396,12 @@ export default function AdminClassDetail() {
                         <TableCell>{o.qty_gold}</TableCell>
                         <TableCell>{o.qty_crema}</TableCell>
                         <TableCell>{Number(o.total_to_class).toLocaleString("sv-SE")} kr</TableCell>
-                        <TableCell>{Number(o.total_to_invoice).toLocaleString("sv-SE")} kr</TableCell>
+                        <TableCell>
+                          {Number(o.total_to_invoice).toLocaleString("sv-SE")} kr
+                          <span className="block italic text-xs text-stone-500">
+                            varav moms 6 %: {Math.round(Number(o.total_to_invoice) - Number(o.total_to_invoice) / 1.06).toLocaleString("sv-SE")} kr
+                          </span>
+                        </TableCell>
                         <TableCell>
                           <OrderStatusBadge
                             invoiceStatus={o.invoice_status}
