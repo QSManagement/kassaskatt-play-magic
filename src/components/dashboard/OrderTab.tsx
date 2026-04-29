@@ -101,6 +101,26 @@ export default function OrderTab({ klass }: Props) {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
+            {studentTotals && (studentTotals.gold > 0 || studentTotals.crema > 0) && (
+              <div className="flex items-center justify-between bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-sm">
+                <div className="text-emerald-900">
+                  Eleverna har sålt totalt{" "}
+                  <strong>{studentTotals.gold} Gold</strong> och{" "}
+                  <strong>{studentTotals.crema} Crema</strong>.
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setQtyGoldStr(String(studentTotals.gold));
+                    setQtyCremaStr(String(studentTotals.crema));
+                  }}
+                >
+                  Fyll i från eleverna
+                </Button>
+              </div>
+            )}
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="qty_gold">Gold malet 500g</Label>
