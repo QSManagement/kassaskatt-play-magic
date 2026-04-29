@@ -198,6 +198,7 @@ export function RegistrationDialog({ open, onOpenChange }: Props) {
               <Check className="w-8 h-8 text-emerald-800" />
             </div>
             <p className="text-emerald-900/80 mb-2">Ditt konto är skapat och vi har skickat startguiden till <strong>{data.contact_email}</strong>.</p>
+            <p className="text-sm text-emerald-900/60 mb-2">Hittar du inte mejlet? Kolla skräpposten/spam-mappen.</p>
             <p className="text-sm text-emerald-900/60">Logga in på dashboarden för att komma igång.</p>
           </div>
         )}
