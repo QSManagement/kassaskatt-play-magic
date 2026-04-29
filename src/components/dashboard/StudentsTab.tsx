@@ -45,9 +45,12 @@ export default function StudentsTab({ klass }: Props) {
   }
 
   async function updateStudent(id: string, field: "sold_gold" | "sold_crema", value: number) {
+    const update: { sold_gold?: number; sold_crema?: number } = {
+      [field]: Math.max(0, value),
+    };
     const { error } = await supabase
       .from("students")
-      .update({ [field]: Math.max(0, value) })
+      .update(update)
       .eq("id", id);
     if (error) toast.error("Kunde inte uppdatera");
     else loadStudents();
