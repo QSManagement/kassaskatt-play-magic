@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import {
   Calculator, Package, TrendingUp, ShieldCheck, Truck, Sparkles, ArrowRight, Check, Users, Repeat,
-  Menu, X, ClipboardList, Wallet,
+  Menu, X, ClipboardList, Wallet, LogIn,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { RegistrationDialog } from '@/components/registration/RegistrationDialog';
 import { StartguideDialog } from '@/components/registration/StartguideDialog';
 import { Logo } from '@/components/Logo';
@@ -62,6 +63,14 @@ export default function Index() {
             ))}
           </div>
           <div className="flex items-center gap-2">
+            <Link
+              to="/logga-in"
+              aria-label="Logga in"
+              className="hidden sm:inline-flex items-center gap-1.5 text-emerald-950 hover:text-amber-700 transition text-sm font-medium px-3 py-2"
+            >
+              <LogIn className="w-4 h-4" aria-hidden="true" />
+              Logga in
+            </Link>
             <button
               onClick={() => setRegOpen(true)}
               aria-label="Starta försäljning"
@@ -100,6 +109,14 @@ export default function Index() {
                 >
                   Starta försäljning
                 </button>
+                <Link
+                  to="/logga-in"
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-3 w-full inline-flex items-center justify-center gap-2 border-2 border-emerald-900 text-emerald-900 px-5 py-3 rounded-full text-sm font-semibold hover:bg-emerald-900 hover:text-amber-50 transition"
+                >
+                  <LogIn className="w-4 h-4" aria-hidden="true" />
+                  Logga in
+                </Link>
               </SheetContent>
             </Sheet>
           </div>
