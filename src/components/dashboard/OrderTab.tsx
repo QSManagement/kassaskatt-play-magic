@@ -4,15 +4,34 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Loader2, Send, Package, Info } from "lucide-react";
+import { Loader2, Send, Package, Info, Pencil, X } from "lucide-react";
 
 interface Props {
   klass: any;
 }
 
 function orderStatusLabel(o: any): string {
+  if (o.invoice_status === "cancelled") return "Avbruten";
   if (o.delivery_status === "delivered") return "Levererad";
   if (o.delivery_status === "shipped") return "Skickad";
   if (o.delivery_status === "preparing") return "Förbereds";
@@ -28,6 +47,12 @@ export default function OrderTab({ klass }: Props) {
   const [orders, setOrders] = useState<any[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
   const [studentTotals, setStudentTotals] = useState<{ gold: number; crema: number } | null>(null);
+  const [editOrder, setEditOrder] = useState<any | null>(null);
+  const [editGoldStr, setEditGoldStr] = useState("");
+  const [editCremaStr, setEditCremaStr] = useState("");
+  const [savingEdit, setSavingEdit] = useState(false);
+  const [cancelOrder, setCancelOrder] = useState<any | null>(null);
+  const [cancelling, setCancelling] = useState(false);
 
   async function loadOrders() {
     setLoadingOrders(true);
@@ -38,6 +63,52 @@ export default function OrderTab({ klass }: Props) {
       .order("created_at", { ascending: false });
     if (!error) setOrders(data || []);
     setLoadingOrders(false);
+  }
+
+  function openEdit(o: any) {
+    setEditOrder(o);
+    setEditGoldStr(String(o.qty_gold ?? 0));
+    setEditCremaStr(String(o.qty_crema ?? 0));
+  }
+
+  async function saveEdit() {
+    if (!editOrder) return;
+    const g = Math.max(0, parseInt(editGoldStr) || 0);
+    const c = Math.max(0, parseInt(editCremaStr) || 0);
+    if (g === 0 && c === 0) {
+      toast.error("Lägg till minst en påse");
+      return;
+    }
+    setSavingEdit(true);
+    const { error } = await supabase
+      .from("orders")
+      .update({ qty_gold: g, qty_crema: c })
+      .eq("id", editOrder.id);
+    setSavingEdit(false);
+    if (error) {
+      toast.error("Kunde inte spara ändringen");
+      return;
+    }
+    toast.success("Beställning uppdaterad");
+    setEditOrder(null);
+    loadOrders();
+  }
+
+  async function confirmCancel() {
+    if (!cancelOrder) return;
+    setCancelling(true);
+    const { error } = await supabase
+      .from("orders")
+      .update({ invoice_status: "cancelled" })
+      .eq("id", cancelOrder.id);
+    setCancelling(false);
+    if (error) {
+      toast.error("Kunde inte avbryta beställningen");
+      return;
+    }
+    toast.success("Beställning avbruten");
+    setCancelOrder(null);
+    loadOrders();
   }
 
   useEffect(() => {
