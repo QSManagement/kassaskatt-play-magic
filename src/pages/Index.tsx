@@ -6,8 +6,8 @@ import {
 import { RegistrationDialog } from '@/components/registration/RegistrationDialog';
 import { StartguideDialog } from '@/components/registration/StartguideDialog';
 import { Logo } from '@/components/Logo';
-import coffeeClassic from '@/assets/coffee-classic.png';
 import coffeeGold from '@/assets/coffee-gold.png';
+import coffeeCrema from '@/assets/coffee-crema.png';
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from '@/components/ui/accordion';
@@ -210,7 +210,7 @@ export default function Index() {
           <div className="flex flex-wrap justify-center items-center gap-12 opacity-70">
             <div className="text-2xl font-serif italic text-emerald-950">Caffè Gondoliere</div>
             <div className="text-sm text-emerald-900/60">Rainforest Alliance-certifierat</div>
-            <div className="text-sm text-emerald-900/60">100% Arabica i Gold</div>
+            <div className="text-sm text-emerald-900/60">100% Arabica i Crema</div>
             <div className="text-sm text-emerald-900/60">Ett av Europas största rosterier</div>
           </div>
         </div>
@@ -294,16 +294,16 @@ export default function Index() {
 
               <div>
                 <div className="flex justify-between items-baseline mb-3">
-                  <label className="font-semibold text-emerald-950">Andel Gold (premium)</label>
+                  <label className="font-semibold text-emerald-950">Andel Crema (premium)</label>
                   <span className="text-3xl font-bold text-emerald-900">{goldRatio}%</span>
                 </div>
                 <input
                   type="range" min="0" max="100" value={goldRatio}
                   onChange={(e) => setGoldRatio(Number(e.target.value))}
                   className="w-full h-2 bg-stone-200 rounded-full appearance-none cursor-pointer accent-amber-700"
-                  aria-label="Andel Gold"
+                  aria-label="Andel Crema"
                 />
-                <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>Bara Classic</span><span>Bara Gold</span></div>
+                <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>Bara Gold</span><span>Bara Crema</span></div>
               </div>
             </div>
 
@@ -325,14 +325,14 @@ export default function Index() {
                   <div className="flex justify-between items-center">
                     <span className="text-amber-100/80 text-sm flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-amber-300"></span>
-                      Gold ({goldBags} påsar × 80 kr)
+                      Crema ({goldBags} påsar × 80 kr)
                     </span>
                     <span className="font-bold">{goldEarnings.toLocaleString('sv-SE')} kr</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-amber-100/80 text-sm flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                      Classic ({classicBags} påsar × 60 kr)
+                      Gold ({classicBags} påsar × 60 kr)
                     </span>
                     <span className="font-bold">{classicEarnings.toLocaleString('sv-SE')} kr</span>
                   </div>
@@ -359,19 +359,19 @@ export default function Index() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Classic */}
+            {/* Gold (basprodukt) */}
             <div className="bg-white rounded-3xl overflow-hidden border border-stone-200 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
               <div className="bg-gradient-to-br from-stone-100 to-stone-50 h-72 flex items-center justify-center relative overflow-hidden">
                 <img
-                  src={coffeeClassic}
-                  alt="Caffè Gondoliere Classic 500g malet filterkaffe"
+                  src={coffeeGold}
+                  alt="Caffè Gondoliere Gold 500g malet filterkaffe"
                   className="h-64 w-auto object-contain drop-shadow-xl transform group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />
               </div>
               <div className="p-8">
                 <div className="flex items-baseline justify-between mb-2">
-                  <h3 className="text-2xl font-bold text-emerald-950">Classic</h3>
+                  <h3 className="text-2xl font-bold text-emerald-950">Gold</h3>
                   <div className="text-2xl font-bold text-emerald-950">199 kr</div>
                 </div>
                 <p className="text-emerald-900/70 mb-6">Mellanrostat, balanserat och rikt. En smak som passar alla.</p>
@@ -393,25 +393,25 @@ export default function Index() {
               </div>
             </div>
 
-            {/* Gold */}
+            {/* Crema (premium) */}
             <div className="bg-white rounded-3xl overflow-hidden border-2 border-amber-300 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group relative">
               <div className="absolute top-4 right-4 bg-amber-300 text-emerald-950 px-3 py-1 rounded-full text-xs font-bold z-10">
                 BÄSTSÄLJARE
               </div>
               <div className="bg-gradient-to-br from-amber-100 to-amber-50 h-72 flex items-center justify-center relative overflow-hidden">
                 <img
-                  src={coffeeGold}
-                  alt="Caffè Gondoliere Gold 500g malet filterkaffe — 100% Arabica"
+                  src={coffeeCrema}
+                  alt="Caffè Gondoliere Crema 1 kg hela bönor — 100% Arabica"
                   className="h-64 w-auto object-contain drop-shadow-xl transform group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />
               </div>
               <div className="p-8">
                 <div className="flex items-baseline justify-between mb-2">
-                  <h3 className="text-2xl font-bold text-emerald-950">Gold</h3>
+                  <h3 className="text-2xl font-bold text-emerald-950">Crema</h3>
                   <div className="text-2xl font-bold text-emerald-950">249 kr</div>
                 </div>
-                <p className="text-emerald-900/70 mb-6">100% Arabica från höglänta odlingar. Mjuk, fyllig och elegant — klart bästsäljaren.</p>
+                <p className="text-emerald-900/70 mb-6">100% Arabica från höglänta odlingar. Hela bönor, mjuk crema och elegant fyllighet — vår lyxigaste blend.</p>
                 <div className="bg-amber-50 rounded-2xl p-5 mb-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium text-amber-900">Klassen tjänar per påse</span>
@@ -424,7 +424,7 @@ export default function Index() {
                 </div>
                 <ul className="space-y-2 text-sm text-emerald-900/80">
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-amber-700" aria-hidden="true" /> 100% Arabica</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-amber-700" aria-hidden="true" /> Vakuumförpackad 500g</li>
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-amber-700" aria-hidden="true" /> Hela bönor, vakuumförpackad 1 kg</li>
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-amber-700" aria-hidden="true" /> Rainforest Alliance-certifierad</li>
                 </ul>
               </div>
@@ -480,10 +480,10 @@ export default function Index() {
                 <div className="text-sm text-emerald-700 mb-6">från återkommande kunder · räkneexempel</div>
                 <div className="space-y-3">
                   {[
-                    { name: 'Anna L.', amount: '+ 30 kr', detail: '2× Gold' },
-                    { name: 'Markus B.', amount: '+ 15 kr', detail: '1× Classic' },
-                    { name: 'Sofia W.', amount: '+ 45 kr', detail: '3× Gold' },
-                    { name: 'Erik J.', amount: '+ 30 kr', detail: '2× Classic' }
+                    { name: 'Anna L.', amount: '+ 30 kr', detail: '2× Crema' },
+                    { name: 'Markus B.', amount: '+ 15 kr', detail: '1× Gold' },
+                    { name: 'Sofia W.', amount: '+ 45 kr', detail: '3× Crema' },
+                    { name: 'Erik J.', amount: '+ 30 kr', detail: '2× Gold' }
                   ].map((tx, i) => (
                     <div key={i} className="flex items-center justify-between py-2 border-b border-stone-100 last:border-0">
                       <div>
@@ -652,9 +652,9 @@ export default function Index() {
               { q: 'Måste klassen ha en förening?', a: 'Ja, vi fakturerar mot ett organisationsnummer (oftast föräldraföreningen). Saknar ni det går det att registrera en enkel ideell förening på 30 minuter — vi skickar instruktioner i startguiden.' },
               { q: 'Kostar det något att starta?', a: 'Nej. Registrering, säljmaterial och all support är gratis. Ni betalar bara för de påsar ni faktiskt beställer.' },
               { q: 'Hur funkar Återköpsklubben rent tekniskt?', a: 'Varje påse har en QR-kod som leder till scandinaviancoffee.se. När en kund handlar där och anger klasskoden får klassen 15 kr per påse — i 6 månader. Vi mejlar er en månadsrapport.' },
-              { q: 'Är kaffet faktiskt premium?', a: 'Caffè Gondoliere är ett av Europas största rosterier, certifierat av Rainforest Alliance. Gold är 100 % höglands-Arabica. Provsmaka själva — vi skickar gratis sample-paket till intresserade lärare på begäran.' },
+              { q: 'Är kaffet faktiskt premium?', a: 'Caffè Gondoliere är ett av Europas största rosterier, certifierat av Rainforest Alliance. Crema är 100 % höglands-Arabica i hela bönor. Provsmaka själva — vi skickar gratis sample-paket till intresserade lärare på begäran.' },
               { q: 'Vad om vi vill avbryta?', a: 'Inga bindningstider. Ni bestämmer själva när och hur mycket ni säljer. Skickar ni inte in en beställning så kostar det inget.' },
-              { q: 'Hur mycket tjänar en typisk klass?', a: '25 elever som säljer 8 påsar var med 60 % Gold-mix landar på cirka 15 600 kr vid utlämning. Sen tickar Återköpsklubben på i 6 månader — vanligtvis 1 500–3 000 kr extra.' },
+              { q: 'Hur mycket tjänar en typisk klass?', a: '25 elever som säljer 8 påsar var med 60 % Crema-mix landar på cirka 15 600 kr vid utlämning. Sen tickar Återköpsklubben på i 6 månader — vanligtvis 1 500–3 000 kr extra.' },
             ].map((item, i) => (
               <AccordionItem key={i} value={`item-${i}`} className="border-b border-stone-200 last:border-0">
                 <AccordionTrigger className="text-left text-emerald-950 font-semibold py-5 hover:no-underline hover:text-amber-700">
@@ -706,9 +706,8 @@ export default function Index() {
             <div>
               <div className="font-semibold text-amber-50 mb-4 text-sm">Produkter</div>
               <ul className="space-y-2 text-sm">
-                <li>Classic 500g</li>
                 <li>Gold 500g</li>
-                <li>Bönor (kommer snart)</li>
+                <li>Crema 1 kg bönor</li>
               </ul>
             </div>
             <div>

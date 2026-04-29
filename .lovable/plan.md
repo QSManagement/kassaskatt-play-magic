@@ -1,44 +1,52 @@
-# Klasskassa – Landningssida
 
-Implementera landningssidan från `klasskassa-site.tsx` exakt — design, copy, struktur och interaktivitet (kalkylator, scroll-effekt på nav) — med tre korrigeringar.
+## Mål
 
-## Korrigeringar mot originalfilen
+Uppdatera sortimentet på hela hemsidan så att:
 
-1. **Ursprung**: Ta bort all "italienskt"-formulering. Caffè Gondoliere är holländskt (Ahold Delhaize Coffee Company).
-   - Hero-paragraf: "...premium kaffe från Caffè Gondoliere — produkter folk faktiskt vill köpa, igen och igen."
-   - Footer-tagline: "Premium kaffe för klassinsamlingar. Officiell svensk partner till Caffè Gondoliere."
-   - Trust-strip-rad: behåll "Ett av Europas största rosterier".
-   - Produktkort Classic: ta bort "klassiska italienska smaken" → "Mellanrostat, balanserat och rikt. En smak som passar alla."
-2. **Hero "Live räknare"**: Ersätt placeholder-siffror med "Lansering 2026"-status.
-   - Rubrik byts från "Klasser tjänade ihop förra månaden" → "Status".
-   - Stora siffran "2 847 320 kr" → "Lansering 2026".
-   - "+34% mot förra året" → tas bort.
-   - Listan "Aktiva klasser / Påsar sålda / Snitt per klass" → ersätts med "Anmäl er klass tidigt — först till kvarn till hösten 2026".
-   - Den roterade badge "Genomsnitt 14 200 kr per klass" → "Tidig anmälan öppen".
-3. Behåll allt annat (kalkylator, produktpriser 60/80 kr, återköpsklubben med exempel-dashboard som tydligt är ett "Räkneexempel", jämförelsetabell, trygghetssektion, CTA, footer).
+- **Classic försvinner helt** — namnet och produkten finns inte kvar någonstans.
+- **Gold tar över Classics plats** (basprodukt, 199 kr / 60 kr till klassen, mellanrostad blandning).
+- **Crema** (ny lyxig 1 kg bönor, 100% Arabica) tar över Goldens plats som premium/bästsäljare (249 kr / 80 kr till klassen).
+- Priser behålls oförändrade.
 
-## Sektioner (oförändrad ordning)
+Slutresultat: två produkter på sidan — **Gold** (vänster, basprodukt) och **Crema** (höger, premium/bästsäljare).
 
-1. Fast nav med scroll-bakgrund
-2. Hero (text + korrigerad status-widget)
-3. Trust strip (Caffè Gondoliere, Rainforest Alliance, 100% Arabica i Gold, Europas största rosterier)
-4. Så funkar det – 3 steg
-5. Kalkylator – reglage för elever, påsar/elev, andel Gold
-6. Produkter – Classic (199 kr / 60 kr till klass) + Gold (249 kr / 80 kr till klass, bästsäljare)
-7. Återköpsklubben – USP med QR-kod + räkneexempel
-8. Jämförelsetabell – kaffe vs kakor vs kryddor
-9. Trygghet – 4 fördelar
-10. Stor CTA
-11. Footer
+## Ändringar
 
-## Tekniskt
+### 1. Bilder (`src/assets/`)
+- Ladda upp den bifogade Crema-bilden som `src/assets/coffee-crema.png`.
+- `coffee-classic.png` blir oanvänd och tas bort.
+- `coffee-gold.png` behålls (samma bild som idag, men flyttar till basprodukt-positionen).
 
-- Ersätt `src/pages/Index.tsx` med komponenten från filen, inklusive korrigeringarna ovan.
-- Beroenden: `lucide-react` används redan i projektet (Coffee, Calculator, Package, TrendingUp, Heart, ShieldCheck, Truck, Sparkles, ArrowRight, Check, Users, Repeat). Inga nya paket behövs.
-- Tailwind-färger (emerald, amber, stone) finns i standard Tailwind v3 — inga config-ändringar.
-- Knappar är icke-funktionella i detta steg (registrering, mailguide, "läs mer" osv. lämnas som rena UI-element). Inga formulär kopplas.
-- Ingen backend, ingen databas, inga nya routes.
+### 2. Produktkort (`src/pages/Index.tsx`, sektionen "Sortimentet")
+- **Vänster kort (basprodukt):** Använd nuvarande Gold-bild + namn "Gold", pris 199 kr, 60 kr till klassen, beskrivning "Mellanrostat, balanserat och rikt. En smak som passar alla.", behåll de gröna emerald-tonerna i gradient/badge så det fortfarande känns som "vardagsvalet".
+  - Bullets: `40% Arabica / 60% Robusta`, `Vakuumförpackad 500g`, `Hållbarhet 18 mån`.
+- **Höger kort (premium, BÄSTSÄLJARE):** Ny Crema-bild + namn "Crema", pris 249 kr, 80 kr till klassen, beskrivning "100% Arabica från höglänta odlingar. Hela bönor, mjuk crema och elegant fyllighet — vår lyxigaste blend.", behåll amber-tonerna i gradient/badge.
+  - Bullets: `100% Arabica`, `Hela bönor, vakuumförpackad 1 kg`, `Rainforest Alliance-certifierad`.
+
+### 3. Kalkylator (samma fil, rad ~290–340)
+- Variabler döps om för läsbarhet: `goldRatio` → `cremaRatio`, `goldBags` → `cremaBags`, `classicBags` → `goldBags`, `goldEarnings` → `cremaEarnings`, `classicEarnings` → `goldEarnings`. Funktion: oförändrad — bara namnen ändras.
+- Etiketter:
+  - "Andel Gold (premium)" → "Andel Crema (premium)"
+  - "Bara Classic" / "Bara Gold" → "Bara Gold" / "Bara Crema"
+  - Resultatraderna: "Gold (X påsar × 80 kr)" → "Crema (X påsar × 80 kr)" och "Classic (X påsar × 60 kr)" → "Gold (X påsar × 60 kr)".
+
+### 4. Trust-strip (rad ~213)
+- "100% Arabica i Gold" → "100% Arabica i Crema".
+
+### 5. Återköpsklubben — exempel-dashboard (rad ~483–486)
+- Byt "Gold" → "Crema" och "Classic" → "Gold" i de fyra exempel-raderna.
+
+### 6. FAQ (rad ~655–657)
+- "Gold är 100 % höglands-Arabica" → "Crema är 100 % höglands-Arabica i hela bönor".
+- "60 % Gold-mix" → "60 % Crema-mix".
+
+### 7. Footer (rad ~709–710)
+- "Classic 500g" / "Gold 500g" → "Gold 500g" / "Crema 1 kg bönor".
+
+### 8. Plan-dokumentet
+- `.lovable/plan.md` uppdateras kort så produkt-referenserna (Classic/Gold) byts mot Gold/Crema med rätt vikter och format, så framtida ändringar har korrekt baseline.
 
 ## Utanför scope
 
-Registrering, dashboard, webbshop, formulärinsamling och Lovable Cloud — byggs i nästa steg.
+- Inga ändringar i priser, layout, färgpalett eller sektionsordning.
+- Inga ändringar i registrering, backend, mailflöden eller logga.
