@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { ArrowLeft, CheckCircle2, XCircle, Mail, Phone, Building2 } from "lucide-react";
+import { Send } from "lucide-react";
 import { StatusBadge } from "./AdminClasses";
 import {
   AlertDialog,
@@ -77,6 +78,7 @@ export default function AdminClassDetail() {
   const [repurchases, setRepurchases] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [sendEmail, setSendEmail] = useState(false);
+  const [resending, setResending] = useState(false);
 
   useEffect(() => {
     if (id) load();
@@ -162,6 +164,36 @@ export default function AdminClassDetail() {
     }
   }
 
+  async function resendActivationEmail() {
+    if (!klass?.contact_email) {
+      toast.error("Klassen saknar kontakt-mejl");
+      return;
+    }
+    setResending(true);
+    try {
+      const { error } = await supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "class-activated",
+          recipientEmail: klass.contact_email,
+          // Unik nyckel per utskick så det inte deduperas av tidigare aktivering
+          idempotencyKey: `activate-${klass.id}-resend-${Date.now()}`,
+          templateData: {
+            name: klass.contact_name,
+            schoolName: klass.school_name,
+            className: klass.class_name,
+            loginUrl: `${window.location.origin}/logga-in`,
+          },
+        },
+      });
+      if (error) throw error;
+      toast.success(`Aktiveringsmejl skickat till ${klass.contact_email}`);
+    } catch (err: any) {
+      toast.error("Kunde inte skicka mejl: " + (err?.message || "okänt fel"));
+    } finally {
+      setResending(false);
+    }
+  }
+
   if (loading || !klass) {
     return <div className="text-stone-500">Laddar...</div>;
   }
@@ -235,6 +267,17 @@ export default function AdminClassDetail() {
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
+          )}
+          {klass.status === "active" && (
+            <Button
+              variant="outline"
+              onClick={resendActivationEmail}
+              disabled={resending}
+              className="border-emerald-200 text-emerald-900 hover:bg-emerald-50"
+            >
+              <Send className="h-4 w-4 mr-2" aria-hidden="true" />
+              {resending ? "Skickar…" : "Skicka om aktiveringsmejl"}
+            </Button>
           )}
           {klass.status !== "cancelled" && klass.status !== "completed" && (
             <AlertDialog>
