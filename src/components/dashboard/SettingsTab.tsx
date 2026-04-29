@@ -18,6 +18,10 @@ export default function SettingsTab({ klass, user }: Props) {
   const [contactPhone, setContactPhone] = useState(klass.contact_phone || "");
   const [trackingMode, setTrackingMode] = useState(klass.tracking_mode || "aggregate");
   const [saving, setSaving] = useState(false);
+  const [associationName, setAssociationName] = useState(klass.association_name || "");
+  const [orgNumber, setOrgNumber] = useState(klass.organization_number || "");
+  const [bankAccount, setBankAccount] = useState(klass.bank_account || "");
+  const [savingAssoc, setSavingAssoc] = useState(false);
 
   async function saveContact() {
     setSaving(true);
@@ -32,6 +36,21 @@ export default function SettingsTab({ klass, user }: Props) {
     setSaving(false);
     if (error) toast.error("Kunde inte spara");
     else toast.success("Sparat");
+  }
+
+  async function saveAssociation() {
+    setSavingAssoc(true);
+    const { error } = await supabase
+      .from("class_registrations")
+      .update({
+        association_name: associationName,
+        organization_number: orgNumber,
+        bank_account: bankAccount,
+      })
+      .eq("id", klass.id);
+    setSavingAssoc(false);
+    if (error) toast.error("Kunde inte spara föreningsuppgifter");
+    else toast.success("Föreningsuppgifter sparade");
   }
 
   async function handleResetPassword() {
@@ -91,27 +110,28 @@ export default function SettingsTab({ klass, user }: Props) {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-emerald-950">Förening (read-only)</CardTitle>
+          <CardTitle className="text-emerald-950">Förening</CardTitle>
           <p className="text-sm text-stone-600">
-            Vi behöver dessa uppgifter för faktureringen. Behöver något ändras — mejla{" "}
-            <a href="mailto:kontakt@scandinaviancoffee.se" className="text-amber-700 hover:underline">
-              kontakt@scandinaviancoffee.se
-            </a>
+            Vi behöver dessa uppgifter för faktureringen. Dubbelkolla att de stämmer.
           </p>
         </CardHeader>
-        <CardContent className="space-y-3 text-sm">
-          <div className="flex justify-between border-b border-stone-100 pb-2">
-            <span className="text-stone-600">Föreningsnamn</span>
-            <span className="font-medium text-emerald-950">{klass.association_name}</span>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="association_name">Föreningsnamn</Label>
+            <Input id="association_name" value={associationName} onChange={(e) => setAssociationName(e.target.value)} />
           </div>
-          <div className="flex justify-between border-b border-stone-100 pb-2">
-            <span className="text-stone-600">Organisationsnummer</span>
-            <span className="font-medium text-emerald-950">{klass.organization_number}</span>
+          <div className="space-y-2">
+            <Label htmlFor="organization_number">Organisationsnummer</Label>
+            <Input id="organization_number" value={orgNumber} onChange={(e) => setOrgNumber(e.target.value)} />
           </div>
-          <div className="flex justify-between">
-            <span className="text-stone-600">Bankgiro</span>
-            <span className="font-medium text-emerald-950">{klass.bank_account}</span>
+          <div className="space-y-2">
+            <Label htmlFor="bank_account">Bankgiro</Label>
+            <Input id="bank_account" value={bankAccount} onChange={(e) => setBankAccount(e.target.value)} />
           </div>
+          <Button onClick={saveAssociation} disabled={savingAssoc} className="bg-emerald-900 hover:bg-emerald-800">
+            {savingAssoc && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            Spara föreningsuppgifter
+          </Button>
         </CardContent>
       </Card>
 
