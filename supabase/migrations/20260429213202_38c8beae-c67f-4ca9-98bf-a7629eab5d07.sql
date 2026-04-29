@@ -1,0 +1,1 @@
+CREATE POLICY "Admins can delete repurchases" ON public.repurchases FOR DELETE USING (public.has_role(auth.uid(), 'admin'::public.app_role));
