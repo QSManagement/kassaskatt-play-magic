@@ -23,9 +23,7 @@ export default function AdminUsers() {
   async function load() {
     const { data: roles } = await supabase
       .from("user_roles")
-      .select(
-        "user_id, role, class_id, created_at, class_registrations:class_id ( school_name, class_name )",
-      )
+      .select("user_id, role, class_id, created_at")
       .order("created_at", { ascending: false });
 
     const userIds = [...new Set((roles ?? []).map((r) => r.user_id))];
@@ -37,9 +35,21 @@ export default function AdminUsers() {
 
     const profileMap = new Map((profiles ?? []).map((p) => [p.id, p]));
 
+    const classIds = [
+      ...new Set((roles ?? []).map((r) => r.class_id).filter(Boolean) as string[]),
+    ];
+    const { data: classes } = classIds.length
+      ? await supabase
+          .from("class_registrations")
+          .select("id, school_name, class_name")
+          .in("id", classIds)
+      : { data: [] as any[] };
+    const classMap = new Map((classes ?? []).map((c) => [c.id, c]));
+
     const enriched = (roles ?? []).map((r) => ({
       ...r,
       profile: profileMap.get(r.user_id),
+      class_registrations: r.class_id ? classMap.get(r.class_id) : null,
     }));
 
     setAdmins(enriched.filter((r) => r.role === "admin"));
