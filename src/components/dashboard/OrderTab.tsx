@@ -280,30 +280,160 @@ export default function OrderTab({ klass }: Props) {
             <p className="text-stone-500 text-sm">Inga beställningar än.</p>
           ) : (
             <div className="space-y-3">
-              {orders.map((o) => (
-                <div key={o.id} className="flex items-center justify-between border border-stone-200 rounded-lg p-4">
-                  <div>
-                    <p className="font-medium text-emerald-950">
-                      {o.qty_gold} Gold + {o.qty_crema} Crema
-                    </p>
-                    <p className="text-xs text-stone-500 mt-1">
-                      {new Date(o.created_at).toLocaleDateString("sv-SE")}
-                    </p>
+              {orders.map((o) => {
+                const isPending = o.invoice_status === "pending";
+                const isCancelled = o.invoice_status === "cancelled";
+                return (
+                  <div
+                    key={o.id}
+                    className={`flex items-center justify-between border rounded-lg p-4 gap-4 ${
+                      isCancelled
+                        ? "border-stone-200 bg-stone-50 opacity-60"
+                        : "border-stone-200"
+                    }`}
+                  >
+                    <div className="min-w-0">
+                      <p className={`font-medium ${isCancelled ? "text-stone-500 line-through" : "text-emerald-950"}`}>
+                        {o.qty_gold} Gold + {o.qty_crema} Crema
+                      </p>
+                      <p className="text-xs text-stone-500 mt-1">
+                        {new Date(o.created_at).toLocaleDateString("sv-SE")}
+                      </p>
+                      {!isPending && !isCancelled && (
+                        <p className="text-xs text-stone-400 mt-1">
+                          Låst — kontakta info@qlasskassan.se för ändringar
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="text-right">
+                        <p className={`font-semibold ${isCancelled ? "text-stone-400" : "text-emerald-900"}`}>
+                          {Number(o.total_to_class).toLocaleString("sv-SE")} kr
+                        </p>
+                        <Badge variant="outline" className="text-xs mt-1">
+                          {orderStatusLabel(o)}
+                        </Badge>
+                      </div>
+                      {isPending && (
+                        <div className="flex flex-col gap-1">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => openEdit(o)}
+                          >
+                            <Pencil className="h-3 w-3 mr-1" aria-hidden="true" />
+                            Redigera
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            className="text-red-700 hover:text-red-800"
+                            onClick={() => setCancelOrder(o)}
+                          >
+                            <X className="h-3 w-3 mr-1" aria-hidden="true" />
+                            Avbryt
+                          </Button>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-semibold text-emerald-900">
-                      {Number(o.total_to_class).toLocaleString("sv-SE")} kr
-                    </p>
-                    <Badge variant="outline" className="text-xs mt-1">
-                      {orderStatusLabel(o)}
-                    </Badge>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </CardContent>
       </Card>
+
+      <Dialog open={!!editOrder} onOpenChange={(open) => !open && setEditOrder(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Redigera beställning</DialogTitle>
+            <DialogDescription>
+              Justera antalet påsar. Totalerna räknas om automatiskt.
+            </DialogDescription>
+          </DialogHeader>
+          {editOrder && (() => {
+            const g = Math.max(0, parseInt(editGoldStr) || 0);
+            const c = Math.max(0, parseInt(editCremaStr) || 0);
+            const tClass = g * 50 + c * 70;
+            const tInvoice = g * 119 + c * 179;
+            return (
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="edit_gold">Gold malet 500g</Label>
+                    <Input
+                      id="edit_gold"
+                      type="number"
+                      min={0}
+                      value={editGoldStr}
+                      placeholder="0"
+                      onChange={(e) => setEditGoldStr(e.target.value.replace(/[^0-9]/g, ""))}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="edit_crema">Crema bönor 1kg</Label>
+                    <Input
+                      id="edit_crema"
+                      type="number"
+                      min={0}
+                      value={editCremaStr}
+                      placeholder="0"
+                      onChange={(e) => setEditCremaStr(e.target.value.replace(/[^0-9]/g, ""))}
+                    />
+                  </div>
+                </div>
+                <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 space-y-1 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-stone-700">Klassen tjänar:</span>
+                    <span className="font-semibold text-emerald-900">{tClass.toLocaleString("sv-SE")} kr</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-stone-700">Faktura till föreningen:</span>
+                    <span className="font-semibold text-stone-900">{tInvoice.toLocaleString("sv-SE")} kr</span>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setEditOrder(null)} disabled={savingEdit}>
+              Avbryt
+            </Button>
+            <Button onClick={saveEdit} disabled={savingEdit} className="bg-emerald-900 hover:bg-emerald-800">
+              {savingEdit && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Spara ändringar
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <AlertDialog open={!!cancelOrder} onOpenChange={(open) => !open && setCancelOrder(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Avbryt beställning?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Detta tar bort beställningen från klassens totaler. Kan inte ångras.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={cancelling}>Tillbaka</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={(e) => {
+                e.preventDefault();
+                confirmCancel();
+              }}
+              disabled={cancelling}
+              className="bg-red-700 hover:bg-red-800"
+            >
+              {cancelling && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Ja, avbryt beställningen
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
