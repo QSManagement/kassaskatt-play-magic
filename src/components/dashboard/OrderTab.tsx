@@ -155,7 +155,14 @@ export default function OrderTab({ klass }: Props) {
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-stone-700">Vår faktura till föreningen:</span>
-                <span className="font-semibold text-stone-900">{totalToInvoice.toLocaleString("sv-SE")} kr</span>
+                <span className="text-right">
+                  <span className="font-semibold text-stone-900">
+                    {totalToInvoice.toLocaleString("sv-SE")} kr
+                  </span>{" "}
+                  <span className="italic text-xs text-stone-500">
+                    (varav moms 6 %: {Math.round(totalToInvoice - totalToInvoice / 1.06).toLocaleString("sv-SE")} kr)
+                  </span>
+                </span>
               </div>
               <div className="flex justify-between text-xs text-stone-500 pt-2 border-t border-emerald-200">
                 <span>Totalt klassen sålt för:</span>
