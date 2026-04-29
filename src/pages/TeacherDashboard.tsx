@@ -19,21 +19,24 @@ export default function TeacherDashboard() {
   const [klass, setKlass] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
+  async function reloadKlass() {
+    if (!classId) return;
+    const { data, error } = await supabase
+      .from("class_registrations")
+      .select("*")
+      .eq("id", classId)
+      .single();
+    if (error) toast.error("Kunde inte ladda klassinformation");
+    else setKlass(data);
+  }
+
   useEffect(() => {
     if (!classId) {
       setLoading(false);
       return;
     }
-    supabase
-      .from("class_registrations")
-      .select("*")
-      .eq("id", classId)
-      .single()
-      .then(({ data, error }) => {
-        if (error) toast.error("Kunde inte ladda klassinformation");
-        else setKlass(data);
-        setLoading(false);
-      });
+    reloadKlass().finally(() => setLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [classId]);
 
   async function handleSignOut() {
@@ -111,7 +114,7 @@ export default function TeacherDashboard() {
             <TabsContent value="students"><StudentsTab klass={klass} /></TabsContent>
           )}
           <TabsContent value="repurchases"><RepurchasesTab klass={klass} /></TabsContent>
-          <TabsContent value="settings"><SettingsTab klass={klass} user={user} /></TabsContent>
+          <TabsContent value="settings"><SettingsTab klass={klass} user={user} onUpdated={reloadKlass} /></TabsContent>
         </Tabs>
       </main>
     </div>
