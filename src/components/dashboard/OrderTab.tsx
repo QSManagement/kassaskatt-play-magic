@@ -281,8 +281,12 @@ export default function OrderTab({ klass }: Props) {
           ) : (
             <div className="space-y-3">
               {orders.map((o) => {
-                const isPending = o.invoice_status === "pending";
                 const isCancelled = o.invoice_status === "cancelled";
+                const deliveryStarted =
+                  o.delivery_status && o.delivery_status !== "pending";
+                const isEditable =
+                  o.invoice_status === "pending" && !deliveryStarted && !isCancelled;
+                const isLocked = !isEditable && !isCancelled;
                 return (
                   <div
                     key={o.id}
@@ -299,7 +303,7 @@ export default function OrderTab({ klass }: Props) {
                       <p className="text-xs text-stone-500 mt-1">
                         {new Date(o.created_at).toLocaleDateString("sv-SE")}
                       </p>
-                      {!isPending && !isCancelled && (
+                      {isLocked && (
                         <p className="text-xs text-stone-400 mt-1">
                           Låst — kontakta info@qlasskassan.se för ändringar
                         </p>
@@ -314,7 +318,7 @@ export default function OrderTab({ klass }: Props) {
                           {orderStatusLabel(o)}
                         </Badge>
                       </div>
-                      {isPending && (
+                      {isEditable ? (
                         <div className="flex flex-col gap-1">
                           <Button
                             type="button"
@@ -336,7 +340,18 @@ export default function OrderTab({ klass }: Props) {
                             Avbryt
                           </Button>
                         </div>
-                      )}
+                      ) : isLocked ? (
+                        <div className="flex flex-col gap-1 opacity-50">
+                          <Button type="button" variant="outline" size="sm" disabled>
+                            <Pencil className="h-3 w-3 mr-1" aria-hidden="true" />
+                            Redigera
+                          </Button>
+                          <Button type="button" variant="outline" size="sm" disabled>
+                            <X className="h-3 w-3 mr-1" aria-hidden="true" />
+                            Avbryt
+                          </Button>
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 );
