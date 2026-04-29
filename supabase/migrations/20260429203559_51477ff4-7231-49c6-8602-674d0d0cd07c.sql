@@ -1,0 +1,1 @@
+DELETE FROM public.orders WHERE id = 'c1d48cfa-7a65-4339-a2e6-0c1a4c2c85a3';
