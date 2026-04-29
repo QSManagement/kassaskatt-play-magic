@@ -68,9 +68,10 @@ export default function StudentsTab({ klass }: Props) {
     const value = Math.max(0, parseInt(raw) || 0);
     const student = students.find((s) => s.id === id);
     if (student && student[field] === value) return;
+    const update: { sold_gold?: number; sold_crema?: number } = { [field]: value };
     const { error } = await supabase
       .from("students")
-      .update({ [field]: value })
+      .update(update)
       .eq("id", id);
     if (error) {
       toast.error("Kunde inte uppdatera");
