@@ -10,6 +10,7 @@ import Login from "./pages/Login.tsx";
 import ResetPassword from "./pages/ResetPassword.tsx";
 import PendingApproval from "./pages/PendingApproval.tsx";
 import TeacherDashboard from "./pages/TeacherDashboard.tsx";
+import AdminDashboard from "./pages/AdminDashboard.tsx";
 import { AuthProvider, useAuth } from "@/lib/AuthContext";
 
 const queryClient = new QueryClient();
@@ -30,8 +31,6 @@ function ProtectedAdmin({ children }: { children: JSX.Element }) {
   if (role !== "admin") return <Navigate to="/" replace />;
   return children;
 }
-
-const AdminDashboard = () => <div className="p-8">Admin-dashboard (byggs i 4B-2)</div>;
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
