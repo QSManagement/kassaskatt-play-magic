@@ -27,6 +27,7 @@ export default function OrderTab({ klass }: Props) {
   const [submitting, setSubmitting] = useState(false);
   const [orders, setOrders] = useState<any[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
+  const [studentTotals, setStudentTotals] = useState<{ gold: number; crema: number } | null>(null);
 
   async function loadOrders() {
     setLoadingOrders(true);
@@ -43,6 +44,22 @@ export default function OrderTab({ klass }: Props) {
     loadOrders();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [klass.id]);
+
+  useEffect(() => {
+    if (klass.tracking_mode !== "per_student") {
+      setStudentTotals(null);
+      return;
+    }
+    supabase
+      .from("students")
+      .select("sold_gold, sold_crema")
+      .eq("class_id", klass.id)
+      .then(({ data }) => {
+        const gold = (data ?? []).reduce((s, r) => s + (r.sold_gold || 0), 0);
+        const crema = (data ?? []).reduce((s, r) => s + (r.sold_crema || 0), 0);
+        setStudentTotals({ gold, crema });
+      });
+  }, [klass.id, klass.tracking_mode]);
 
   const qtyGold = Math.max(0, parseInt(qtyGoldStr) || 0);
   const qtyCrema = Math.max(0, parseInt(qtyCremaStr) || 0);
@@ -84,6 +101,26 @@ export default function OrderTab({ klass }: Props) {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
+            {studentTotals && (studentTotals.gold > 0 || studentTotals.crema > 0) && (
+              <div className="flex items-center justify-between bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-sm">
+                <div className="text-emerald-900">
+                  Eleverna har sålt totalt{" "}
+                  <strong>{studentTotals.gold} Gold</strong> och{" "}
+                  <strong>{studentTotals.crema} Crema</strong>.
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setQtyGoldStr(String(studentTotals.gold));
+                    setQtyCremaStr(String(studentTotals.crema));
+                  }}
+                >
+                  Fyll i från eleverna
+                </Button>
+              </div>
+            )}
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="qty_gold">Gold malet 500g</Label>
