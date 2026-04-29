@@ -22,8 +22,8 @@ function orderStatusLabel(o: any): string {
 }
 
 export default function OrderTab({ klass }: Props) {
-  const [qtyGold, setQtyGold] = useState(0);
-  const [qtyCrema, setQtyCrema] = useState(0);
+  const [qtyGoldStr, setQtyGoldStr] = useState("");
+  const [qtyCremaStr, setQtyCremaStr] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [orders, setOrders] = useState<any[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
@@ -44,6 +44,8 @@ export default function OrderTab({ klass }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [klass.id]);
 
+  const qtyGold = Math.max(0, parseInt(qtyGoldStr) || 0);
+  const qtyCrema = Math.max(0, parseInt(qtyCremaStr) || 0);
   const totalToClass = qtyGold * 50 + qtyCrema * 70;
   const totalToInvoice = qtyGold * 119 + qtyCrema * 179;
 
@@ -65,8 +67,8 @@ export default function OrderTab({ klass }: Props) {
       return;
     }
     toast.success("Beställning skickad! Vi hör av oss inom 24 timmar.");
-    setQtyGold(0);
-    setQtyCrema(0);
+    setQtyGoldStr("");
+    setQtyCremaStr("");
     loadOrders();
   }
 
@@ -89,8 +91,9 @@ export default function OrderTab({ klass }: Props) {
                   id="qty_gold"
                   type="number"
                   min={0}
-                  value={qtyGold}
-                  onChange={(e) => setQtyGold(Math.max(0, parseInt(e.target.value) || 0))}
+                  value={qtyGoldStr}
+                  placeholder="0"
+                  onChange={(e) => setQtyGoldStr(e.target.value.replace(/[^0-9]/g, ""))}
                 />
                 <p className="text-xs text-stone-500">169 kr/påse · 50 kr till klassen</p>
               </div>
@@ -100,8 +103,9 @@ export default function OrderTab({ klass }: Props) {
                   id="qty_crema"
                   type="number"
                   min={0}
-                  value={qtyCrema}
-                  onChange={(e) => setQtyCrema(Math.max(0, parseInt(e.target.value) || 0))}
+                  value={qtyCremaStr}
+                  placeholder="0"
+                  onChange={(e) => setQtyCremaStr(e.target.value.replace(/[^0-9]/g, ""))}
                 />
                 <p className="text-xs text-stone-500">249 kr/påse · 70 kr till klassen</p>
               </div>
