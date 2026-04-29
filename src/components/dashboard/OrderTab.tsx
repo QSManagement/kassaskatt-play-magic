@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Loader2, Send, Package } from "lucide-react";
+import { Loader2, Send, Package, Info } from "lucide-react";
 
 interface Props {
   klass: any;
@@ -168,6 +168,15 @@ export default function OrderTab({ klass }: Props) {
                 <span>Totalt klassen sålt för:</span>
                 <span>{(totalToClass + totalToInvoice).toLocaleString("sv-SE")} kr</span>
               </div>
+            </div>
+
+            <div className="bg-stone-50 border border-stone-200 rounded-lg p-3 text-sm text-stone-600 flex items-start gap-2 mb-4">
+              <Info className="h-4 w-4 mt-0.5 flex-shrink-0 text-stone-500" aria-hidden="true" />
+              <p>
+                <strong>Översikt uppdateras när ni skickat in beställningen.</strong>
+                {' '}Använd Eleverna-fliken som arbetsverktyg under tiden — där sparas
+                elevernas siffror automatiskt utan att påverka Översikt.
+              </p>
             </div>
 
             <Button
