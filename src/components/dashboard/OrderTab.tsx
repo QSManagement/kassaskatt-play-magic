@@ -93,6 +93,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
     toast.success("Beställning uppdaterad");
     setEditOrder(null);
     loadOrders();
+    onOrdersChanged?.();
   }
 
   async function confirmCancel() {
@@ -110,6 +111,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
     toast.success("Beställning avbruten");
     setCancelOrder(null);
     loadOrders();
+    onOrdersChanged?.();
   }
 
   useEffect(() => {
@@ -159,6 +161,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
     setQtyGoldStr("");
     setQtyCremaStr("");
     loadOrders();
+    onOrdersChanged?.();
   }
 
   return (
