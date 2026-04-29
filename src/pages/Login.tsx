@@ -38,7 +38,7 @@ export default function Login() {
     setLoading(true);
     try {
       await resetPassword(email);
-      toast.success("Återställningslänk skickad till din mejl");
+      toast.success("Återställningslänk skickad — kolla även skräpposten");
       setResetMode(false);
     } catch (err: any) {
       toast.error(err.message || "Kunde inte skicka återställningslänk");
