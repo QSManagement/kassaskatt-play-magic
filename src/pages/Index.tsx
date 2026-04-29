@@ -411,7 +411,7 @@ export default function Index() {
                   <h3 className="text-2xl font-bold text-emerald-950">Crema</h3>
                   <div className="text-2xl font-bold text-emerald-950">249 kr</div>
                 </div>
-                <p className="text-emerald-900/70 mb-6">100% Arabica från höglänta odlingar. Hela bönor, mjuk crema och elegant fyllighet — vår lyxigaste blend.</p>
+                <p className="text-emerald-900/70 mb-6">100% Arabica i hela bönor. Balanserad, len och nötig med naturlig sötma och len crema — lyxvalet för espresso och fullautomater.</p>
                 <div className="bg-amber-50 rounded-2xl p-5 mb-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium text-amber-900">Klassen tjänar per påse</span>
@@ -424,7 +424,7 @@ export default function Index() {
                 </div>
                 <ul className="space-y-2 text-sm text-emerald-900/80">
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-amber-700" aria-hidden="true" /> 100% Arabica</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-amber-700" aria-hidden="true" /> Hela bönor, vakuumförpackad 1 kg</li>
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-amber-700" aria-hidden="true" /> Hela bönor · 1 kg påse</li>
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-amber-700" aria-hidden="true" /> Rainforest Alliance-certifierad</li>
                 </ul>
               </div>
