@@ -27,6 +27,7 @@ export default function OrderTab({ klass }: Props) {
   const [submitting, setSubmitting] = useState(false);
   const [orders, setOrders] = useState<any[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
+  const [studentTotals, setStudentTotals] = useState<{ gold: number; crema: number } | null>(null);
 
   async function loadOrders() {
     setLoadingOrders(true);
@@ -43,6 +44,22 @@ export default function OrderTab({ klass }: Props) {
     loadOrders();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [klass.id]);
+
+  useEffect(() => {
+    if (klass.tracking_mode !== "per_student") {
+      setStudentTotals(null);
+      return;
+    }
+    supabase
+      .from("students")
+      .select("sold_gold, sold_crema")
+      .eq("class_id", klass.id)
+      .then(({ data }) => {
+        const gold = (data ?? []).reduce((s, r) => s + (r.sold_gold || 0), 0);
+        const crema = (data ?? []).reduce((s, r) => s + (r.sold_crema || 0), 0);
+        setStudentTotals({ gold, crema });
+      });
+  }, [klass.id, klass.tracking_mode]);
 
   const qtyGold = Math.max(0, parseInt(qtyGoldStr) || 0);
   const qtyCrema = Math.max(0, parseInt(qtyCremaStr) || 0);
