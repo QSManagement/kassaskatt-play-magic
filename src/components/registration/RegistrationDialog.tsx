@@ -198,7 +198,7 @@ export function RegistrationDialog({ open, onOpenChange }: Props) {
               <Check className="w-8 h-8 text-emerald-800" />
             </div>
             <p className="text-emerald-900/80 mb-2">Ditt konto är skapat och vi har skickat startguiden till <strong>{data.contact_email}</strong>.</p>
-            <p className="text-sm text-emerald-900/60">Du kan logga in på dashboarden så snart vi släpper den (lansering 2026).</p>
+            <p className="text-sm text-emerald-900/60">Logga in på dashboarden för att komma igång.</p>
           </div>
         )}
 
