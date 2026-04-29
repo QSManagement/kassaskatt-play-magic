@@ -62,6 +62,12 @@ export function OrderStatusBadge({
         Faktura skickad
       </Badge>
     );
+  if (invoiceStatus === "cancelled")
+    return (
+      <Badge variant="outline" className="bg-stone-100 text-stone-500 border-stone-300">
+        Avbruten
+      </Badge>
+    );
   if (invoiceStatus === "overdue")
     return (
       <Badge variant="outline" className="bg-red-100 text-red-800 border-red-200">
