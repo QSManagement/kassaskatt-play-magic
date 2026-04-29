@@ -6,28 +6,32 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import Login from "./pages/Login.tsx";
+import ResetPassword from "./pages/ResetPassword.tsx";
+import PendingApproval from "./pages/PendingApproval.tsx";
+import TeacherDashboard from "./pages/TeacherDashboard.tsx";
 import { AuthProvider, useAuth } from "@/lib/AuthContext";
 
 const queryClient = new QueryClient();
 
-function RequireAuth({
-  children,
-  requiredRole,
-}: {
-  children: JSX.Element;
-  requiredRole?: "admin" | "teacher";
-}) {
+function ProtectedTeacher({ children }: { children: JSX.Element }) {
   const { user, role, loading } = useAuth();
-  if (loading) return <div className="p-8">Laddar...</div>;
+  if (loading) return <div className="min-h-screen flex items-center justify-center text-stone-600">Laddar...</div>;
   if (!user) return <Navigate to="/logga-in" replace />;
-  if (requiredRole && role !== requiredRole) return <Navigate to="/" replace />;
+  if (role === "admin") return <Navigate to="/admin" replace />;
+  if (role !== "teacher") return <Navigate to="/vantar" replace />;
   return children;
 }
 
-const LoginPage = () => <div className="p-8">Inloggning (byggs i 4B)</div>;
-const ResetPasswordPage = () => <div className="p-8">Återställ lösenord (byggs i 4B)</div>;
-const TeacherDashboard = () => <div className="p-8">Lärar-dashboard (byggs i 4B)</div>;
-const AdminDashboard = () => <div className="p-8">Admin-dashboard (byggs i 4B)</div>;
+function ProtectedAdmin({ children }: { children: JSX.Element }) {
+  const { user, role, loading } = useAuth();
+  if (loading) return <div className="min-h-screen flex items-center justify-center text-stone-600">Laddar...</div>;
+  if (!user) return <Navigate to="/logga-in" replace />;
+  if (role !== "admin") return <Navigate to="/" replace />;
+  return children;
+}
+
+const AdminDashboard = () => <div className="p-8">Admin-dashboard (byggs i 4B-2)</div>;
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -38,22 +42,23 @@ const App = () => (
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/logga-in" element={<LoginPage />} />
-            <Route path="/aterstall-losenord" element={<ResetPasswordPage />} />
+            <Route path="/logga-in" element={<Login />} />
+            <Route path="/aterstall-losenord" element={<ResetPassword />} />
+            <Route path="/vantar" element={<PendingApproval />} />
             <Route
               path="/dashboard/*"
               element={
-                <RequireAuth requiredRole="teacher">
+                <ProtectedTeacher>
                   <TeacherDashboard />
-                </RequireAuth>
+                </ProtectedTeacher>
               }
             />
             <Route
               path="/admin/*"
               element={
-                <RequireAuth requiredRole="admin">
+                <ProtectedAdmin>
                   <AdminDashboard />
-                </RequireAuth>
+                </ProtectedAdmin>
               }
             />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
