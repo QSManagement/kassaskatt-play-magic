@@ -28,6 +28,7 @@ import { Loader2, Send, Package, Info, Pencil, X } from "lucide-react";
 
 interface Props {
   klass: any;
+  onOrdersChanged?: () => void | Promise<void>;
 }
 
 function orderStatusLabel(o: any): string {
@@ -40,7 +41,7 @@ function orderStatusLabel(o: any): string {
   return "Behandlas";
 }
 
-export default function OrderTab({ klass }: Props) {
+export default function OrderTab({ klass, onOrdersChanged }: Props) {
   const [qtyGoldStr, setQtyGoldStr] = useState("");
   const [qtyCremaStr, setQtyCremaStr] = useState("");
   const [submitting, setSubmitting] = useState(false);
