@@ -10,6 +10,7 @@ interface Props {
 
 export default function OverviewTab({ klass }: Props) {
   const [repurchaseTotal, setRepurchaseTotal] = useState(0);
+  const [studentTotals, setStudentTotals] = useState<{ gold: number; crema: number } | null>(null);
 
   useEffect(() => {
     supabase
@@ -22,7 +23,31 @@ export default function OverviewTab({ klass }: Props) {
       });
   }, [klass.id]);
 
-  const totalEarned = Number(klass.total_to_class || 0) + repurchaseTotal;
+  useEffect(() => {
+    if (klass.tracking_mode !== "per_student") {
+      setStudentTotals(null);
+      return;
+    }
+    supabase
+      .from("students")
+      .select("sold_gold, sold_crema")
+      .eq("class_id", klass.id)
+      .then(({ data }) => {
+        const gold = (data ?? []).reduce((s, r) => s + (r.sold_gold || 0), 0);
+        const crema = (data ?? []).reduce((s, r) => s + (r.sold_crema || 0), 0);
+        setStudentTotals({ gold, crema });
+      });
+  }, [klass.id, klass.tracking_mode]);
+
+  const orderGold = Number(klass.total_sold_gold || 0);
+  const orderCrema = Number(klass.total_sold_crema || 0);
+  const displayGold = studentTotals ? Math.max(orderGold, studentTotals.gold) : orderGold;
+  const displayCrema = studentTotals ? Math.max(orderCrema, studentTotals.crema) : orderCrema;
+  const projectedToClass = studentTotals
+    ? studentTotals.gold * 50 + studentTotals.crema * 70
+    : 0;
+  const baseEarned = Math.max(Number(klass.total_to_class || 0), projectedToClass);
+  const totalEarned = baseEarned + repurchaseTotal;
   const goal = klass.goal_amount || 0;
   const progressPct = goal > 0 ? Math.min(100, (totalEarned / goal) * 100) : 0;
 
@@ -81,7 +106,7 @@ export default function OverviewTab({ klass }: Props) {
             </div>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-emerald-950">{klass.total_sold_gold || 0}</p>
+            <p className="text-3xl font-bold text-emerald-950">{displayGold}</p>
             <p className="text-xs text-stone-500 mt-1">påsar</p>
           </CardContent>
         </Card>
@@ -94,7 +119,7 @@ export default function OverviewTab({ klass }: Props) {
             </div>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-emerald-950">{klass.total_sold_crema || 0}</p>
+            <p className="text-3xl font-bold text-emerald-950">{displayCrema}</p>
             <p className="text-xs text-stone-500 mt-1">påsar</p>
           </CardContent>
         </Card>
