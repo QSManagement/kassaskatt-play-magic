@@ -18,51 +18,72 @@ export type Database = {
         Row: {
           association_name: string
           bank_account: string
+          campaign_end: string | null
+          campaign_start: string | null
           class_name: string
           contact_email: string
           contact_name: string
           contact_phone: string
           created_at: string
           fundraising_goal: string | null
+          goal_amount: number | null
           id: string
           organization_number: string
           school_name: string
           status: string
           student_count: number
+          total_sold_crema: number
+          total_sold_gold: number
+          total_to_class: number
+          tracking_mode: string
           updated_at: string
           user_id: string | null
         }
         Insert: {
           association_name: string
           bank_account: string
+          campaign_end?: string | null
+          campaign_start?: string | null
           class_name: string
           contact_email: string
           contact_name: string
           contact_phone: string
           created_at?: string
           fundraising_goal?: string | null
+          goal_amount?: number | null
           id?: string
           organization_number: string
           school_name: string
           status?: string
           student_count: number
+          total_sold_crema?: number
+          total_sold_gold?: number
+          total_to_class?: number
+          tracking_mode?: string
           updated_at?: string
           user_id?: string | null
         }
         Update: {
           association_name?: string
           bank_account?: string
+          campaign_end?: string | null
+          campaign_start?: string | null
           class_name?: string
           contact_email?: string
           contact_name?: string
           contact_phone?: string
           created_at?: string
           fundraising_goal?: string | null
+          goal_amount?: number | null
           id?: string
           organization_number?: string
           school_name?: string
           status?: string
           student_count?: number
+          total_sold_crema?: number
+          total_sold_gold?: number
+          total_to_class?: number
+          tracking_mode?: string
           updated_at?: string
           user_id?: string | null
         }
@@ -155,6 +176,80 @@ export type Database = {
         }
         Relationships: []
       }
+      orders: {
+        Row: {
+          class_id: string
+          created_at: string
+          delivered_at: string | null
+          delivery_address: string | null
+          delivery_status: string
+          id: string
+          invoice_due_date: string | null
+          invoice_number: string | null
+          invoice_paid_at: string | null
+          invoice_sent_at: string | null
+          invoice_status: string
+          notes: string | null
+          qty_crema: number
+          qty_gold: number
+          submitted_at: string
+          total_to_class: number
+          total_to_invoice: number
+          tracking_number: string | null
+          updated_at: string
+        }
+        Insert: {
+          class_id: string
+          created_at?: string
+          delivered_at?: string | null
+          delivery_address?: string | null
+          delivery_status?: string
+          id?: string
+          invoice_due_date?: string | null
+          invoice_number?: string | null
+          invoice_paid_at?: string | null
+          invoice_sent_at?: string | null
+          invoice_status?: string
+          notes?: string | null
+          qty_crema?: number
+          qty_gold?: number
+          submitted_at?: string
+          total_to_class?: number
+          total_to_invoice?: number
+          tracking_number?: string | null
+          updated_at?: string
+        }
+        Update: {
+          class_id?: string
+          created_at?: string
+          delivered_at?: string | null
+          delivery_address?: string | null
+          delivery_status?: string
+          id?: string
+          invoice_due_date?: string | null
+          invoice_number?: string | null
+          invoice_paid_at?: string | null
+          invoice_sent_at?: string | null
+          invoice_status?: string
+          notes?: string | null
+          qty_crema?: number
+          qty_gold?: number
+          submitted_at?: string
+          total_to_class?: number
+          total_to_invoice?: number
+          tracking_number?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_class_id_fkey"
+            columns: ["class_id"]
+            isOneToOne: false
+            referencedRelation: "class_registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -230,6 +325,60 @@ export type Database = {
         }
         Relationships: []
       }
+      repurchases: {
+        Row: {
+          bonus_to_class: number
+          class_id: string
+          created_at: string
+          customer_email: string | null
+          id: string
+          notes: string | null
+          product: string
+          purchased_at: string
+          quantity: number
+          source_order_id: string | null
+        }
+        Insert: {
+          bonus_to_class?: number
+          class_id: string
+          created_at?: string
+          customer_email?: string | null
+          id?: string
+          notes?: string | null
+          product: string
+          purchased_at?: string
+          quantity: number
+          source_order_id?: string | null
+        }
+        Update: {
+          bonus_to_class?: number
+          class_id?: string
+          created_at?: string
+          customer_email?: string | null
+          id?: string
+          notes?: string | null
+          product?: string
+          purchased_at?: string
+          quantity?: number
+          source_order_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "repurchases_class_id_fkey"
+            columns: ["class_id"]
+            isOneToOne: false
+            referencedRelation: "class_registrations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "repurchases_source_order_id_fkey"
+            columns: ["source_order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       startguide_leads: {
         Row: {
           created_at: string
@@ -253,6 +402,47 @@ export type Database = {
           school_name?: string
         }
         Relationships: []
+      }
+      students: {
+        Row: {
+          class_id: string
+          created_at: string
+          id: string
+          name: string
+          notes: string | null
+          sold_crema: number
+          sold_gold: number
+          updated_at: string
+        }
+        Insert: {
+          class_id: string
+          created_at?: string
+          id?: string
+          name: string
+          notes?: string | null
+          sold_crema?: number
+          sold_gold?: number
+          updated_at?: string
+        }
+        Update: {
+          class_id?: string
+          created_at?: string
+          id?: string
+          name?: string
+          notes?: string | null
+          sold_crema?: number
+          sold_gold?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "students_class_id_fkey"
+            columns: ["class_id"]
+            isOneToOne: false
+            referencedRelation: "class_registrations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       suppressed_emails: {
         Row: {
@@ -278,6 +468,30 @@ export type Database = {
         }
         Relationships: []
       }
+      user_roles: {
+        Row: {
+          class_id: string | null
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          class_id?: string | null
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          class_id?: string | null
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -290,6 +504,14 @@ export type Database = {
       enqueue_email: {
         Args: { payload: Json; queue_name: string }
         Returns: number
+      }
+      get_user_class_id: { Args: { _user_id: string }; Returns: string }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
       }
       move_to_dlq: {
         Args: {
@@ -310,7 +532,7 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "teacher"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -437,6 +659,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "teacher"],
+    },
   },
 } as const
