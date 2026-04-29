@@ -11,9 +11,10 @@ import { Loader2 } from "lucide-react";
 interface Props {
   klass: any;
   user: any;
+  onUpdated?: () => void | Promise<void>;
 }
 
-export default function SettingsTab({ klass, user }: Props) {
+export default function SettingsTab({ klass, user, onUpdated }: Props) {
   const [contactName, setContactName] = useState(klass.contact_name || "");
   const [contactPhone, setContactPhone] = useState(klass.contact_phone || "");
   const [trackingMode, setTrackingMode] = useState(klass.tracking_mode || "aggregate");
@@ -35,7 +36,10 @@ export default function SettingsTab({ klass, user }: Props) {
       .eq("id", klass.id);
     setSaving(false);
     if (error) toast.error("Kunde inte spara");
-    else toast.success("Sparat");
+    else {
+      toast.success("Sparat");
+      onUpdated?.();
+    }
   }
 
   async function saveAssociation() {
@@ -50,7 +54,10 @@ export default function SettingsTab({ klass, user }: Props) {
       .eq("id", klass.id);
     setSavingAssoc(false);
     if (error) toast.error("Kunde inte spara föreningsuppgifter");
-    else toast.success("Föreningsuppgifter sparade");
+    else {
+      toast.success("Föreningsuppgifter sparade");
+      onUpdated?.();
+    }
   }
 
   async function handleResetPassword() {
