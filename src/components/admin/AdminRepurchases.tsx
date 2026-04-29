@@ -28,7 +28,18 @@ import {
 } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Plus, Sparkles } from "lucide-react";
+import { Plus, Sparkles, Trash2 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export default function AdminRepurchases() {
   const [repurchases, setRepurchases] = useState<any[]>([]);
@@ -68,6 +79,16 @@ export default function AdminRepurchases() {
     } else {
       toast.success("Återköp registrerat");
       setOpen(false);
+      load();
+    }
+  }
+
+  async function deleteRepurchase(id: string) {
+    const { error } = await supabase.from("repurchases").delete().eq("id", id);
+    if (error) {
+      toast.error("Kunde inte ta bort: " + error.message);
+    } else {
+      toast.success("Återköp borttaget");
       load();
     }
   }
@@ -116,6 +137,7 @@ export default function AdminRepurchases() {
                   <TableHead>Produkt</TableHead>
                   <TableHead>Antal</TableHead>
                   <TableHead className="text-right">Bonus</TableHead>
+                  <TableHead className="w-12"></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -141,6 +163,39 @@ export default function AdminRepurchases() {
                     <TableCell>{r.quantity}</TableCell>
                     <TableCell className="text-right font-semibold text-amber-700">
                       +{Number(r.bonus_to_class).toLocaleString("sv-SE")} kr
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8 text-stone-400 hover:text-red-700 hover:bg-red-50"
+                            aria-label="Ta bort återköp"
+                          >
+                            <Trash2 className="h-4 w-4" aria-hidden="true" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Ta bort återköp?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Detta tar bort återköpet permanent och drar av{" "}
+                              {Number(r.bonus_to_class).toLocaleString("sv-SE")} kr
+                              från klassens bonus. Går inte att ångra.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Avbryt</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => deleteRepurchase(r.id)}
+                              className="bg-red-700 hover:bg-red-800"
+                            >
+                              Ja, ta bort
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </TableCell>
                   </TableRow>
                 ))}
