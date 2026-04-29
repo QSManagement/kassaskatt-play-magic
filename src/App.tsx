@@ -11,6 +11,7 @@ import ResetPassword from "./pages/ResetPassword.tsx";
 import PendingApproval from "./pages/PendingApproval.tsx";
 import TeacherDashboard from "./pages/TeacherDashboard.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
+import Unsubscribe from "./pages/Unsubscribe.tsx";
 import { AuthProvider, useAuth } from "@/lib/AuthContext";
 
 const queryClient = new QueryClient();
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/logga-in" element={<Login />} />
             <Route path="/aterstall-losenord" element={<ResetPassword />} />
             <Route path="/vantar" element={<PendingApproval />} />
+            <Route path="/unsubscribe" element={<Unsubscribe />} />
             <Route
               path="/dashboard/*"
               element={
