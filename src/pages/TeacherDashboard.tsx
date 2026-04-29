@@ -109,7 +109,7 @@ export default function TeacherDashboard() {
           </TabsList>
 
           <TabsContent value="overview"><OverviewTab klass={klass} /></TabsContent>
-          <TabsContent value="order"><OrderTab klass={klass} /></TabsContent>
+          <TabsContent value="order"><OrderTab klass={klass} onOrdersChanged={reloadKlass} /></TabsContent>
           {klass.tracking_mode === "per_student" && (
             <TabsContent value="students"><StudentsTab klass={klass} /></TabsContent>
           )}
