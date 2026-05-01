@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
-import { Coffee, TrendingUp, Calendar, Sparkles } from "lucide-react";
+import { Coffee, TrendingUp, Calendar, Sparkles, FileText, Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   klass: any;
@@ -143,6 +144,30 @@ export default function OverviewTab({ klass }: Props) {
               <TrendingUp className="h-3 w-3 mr-1" aria-hidden="true" />
               {klass.tracking_mode === "per_student" ? "Per elev" : "Sammanlagt"}
             </Badge>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="border-amber-200 bg-amber-50">
+        <CardContent className="pt-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-amber-100 rounded-lg">
+                <FileText className="h-5 w-5 text-amber-700" aria-hidden="true" />
+              </div>
+              <div>
+                <p className="text-base font-semibold text-emerald-950">Säljblad för klassen</p>
+                <p className="text-sm text-stone-600 mt-1">
+                  Skriv ut och dela ut till eleverna så de kan hålla koll på sin egen försäljning.
+                </p>
+              </div>
+            </div>
+            <Button asChild className="bg-emerald-950 hover:bg-emerald-900 text-amber-50 shrink-0">
+              <a href="/qlasskassan-saljblad.pdf" download target="_blank" rel="noopener noreferrer">
+                <Download className="h-4 w-4 mr-2" aria-hidden="true" />
+                Ladda ner säljblad (PDF)
+              </a>
+            </Button>
           </div>
         </CardContent>
       </Card>

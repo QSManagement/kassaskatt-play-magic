@@ -1,55 +1,44 @@
-## Verifiering & ändringar — Översikt och Beställning
+## Plan: Säljblad till klasser
 
-### 1. Trigger-bekräftelse (databas)
+Säljbladet (PDF) blir tillgängligt på två ställen: i dashboarden som en alltid-tillgänglig nedladdningsknapp, och som en länk i mejlet "klass aktiverad" så lärarna får det direkt när kontot godkänns.
 
-Verifierat direkt mot databasen:
+### 1. Lägg PDF:en i projektet
+- Kopiera `Qlasskassan_säljblad.pdf` till `public/qlasskassan-saljblad.pdf` så den kan laddas ner direkt från `https://qlasskassan.se/qlasskassan-saljblad.pdf` (samma mönster som befintliga `qlasskassan-startguide.pdf`).
 
-- Triggern **`orders_update_class_counters`** är **aktiv** (`tgenabled = 'O'`) på `public.orders`.
-- Den körs **AFTER INSERT OR UPDATE OR DELETE FOR EACH ROW** och anropar `update_class_counters()`.
-- Funktionen räknar om `total_sold_gold`, `total_sold_crema` och `total_to_class` på `class_registrations` baserat på summan av alla `orders` för klassen.
+### 2. Nedladdningsknapp i Dashboarden (Översikt)
+I `src/components/dashboard/OverviewTab.tsx` läggs ett nytt kort till längst ner — ett "Material & resurser"-kort med en tydlig knapp:
 
-Det betyder: hjältekortets siffra på Översikt ändras endast när en order skickas in, ändras eller raderas — precis som specificerat.
-
-### 2. OverviewTab.tsx — ta bort student-rollupen
-
-Dagens kod räknar in `students.sold_gold/sold_crema` i Översiktens totaler. Det ska tas bort så att Översikt enbart speglar `class_registrations`-fälten (som triggern uppdaterar från `orders`).
-
-Ändringar i `src/components/dashboard/OverviewTab.tsx`:
-
-- Ta bort `studentTotals`-state och tillhörande `useEffect` som hämtar från `students`.
-- Ta bort `projectedToClass` och `Math.max(...)`-logiken.
-- `totalEarned` blir: `Number(klass.total_to_class || 0) + repurchaseTotal`.
-- Korten "Gold sålda" / "Crema sålda" visar `klass.total_sold_gold` / `klass.total_sold_crema` direkt.
-- `repurchaseTotal`-hämtningen behålls oförändrad (återköp ska fortsatt synas).
-
-### 3. OrderTab.tsx — info-ruta
-
-I `src/components/dashboard/OrderTab.tsx`:
-
-- Lägg till `Info` i import från `lucide-react` (bredvid befintliga `Loader2, Send, Package`).
-- Placera den specificerade info-rutan **direkt ovanför** `<Button type="submit">…Skicka in beställning</Button>` inuti formuläret:
-
-```tsx
-<div className="bg-stone-50 border border-stone-200 rounded-lg p-3 text-sm text-stone-600 flex items-start gap-2 mb-4">
-  <Info className="h-4 w-4 mt-0.5 flex-shrink-0 text-stone-500" aria-hidden="true" />
-  <p>
-    <strong>Översikt uppdateras när ni skickat in beställningen.</strong>
-    {' '}Använd Eleverna-fliken som arbetsverktyg under tiden — där sparas
-    elevernas siffror automatiskt utan att påverka Översikt.
-  </p>
-</div>
+```
+┌────────────────────────────────────────────────┐
+│ 📄  Säljblad för klassen                       │
+│ Skriv ut och dela ut till eleverna för att     │
+│ hålla koll på sin egen försäljning.            │
+│                                                │
+│         [ Ladda ner säljblad (PDF) ]           │
+└────────────────────────────────────────────────┘
 ```
 
-- Befintlig "Fyll i från eleverna"-knapp och student-summarutan behålls (de läser från `students` lokalt i Beställning-fliken, inte i Översikt).
+Knappen är en `<a href="/qlasskassan-saljblad.pdf" download>` stylad som primary Button (samma gröna ton som resten av dashboarden). Ikon: `Download` eller `FileText` från lucide-react.
 
-### 4. Vad som INTE ändras
+**Varför Översikt-fliken?** Det är första vyn lärare ser när de loggar in, så materialet är omedelbart hittbart. Vi kan även överväga att lägga den i Beställning-fliken senare om lärare efterfrågar det, men en plats räcker för att hålla UI:n ren.
 
-- `StudentsTab.tsx` — fortsätter spara per-elev-siffror i `students` (arbetsverktyg).
-- `OrderTab.tsx` "Fyll i från eleverna" — kvar, hjälper läraren att bygga ordern.
-- Återköpsvisning på Översikt — kvar.
-- Inga DB-migrationer behövs.
+### 3. Uppdatera "Klass aktiverad"-mejlet
+I `supabase/functions/_shared/transactional-email-templates/class-activated.tsx`:
+- Lägg till en ny knapp/länk under "Logga in på dashboarden" som heter **"📄 Ladda ner säljblad (PDF)"**, stylad i amber-ton (samma som PDF-knappen i startguide-mejlet) så den tydligt skiljer sig från huvud-CTA.
+- Länkar till `https://qlasskassan.se/qlasskassan-saljblad.pdf`.
+- Lägg till en kort mening i "Kom igång på 3 steg"-kortet som nämner att de kan skriva ut säljbladet och dela ut till eleverna.
 
-### Sammanfattning av filer som ändras
+### 4. Deploy
+Deploya `send-transactional-email` så den uppdaterade template-registret används. (Edge functions serverar bara senast deployade kod.)
 
-- `src/components/dashboard/OverviewTab.tsx` — ta bort student-rollup-logiken.
-- `src/components/dashboard/OrderTab.tsx` — lägg till `Info`-import och info-ruta ovanför submit-knappen.
+### Tekniska detaljer
+- **Filer som ändras:**
+  - `public/qlasskassan-saljblad.pdf` (ny — kopia av uppladdad PDF)
+  - `src/components/dashboard/OverviewTab.tsx` (nytt resurs-kort längst ner)
+  - `supabase/functions/_shared/transactional-email-templates/class-activated.tsx` (PDF-knapp + uppdaterad steg-text)
+- **Edge function deploy:** `send-transactional-email`
+- **Inga DB-ändringar, ingen ny route, inga nya secrets.**
+
+### Frågor innan jag bygger
+1. Ska säljbladsknappen ligga i **Översikt-fliken** (förslaget ovan) eller hellre i **Beställning-fliken** där lärarna jobbar med själva försäljningen — eller på båda ställena?
+2. Ska säljbladet även länkas i **startguide-mejlet** (det som skickas till leads innan de signat upp), eller bara i aktiveringsmejlet till godkända klasser?
