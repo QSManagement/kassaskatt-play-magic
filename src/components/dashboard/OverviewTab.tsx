@@ -3,8 +3,9 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { Coffee, TrendingUp, Calendar, Sparkles, FileText, Download } from "lucide-react";
-import { Ticket, Copy } from "lucide-react";
+import { Ticket, Copy, Pencil, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
 interface Props {
@@ -13,6 +14,10 @@ interface Props {
 
 export default function OverviewTab({ klass }: Props) {
   const [repurchaseTotal, setRepurchaseTotal] = useState(0);
+  const [editingCode, setEditingCode] = useState(false);
+  const [codeDraft, setCodeDraft] = useState(klass.class_code ?? "");
+  const [savingCode, setSavingCode] = useState(false);
+  const [currentCode, setCurrentCode] = useState<string>(klass.class_code ?? "");
 
   useEffect(() => {
     supabase
@@ -35,11 +40,40 @@ export default function OverviewTab({ klass }: Props) {
     ? Math.max(0, Math.ceil((new Date(klass.campaign_end).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
     : null;
 
-  const repurchaseLink = `${window.location.origin}/aterkop?kod=${klass.class_code ?? ""}`;
+  const repurchaseLink = `${window.location.origin}/aterkop?kod=${currentCode ?? ""}`;
 
   function copyToClipboard(text: string, label: string) {
     navigator.clipboard.writeText(text);
     toast.success(`${label} kopierad`);
+  }
+
+  async function saveCode() {
+    const trimmed = codeDraft.trim().toUpperCase();
+    if (!/^[A-Z0-9-]{4,20}$/.test(trimmed)) {
+      toast.error("Använd 4–20 tecken: A–Z, 0–9 eller bindestreck.");
+      return;
+    }
+    if (trimmed === currentCode) {
+      setEditingCode(false);
+      return;
+    }
+    setSavingCode(true);
+    const { error } = await supabase
+      .from("class_registrations")
+      .update({ class_code: trimmed })
+      .eq("id", klass.id);
+    setSavingCode(false);
+    if (error) {
+      if (error.message?.includes("class_code") || (error as any).code === "23505") {
+        toast.error("Den koden är redan tagen — välj en annan.");
+      } else {
+        toast.error("Kunde inte spara koden: " + error.message);
+      }
+      return;
+    }
+    setCurrentCode(trimmed);
+    setEditingCode(false);
+    toast.success("Klasskod uppdaterad");
   }
 
   return (
