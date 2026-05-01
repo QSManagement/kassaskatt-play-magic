@@ -80,6 +80,15 @@ Deno.serve(async (req) => {
         { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
+    if (klass.window_active === false) {
+      return new Response(
+        JSON.stringify({
+          error:
+            "Den här klassens återköpsperiod (6 månader) har gått ut. Kontakta oss om ni vill förlänga.",
+        }),
+        { status: 410, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
 
     // Create the pending order row first
     const deliveryAddress = body.delivery.address;
