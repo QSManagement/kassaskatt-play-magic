@@ -56,6 +56,61 @@ Deno.serve(async (req) => {
           .eq("id", orderId)
           .eq("payment_status", "pending"); // idempotency guard
         if (error) console.error("Failed to mark order paid", error);
+
+        // Notify the teacher (only for repurchase orders)
+        try {
+          const { data: order } = await supabase
+            .from("orders")
+            .select("id, order_type, qty_gold, qty_crema, class_id")
+            .eq("id", orderId)
+            .maybeSingle();
+
+          if (order?.order_type === "repurchase" && order.class_id) {
+            const { data: klass } = await supabase
+              .from("class_registrations")
+              .select("school_name, class_name, contact_name, contact_email, total_to_class")
+              .eq("id", order.class_id)
+              .maybeSingle();
+
+            // Sum repurchase bonuses so far for this class
+            const { data: rep } = await supabase
+              .from("repurchases")
+              .select("bonus_to_class")
+              .eq("class_id", order.class_id);
+            const repurchaseTotal = (rep ?? []).reduce(
+              (s, r: any) => s + Number(r.bonus_to_class ?? 0),
+              0,
+            );
+            const totalEarned =
+              Number(klass?.total_to_class ?? 0) + repurchaseTotal;
+
+            const totalBags =
+              Number(order.qty_gold ?? 0) + Number(order.qty_crema ?? 0);
+            const bonusToClass = totalBags * 15;
+
+            if (klass?.contact_email) {
+              await supabase.functions.invoke("send-transactional-email", {
+                body: {
+                  templateName: "repurchase-notification",
+                  recipientEmail: klass.contact_email,
+                  idempotencyKey: `repurchase-notify-${orderId}`,
+                  templateData: {
+                    teacherName: klass.contact_name ?? null,
+                    className: klass.class_name ?? null,
+                    schoolName: klass.school_name ?? null,
+                    qtyGold: Number(order.qty_gold ?? 0),
+                    qtyCrema: Number(order.qty_crema ?? 0),
+                    bonusToClass,
+                    totalEarned,
+                    dashboardUrl: "https://qlasskassan.se/dashboard",
+                  },
+                },
+              });
+            }
+          }
+        } catch (notifyErr) {
+          console.error("Failed to send repurchase notification email", notifyErr);
+        }
       }
     }
 
