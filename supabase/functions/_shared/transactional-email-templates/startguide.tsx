@@ -43,6 +43,12 @@ const StartguideEmail = ({ name, schoolName }: StartguideProps) => (
         </Section>
 
         <Section style={{ textAlign: 'center', margin: '32px 0' }}>
+          <Button href="https://qlasskassan.se/qlasskassan-startguide.pdf" style={pdfButton}>
+            📄 Ladda ner startguide (PDF)
+          </Button>
+        </Section>
+
+        <Section style={{ textAlign: 'center', margin: '24px 0 32px' }}>
           <Button href="https://qlasskassan.se/" style={button}>
             Anmäl klassen nu
           </Button>
@@ -85,6 +91,15 @@ const card = {
 }
 const button = {
   backgroundColor: '#064e3b',
+  color: '#fffbeb',
+  fontSize: '15px',
+  fontWeight: 'bold',
+  padding: '12px 28px',
+  borderRadius: '999px',
+  textDecoration: 'none',
+}
+const pdfButton = {
+  backgroundColor: '#b45309',
   color: '#fffbeb',
   fontSize: '15px',
   fontWeight: 'bold',
