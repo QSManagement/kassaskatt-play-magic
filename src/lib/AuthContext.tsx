@@ -47,6 +47,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
     // Set up listener FIRST to avoid missing events
     const {
       data: { subscription },
@@ -54,16 +55,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSession(newSession);
       setUser(newSession?.user ?? null);
       if (newSession?.user) {
+        // Mark loading until role is resolved — prevents brief flash of
+        // PendingApproval/wrong route while role is still null.
+        setLoading(true);
         // Defer Supabase calls to avoid deadlocks inside the callback
         setTimeout(() => {
           loadRoleAndClass(newSession.user.id).then(({ role, classId }) => {
+            if (!isMounted) return;
             setRole(role);
             setClassId(classId);
+            setLoading(false);
           });
         }, 0);
       } else {
         setRole(null);
         setClassId(null);
+        setLoading(false);
       }
     });
 
@@ -73,6 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(existingSession?.user ?? null);
       if (existingSession?.user) {
         loadRoleAndClass(existingSession.user.id).then(({ role, classId }) => {
+          if (!isMounted) return;
           setRole(role);
           setClassId(classId);
           setLoading(false);
@@ -82,7 +90,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   return (
