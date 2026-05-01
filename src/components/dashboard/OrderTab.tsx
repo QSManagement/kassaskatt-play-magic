@@ -44,6 +44,10 @@ function orderStatusLabel(o: any): string {
 export default function OrderTab({ klass, onOrdersChanged }: Props) {
   const [qtyGoldStr, setQtyGoldStr] = useState("");
   const [qtyCremaStr, setQtyCremaStr] = useState("");
+  const [deliveryRecipient, setDeliveryRecipient] = useState("");
+  const [deliveryAddress, setDeliveryAddress] = useState("");
+  const [deliveryPostalCode, setDeliveryPostalCode] = useState("");
+  const [deliveryCity, setDeliveryCity] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [orders, setOrders] = useState<any[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
@@ -54,6 +58,8 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
   const [savingEdit, setSavingEdit] = useState(false);
   const [cancelOrder, setCancelOrder] = useState<any | null>(null);
   const [cancelling, setCancelling] = useState(false);
+  const [deleteOrder, setDeleteOrder] = useState<any | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   async function loadOrders() {
     setLoadingOrders(true);
@@ -62,7 +68,20 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
       .select("*")
       .eq("class_id", klass.id)
       .order("created_at", { ascending: false });
-    if (!error) setOrders(data || []);
+    if (!error) {
+      const list = data || [];
+      setOrders(list);
+      // Förfyll adressfälten med senaste använda adress
+      const last = list.find((o: any) => o.delivery_address);
+      if (last && !deliveryAddress) {
+        setDeliveryRecipient(last.delivery_recipient || klass.school_name || "");
+        setDeliveryAddress(last.delivery_address || "");
+        setDeliveryPostalCode(last.delivery_postal_code || "");
+        setDeliveryCity(last.delivery_city || "");
+      } else if (!deliveryRecipient && klass.school_name) {
+        setDeliveryRecipient(klass.school_name);
+      }
+    }
     setLoadingOrders(false);
   }
 
@@ -114,6 +133,24 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
     onOrdersChanged?.();
   }
 
+  async function confirmDelete() {
+    if (!deleteOrder) return;
+    setDeleting(true);
+    const { error } = await supabase
+      .from("orders")
+      .delete()
+      .eq("id", deleteOrder.id);
+    setDeleting(false);
+    if (error) {
+      toast.error("Kunde inte radera beställningen");
+      return;
+    }
+    toast.success("Beställning raderad");
+    setDeleteOrder(null);
+    loadOrders();
+    onOrdersChanged?.();
+  }
+
   useEffect(() => {
     loadOrders();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -146,11 +183,19 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
       toast.error("Lägg till minst en påse innan du skickar");
       return;
     }
+    if (!deliveryRecipient.trim() || !deliveryAddress.trim() || !deliveryPostalCode.trim() || !deliveryCity.trim()) {
+      toast.error("Fyll i hela leveransadressen");
+      return;
+    }
     setSubmitting(true);
     const { error } = await supabase.from("orders").insert({
       class_id: klass.id,
       qty_gold: qtyGold,
       qty_crema: qtyCrema,
+      delivery_recipient: deliveryRecipient.trim(),
+      delivery_address: deliveryAddress.trim(),
+      delivery_postal_code: deliveryPostalCode.trim(),
+      delivery_city: deliveryCity.trim(),
     });
     setSubmitting(false);
     if (error) {
