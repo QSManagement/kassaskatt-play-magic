@@ -12,9 +12,11 @@ export interface TemplateEntry {
 import { template as startguide } from './startguide.tsx'
 import { template as registrationWelcome } from './registration-welcome.tsx'
 import { template as classActivated } from './class-activated.tsx'
+import { template as repurchaseNotification } from './repurchase-notification.tsx'
 
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'startguide': startguide,
   'registration-welcome': registrationWelcome,
   'class-activated': classActivated,
+  'repurchase-notification': repurchaseNotification,
 }
