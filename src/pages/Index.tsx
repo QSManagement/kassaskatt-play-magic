@@ -138,7 +138,7 @@ export default function Index() {
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-emerald-950 leading-[1.05] tracking-tight mb-6">
               <span className="block">Sälj <span className="italic text-amber-700">premium</span> kaffe</span>
-              <span className="block">Bygg er <span className="underline decoration-amber-400 decoration-4 underline-offset-4">klasskassa</span> på fyra veckor</span>
+              <span className="block">Bygg er <span className="underline decoration-amber-400 decoration-4 underline-offset-4">klasskassa</span> i er egen takt</span>
             </h1>
 
             {/* I1: Sifferstrip */}
@@ -663,7 +663,7 @@ export default function Index() {
           </div>
           <Accordion type="single" collapsible className="bg-white border border-stone-200 rounded-3xl px-6 md:px-8">
             {[
-              { q: 'Hur länge tar en typisk försäljning?', a: 'Från kickoff till utlämning brukar det landa på 4 veckor. Ni säljer i 2–3 veckor, samlar in beställningar och pengar, vi levererar inom 5 arbetsdagar.' },
+              { q: 'Hur länge tar en typisk försäljning?', a: 'Ni bestämmer själva hur länge ni säljer – allt från några dagar till hela terminen. När ni skickat in den samlade beställningen levererar vi inom 5 arbetsdagar. Många klasser kör flera säljperioder per läsår.' },
               { q: 'Hur går betalningen till?', a: 'Klassen samlar in pengar från kunderna (Swish till föreningens konto). När ni skickar in den samlade beställningen till oss fakturerar vi föreningen för vår del — med 14 dagars betaltid. Klassen behåller mellanskillnaden direkt.' },
               { q: 'Vad händer om en kund ångrar sig?', a: 'Eftersom ni samlar in beställningar och pengar innan vi packar och kör så händer det sällan. Skulle det ändå göra det, hör av er — vi löser det.' },
               { q: 'Måste klassen ha en förening?', a: 'Ja, vi fakturerar mot ett organisationsnummer (oftast föräldraföreningen). Saknar ni det går det att registrera en enkel ideell förening på 30 minuter — vi skickar instruktioner i startguiden.' },
