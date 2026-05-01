@@ -53,7 +53,10 @@ const ClassActivatedEmail = ({ name, className, schoolName, loginUrl, classCode,
 
         <Section style={{ textAlign: 'center', margin: '8px 0 28px' }}>
           <Button href="https://qlasskassan.se/qlasskassan-saljblad.pdf" style={pdfButton}>
-            📄 Ladda ner säljblad (PDF)
+            📄 Beställningsblankett (PDF)
+          </Button>
+          <Button href="https://qlasskassan.se/qlasskassan-aterkop.pdf" style={{ ...pdfButton, marginLeft: '8px' }}>
+            ☕ Återköpsblad — klasskod (PDF)
           </Button>
         </Section>
 
