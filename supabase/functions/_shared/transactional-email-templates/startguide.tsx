@@ -23,7 +23,7 @@ const StartguideEmail = ({ name, schoolName }: StartguideProps) => (
         <Text style={text}>
           Tack för att du vill veta mer om {SITE_NAME}
           {schoolName ? ` för ${schoolName}` : ''}. Här kommer en kort
-          startguide som hjälper er komma igång på fyra veckor.
+          startguide som hjälper er komma igång – i er egen takt.
         </Text>
 
         <Section style={card}>
