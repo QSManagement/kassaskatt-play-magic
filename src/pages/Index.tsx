@@ -467,7 +467,7 @@ export default function Index() {
                 Klassen får pengar <span className="italic text-amber-700">även</span> efter att försäljningen är slut
               </h2>
               <p className="text-lg text-emerald-900/80 mb-8 leading-relaxed">
-                Det här är vår superkraft. När en kund köpt kaffe via klassen får de en QR-kod på påsen. Återköper de kaffet på scandinaviancoffee.se inom 6 månader får klassen <strong>15 kr per påse</strong> — automatiskt, utan att eleverna lyfter ett finger.
+                Det här är vår superkraft. Varje klass får en unik klasskod. Återköper kunderna kaffet på <strong>qlasskassan.se/aterkop</strong> med koden inom 6 månader får klassen <strong>15 kr per påse</strong> — automatiskt, utan att eleverna lyfter ett finger.
               </p>
               <div className="bg-white rounded-2xl p-6 border border-amber-200 mb-8">
                 <div className="text-sm font-semibold text-emerald-900 mb-4">Räkneexempel återköp</div>
@@ -668,7 +668,7 @@ export default function Index() {
               { q: 'Vad händer om en kund ångrar sig?', a: 'Eftersom ni samlar in beställningar och pengar innan vi packar och kör så händer det sällan. Skulle det ändå göra det, hör av er — vi löser det.' },
               { q: 'Måste klassen ha en förening?', a: 'Ja, vi fakturerar mot ett organisationsnummer (oftast föräldraföreningen). Saknar ni det går det att registrera en enkel ideell förening på 30 minuter — vi skickar instruktioner i startguiden.' },
               { q: 'Kostar det något att starta?', a: 'Nej. Registrering, säljmaterial och all support är gratis. Ni betalar bara för de påsar ni faktiskt beställer.' },
-              { q: 'Hur funkar Återköpsklubben rent tekniskt?', a: 'Varje påse har en QR-kod som leder till scandinaviancoffee.se. När en kund handlar där och anger klasskoden får klassen 15 kr per påse — i 6 månader. Vi mejlar er en månadsrapport.' },
+              { q: 'Hur funkar Återköpsklubben rent tekniskt?', a: 'Varje klass får en unik klasskod (står på säljbladet). När en kund handlar på qlasskassan.se/aterkop och anger koden får klassen 15 kr per påse — i 6 månader. Vi mejlar er en månadsrapport.' },
               { q: 'Är kaffet faktiskt premium?', a: 'Caffè Gondoliere är ett av Europas största rosterier, certifierat av Rainforest Alliance. Crema är 100 % höglands-Arabica i hela bönor. Provsmaka själva — vi skickar gratis sample-paket till intresserade lärare på begäran.' },
               { q: 'Vad om vi vill avbryta?', a: 'Inga bindningstider. Ni bestämmer själva när och hur mycket ni säljer. Skickar ni inte in en beställning så kostar det inget.' },
               { q: 'Hur mycket tjänar en typisk klass?', a: '25 elever som säljer 8 påsar var med 60 % Crema-mix landar på cirka 11 600 kr vid utlämning. Sen tickar Återköpsklubben på i 6 månader — vanligtvis 1 500–2 500 kr extra.' },
