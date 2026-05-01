@@ -45,7 +45,7 @@ export type Database = {
           bank_account: string
           campaign_end?: string | null
           campaign_start?: string | null
-          class_code: string
+          class_code?: string
           class_name: string
           contact_email: string
           contact_name: string
