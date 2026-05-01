@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Loader2, Send, Package, Info, Pencil, X } from "lucide-react";
+import { Loader2, Send, Package, Info, Pencil, X, Trash2, MapPin } from "lucide-react";
 
 interface Props {
   klass: any;
@@ -44,6 +44,10 @@ function orderStatusLabel(o: any): string {
 export default function OrderTab({ klass, onOrdersChanged }: Props) {
   const [qtyGoldStr, setQtyGoldStr] = useState("");
   const [qtyCremaStr, setQtyCremaStr] = useState("");
+  const [deliveryRecipient, setDeliveryRecipient] = useState("");
+  const [deliveryAddress, setDeliveryAddress] = useState("");
+  const [deliveryPostalCode, setDeliveryPostalCode] = useState("");
+  const [deliveryCity, setDeliveryCity] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [orders, setOrders] = useState<any[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
@@ -54,6 +58,8 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
   const [savingEdit, setSavingEdit] = useState(false);
   const [cancelOrder, setCancelOrder] = useState<any | null>(null);
   const [cancelling, setCancelling] = useState(false);
+  const [deleteOrder, setDeleteOrder] = useState<any | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   async function loadOrders() {
     setLoadingOrders(true);
@@ -62,7 +68,20 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
       .select("*")
       .eq("class_id", klass.id)
       .order("created_at", { ascending: false });
-    if (!error) setOrders(data || []);
+    if (!error) {
+      const list = data || [];
+      setOrders(list);
+      // Förfyll adressfälten med senaste använda adress
+      const last = list.find((o: any) => o.delivery_address);
+      if (last && !deliveryAddress) {
+        setDeliveryRecipient(last.delivery_recipient || klass.school_name || "");
+        setDeliveryAddress(last.delivery_address || "");
+        setDeliveryPostalCode(last.delivery_postal_code || "");
+        setDeliveryCity(last.delivery_city || "");
+      } else if (!deliveryRecipient && klass.school_name) {
+        setDeliveryRecipient(klass.school_name);
+      }
+    }
     setLoadingOrders(false);
   }
 
@@ -114,6 +133,24 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
     onOrdersChanged?.();
   }
 
+  async function confirmDelete() {
+    if (!deleteOrder) return;
+    setDeleting(true);
+    const { error } = await supabase
+      .from("orders")
+      .delete()
+      .eq("id", deleteOrder.id);
+    setDeleting(false);
+    if (error) {
+      toast.error("Kunde inte radera beställningen");
+      return;
+    }
+    toast.success("Beställning raderad");
+    setDeleteOrder(null);
+    loadOrders();
+    onOrdersChanged?.();
+  }
+
   useEffect(() => {
     loadOrders();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -146,11 +183,19 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
       toast.error("Lägg till minst en påse innan du skickar");
       return;
     }
+    if (!deliveryRecipient.trim() || !deliveryAddress.trim() || !deliveryPostalCode.trim() || !deliveryCity.trim()) {
+      toast.error("Fyll i hela leveransadressen");
+      return;
+    }
     setSubmitting(true);
     const { error } = await supabase.from("orders").insert({
       class_id: klass.id,
       qty_gold: qtyGold,
       qty_crema: qtyCrema,
+      delivery_recipient: deliveryRecipient.trim(),
+      delivery_address: deliveryAddress.trim(),
+      delivery_postal_code: deliveryPostalCode.trim(),
+      delivery_city: deliveryCity.trim(),
     });
     setSubmitting(false);
     if (error) {
@@ -220,6 +265,58 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                   onChange={(e) => setQtyCremaStr(e.target.value.replace(/[^0-9]/g, ""))}
                 />
                 <p className="text-xs text-stone-500">249 kr/påse · 70 kr till klassen</p>
+              </div>
+            </div>
+
+            <div className="space-y-3 border border-stone-200 rounded-lg p-4 bg-stone-50">
+              <div className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-emerald-900" aria-hidden="true" />
+                <h3 className="font-semibold text-emerald-950 text-sm">Leveransadress</h3>
+              </div>
+              <p className="text-xs text-stone-600">
+                Vart ska vi leverera påsarna? Vanligtvis till skolan.
+              </p>
+              <div className="space-y-2">
+                <Label htmlFor="delivery_recipient">Mottagare (skola/kontaktperson) *</Label>
+                <Input
+                  id="delivery_recipient"
+                  value={deliveryRecipient}
+                  placeholder="t.ex. Lindeskolan, c/o Anna Andersson"
+                  onChange={(e) => setDeliveryRecipient(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="delivery_address">Gatuadress *</Label>
+                <Input
+                  id="delivery_address"
+                  value={deliveryAddress}
+                  placeholder="t.ex. Skolvägen 12"
+                  onChange={(e) => setDeliveryAddress(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                <div className="space-y-2">
+                  <Label htmlFor="delivery_postal">Postnr *</Label>
+                  <Input
+                    id="delivery_postal"
+                    value={deliveryPostalCode}
+                    placeholder="711 30"
+                    onChange={(e) => setDeliveryPostalCode(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="space-y-2 col-span-2">
+                  <Label htmlFor="delivery_city">Ort *</Label>
+                  <Input
+                    id="delivery_city"
+                    value={deliveryCity}
+                    placeholder="Lindesberg"
+                    onChange={(e) => setDeliveryCity(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
             </div>
 
@@ -307,6 +404,15 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                       <p className="text-xs text-stone-500 mt-1">
                         {new Date(o.created_at).toLocaleDateString("sv-SE")}
                       </p>
+                      {o.delivery_address && (
+                        <p className="text-xs text-stone-500 mt-1 flex items-start gap-1">
+                          <MapPin className="h-3 w-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                          <span>
+                            {o.delivery_recipient && <>{o.delivery_recipient}, </>}
+                            {o.delivery_address}, {o.delivery_postal_code} {o.delivery_city}
+                          </span>
+                        </p>
+                      )}
                       {isLocked && (
                         <p className="text-xs text-stone-400 mt-1">
                           Låst — kontakta info@qlasskassan.se för ändringar
@@ -342,6 +448,16 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                           >
                             <X className="h-3 w-3 mr-1" aria-hidden="true" />
                             Avbryt
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            className="text-red-700 hover:text-red-800"
+                            onClick={() => setDeleteOrder(o)}
+                          >
+                            <Trash2 className="h-3 w-3 mr-1" aria-hidden="true" />
+                            Radera
                           </Button>
                         </div>
                       ) : isLocked ? (
@@ -449,6 +565,32 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
             >
               {cancelling && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Ja, avbryt beställningen
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <AlertDialog open={!!deleteOrder} onOpenChange={(open) => !open && setDeleteOrder(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Radera beställning?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Beställningen tas bort permanent och försvinner både hos er och hos Qlasskassan.
+              Använd om beställningen är felaktig eller en testbeställning.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={deleting}>Tillbaka</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={(e) => {
+                e.preventDefault();
+                confirmDelete();
+              }}
+              disabled={deleting}
+              className="bg-red-700 hover:bg-red-800"
+            >
+              {deleting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Ja, radera
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

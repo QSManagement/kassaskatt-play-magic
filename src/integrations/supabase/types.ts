@@ -182,6 +182,9 @@ export type Database = {
           created_at: string
           delivered_at: string | null
           delivery_address: string | null
+          delivery_city: string | null
+          delivery_postal_code: string | null
+          delivery_recipient: string | null
           delivery_status: string
           id: string
           invoice_due_date: string | null
@@ -203,6 +206,9 @@ export type Database = {
           created_at?: string
           delivered_at?: string | null
           delivery_address?: string | null
+          delivery_city?: string | null
+          delivery_postal_code?: string | null
+          delivery_recipient?: string | null
           delivery_status?: string
           id?: string
           invoice_due_date?: string | null
@@ -224,6 +230,9 @@ export type Database = {
           created_at?: string
           delivered_at?: string | null
           delivery_address?: string | null
+          delivery_city?: string | null
+          delivery_postal_code?: string | null
+          delivery_recipient?: string | null
           delivery_status?: string
           id?: string
           invoice_due_date?: string | null
