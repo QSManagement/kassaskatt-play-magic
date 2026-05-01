@@ -18,7 +18,19 @@ import {
 } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Package } from "lucide-react";
+import { Package, Trash2, MapPin } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState<any[]>([]);
@@ -62,6 +74,15 @@ export default function AdminOrders() {
     if (error) toast.error("Kunde inte uppdatera");
     else {
       toast.success("Uppdaterad");
+      load();
+    }
+  }
+
+  async function deleteOrder(id: string) {
+    const { error } = await supabase.from("orders").delete().eq("id", id);
+    if (error) toast.error("Kunde inte radera ordern");
+    else {
+      toast.success("Ordern raderad");
       load();
     }
   }
@@ -154,8 +175,10 @@ export default function AdminOrders() {
                   <TableHead>Klass</TableHead>
                   <TableHead>Antal</TableHead>
                   <TableHead>Faktura</TableHead>
+                  <TableHead>Leveransadress</TableHead>
                   <TableHead>Faktura status</TableHead>
                   <TableHead>Leverans status</TableHead>
+                  <TableHead></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -182,6 +205,26 @@ export default function AdminOrders() {
                       <span className="block italic text-xs font-normal text-stone-500">
                         varav moms 6 %: {Math.round(Number(o.total_to_invoice) - Number(o.total_to_invoice) / 1.06).toLocaleString("sv-SE")} kr
                       </span>
+                    </TableCell>
+                    <TableCell className="text-xs text-stone-700 max-w-[220px]">
+                      {o.delivery_address ? (
+                        <div className="flex items-start gap-1">
+                          <MapPin className="h-3 w-3 mt-0.5 flex-shrink-0 text-stone-400" aria-hidden="true" />
+                          <div>
+                            {o.delivery_recipient && (
+                              <p className="font-medium text-stone-900">{o.delivery_recipient}</p>
+                            )}
+                            <p>{o.delivery_address}</p>
+                            {(o.delivery_postal_code || o.delivery_city) && (
+                              <p>
+                                {o.delivery_postal_code} {o.delivery_city}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      ) : (
+                        <span className="text-stone-400 italic">Saknas</span>
+                      )}
                     </TableCell>
                     <TableCell>
                       <Select
@@ -214,6 +257,38 @@ export default function AdminOrders() {
                           <SelectItem value="delivered">Levererad</SelectItem>
                         </SelectContent>
                       </Select>
+                    </TableCell>
+                    <TableCell>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-red-700 hover:text-red-800 hover:bg-red-50 h-8 w-8 p-0"
+                            aria-label="Radera order"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Radera order?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Ordern tas bort permanent — både hos er och hos klassen.
+                              Klassens totaler räknas om automatiskt. Använd för fel- eller testbeställningar.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Avbryt</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => deleteOrder(o.id)}
+                              className="bg-red-700 hover:bg-red-800"
+                            >
+                              Ja, radera
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </TableCell>
                   </TableRow>
                 ))}
