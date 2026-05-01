@@ -20,6 +20,7 @@ export type Database = {
           bank_account: string
           campaign_end: string | null
           campaign_start: string | null
+          class_code: string
           class_name: string
           contact_email: string
           contact_name: string
@@ -44,6 +45,7 @@ export type Database = {
           bank_account: string
           campaign_end?: string | null
           campaign_start?: string | null
+          class_code?: string
           class_name: string
           contact_email: string
           contact_name: string
@@ -68,6 +70,7 @@ export type Database = {
           bank_account?: string
           campaign_end?: string | null
           campaign_start?: string | null
+          class_code?: string
           class_name?: string
           contact_email?: string
           contact_name?: string
@@ -180,6 +183,9 @@ export type Database = {
         Row: {
           class_id: string
           created_at: string
+          customer_email: string | null
+          customer_name: string | null
+          customer_phone: string | null
           delivered_at: string | null
           delivery_address: string | null
           delivery_city: string | null
@@ -193,8 +199,12 @@ export type Database = {
           invoice_sent_at: string | null
           invoice_status: string
           notes: string | null
+          order_type: string
+          paid_at: string | null
+          payment_status: string
           qty_crema: number
           qty_gold: number
+          stripe_session_id: string | null
           submitted_at: string
           total_to_class: number
           total_to_invoice: number
@@ -204,6 +214,9 @@ export type Database = {
         Insert: {
           class_id: string
           created_at?: string
+          customer_email?: string | null
+          customer_name?: string | null
+          customer_phone?: string | null
           delivered_at?: string | null
           delivery_address?: string | null
           delivery_city?: string | null
@@ -217,8 +230,12 @@ export type Database = {
           invoice_sent_at?: string | null
           invoice_status?: string
           notes?: string | null
+          order_type?: string
+          paid_at?: string | null
+          payment_status?: string
           qty_crema?: number
           qty_gold?: number
+          stripe_session_id?: string | null
           submitted_at?: string
           total_to_class?: number
           total_to_invoice?: number
@@ -228,6 +245,9 @@ export type Database = {
         Update: {
           class_id?: string
           created_at?: string
+          customer_email?: string | null
+          customer_name?: string | null
+          customer_phone?: string | null
           delivered_at?: string | null
           delivery_address?: string | null
           delivery_city?: string | null
@@ -241,8 +261,12 @@ export type Database = {
           invoice_sent_at?: string | null
           invoice_status?: string
           notes?: string | null
+          order_type?: string
+          paid_at?: string | null
+          payment_status?: string
           qty_crema?: number
           qty_gold?: number
+          stripe_session_id?: string | null
           submitted_at?: string
           total_to_class?: number
           total_to_invoice?: number
@@ -514,6 +538,7 @@ export type Database = {
         Args: { payload: Json; queue_name: string }
         Returns: number
       }
+      generate_class_code: { Args: never; Returns: string }
       get_user_class_id: { Args: { _user_id: string }; Returns: string }
       has_role: {
         Args: {
@@ -521,6 +546,16 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      lookup_class_by_code: {
+        Args: { _code: string }
+        Returns: {
+          class_code: string
+          class_name: string
+          id: string
+          school_name: string
+          status: string
+        }[]
       }
       move_to_dlq: {
         Args: {

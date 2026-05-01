@@ -3,7 +3,9 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { Coffee, TrendingUp, Calendar, Sparkles, FileText, Download } from "lucide-react";
+import { Ticket, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 interface Props {
   klass: any;
@@ -32,6 +34,13 @@ export default function OverviewTab({ klass }: Props) {
   const daysLeft = klass.campaign_end
     ? Math.max(0, Math.ceil((new Date(klass.campaign_end).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
     : null;
+
+  const repurchaseLink = `${window.location.origin}/aterkop?kod=${klass.class_code ?? ""}`;
+
+  function copyToClipboard(text: string, label: string) {
+    navigator.clipboard.writeText(text);
+    toast.success(`${label} kopierad`);
+  }
 
   return (
     <div className="space-y-6">
@@ -147,6 +156,46 @@ export default function OverviewTab({ klass }: Props) {
           </div>
         </CardContent>
       </Card>
+
+      {klass.class_code && (
+        <Card className="border-emerald-200 bg-gradient-to-br from-emerald-50 to-amber-50">
+          <CardContent className="pt-6 space-y-4">
+            <div className="flex items-start gap-3">
+              <div className="p-2 bg-emerald-100 rounded-lg">
+                <Ticket className="h-5 w-5 text-emerald-700" aria-hidden="true" />
+              </div>
+              <div className="flex-1">
+                <p className="text-base font-semibold text-emerald-950">Er klasskod</p>
+                <p className="text-sm text-stone-600 mt-1">
+                  Dela med era kunder. När de återköper kaffe på qlasskassan.se/aterkop och anger koden får ni 15 kr per påse — automatiskt.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 bg-white border border-emerald-200 rounded-lg p-3">
+              <code className="font-mono text-2xl font-bold text-emerald-900 flex-1 tracking-wider">
+                {klass.class_code}
+              </code>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => copyToClipboard(klass.class_code, "Klasskod")}
+              >
+                <Copy className="h-3 w-3 mr-1" /> Kopiera
+              </Button>
+            </div>
+            <div className="flex items-center gap-2 bg-white border border-stone-200 rounded-lg p-3">
+              <span className="text-xs text-stone-500 truncate flex-1">{repurchaseLink}</span>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => copyToClipboard(repurchaseLink, "Direktlänk")}
+              >
+                <Copy className="h-3 w-3 mr-1" /> Kopiera länk
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <Card className="border-amber-200 bg-amber-50">
         <CardContent className="pt-6">

@@ -53,8 +53,8 @@ export default function RepurchasesTab({ klass }: Props) {
         <CardContent className="text-sm text-stone-700 space-y-2">
           <p>
             Varje gång en av era kunder återköper kaffe på{" "}
-            <a href="https://scandinaviancoffee.se" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline">scandinaviancoffee.se</a>{" "}
-            inom 6 månader får er klass <strong>15 kr per påse</strong> — automatiskt.
+            <a href={`/aterkop?kod=${klass.class_code ?? ""}`} target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline">qlasskassan.se/aterkop</a>{" "}
+            med er klasskod inom 6 månader får er klass <strong>15 kr per påse</strong> — automatiskt.
           </p>
           <p>Vi mejlar er en månadsrapport så ni kan följa utvecklingen.</p>
         </CardContent>
@@ -71,7 +71,7 @@ export default function RepurchasesTab({ klass }: Props) {
             <div className="text-center py-8 text-stone-500">
               <Coffee className="h-8 w-8 mx-auto mb-3 text-stone-300" aria-hidden="true" />
               <p className="text-sm">Inga återköp registrerade ännu.</p>
-              <p className="text-xs mt-1">Återköp dyker upp här när era kunder börjar handla på scandinaviancoffee.se</p>
+              <p className="text-xs mt-1">Återköp dyker upp här när era kunder börjar handla på qlasskassan.se/aterkop med er klasskod</p>
             </div>
           ) : (
             <div className="space-y-2">
