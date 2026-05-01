@@ -260,24 +260,45 @@ export default function OverviewTab({ klass }: Props) {
 
       <Card className="border-amber-200 bg-amber-50">
         <CardContent className="pt-6">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-amber-100 rounded-lg">
-                <FileText className="h-5 w-5 text-amber-700" aria-hidden="true" />
+          <div className="space-y-4">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div className="flex items-start gap-3">
+                <div className="p-2 bg-amber-100 rounded-lg">
+                  <FileText className="h-5 w-5 text-amber-700" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="text-base font-semibold text-emerald-950">Säljblad / beställningsblankett</p>
+                  <p className="text-sm text-stone-600 mt-1">
+                    Skriv ut och dela ut till eleverna — kunden fyller i namn, antal och summa.
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-base font-semibold text-emerald-950">Säljblad för klassen</p>
-                <p className="text-sm text-stone-600 mt-1">
-                  Skriv ut och dela ut till eleverna så de kan hålla koll på sin egen försäljning.
-                </p>
-              </div>
+              <Button asChild className="bg-emerald-950 hover:bg-emerald-900 text-amber-50 shrink-0">
+                <a href="/qlasskassan-saljblad.pdf" download target="_blank" rel="noopener noreferrer">
+                  <Download className="h-4 w-4 mr-2" aria-hidden="true" />
+                  Ladda ner säljblad (PDF)
+                </a>
+              </Button>
             </div>
-            <Button asChild className="bg-emerald-950 hover:bg-emerald-900 text-amber-50 shrink-0">
-              <a href="/qlasskassan-saljblad.pdf" download target="_blank" rel="noopener noreferrer">
-                <Download className="h-4 w-4 mr-2" aria-hidden="true" />
-                Ladda ner säljblad (PDF)
-              </a>
-            </Button>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pt-4 border-t border-amber-200">
+              <div className="flex items-start gap-3">
+                <div className="p-2 bg-amber-100 rounded-lg">
+                  <Sparkles className="h-5 w-5 text-amber-700" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="text-base font-semibold text-emerald-950">Återköpsblad med klasskod</p>
+                  <p className="text-sm text-stone-600 mt-1">
+                    Dela ut till nöjda kunder så de kan återbeställa online och ge er 15 kr/påse i bonus.
+                  </p>
+                </div>
+              </div>
+              <Button asChild variant="outline" className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 shrink-0">
+                <a href="/qlasskassan-aterkop.pdf" download target="_blank" rel="noopener noreferrer">
+                  <Download className="h-4 w-4 mr-2" aria-hidden="true" />
+                  Ladda ner återköpsblad (PDF)
+                </a>
+              </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
