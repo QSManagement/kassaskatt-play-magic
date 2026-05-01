@@ -404,6 +404,15 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                       <p className="text-xs text-stone-500 mt-1">
                         {new Date(o.created_at).toLocaleDateString("sv-SE")}
                       </p>
+                      {o.delivery_address && (
+                        <p className="text-xs text-stone-500 mt-1 flex items-start gap-1">
+                          <MapPin className="h-3 w-3 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                          <span>
+                            {o.delivery_recipient && <>{o.delivery_recipient}, </>}
+                            {o.delivery_address}, {o.delivery_postal_code} {o.delivery_city}
+                          </span>
+                        </p>
+                      )}
                       {isLocked && (
                         <p className="text-xs text-stone-400 mt-1">
                           Låst — kontakta info@qlasskassan.se för ändringar
@@ -439,6 +448,16 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                           >
                             <X className="h-3 w-3 mr-1" aria-hidden="true" />
                             Avbryt
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            className="text-red-700 hover:text-red-800"
+                            onClick={() => setDeleteOrder(o)}
+                          >
+                            <Trash2 className="h-3 w-3 mr-1" aria-hidden="true" />
+                            Radera
                           </Button>
                         </div>
                       ) : isLocked ? (
