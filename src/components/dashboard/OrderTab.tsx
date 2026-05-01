@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Loader2, Send, Package, Info, Pencil, X } from "lucide-react";
+import { Loader2, Send, Package, Info, Pencil, X, Trash2, MapPin } from "lucide-react";
 
 interface Props {
   klass: any;
@@ -265,6 +265,58 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                   onChange={(e) => setQtyCremaStr(e.target.value.replace(/[^0-9]/g, ""))}
                 />
                 <p className="text-xs text-stone-500">249 kr/påse · 70 kr till klassen</p>
+              </div>
+            </div>
+
+            <div className="space-y-3 border border-stone-200 rounded-lg p-4 bg-stone-50">
+              <div className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-emerald-900" aria-hidden="true" />
+                <h3 className="font-semibold text-emerald-950 text-sm">Leveransadress</h3>
+              </div>
+              <p className="text-xs text-stone-600">
+                Vart ska vi leverera påsarna? Vanligtvis till skolan.
+              </p>
+              <div className="space-y-2">
+                <Label htmlFor="delivery_recipient">Mottagare (skola/kontaktperson) *</Label>
+                <Input
+                  id="delivery_recipient"
+                  value={deliveryRecipient}
+                  placeholder="t.ex. Lindeskolan, c/o Anna Andersson"
+                  onChange={(e) => setDeliveryRecipient(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="delivery_address">Gatuadress *</Label>
+                <Input
+                  id="delivery_address"
+                  value={deliveryAddress}
+                  placeholder="t.ex. Skolvägen 12"
+                  onChange={(e) => setDeliveryAddress(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                <div className="space-y-2">
+                  <Label htmlFor="delivery_postal">Postnr *</Label>
+                  <Input
+                    id="delivery_postal"
+                    value={deliveryPostalCode}
+                    placeholder="711 30"
+                    onChange={(e) => setDeliveryPostalCode(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="space-y-2 col-span-2">
+                  <Label htmlFor="delivery_city">Ort *</Label>
+                  <Input
+                    id="delivery_city"
+                    value={deliveryCity}
+                    placeholder="Lindesberg"
+                    onChange={(e) => setDeliveryCity(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
             </div>
 
