@@ -22,9 +22,18 @@ Deno.serve(async (req) => {
     }
     const { name, email, school_name } = parsed.data;
 
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const functionInvokeKey = Deno.env.get("SUPABASE_ANON_KEY") ?? Deno.env.get("SUPABASE_PUBLISHABLE_KEY")!;
+
     const supabase = createClient(
+      supabaseUrl,
+      serviceRoleKey,
+    );
+
+    const functionInvoker = createClient(
       Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      functionInvokeKey,
     );
 
     // 1. Save lead
@@ -38,7 +47,7 @@ Deno.serve(async (req) => {
 
     // 2. Send email via transactional pipeline using the SDK invoke,
     //    which builds a correctly-signed JWT for the gateway.
-    const { error: sendErr } = await supabase.functions.invoke(
+    const { error: sendErr } = await functionInvoker.functions.invoke(
       "send-transactional-email",
       {
         body: {
