@@ -392,6 +392,7 @@ export default function AdminClassDetail() {
                       <TableHead>Crema</TableHead>
                       <TableHead>Klassen</TableHead>
                       <TableHead>Faktura</TableHead>
+                      <TableHead>Leveransadress</TableHead>
                       <TableHead>Status</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -407,6 +408,21 @@ export default function AdminClassDetail() {
                           <span className="block italic text-xs text-stone-500">
                             varav moms 6 %: {Math.round(Number(o.total_to_invoice) - Number(o.total_to_invoice) / 1.06).toLocaleString("sv-SE")} kr
                           </span>
+                        </TableCell>
+                        <TableCell className="text-xs text-stone-700 max-w-[220px]">
+                          {o.delivery_address ? (
+                            <div>
+                              {o.delivery_recipient && (
+                                <p className="font-medium text-stone-900">{o.delivery_recipient}</p>
+                              )}
+                              <p>{o.delivery_address}</p>
+                              {(o.delivery_postal_code || o.delivery_city) && (
+                                <p>{o.delivery_postal_code} {o.delivery_city}</p>
+                              )}
+                            </div>
+                          ) : (
+                            <span className="text-stone-400 italic">Saknas</span>
+                          )}
                         </TableCell>
                         <TableCell>
                           <OrderStatusBadge
