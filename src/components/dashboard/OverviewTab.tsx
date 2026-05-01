@@ -191,7 +191,7 @@ export default function OverviewTab({ klass }: Props) {
         </CardContent>
       </Card>
 
-      {klass.class_code && (
+      {currentCode && (
         <Card className="border-emerald-200 bg-gradient-to-br from-emerald-50 to-amber-50">
           <CardContent className="pt-6 space-y-4">
             <div className="flex items-start gap-3">
@@ -202,21 +202,48 @@ export default function OverviewTab({ klass }: Props) {
                 <p className="text-base font-semibold text-emerald-950">Er klasskod</p>
                 <p className="text-sm text-stone-600 mt-1">
                   Dela med era kunder. När de återköper kaffe på qlasskassan.se/aterkop och anger koden får ni 15 kr per påse — automatiskt.
+                  Välj gärna en kod som är lätt att komma ihåg, t.ex. <code className="font-mono">SOLSKOLAN-3A</code>.
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-2 bg-white border border-emerald-200 rounded-lg p-3">
-              <code className="font-mono text-2xl font-bold text-emerald-900 flex-1 tracking-wider">
-                {klass.class_code}
-              </code>
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() => copyToClipboard(klass.class_code, "Klasskod")}
-              >
-                <Copy className="h-3 w-3 mr-1" /> Kopiera
-              </Button>
-            </div>
+            {editingCode ? (
+              <div className="flex items-center gap-2 bg-white border border-emerald-200 rounded-lg p-3">
+                <Input
+                  value={codeDraft}
+                  onChange={(e) => setCodeDraft(e.target.value.toUpperCase())}
+                  maxLength={20}
+                  placeholder="T.EX. SOLSKOLAN-3A"
+                  className="font-mono text-lg tracking-wider uppercase flex-1"
+                  autoFocus
+                />
+                <Button size="sm" onClick={saveCode} disabled={savingCode} className="bg-emerald-900 hover:bg-emerald-800 text-amber-50">
+                  <Check className="h-3 w-3 mr-1" /> Spara
+                </Button>
+                <Button size="sm" variant="ghost" onClick={() => { setEditingCode(false); setCodeDraft(currentCode); }}>
+                  <X className="h-3 w-3" />
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 bg-white border border-emerald-200 rounded-lg p-3">
+                <code className="font-mono text-2xl font-bold text-emerald-900 flex-1 tracking-wider">
+                  {currentCode}
+                </code>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => copyToClipboard(currentCode, "Klasskod")}
+                >
+                  <Copy className="h-3 w-3 mr-1" /> Kopiera
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => { setCodeDraft(currentCode); setEditingCode(true); }}
+                >
+                  <Pencil className="h-3 w-3 mr-1" /> Ändra
+                </Button>
+              </div>
+            )}
             <div className="flex items-center gap-2 bg-white border border-stone-200 rounded-lg p-3">
               <span className="text-xs text-stone-500 truncate flex-1">{repurchaseLink}</span>
               <Button
