@@ -35,10 +35,16 @@ const ClassActivatedEmail = ({ name, className, schoolName, loginUrl }: ClassAct
           </Section>
         )}
 
+        <Section style={{ textAlign: 'center', margin: '8px 0 28px' }}>
+          <Button href="https://qlasskassan.se/qlasskassan-saljblad.pdf" style={pdfButton}>
+            📄 Ladda ner säljblad (PDF)
+          </Button>
+        </Section>
+
         <Section style={card}>
           <Heading as="h2" style={h2}>Kom igång på 3 steg</Heading>
           <Text style={text}><strong>1.</strong> Logga in och kontrollera klassinformationen.</Text>
-          <Text style={text}><strong>2.</strong> Dela försäljningslänken med föräldrar och elever.</Text>
+          <Text style={text}><strong>2.</strong> Skriv ut säljbladet och dela ut till eleverna så de kan hålla koll på sin egen försäljning.</Text>
           <Text style={text}><strong>3.</strong> Följ försäljningen i realtid på dashboarden.</Text>
         </Section>
 
@@ -85,6 +91,16 @@ const card = {
 const button = {
   backgroundColor: '#052e16',
   color: '#fef3c7',
+  padding: '12px 28px',
+  borderRadius: '999px',
+  fontWeight: 'bold',
+  fontSize: '15px',
+  textDecoration: 'none',
+  display: 'inline-block',
+}
+const pdfButton = {
+  backgroundColor: '#b45309',
+  color: '#fffbeb',
   padding: '12px 28px',
   borderRadius: '999px',
   fontWeight: 'bold',
