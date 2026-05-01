@@ -38,21 +38,28 @@ Deno.serve(async (req) => {
 
     // 2. Send email via transactional pipeline if available; otherwise
     //    log and let the user know we have the lead.
-    const { error: mailError } = await supabase.functions.invoke(
-      "send-transactional-email",
-      {
-        body: {
-          templateName: "startguide",
-          recipientEmail: email,
-          idempotencyKey: `startguide-${email}-${Date.now()}`,
-          templateData: { name, schoolName: school_name },
-        },
+    // Call send-transactional-email directly with the service role key so
+    // the verify_jwt gateway accepts the request.
+    const sendUrl = `${Deno.env.get("SUPABASE_URL")}/functions/v1/send-transactional-email`;
+    const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const sendRes = await fetch(sendUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${serviceKey}`,
+        apikey: serviceKey,
       },
-    );
-    if (mailError) {
-      // Email infrastructure not yet ready (domain pending). Lead is saved;
-      // we'll send the guide manually until the domain is verified.
-      console.warn("mail send skipped:", mailError.message);
+      body: JSON.stringify({
+        templateName: "startguide",
+        recipientEmail: email,
+        idempotencyKey: `startguide-${email}-${Date.now()}`,
+        templateData: { name, schoolName: school_name },
+      }),
+    });
+    if (!sendRes.ok) {
+      const txt = await sendRes.text();
+      console.error("mail send failed:", sendRes.status, txt);
+      return json({ error: "Kunde inte skicka mejlet just nu. Försök igen om en stund." }, 500);
     }
 
     return json({ ok: true });
