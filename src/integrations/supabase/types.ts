@@ -555,6 +555,7 @@ export type Database = {
           id: string
           school_name: string
           status: string
+          window_active: boolean
         }[]
       }
       move_to_dlq: {
@@ -573,6 +574,10 @@ export type Database = {
           msg_id: number
           read_ct: number
         }[]
+      }
+      repurchase_window_active: {
+        Args: { _class_id: string }
+        Returns: boolean
       }
     }
     Enums: {
