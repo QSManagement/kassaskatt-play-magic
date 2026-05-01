@@ -12,6 +12,8 @@ import PendingApproval from "./pages/PendingApproval.tsx";
 import TeacherDashboard from "./pages/TeacherDashboard.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import Unsubscribe from "./pages/Unsubscribe.tsx";
+import Repurchase from "./pages/Repurchase.tsx";
+import RepurchaseSuccess from "./pages/RepurchaseSuccess.tsx";
 import { AuthProvider, useAuth } from "@/lib/AuthContext";
 
 const queryClient = new QueryClient();
@@ -46,6 +48,8 @@ const App = () => (
             <Route path="/aterstall-losenord" element={<ResetPassword />} />
             <Route path="/vantar" element={<PendingApproval />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
+            <Route path="/aterkop" element={<Repurchase />} />
+            <Route path="/aterkop/tack" element={<RepurchaseSuccess />} />
             <Route
               path="/dashboard/*"
               element={
