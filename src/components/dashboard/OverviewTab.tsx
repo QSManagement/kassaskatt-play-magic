@@ -3,8 +3,9 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { Coffee, TrendingUp, Calendar, Sparkles, FileText, Download } from "lucide-react";
-import { Ticket, Copy } from "lucide-react";
+import { Ticket, Copy, Pencil, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
 interface Props {
@@ -13,6 +14,10 @@ interface Props {
 
 export default function OverviewTab({ klass }: Props) {
   const [repurchaseTotal, setRepurchaseTotal] = useState(0);
+  const [editingCode, setEditingCode] = useState(false);
+  const [codeDraft, setCodeDraft] = useState(klass.class_code ?? "");
+  const [savingCode, setSavingCode] = useState(false);
+  const [currentCode, setCurrentCode] = useState<string>(klass.class_code ?? "");
 
   useEffect(() => {
     supabase
@@ -35,11 +40,40 @@ export default function OverviewTab({ klass }: Props) {
     ? Math.max(0, Math.ceil((new Date(klass.campaign_end).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
     : null;
 
-  const repurchaseLink = `${window.location.origin}/aterkop?kod=${klass.class_code ?? ""}`;
+  const repurchaseLink = `${window.location.origin}/aterkop?kod=${currentCode ?? ""}`;
 
   function copyToClipboard(text: string, label: string) {
     navigator.clipboard.writeText(text);
     toast.success(`${label} kopierad`);
+  }
+
+  async function saveCode() {
+    const trimmed = codeDraft.trim().toUpperCase();
+    if (!/^[A-Z0-9-]{4,20}$/.test(trimmed)) {
+      toast.error("Använd 4–20 tecken: A–Z, 0–9 eller bindestreck.");
+      return;
+    }
+    if (trimmed === currentCode) {
+      setEditingCode(false);
+      return;
+    }
+    setSavingCode(true);
+    const { error } = await supabase
+      .from("class_registrations")
+      .update({ class_code: trimmed })
+      .eq("id", klass.id);
+    setSavingCode(false);
+    if (error) {
+      if (error.message?.includes("class_code") || (error as any).code === "23505") {
+        toast.error("Den koden är redan tagen — välj en annan.");
+      } else {
+        toast.error("Kunde inte spara koden: " + error.message);
+      }
+      return;
+    }
+    setCurrentCode(trimmed);
+    setEditingCode(false);
+    toast.success("Klasskod uppdaterad");
   }
 
   return (
@@ -157,7 +191,7 @@ export default function OverviewTab({ klass }: Props) {
         </CardContent>
       </Card>
 
-      {klass.class_code && (
+      {currentCode && (
         <Card className="border-emerald-200 bg-gradient-to-br from-emerald-50 to-amber-50">
           <CardContent className="pt-6 space-y-4">
             <div className="flex items-start gap-3">
@@ -168,21 +202,48 @@ export default function OverviewTab({ klass }: Props) {
                 <p className="text-base font-semibold text-emerald-950">Er klasskod</p>
                 <p className="text-sm text-stone-600 mt-1">
                   Dela med era kunder. När de återköper kaffe på qlasskassan.se/aterkop och anger koden får ni 15 kr per påse — automatiskt.
+                  Välj gärna en kod som är lätt att komma ihåg, t.ex. <code className="font-mono">SOLSKOLAN-3A</code>.
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-2 bg-white border border-emerald-200 rounded-lg p-3">
-              <code className="font-mono text-2xl font-bold text-emerald-900 flex-1 tracking-wider">
-                {klass.class_code}
-              </code>
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() => copyToClipboard(klass.class_code, "Klasskod")}
-              >
-                <Copy className="h-3 w-3 mr-1" /> Kopiera
-              </Button>
-            </div>
+            {editingCode ? (
+              <div className="flex items-center gap-2 bg-white border border-emerald-200 rounded-lg p-3">
+                <Input
+                  value={codeDraft}
+                  onChange={(e) => setCodeDraft(e.target.value.toUpperCase())}
+                  maxLength={20}
+                  placeholder="T.EX. SOLSKOLAN-3A"
+                  className="font-mono text-lg tracking-wider uppercase flex-1"
+                  autoFocus
+                />
+                <Button size="sm" onClick={saveCode} disabled={savingCode} className="bg-emerald-900 hover:bg-emerald-800 text-amber-50">
+                  <Check className="h-3 w-3 mr-1" /> Spara
+                </Button>
+                <Button size="sm" variant="ghost" onClick={() => { setEditingCode(false); setCodeDraft(currentCode); }}>
+                  <X className="h-3 w-3" />
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 bg-white border border-emerald-200 rounded-lg p-3">
+                <code className="font-mono text-2xl font-bold text-emerald-900 flex-1 tracking-wider">
+                  {currentCode}
+                </code>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => copyToClipboard(currentCode, "Klasskod")}
+                >
+                  <Copy className="h-3 w-3 mr-1" /> Kopiera
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => { setCodeDraft(currentCode); setEditingCode(true); }}
+                >
+                  <Pencil className="h-3 w-3 mr-1" /> Ändra
+                </Button>
+              </div>
+            )}
             <div className="flex items-center gap-2 bg-white border border-stone-200 rounded-lg p-3">
               <span className="text-xs text-stone-500 truncate flex-1">{repurchaseLink}</span>
               <Button

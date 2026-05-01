@@ -31,11 +31,14 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
+  const [tab, setTab] = useState<"class" | "repurchase">("class");
 
   useEffect(() => {
     load();
@@ -88,6 +91,7 @@ export default function AdminOrders() {
   }
 
   const filtered = orders.filter((o) => {
+    if (o.order_type !== tab) return false;
     if (filter === "all") return true;
     if (filter === "pending_invoice") return o.invoice_status === "pending";
     if (filter === "unpaid") return o.invoice_status === "sent";
@@ -95,6 +99,9 @@ export default function AdminOrders() {
       return o.invoice_status === "paid" && o.delivery_status !== "delivered";
     return true;
   });
+
+  const classCount = orders.filter((o) => o.order_type === "class").length;
+  const repurchaseCount = orders.filter((o) => o.order_type === "repurchase").length;
 
   const totals = filtered.reduce(
     (acc, o) => ({
@@ -111,9 +118,23 @@ export default function AdminOrders() {
       <div>
         <h1 className="text-3xl font-bold text-emerald-950 tracking-tight">Ordrar</h1>
         <p className="text-stone-600 mt-1">
-          {filtered.length} ordrar · {totals.revenue.toLocaleString("sv-SE")} kr fakturerat
+          {filtered.length} {tab === "class" ? "klassordrar" : "återköpsordrar"} ·{" "}
+          {totals.revenue.toLocaleString("sv-SE")} kr {tab === "class" ? "fakturerat" : "intäkt"}
         </p>
       </div>
+
+      <Tabs value={tab} onValueChange={(v) => setTab(v as "class" | "repurchase")}>
+        <TabsList>
+          <TabsTrigger value="class">
+            Klassbeställningar <Badge variant="secondary" className="ml-2">{classCount}</Badge>
+          </TabsTrigger>
+          <TabsTrigger value="repurchase">
+            Återköp (förälder) <Badge variant="secondary" className="ml-2">{repurchaseCount}</Badge>
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="class" />
+        <TabsContent value="repurchase" />
+      </Tabs>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <Card>
@@ -124,7 +145,7 @@ export default function AdminOrders() {
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <p className="text-xs text-stone-600">Total fakturerat</p>
+            <p className="text-xs text-stone-600">{tab === "class" ? "Total fakturerat" : "Total intäkt"}</p>
             <p className="text-2xl font-bold text-emerald-950">
               {totals.revenue.toLocaleString("sv-SE")} kr
             </p>
@@ -172,7 +193,7 @@ export default function AdminOrders() {
               <TableHeader>
                 <TableRow>
                   <TableHead>Datum</TableHead>
-                  <TableHead>Klass</TableHead>
+                  <TableHead>{tab === "class" ? "Klass" : "Kund / Klass"}</TableHead>
                   <TableHead>Antal</TableHead>
                   <TableHead>Faktura</TableHead>
                   <TableHead>Leveransadress</TableHead>
@@ -188,14 +209,18 @@ export default function AdminOrders() {
                       {new Date(o.created_at).toLocaleDateString("sv-SE")}
                     </TableCell>
                     <TableCell>
-                      <Link to={`/admin/klasser/${o.class_id}`} className="hover:underline">
-                        <p className="font-medium text-emerald-950">
+                      {tab === "repurchase" && o.customer_name && (
+                        <p className="font-medium text-emerald-950">{o.customer_name}</p>
+                      )}
+                      <Link to={`/admin/klasser/${o.class_id}`} className="hover:underline block">
+                        <p className={tab === "repurchase" ? "text-xs text-stone-600" : "font-medium text-emerald-950"}>
                           {o.class_registrations?.school_name}
+                          {o.class_registrations?.class_name && ` · ${o.class_registrations.class_name}`}
                         </p>
-                        {o.class_registrations?.class_name && (
-                          <p className="text-xs text-stone-500">{o.class_registrations.class_name}</p>
-                        )}
                       </Link>
+                      {tab === "repurchase" && o.customer_email && (
+                        <p className="text-xs text-stone-500">{o.customer_email}</p>
+                      )}
                     </TableCell>
                     <TableCell className="text-sm">
                       {o.qty_gold} G + {o.qty_crema} C

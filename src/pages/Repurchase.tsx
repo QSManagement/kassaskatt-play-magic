@@ -19,6 +19,7 @@ type ClassMatch = {
   school_name: string;
   class_name: string | null;
   class_code: string;
+  window_active?: boolean;
 };
 
 const PRICE_GOLD = 169;
@@ -84,6 +85,11 @@ export default function Repurchase() {
         setKlass(null);
       } else if (!match) {
         setLookupError("Hittade ingen klass med den koden");
+        setKlass(null);
+      } else if (match.window_active === false) {
+        setLookupError(
+          "Den här klassens återköpsperiod (6 månader) har gått ut. Hör av er till oss om ni vill förlänga.",
+        );
         setKlass(null);
       } else {
         setLookupError(null);

@@ -11,9 +11,11 @@ interface ClassActivatedProps {
   className?: string
   schoolName?: string
   loginUrl?: string
+  classCode?: string
+  repurchaseUrl?: string
 }
 
-const ClassActivatedEmail = ({ name, className, schoolName, loginUrl }: ClassActivatedProps) => (
+const ClassActivatedEmail = ({ name, className, schoolName, loginUrl, classCode, repurchaseUrl }: ClassActivatedProps) => (
   <Html lang="sv" dir="ltr">
     <Head />
     <Preview>Er klass är aktiverad — dags att dra igång!</Preview>
@@ -28,6 +30,20 @@ const ClassActivatedEmail = ({ name, className, schoolName, loginUrl }: ClassAct
           {schoolName ? ` på ${schoolName}` : ''} är nu aktiverad i {SITE_NAME}.
           Ni kan logga in och börja sälja direkt.
         </Text>
+
+        {classCode && (
+          <Section style={codeCard}>
+            <Text style={codeLabel}>Er klasskod</Text>
+            <Text style={codeValue}>{classCode}</Text>
+            <Text style={codeHelp}>
+              Dela koden med era kunder. När de återköper kaffe på{' '}
+              <a href={repurchaseUrl ?? 'https://qlasskassan.se/aterkop'} style={link}>
+                qlasskassan.se/aterkop
+              </a>{' '}
+              och anger koden får ni <strong>15 kr per påse</strong> i bonus — automatiskt.
+            </Text>
+          </Section>
+        )}
 
         {loginUrl && (
           <Section style={{ textAlign: 'center', margin: '28px 0' }}>
@@ -51,8 +67,8 @@ const ClassActivatedEmail = ({ name, className, schoolName, loginUrl }: ClassAct
         <Hr style={hr} />
         <Text style={footer}>
           Frågor? Mejla oss på{' '}
-          <a href="mailto:kontakt@scandinaviancoffee.se" style={link}>
-            kontakt@scandinaviancoffee.se
+          <a href="mailto:kontakt@qlasskassan.se" style={link}>
+            kontakt@qlasskassan.se
           </a>
         </Text>
         <Text style={footer}>Lycka till! — Teamet bakom {SITE_NAME}</Text>
@@ -70,6 +86,8 @@ export const template = {
     className: '7B',
     schoolName: 'Solskolan',
     loginUrl: 'https://kassaskatt-play-magic.lovable.app/logga-in',
+    classCode: 'SOLSKOLAN-7B',
+    repurchaseUrl: 'https://qlasskassan.se/aterkop?kod=SOLSKOLAN-7B',
   },
 } satisfies TemplateEntry
 
@@ -111,3 +129,32 @@ const pdfButton = {
 const hr = { borderColor: '#e7e5e4', margin: '32px 0 20px' }
 const footer = { fontSize: '13px', color: '#78716c', margin: '0 0 8px' }
 const link = { color: '#b45309', textDecoration: 'underline' }
+const codeCard = {
+  backgroundColor: '#ecfdf5',
+  border: '1px solid #a7f3d0',
+  borderRadius: '12px',
+  padding: '18px 22px',
+  margin: '20px 0 24px',
+  textAlign: 'center' as const,
+}
+const codeLabel = {
+  fontSize: '12px',
+  color: '#047857',
+  textTransform: 'uppercase' as const,
+  letterSpacing: '0.08em',
+  margin: '0 0 6px',
+}
+const codeValue = {
+  fontSize: '28px',
+  fontWeight: 'bold' as const,
+  color: '#052e16',
+  letterSpacing: '0.08em',
+  margin: '0 0 10px',
+  fontFamily: 'ui-monospace, Menlo, Consolas, monospace',
+}
+const codeHelp = {
+  fontSize: '13px',
+  color: '#1c1917',
+  lineHeight: '1.5',
+  margin: '0',
+}
