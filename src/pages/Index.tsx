@@ -742,8 +742,6 @@ export default function Index() {
               <div className="font-semibold text-amber-50 mb-4 text-sm">Kontakt</div>
               <ul className="space-y-2 text-sm">
                 <li>kontakt@scandinaviancoffee.se</li>
-                <li>070-123 45 67</li>
-                <li>Vardagar 9-17</li>
               </ul>
             </div>
           </div>
