@@ -53,7 +53,7 @@ export default function Cookies() {
         <h2 className="text-2xl font-bold text-emerald-950 mt-10 mb-3">Ändringar</h2>
         <p>Om vi i framtiden börjar använda cookies för analys eller marknadsföring kommer vi att be om ditt samtycke via en banner och uppdatera den här sidan.</p>
 
-        <p className="mt-8">Frågor? Mejla <a href="mailto:info@qlasskassan.se" className="text-emerald-900 underline">info@qlasskassan.se</a>.</p>
+        <p className="mt-8">Frågor? Mejla <a href="mailto:kontakt@scandinaviancoffee.se" className="text-emerald-900 underline">kontakt@scandinaviancoffee.se</a>.</p>
       </main>
     </div>
   );

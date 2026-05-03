@@ -23,7 +23,7 @@ export default function Integritetspolicy() {
         <p className="mb-2">
           Qlasskassan (drivs av Scandinavian Coffee AB, org.nr <em>[fyll i]</em>).
         </p>
-        <p>Kontakt i dataskyddsfrågor: <a href="mailto:info@qlasskassan.se" className="text-emerald-900 underline">info@qlasskassan.se</a></p>
+        <p>Kontakt i dataskyddsfrågor: <a href="mailto:kontakt@scandinaviancoffee.se" className="text-emerald-900 underline">kontakt@scandinaviancoffee.se</a></p>
 
         <h2 className="text-2xl font-bold text-emerald-950 mt-10 mb-3">Vilka uppgifter vi samlar in</h2>
         <ul className="list-disc pl-6 space-y-2">
@@ -79,7 +79,7 @@ export default function Integritetspolicy() {
           <li>invända mot behandling som baseras på berättigat intresse,</li>
           <li>klaga till Integritetsskyddsmyndigheten (IMY).</li>
         </ul>
-        <p className="mt-3">Kontakta oss på <a href="mailto:info@qlasskassan.se" className="text-emerald-900 underline">info@qlasskassan.se</a> så hanterar vi din begäran.</p>
+        <p className="mt-3">Kontakta oss på <a href="mailto:kontakt@scandinaviancoffee.se" className="text-emerald-900 underline">kontakt@scandinaviancoffee.se</a> så hanterar vi din begäran.</p>
 
         <h2 className="text-2xl font-bold text-emerald-950 mt-10 mb-3">Cookies</h2>
         <p>Vi använder endast nödvändiga cookies för inloggning. Läs mer på <Link to="/cookies" className="text-emerald-900 underline">cookiesidan</Link>.</p>
