@@ -414,6 +414,7 @@ export default function Repurchase() {
             </p>
           </CardContent>
         </Card>
+        <LegalFooter />
       </main>
     </div>
   );
