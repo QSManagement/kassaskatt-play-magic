@@ -100,9 +100,10 @@ export default function Repurchase() {
     };
   }, [classCode]);
 
-  const total = qtyGold * PRICE_GOLD + qtyCrema * PRICE_CREMA;
+  const pricing = usePricing();
+  const total = qtyGold * pricing.price_gold_consumer + qtyCrema * pricing.price_crema_consumer;
   const totalBags = qtyGold + qtyCrema;
-  const bonusToClass = totalBags * BONUS_PER_BAG;
+  const bonusToClass = totalBags * pricing.repurchase_bonus;
   const momsAmount = useMemo(() => Math.round((total - total / 1.06) * 100) / 100, [total]);
 
   function update<K extends keyof typeof form>(key: K, value: string) {
@@ -225,7 +226,7 @@ export default function Repurchase() {
           </h1>
           <p className="text-stone-600 max-w-xl mx-auto">
             Ange klasskoden från säljbladet, välj kaffe och betala — klassen får{" "}
-            <strong>{BONUS_PER_BAG} kr per påse</strong> i bonus, helt automatiskt.
+            <strong>{pricing.repurchase_bonus} kr per påse</strong> i bonus, helt automatiskt.
           </p>
         </div>
 
@@ -276,14 +277,14 @@ export default function Repurchase() {
             <ProductRow
               name="Caffè Gondoliere Gold"
               subtitle="500 g malet · 100 % Arabica"
-              price={PRICE_GOLD}
+              price={pricing.price_gold_consumer}
               qty={qtyGold}
               setQty={setQtyGold}
             />
             <ProductRow
               name="Caffè Gondoliere Crema"
               subtitle="500 g hela bönor · höglands-Arabica"
-              price={PRICE_CREMA}
+              price={pricing.price_crema_consumer}
               qty={qtyCrema}
               setQty={setQtyCrema}
             />
