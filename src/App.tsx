@@ -14,6 +14,9 @@ import AdminDashboard from "./pages/AdminDashboard.tsx";
 import Unsubscribe from "./pages/Unsubscribe.tsx";
 import Repurchase from "./pages/Repurchase.tsx";
 import RepurchaseSuccess from "./pages/RepurchaseSuccess.tsx";
+import Integritetspolicy from "./pages/Integritetspolicy.tsx";
+import Villkor from "./pages/Villkor.tsx";
+import Cookies from "./pages/Cookies.tsx";
 import { AuthProvider, useAuth } from "@/lib/AuthContext";
 
 const queryClient = new QueryClient();
@@ -50,6 +53,9 @@ const App = () => (
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             <Route path="/aterkop" element={<Repurchase />} />
             <Route path="/aterkop/tack" element={<RepurchaseSuccess />} />
+            <Route path="/integritetspolicy" element={<Integritetspolicy />} />
+            <Route path="/villkor" element={<Villkor />} />
+            <Route path="/cookies" element={<Cookies />} />
             <Route
               path="/dashboard/*"
               element={
