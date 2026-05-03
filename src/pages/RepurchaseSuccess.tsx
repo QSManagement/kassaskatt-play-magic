@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
 import { CheckCircle2, Sparkles, Loader2, Coffee } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { LegalFooter } from "@/components/LegalFooter";
 
 export default function RepurchaseSuccess() {
   const [searchParams] = useSearchParams();
@@ -149,6 +150,7 @@ export default function RepurchaseSuccess() {
             )}
           </CardContent>
         </Card>
+        <LegalFooter />
       </main>
     </div>
   );
