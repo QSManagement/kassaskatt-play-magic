@@ -86,7 +86,13 @@ Deno.serve(async (req) => {
 
             const totalBags =
               Number(order.qty_gold ?? 0) + Number(order.qty_crema ?? 0);
-            const bonusToClass = totalBags * 15;
+            const { data: pricing } = await supabase
+              .from("pricing_settings")
+              .select("repurchase_bonus")
+              .eq("id", 1)
+              .maybeSingle();
+            const bonusPerBag = Number(pricing?.repurchase_bonus ?? 15);
+            const bonusToClass = totalBags * bonusPerBag;
 
             if (klass?.contact_email) {
               await supabase.functions.invoke("send-transactional-email", {
