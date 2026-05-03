@@ -14,6 +14,7 @@ import { Coffee, Minus, Plus, CheckCircle2, Loader2, AlertCircle, ArrowLeft } fr
 import { toast } from "sonner";
 import { z } from "zod";
 import { LegalFooter } from "@/components/LegalFooter";
+import { usePricing } from "@/hooks/usePricing";
 
 type ClassMatch = {
   id: string;
@@ -22,10 +23,6 @@ type ClassMatch = {
   class_code: string;
   window_active?: boolean;
 };
-
-const PRICE_GOLD = 169;
-const PRICE_CREMA = 249;
-const BONUS_PER_BAG = 15;
 
 const formSchema = z.object({
   recipient: z.string().trim().min(1, "Mottagarens namn krävs").max(100),
