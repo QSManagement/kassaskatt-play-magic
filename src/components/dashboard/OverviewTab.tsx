@@ -7,6 +7,7 @@ import { Ticket, Copy, Pencil, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { usePricing } from "@/hooks/usePricing";
 
 interface Props {
   klass: any;
