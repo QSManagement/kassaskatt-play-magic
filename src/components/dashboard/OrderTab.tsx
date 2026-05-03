@@ -417,7 +417,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                       )}
                       {isLocked && (
                         <p className="text-xs text-stone-400 mt-1">
-                          Låst — kontakta info@qlasskassan.se för ändringar
+                          Låst — kontakta kontakt@scandinaviancoffee.se för ändringar
                         </p>
                       )}
                     </div>

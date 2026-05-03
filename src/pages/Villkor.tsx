@@ -27,7 +27,7 @@ export default function Villkor() {
         <p>Klassbeställningar levereras fritt till angiven skola. Leveranstid är normalt 5–10 arbetsdagar efter bekräftad order. Återköp levereras till angiven adress enligt valt fraktsätt.</p>
 
         <h2 className="text-2xl font-bold text-emerald-950 mt-8 mb-3">5. Reklamation</h2>
-        <p>Eftersom produkten är livsmedel ber vi dig att kontrollera leveransen direkt vid mottagandet och anmäla eventuella fel inom skälig tid till <a href="mailto:info@qlasskassan.se" className="text-emerald-900 underline">info@qlasskassan.se</a>.</p>
+        <p>Eftersom produkten är livsmedel ber vi dig att kontrollera leveransen direkt vid mottagandet och anmäla eventuella fel inom skälig tid till <a href="mailto:kontakt@scandinaviancoffee.se" className="text-emerald-900 underline">kontakt@scandinaviancoffee.se</a>.</p>
 
         <h2 className="text-2xl font-bold text-emerald-950 mt-8 mb-3">6. Ångerrätt</h2>
         <p>Ångerrätt enligt distansavtalslagen gäller normalt inte för livsmedel som riskerar att försämras snabbt (2 kap. 11 § distansavtalslagen). Skadat eller felaktigt levererat gods byts eller krediteras alltid.</p>
