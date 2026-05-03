@@ -7,6 +7,7 @@ import { Ticket, Copy, Pencil, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { usePricing } from "@/hooks/usePricing";
 
 interface Props {
   klass: any;
@@ -18,6 +19,7 @@ export default function OverviewTab({ klass }: Props) {
   const [codeDraft, setCodeDraft] = useState(klass.class_code ?? "");
   const [savingCode, setSavingCode] = useState(false);
   const [currentCode, setCurrentCode] = useState<string>(klass.class_code ?? "");
+  const pricing = usePricing();
 
   useEffect(() => {
     supabase
@@ -288,7 +290,7 @@ export default function OverviewTab({ klass }: Props) {
                 <div>
                   <p className="text-base font-semibold text-emerald-950">Återköpsblad med klasskod</p>
                   <p className="text-sm text-stone-600 mt-1">
-                    Dela ut till nöjda kunder så de kan återbeställa online och ge er 15 kr/påse i bonus.
+                    Dela ut till nöjda kunder så de kan återbeställa online och ge er {pricing.repurchase_bonus} kr/påse i bonus.
                   </p>
                 </div>
               </div>

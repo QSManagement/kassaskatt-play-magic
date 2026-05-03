@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { usePricing } from "@/hooks/usePricing";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -174,8 +175,9 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
 
   const qtyGold = Math.max(0, parseInt(qtyGoldStr) || 0);
   const qtyCrema = Math.max(0, parseInt(qtyCremaStr) || 0);
-  const totalToClass = qtyGold * 50 + qtyCrema * 70;
-  const totalToInvoice = qtyGold * 119 + qtyCrema * 179;
+  const pricing = usePricing();
+  const totalToClass = qtyGold * pricing.margin_gold + qtyCrema * pricing.margin_crema;
+  const totalToInvoice = qtyGold * pricing.price_gold_class + qtyCrema * pricing.price_crema_class;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -252,7 +254,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                   placeholder="0"
                   onChange={(e) => setQtyGoldStr(e.target.value.replace(/[^0-9]/g, ""))}
                 />
-                <p className="text-xs text-stone-500">169 kr/påse · 50 kr till klassen</p>
+                <p className="text-xs text-stone-500">{pricing.price_gold_class} kr/påse · {pricing.margin_gold} kr till klassen</p>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="qty_crema">Crema bönor 1kg</Label>
@@ -264,7 +266,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                   placeholder="0"
                   onChange={(e) => setQtyCremaStr(e.target.value.replace(/[^0-9]/g, ""))}
                 />
-                <p className="text-xs text-stone-500">249 kr/påse · 70 kr till klassen</p>
+                <p className="text-xs text-stone-500">{pricing.price_crema_class} kr/påse · {pricing.margin_crema} kr till klassen</p>
               </div>
             </div>
 
@@ -492,8 +494,8 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
           {editOrder && (() => {
             const g = Math.max(0, parseInt(editGoldStr) || 0);
             const c = Math.max(0, parseInt(editCremaStr) || 0);
-            const tClass = g * 50 + c * 70;
-            const tInvoice = g * 119 + c * 179;
+            const tClass = g * pricing.margin_gold + c * pricing.margin_crema;
+            const tInvoice = g * pricing.price_gold_class + c * pricing.price_crema_class;
             return (
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">

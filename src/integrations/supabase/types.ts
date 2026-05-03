@@ -283,6 +283,45 @@ export type Database = {
           },
         ]
       }
+      pricing_settings: {
+        Row: {
+          id: number
+          margin_crema: number
+          margin_gold: number
+          price_crema_class: number
+          price_crema_consumer: number
+          price_gold_class: number
+          price_gold_consumer: number
+          repurchase_bonus: number
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          id?: number
+          margin_crema?: number
+          margin_gold?: number
+          price_crema_class?: number
+          price_crema_consumer?: number
+          price_gold_class?: number
+          price_gold_consumer?: number
+          repurchase_bonus?: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          id?: number
+          margin_crema?: number
+          margin_gold?: number
+          price_crema_class?: number
+          price_crema_consumer?: number
+          price_gold_class?: number
+          price_gold_consumer?: number
+          repurchase_bonus?: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string

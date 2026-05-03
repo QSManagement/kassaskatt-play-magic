@@ -13,6 +13,7 @@ import {
   Sparkles,
   Users,
   Settings,
+  Tag,
   LogOut,
   Menu,
   X,
@@ -26,6 +27,7 @@ import AdminOrders from "@/components/admin/AdminOrders";
 import AdminRepurchases from "@/components/admin/AdminRepurchases";
 import AdminUsers from "@/components/admin/AdminUsers";
 import AdminSettings from "@/components/admin/AdminSettings";
+import AdminPricing from "@/components/admin/AdminPricing";
 
 const navItems = [
   { to: "/admin", label: "Översikt", icon: LayoutDashboard, exact: true },
@@ -34,6 +36,7 @@ const navItems = [
   { to: "/admin/ordrar", label: "Ordrar", icon: ShoppingBag },
   { to: "/admin/aterkop", label: "Återköp", icon: Sparkles },
   { to: "/admin/anvandare", label: "Användare", icon: Users },
+  { to: "/admin/priser", label: "Priser", icon: Tag },
   { to: "/admin/installningar", label: "Inställningar", icon: Settings },
 ];
 
@@ -158,6 +161,7 @@ export default function AdminDashboard() {
             <Route path="ordrar" element={<AdminOrders />} />
             <Route path="aterkop" element={<AdminRepurchases />} />
             <Route path="anvandare" element={<AdminUsers />} />
+            <Route path="priser" element={<AdminPricing />} />
             <Route path="installningar" element={<AdminSettings />} />
             <Route path="*" element={<Navigate to="/admin" replace />} />
           </Routes>

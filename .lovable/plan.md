@@ -1,83 +1,62 @@
-# Juridiska sidor för Qlasskassan
+# Centralisera priser + ta bort kontaktinfo i footer
 
-Skapar tre nya sidor med svensk text anpassad för verksamheten, samt länkar i footern på landningssidan och i auth-/dashboard-vyer.
+Två saker:
 
-## Nya sidor
+## 1. Ta bort telefon + öppettider i footern
+I `src/pages/Index.tsx` (footer-kolumnen "Kontakt") tas raderna `070-123 45 67` och `Vardagar 9-17` bort. E-postadressen behålls.
 
-### `/integritetspolicy` (`src/pages/Integritetspolicy.tsx`)
-Innehåll:
-- **Personuppgiftsansvarig** — Qlasskassan + kontakt-e-post (placeholder `info@qlasskassan.se`, ni byter)
-- **Vilka uppgifter vi samlar in**:
-  - Lärare: namn, e-post, telefon, skola, klass (vid registrering)
-  - Föräldrar/återköpskunder: namn, e-post, leveransadress, betalinfo (via Stripe)
-  - Leads: namn, e-post, skola (startguide-formulär)
-  - Elever: namn (om läraren lägger in dem för intern uppföljning)
-- **Ändamål och rättslig grund** (tabell):
-  - Lärarkonto → avtal
-  - Beställning/leverans → avtal
-  - Marknadskommunikation → samtycke (avregistrering via länk i varje mejl)
-  - Återköpsnotiser → berättigat intresse
-  - Bokföring → rättslig förpliktelse (7 år enligt BFL)
-- **Mottagare/underbiträden**: Lovable Cloud (Supabase, EU), Stripe (betalning), Resend (e-post), Caffè Gondoliere (leverans)
-- **Lagringstid**: konto så länge aktivt + 12 mån, leads 24 mån, bokföringsunderlag 7 år
-- **Dina rättigheter**: tillgång, rättelse, radering, dataportabilitet, klagomål till IMY
-- **Överföring utanför EU/EES**: notering om att Resend/Stripe kan involvera USA med SCC
-- **Kontakt** för dataskyddsfrågor
+## 2. Admin-styrda priser
 
-### `/villkor` (`src/pages/Villkor.tsx`)
-- Allmänt om tjänsten (klassinsamling, lärare beställer, faktura mot förening/skola)
-- Beställning och avtal (när bindande)
-- Priser, betalning (faktura 30 dagar / Stripe vid återköp)
-- Leverans (fri till skolan, leveranstid)
-- Reklamation (livsmedel, omedelbart vid mottagande)
-- Ångerrätt — undantag för livsmedel enligt distansavtalslagen 2 kap 11 §
-- Ansvarsbegränsning
-- Tvist (svensk lag, ARN)
+### Ny tabell `pricing_settings` (singleton)
+| kolumn | typ | beskrivning |
+|---|---|---|
+| `id` | int PK (alltid 1) | singleton |
+| `price_gold_consumer` | numeric | återköp / konsumentpris Gold (idag 169) |
+| `price_crema_consumer` | numeric | återköp / konsumentpris Crema (idag 249) |
+| `price_gold_class` | numeric | klassens inköpspris Gold (idag 119) |
+| `price_crema_class` | numeric | klassens inköpspris Crema (idag 179) |
+| `margin_gold` | numeric | till klassen per Gold-påse (idag 50) |
+| `margin_crema` | numeric | till klassen per Crema-påse (idag 70) |
+| `repurchase_bonus` | numeric | bonus per återköpspåse (idag 15) |
+| `updated_at`, `updated_by` | | |
 
-### `/cookies` (`src/pages/Cookies.tsx`)
-Kort sida som förklarar att Qlasskassan **endast använder nödvändiga cookies** (Supabase-auth-session) och därför inte kräver samtyckesbanner. Tabell med:
-- `sb-access-token` / `sb-refresh-token` — auth, sessionscookies
-- Ingen analytics, inga tracking-pixlar i nuläget
+**RLS**: alla autentiserade får läsa (SELECT), endast admin får uppdatera. Edge functions läser via service role.
 
-Notering om att det uppdateras om tracking läggs till framöver.
+### Databasändringar
+- Skriv om `calculate_order_totals()` så den läser från `pricing_settings` istället för hårdkodade `* 50`, `* 70`, `* 119`, `* 169`, `* 179`, `* 249`.
+- Skriv om `calculate_repurchase_bonus()` så den läser `repurchase_bonus` istället för `* 15`.
+- Seeda raden med dagens värden så inget bryts.
 
-## Footer-länkar
+### Frontend — läs priser via en hook
+Ny `usePricing()` (React Query, cache 5 min) som hämtar `pricing_settings`. Används i:
+- `src/pages/Repurchase.tsx` (ersätter `PRICE_GOLD`/`PRICE_CREMA`-konstanterna)
+- `src/components/dashboard/OrderTab.tsx` (rad 178, 255, 267, 496 — beräkning + texter)
+- `src/pages/Index.tsx` — kalkylatorn (rad 43–44), prisrutorna (rad 392, 398, 429, 435), kalkylraderna (rad 345, 352) och jämförelsetabellen (rad 603, 608)
+- `src/components/dashboard/OverviewTab.tsx` (rad 291 — "15 kr/påse")
 
-- Lägg till en enkel `<Footer>`-komponent (`src/components/Footer.tsx`) med tre länkar: Integritetspolicy, Villkor, Cookies + copyright `© Qlasskassan`
-- Visa footern på:
-  - `src/pages/Index.tsx` (landningssidan)
-  - `src/pages/Login.tsx`
-  - `src/pages/Repurchase.tsx` och `RepurchaseSuccess.tsx`
-- Dashboard-sidor (lärare/admin) får inte footer — de är arbetsverktyg
+För Index-sidan: visa skeleton-värden tills hooken laddat, eller initiera med dagens defaults så sidan inte hoppar.
 
-## Routing
+### Edge functions
+- `create-repurchase-checkout/index.ts` — beräkna totals från `pricing_settings` istället för hårdkodat. Säkerhetsskäl: aldrig lita på pris från klienten.
+- `payments-webhook/index.ts` — om den refererar priser, läs från db.
 
-I `src/App.tsx`, ovanför catch-all-routen:
-```tsx
-<Route path="/integritetspolicy" element={<Integritetspolicy />} />
-<Route path="/villkor" element={<Villkor />} />
-<Route path="/cookies" element={<Cookies />} />
-```
+### Ny admin-vy: `src/components/admin/AdminPricing.tsx`
+- Formulär med alla 7 fält
+- Förhandsvisning: "Vid ändring uppdateras alla nya beställningar och kalkylatorn på hemsidan omedelbart."
+- Sparar via supabase.update; visar `updated_at` + vem som uppdaterade
+- Lägg till flik "Priser" i `AdminDashboard.tsx`
 
-## Design
+### Viktigt — påverkar INTE befintliga ordrar
+`calculate_order_totals` triggas vid INSERT/UPDATE av en order. Tidigare ordrar har sina totals lagrade och förändras inte. Bra: ingen retroaktiv prisändring på fakturerade beställningar.
 
-- Återanvänd befintliga semantiska tokens (`emerald-950`, `stone-50`, `amber-50`)
-- Samma `<Logo>` + bakgrund som `Unsubscribe.tsx`
-- Läsvänlig typografi: max-width ~720px, generös radhöjd, tydliga `<h2>`-rubriker
-- "Senast uppdaterad: 3 maj 2026" högst upp
+## Vad jag INTE gör
+- Ingen versionshistorik på priser (kan läggas till senare om revision behövs)
+- Ingen schemaläggning av framtida prisändringar
+- PDF-säljbladen (`qlasskassan-saljblad.pdf`, `qlasskassan-aterkop.pdf`) uppdateras inte automatiskt — om priser ändras behöver de regenereras manuellt. Notering visas i admin-vyn.
 
-## Vad jag INTE gör i detta steg
-
-- Ingen cookie-banner (behövs inte med endast nödvändiga cookies)
-- Ingen rate limiting (separat steg om du vill)
-- Ingen säkerhetsskanning (separat steg)
-- Inga ändringar i mejlmallar — kan länka till policyn i en senare iteration
-
-## Innan jag går live
-
-Du behöver bekräfta/fylla i:
-- Företagsnamn + org.nr som ska stå som personuppgiftsansvarig
-- Kontakt-e-post för dataskyddsfrågor (default: `info@qlasskassan.se`)
-- Ev. fysisk adress för villkoren
-
-Jag använder rimliga placeholders som är tydligt markerade så ni kan byta dem efteråt.
+## Steg
+1. Migration: skapa tabell + RLS + seed + skriv om de två triggers
+2. Ny `usePricing` hook + uppdatera alla 4 frontend-filer
+3. Uppdatera edge functions
+4. Bygg `AdminPricing`-vyn + flik i admin
+5. Ta bort telefon/öppettider i Index-footern
