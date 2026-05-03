@@ -13,6 +13,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { usePricing } from '@/hooks/usePricing';
 
 const NAV_LINKS = [
   { href: '#sa-funkar', label: 'Så funkar det' },
@@ -30,6 +31,7 @@ export default function Index() {
   const [regOpen, setRegOpen] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pricing = usePricing();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY);
@@ -40,8 +42,9 @@ export default function Index() {
   const totalBags = students * bagsPerStudent;
   const goldBags = Math.round(totalBags * (goldRatio / 100));
   const classicBags = totalBags - goldBags;
-  const goldEarnings = goldBags * 70; // Crema: 70 kr/påse
-  const classicEarnings = classicBags * 50; // Gold: 50 kr/påse
+  // Note: variable names are legacy — goldBags maps to Crema, classicBags to Gold
+  const goldEarnings = goldBags * pricing.margin_crema;
+  const classicEarnings = classicBags * pricing.margin_gold;
   const totalEarnings = goldEarnings + classicEarnings;
   const reorderEarnings = Math.round(totalEarnings * 0.05);
 
@@ -144,7 +147,7 @@ export default function Index() {
             {/* I1: Sifferstrip */}
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium text-emerald-900/80 mb-6">
               <span className="inline-flex items-center gap-2">
-                <span className="text-amber-700 font-bold">+15 kr/påse</span>
+                <span className="text-amber-700 font-bold">+{pricing.repurchase_bonus} kr/påse</span>
                 <span className="text-emerald-900/60">Återköpsbonus</span>
               </span>
               <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-amber-400" aria-hidden="true"></span>
@@ -172,7 +175,7 @@ export default function Index() {
               </button>
             </div>
             <div className="flex flex-wrap items-center gap-6 text-sm text-emerald-900/70">
-              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Upp till 70 kr per påse till klassen</div>
+              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Upp till {pricing.margin_crema} kr per påse till klassen</div>
               <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Faktura till föreningen, 14 dagar</div>
               <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Inget osålt — vi rullar exakt volym</div>
             </div>
@@ -342,14 +345,14 @@ export default function Index() {
                   <div className="flex justify-between items-center">
                     <span className="text-amber-100/80 text-sm flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-amber-300"></span>
-                      Crema ({goldBags} påsar × 70 kr)
+                      Crema ({goldBags} påsar × {pricing.margin_crema} kr)
                     </span>
                     <span className="font-bold">{goldEarnings.toLocaleString('sv-SE')} kr</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-amber-100/80 text-sm flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                      Gold ({classicBags} påsar × 50 kr)
+                      Gold ({classicBags} påsar × {pricing.margin_gold} kr)
                     </span>
                     <span className="font-bold">{classicEarnings.toLocaleString('sv-SE')} kr</span>
                   </div>
@@ -389,13 +392,13 @@ export default function Index() {
               <div className="p-8">
                 <div className="flex items-baseline justify-between mb-2">
                   <h3 className="text-2xl font-bold text-emerald-950">Gold</h3>
-                  <div className="text-2xl font-bold text-emerald-950">169 kr</div>
+                  <div className="text-2xl font-bold text-emerald-950">{pricing.price_gold_consumer} kr</div>
                 </div>
                 <p className="text-emerald-900/70 mb-6">Premium 100% Arabica malet filterkaffe. Mjuk, aromatisk och välbalanserad — en klassiker för bryggkaffe hemma och på kontoret.</p>
                 <div className="bg-emerald-50 rounded-2xl p-5 mb-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium text-emerald-900">Klassen tjänar per påse</span>
-                    <span className="text-3xl font-bold text-emerald-800">50 kr</span>
+                    <span className="text-3xl font-bold text-emerald-800">{pricing.margin_gold} kr</span>
                   </div>
                   <div className="h-2 bg-emerald-200 rounded-full overflow-hidden">
                     <div className="h-full bg-emerald-700 rounded-full" style={{ width: '30%' }}></div>
@@ -426,13 +429,13 @@ export default function Index() {
               <div className="p-8">
                 <div className="flex items-baseline justify-between mb-2">
                   <h3 className="text-2xl font-bold text-emerald-950">Crema</h3>
-                  <div className="text-2xl font-bold text-emerald-950">249 kr</div>
+                  <div className="text-2xl font-bold text-emerald-950">{pricing.price_crema_consumer} kr</div>
                 </div>
                 <p className="text-emerald-900/70 mb-6">100% Arabica i hela bönor. Balanserad, len och nötig med naturlig sötma och len crema — lyxvalet för espresso och fullautomater.</p>
                 <div className="bg-amber-50 rounded-2xl p-5 mb-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium text-amber-900">Klassen tjänar per påse</span>
-                    <span className="text-3xl font-bold text-amber-800">70 kr</span>
+                    <span className="text-3xl font-bold text-amber-800">{pricing.margin_crema} kr</span>
                   </div>
                   <div className="h-2 bg-amber-200 rounded-full overflow-hidden">
                     <div className="h-full bg-amber-600 rounded-full" style={{ width: '28%' }}></div>
@@ -600,12 +603,12 @@ export default function Index() {
               <div className="p-5 text-center">Kryddor</div>
             </div>
             {[
-              ['Marginal till klassen', '50–70 kr/påse', '20–30 kr/box', '49–54 kr/box'],
+              ['Marginal till klassen', `${pricing.margin_gold}–${pricing.margin_crema} kr/påse`, '20–30 kr/box', '49–54 kr/box'],
               ['Återkommande kunder', 'Ja, automatiskt', 'Sällan', 'Sällan'],
               ['Förbrukningsvara', 'Ja — köps om varje månad', 'Nej', 'Nej'],
               ['Premium-känsla', 'Hög', 'Låg', 'Mellan'],
               ['Påsar/boxar för 15 000 kr', '~190', '~600', '~290'],
-              ['Återköpsbonus efter kampanj', 'Ja — 15 kr/påse i 6 mån', 'Nej', 'Nej'],
+              ['Återköpsbonus efter kampanj', `Ja — ${pricing.repurchase_bonus} kr/påse i 6 mån`, 'Nej', 'Nej'],
             ].map((row, i) => (
               <div key={i} className={`grid grid-cols-4 text-sm border-t border-stone-200 ${i % 2 === 0 ? 'bg-white' : 'bg-stone-50'}`}>
                 <div className="p-5 font-medium text-emerald-950">{row[0]}</div>
