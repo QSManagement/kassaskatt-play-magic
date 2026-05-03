@@ -13,6 +13,7 @@ import { EmbeddedCheckoutProvider, EmbeddedCheckout } from "@stripe/react-stripe
 import { Coffee, Minus, Plus, CheckCircle2, Loader2, AlertCircle, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
+import { LegalFooter } from "@/components/LegalFooter";
 
 type ClassMatch = {
   id: string;
@@ -414,6 +415,7 @@ export default function Repurchase() {
             </p>
           </CardContent>
         </Card>
+        <LegalFooter />
       </main>
     </div>
   );

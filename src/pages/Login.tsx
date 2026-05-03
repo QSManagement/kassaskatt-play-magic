@@ -133,6 +133,11 @@ export default function Login() {
             </div>
           </CardContent>
         </Card>
+        <div className="mt-6 text-center text-xs text-stone-500 space-x-4">
+          <Link to="/integritetspolicy" className="hover:text-emerald-900 hover:underline">Integritetspolicy</Link>
+          <Link to="/villkor" className="hover:text-emerald-900 hover:underline">Villkor</Link>
+          <Link to="/cookies" className="hover:text-emerald-900 hover:underline">Cookies</Link>
+        </div>
       </div>
     </div>
   );

@@ -747,8 +747,9 @@ export default function Index() {
           <div className="pt-8 border-t border-emerald-800 text-xs flex flex-wrap justify-between gap-4">
             <div>© 2026 Qlasskassan · Drivs av Scandinavian Coffee AB</div>
             <div className="flex gap-6">
-              <span>Allmänna villkor</span>
-              <span>Integritetspolicy</span>
+              <a href="/villkor" className="hover:text-amber-300 transition">Allmänna villkor</a>
+              <a href="/integritetspolicy" className="hover:text-amber-300 transition">Integritetspolicy</a>
+              <a href="/cookies" className="hover:text-amber-300 transition">Cookies</a>
             </div>
           </div>
         </div>
