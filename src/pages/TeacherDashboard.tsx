@@ -87,28 +87,30 @@ export default function TeacherDashboard() {
 
       <main className="max-w-7xl mx-auto px-4 py-8">
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 mb-8 h-auto">
-            <TabsTrigger value="overview" className="gap-2 py-3">
+          <TabsList
+            className={`grid w-full ${klass.tracking_mode === "per_student" ? "grid-cols-5" : "grid-cols-4"} mb-8 h-auto gap-1`}
+          >
+            <TabsTrigger value="overview" className="flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
               <LayoutDashboard className="h-4 w-4" aria-hidden="true" />
-              <span className="hidden md:inline">Översikt</span>
+              <span>Översikt</span>
             </TabsTrigger>
-            <TabsTrigger value="order" className="gap-2 py-3">
+            <TabsTrigger value="order" className="flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
               <ShoppingBag className="h-4 w-4" aria-hidden="true" />
-              <span className="hidden md:inline">Beställning</span>
+              <span>Beställ</span>
             </TabsTrigger>
             {klass.tracking_mode === "per_student" && (
-              <TabsTrigger value="students" className="gap-2 py-3">
+              <TabsTrigger value="students" className="flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
                 <Users className="h-4 w-4" aria-hidden="true" />
-                <span className="hidden md:inline">Eleverna</span>
+                <span>Elever</span>
               </TabsTrigger>
             )}
-            <TabsTrigger value="repurchases" className="gap-2 py-3">
+            <TabsTrigger value="repurchases" className="flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
               <Sparkles className="h-4 w-4" aria-hidden="true" />
-              <span className="hidden md:inline">Återköp</span>
+              <span>Återköp</span>
             </TabsTrigger>
-            <TabsTrigger value="settings" className="gap-2 py-3">
+            <TabsTrigger value="settings" className="flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
               <Settings className="h-4 w-4" aria-hidden="true" />
-              <span className="hidden md:inline">Inställningar</span>
+              <span>Inställ.</span>
             </TabsTrigger>
           </TabsList>
 
