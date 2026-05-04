@@ -17,6 +17,7 @@ import RepurchaseSuccess from "./pages/RepurchaseSuccess.tsx";
 import Integritetspolicy from "./pages/Integritetspolicy.tsx";
 import Villkor from "./pages/Villkor.tsx";
 import Cookies from "./pages/Cookies.tsx";
+import StudentReport from "./pages/StudentReport.tsx";
 import { AuthProvider, useAuth } from "@/lib/AuthContext";
 
 const queryClient = new QueryClient();
@@ -56,6 +57,7 @@ const App = () => (
             <Route path="/integritetspolicy" element={<Integritetspolicy />} />
             <Route path="/villkor" element={<Villkor />} />
             <Route path="/cookies" element={<Cookies />} />
+            <Route path="/salj/:code" element={<StudentReport />} />
             <Route
               path="/dashboard/*"
               element={

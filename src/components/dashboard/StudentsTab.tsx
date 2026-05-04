@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Trash2, UserPlus } from "lucide-react";
+import { Trash2, UserPlus, Share2, Copy, Check } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 
 interface Props {
   klass: any;
@@ -15,6 +17,21 @@ export default function StudentsTab({ klass }: Props) {
   const [newName, setNewName] = useState("");
   const [loading, setLoading] = useState(true);
   const [drafts, setDrafts] = useState<Record<string, { gold: string; crema: string }>>({});
+  const [shareOpen, setShareOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const reportUrl = `https://qlasskassan.se/salj/${klass.class_code}`;
+
+  async function copyLink() {
+    try {
+      await navigator.clipboard.writeText(reportUrl);
+      setCopied(true);
+      toast.success("Länk kopierad");
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error("Kunde inte kopiera");
+    }
+  }
 
   async function loadStudents() {
     setLoading(true);
@@ -40,6 +57,18 @@ export default function StudentsTab({ klass }: Props) {
 
   useEffect(() => {
     loadStudents();
+    // Live-uppdatera när elever rapporterar via publika länken
+    const channel = supabase
+      .channel(`students-${klass.id}`)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "students", filter: `class_id=eq.${klass.id}` },
+        () => loadStudents(),
+      )
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [klass.id]);
 
@@ -100,10 +129,44 @@ export default function StudentsTab({ klass }: Props) {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle className="text-emerald-950">Eleverna</CardTitle>
-          <p className="text-sm text-stone-600">
-            Skriv in vad varje elev sålt. När alla är klara går du till Beställning för att summera och skicka in.
-          </p>
+          <div className="flex items-start justify-between gap-3 flex-wrap">
+            <div>
+              <CardTitle className="text-emerald-950">Eleverna</CardTitle>
+              <p className="text-sm text-stone-600 mt-1">
+                Skriv in vad varje elev sålt — eller dela elevlänken så rapporterar de själva.
+              </p>
+            </div>
+            <Dialog open={shareOpen} onOpenChange={setShareOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="sm" className="shrink-0">
+                  <Share2 className="h-4 w-4 mr-2" aria-hidden="true" />
+                  Dela elevlänk
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-md">
+                <DialogHeader>
+                  <DialogTitle className="text-emerald-950">Elevernas rapporteringslänk</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <p className="text-sm text-stone-600">
+                    Dela länken eller QR-koden med klassen. Eleverna väljer sitt namn och fyller i hur mycket de sålt — det adderas automatiskt till deras totalsumma här.
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <Input value={reportUrl} readOnly className="font-mono text-sm" />
+                    <Button onClick={copyLink} variant="outline" size="sm" className="shrink-0">
+                      {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                    </Button>
+                  </div>
+                  <div className="flex justify-center bg-white p-4 rounded-lg border border-stone-200">
+                    <QRCodeSVG value={reportUrl} size={200} />
+                  </div>
+                  <p className="text-xs text-stone-500 text-center">
+                    Klasskod: <strong>{klass.class_code}</strong>
+                  </p>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="flex gap-2 mb-6">

@@ -606,6 +606,26 @@ export type Database = {
         }
         Returns: number
       }
+      public_list_class_students: {
+        Args: { _code: string }
+        Returns: {
+          class_id: string
+          class_name: string
+          school_name: string
+          student_id: string
+          student_name: string
+          tracking_mode: string
+        }[]
+      }
+      public_report_student_sale: {
+        Args: {
+          _add_crema: number
+          _add_gold: number
+          _code: string
+          _student_name: string
+        }
+        Returns: string
+      }
       read_email_batch: {
         Args: { batch_size: number; queue_name: string; vt: number }
         Returns: {
