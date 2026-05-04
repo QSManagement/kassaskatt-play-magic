@@ -8,6 +8,7 @@ import { Trash2, Search, Download } from "lucide-react";
 
 interface Sale {
   id: string;
+  student_id: string | null;
   student_name: string;
   qty_gold: number;
   qty_crema: number;
@@ -54,10 +55,34 @@ export default function SalesLogTab({ klass }: Props) {
   }, [klass.id]);
 
   async function remove(id: string) {
-    if (!confirm("Ta bort denna försäljning? Elevens totalsumma uppdateras inte automatiskt — justera den vid behov i fliken Eleverna.")) return;
+    const sale = sales.find((s) => s.id === id);
+    if (!sale) return;
+    if (!confirm("Ta bort denna försäljning? Antalet dras automatiskt från elevens totalsumma.")) return;
+
     const { error } = await supabase.from("student_sales").delete().eq("id", id);
-    if (error) toast.error("Kunde inte ta bort");
-    else toast.success("Försäljning borttagen");
+    if (error) {
+      toast.error("Kunde inte ta bort");
+      return;
+    }
+
+    // Subtract from student total
+    if (sale.student_id) {
+      const { data: student } = await supabase
+        .from("students")
+        .select("sold_gold, sold_crema")
+        .eq("id", sale.student_id)
+        .maybeSingle();
+      if (student) {
+        await supabase
+          .from("students")
+          .update({
+            sold_gold: Math.max(0, (student.sold_gold ?? 0) - (sale.qty_gold ?? 0)),
+            sold_crema: Math.max(0, (student.sold_crema ?? 0) - (sale.qty_crema ?? 0)),
+          })
+          .eq("id", sale.student_id);
+      }
+    }
+    toast.success("Försäljning borttagen");
   }
 
   function exportCsv() {
