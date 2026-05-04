@@ -21,6 +21,14 @@ export default function AdminLeads() {
 
   useEffect(() => {
     load();
+    const channel = supabase
+      .channel("admin-leads")
+      .on("postgres_changes", { event: "*", schema: "public", table: "class_registrations" }, () => load())
+      .on("postgres_changes", { event: "*", schema: "public", table: "qlasskassan_leads" }, () => load())
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   async function load() {
