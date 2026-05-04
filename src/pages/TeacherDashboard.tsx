@@ -13,6 +13,7 @@ import OrderTab from "@/components/dashboard/OrderTab";
 import StudentsTab from "@/components/dashboard/StudentsTab";
 import RepurchasesTab from "@/components/dashboard/RepurchasesTab";
 import SettingsTab from "@/components/dashboard/SettingsTab";
+import HelpDialog from "@/components/dashboard/HelpDialog";
 
 export default function TeacherDashboard() {
   const { classId, user } = useAuth();
@@ -74,10 +75,13 @@ export default function TeacherDashboard() {
               </p>
             </div>
           </div>
-          <Button variant="ghost" size="sm" onClick={handleSignOut}>
-            <LogOut className="h-4 w-4 mr-2" aria-hidden="true" />
-            Logga ut
-          </Button>
+          <div className="flex items-center gap-1">
+            <HelpDialog />
+            <Button variant="ghost" size="sm" onClick={handleSignOut}>
+              <LogOut className="h-4 w-4 mr-2" aria-hidden="true" />
+              Logga ut
+            </Button>
+          </div>
         </div>
       </header>
 
