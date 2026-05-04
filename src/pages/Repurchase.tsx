@@ -283,7 +283,7 @@ export default function Repurchase() {
             />
             <ProductRow
               name="Caffè Gondoliere Crema"
-              subtitle="500 g hela bönor · höglands-Arabica"
+              subtitle="1 kg hela bönor · höglands-Arabica"
               price={pricing.price_crema_consumer}
               qty={qtyCrema}
               setQty={setQtyCrema}
