@@ -215,6 +215,32 @@ export default function StudentReport() {
                   </div>
                 </div>
 
+                <div className="pt-2 border-t border-stone-200">
+                  <p className="text-sm font-medium text-stone-700 mb-1">Vem köpte? <span className="text-stone-400 font-normal">(valfritt)</span></p>
+                  <p className="text-xs text-stone-500 mb-3">Hjälper läraren se vem som köpt kaffe och var det ska levereras.</p>
+                  <div className="space-y-3">
+                    <Input
+                      value={customerName}
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      placeholder="Kundens namn"
+                      maxLength={100}
+                    />
+                    <Input
+                      value={customerAddress}
+                      onChange={(e) => setCustomerAddress(e.target.value)}
+                      placeholder="Adress"
+                      maxLength={300}
+                    />
+                    <Input
+                      value={customerPhone}
+                      onChange={(e) => setCustomerPhone(e.target.value)}
+                      placeholder="Telefon"
+                      maxLength={40}
+                      inputMode="tel"
+                    />
+                  </div>
+                </div>
+
                 <Button
                   type="submit"
                   disabled={submitting}
