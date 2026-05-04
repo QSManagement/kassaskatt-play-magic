@@ -26,6 +26,9 @@ export default function StudentReport() {
   const [customName, setCustomName] = useState("");
   const [gold, setGold] = useState("");
   const [crema, setCrema] = useState("");
+  const [customerName, setCustomerName] = useState("");
+  const [customerAddress, setCustomerAddress] = useState("");
+  const [customerPhone, setCustomerPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState<{ name: string; gold: number; crema: number } | null>(null);
   const [notFound, setNotFound] = useState(false);
@@ -68,6 +71,9 @@ export default function StudentReport() {
       _student_name: finalName,
       _add_gold: g,
       _add_crema: c,
+      _customer_name: customerName.trim() || null,
+      _customer_address: customerAddress.trim() || null,
+      _customer_phone: customerPhone.trim() || null,
     });
     setSubmitting(false);
     if (error) {
@@ -81,6 +87,9 @@ export default function StudentReport() {
     setSuccess(null);
     setGold("");
     setCrema("");
+    setCustomerName("");
+    setCustomerAddress("");
+    setCustomerPhone("");
   }
 
   if (loading) {
@@ -202,6 +211,32 @@ export default function StudentReport() {
                       value={crema}
                       onChange={(e) => setCrema(e.target.value.replace(/[^0-9]/g, ""))}
                       placeholder="0"
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-stone-200">
+                  <p className="text-sm font-medium text-stone-700 mb-1">Vem köpte? <span className="text-stone-400 font-normal">(valfritt)</span></p>
+                  <p className="text-xs text-stone-500 mb-3">Hjälper läraren se vem som köpt kaffe och var det ska levereras.</p>
+                  <div className="space-y-3">
+                    <Input
+                      value={customerName}
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      placeholder="Kundens namn"
+                      maxLength={100}
+                    />
+                    <Input
+                      value={customerAddress}
+                      onChange={(e) => setCustomerAddress(e.target.value)}
+                      placeholder="Adress"
+                      maxLength={300}
+                    />
+                    <Input
+                      value={customerPhone}
+                      onChange={(e) => setCustomerPhone(e.target.value)}
+                      placeholder="Telefon"
+                      maxLength={40}
+                      inputMode="tel"
                     />
                   </div>
                 </div>

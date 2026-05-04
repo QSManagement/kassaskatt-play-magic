@@ -475,6 +475,45 @@ export type Database = {
         }
         Relationships: []
       }
+      student_sales: {
+        Row: {
+          class_id: string
+          created_at: string
+          customer_address: string | null
+          customer_name: string | null
+          customer_phone: string | null
+          id: string
+          qty_crema: number
+          qty_gold: number
+          student_id: string | null
+          student_name: string
+        }
+        Insert: {
+          class_id: string
+          created_at?: string
+          customer_address?: string | null
+          customer_name?: string | null
+          customer_phone?: string | null
+          id?: string
+          qty_crema?: number
+          qty_gold?: number
+          student_id?: string | null
+          student_name: string
+        }
+        Update: {
+          class_id?: string
+          created_at?: string
+          customer_address?: string | null
+          customer_name?: string | null
+          customer_phone?: string | null
+          id?: string
+          qty_crema?: number
+          qty_gold?: number
+          student_id?: string | null
+          student_name?: string
+        }
+        Relationships: []
+      }
       students: {
         Row: {
           class_id: string
@@ -617,15 +656,28 @@ export type Database = {
           tracking_mode: string
         }[]
       }
-      public_report_student_sale: {
-        Args: {
-          _add_crema: number
-          _add_gold: number
-          _code: string
-          _student_name: string
-        }
-        Returns: string
-      }
+      public_report_student_sale:
+        | {
+            Args: {
+              _add_crema: number
+              _add_gold: number
+              _code: string
+              _student_name: string
+            }
+            Returns: string
+          }
+        | {
+            Args: {
+              _add_crema: number
+              _add_gold: number
+              _code: string
+              _customer_address?: string
+              _customer_name?: string
+              _customer_phone?: string
+              _student_name: string
+            }
+            Returns: string
+          }
       read_email_batch: {
         Args: { batch_size: number; queue_name: string; vt: number }
         Returns: {
