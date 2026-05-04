@@ -26,6 +26,9 @@ export default function StudentReport() {
   const [customName, setCustomName] = useState("");
   const [gold, setGold] = useState("");
   const [crema, setCrema] = useState("");
+  const [customerName, setCustomerName] = useState("");
+  const [customerAddress, setCustomerAddress] = useState("");
+  const [customerPhone, setCustomerPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState<{ name: string; gold: number; crema: number } | null>(null);
   const [notFound, setNotFound] = useState(false);
@@ -68,6 +71,9 @@ export default function StudentReport() {
       _student_name: finalName,
       _add_gold: g,
       _add_crema: c,
+      _customer_name: customerName.trim() || null,
+      _customer_address: customerAddress.trim() || null,
+      _customer_phone: customerPhone.trim() || null,
     });
     setSubmitting(false);
     if (error) {
@@ -81,6 +87,9 @@ export default function StudentReport() {
     setSuccess(null);
     setGold("");
     setCrema("");
+    setCustomerName("");
+    setCustomerAddress("");
+    setCustomerPhone("");
   }
 
   if (loading) {
