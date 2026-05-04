@@ -6,11 +6,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { LogOut, LayoutDashboard, ShoppingBag, Users, Sparkles, Settings } from "lucide-react";
+import { Receipt } from "lucide-react";
 import { toast } from "sonner";
 
 import OverviewTab from "@/components/dashboard/OverviewTab";
 import OrderTab from "@/components/dashboard/OrderTab";
 import StudentsTab from "@/components/dashboard/StudentsTab";
+import SalesLogTab from "@/components/dashboard/SalesLogTab";
 import RepurchasesTab from "@/components/dashboard/RepurchasesTab";
 import SettingsTab from "@/components/dashboard/SettingsTab";
 import HelpDialog from "@/components/dashboard/HelpDialog";
@@ -88,7 +90,7 @@ export default function TeacherDashboard() {
       <main className="max-w-7xl mx-auto px-4 py-8">
         <Tabs defaultValue="overview" className="w-full">
           <TabsList
-            className={`grid w-full ${klass.tracking_mode === "per_student" ? "grid-cols-5" : "grid-cols-4"} mb-8 h-auto gap-1`}
+            className={`grid w-full ${klass.tracking_mode === "per_student" ? "grid-cols-6" : "grid-cols-5"} mb-8 h-auto gap-1`}
           >
             <TabsTrigger value="overview" className="flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
               <LayoutDashboard className="h-4 w-4" aria-hidden="true" />
@@ -104,6 +106,10 @@ export default function TeacherDashboard() {
                 <span>Elever</span>
               </TabsTrigger>
             )}
+            <TabsTrigger value="sales" className="flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
+              <Receipt className="h-4 w-4" aria-hidden="true" />
+              <span>Försälj.</span>
+            </TabsTrigger>
             <TabsTrigger value="repurchases" className="flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
               <Sparkles className="h-4 w-4" aria-hidden="true" />
               <span>Återköp</span>
@@ -119,6 +125,7 @@ export default function TeacherDashboard() {
           {klass.tracking_mode === "per_student" && (
             <TabsContent value="students"><StudentsTab klass={klass} /></TabsContent>
           )}
+          <TabsContent value="sales"><SalesLogTab klass={klass} /></TabsContent>
           <TabsContent value="repurchases"><RepurchasesTab klass={klass} /></TabsContent>
           <TabsContent value="settings"><SettingsTab klass={klass} user={user} onUpdated={reloadKlass} /></TabsContent>
         </Tabs>
