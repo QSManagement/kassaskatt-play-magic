@@ -141,7 +141,7 @@ export default function AdminClassDetail() {
               name: klass.contact_name,
               schoolName: klass.school_name,
               className: klass.class_name,
-              loginUrl: `${window.location.origin}/logga-in`,
+              loginUrl: "https://qlasskassan.se/logga-in",
             },
           },
         });
@@ -187,7 +187,7 @@ export default function AdminClassDetail() {
             name: klass.contact_name,
             schoolName: klass.school_name,
             className: klass.class_name,
-            loginUrl: `${window.location.origin}/logga-in`,
+            loginUrl: "https://qlasskassan.se/logga-in",
           },
         },
       });
