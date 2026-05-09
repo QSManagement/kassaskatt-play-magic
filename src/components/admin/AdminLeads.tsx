@@ -18,6 +18,7 @@ import { Inbox, ExternalLink, Mail } from "lucide-react";
 export default function AdminLeads() {
   const [pending, setPending] = useState<any[]>([]);
   const [otherLeads, setOtherLeads] = useState<any[]>([]);
+  const [startguide, setStartguide] = useState<any[]>([]);
 
   useEffect(() => {
     load();
@@ -25,6 +26,7 @@ export default function AdminLeads() {
       .channel("admin-leads")
       .on("postgres_changes", { event: "*", schema: "public", table: "class_registrations" }, () => load())
       .on("postgres_changes", { event: "*", schema: "public", table: "qlasskassan_leads" }, () => load())
+      .on("postgres_changes", { event: "*", schema: "public", table: "startguide_leads" }, () => load())
       .subscribe();
     return () => {
       supabase.removeChannel(channel);
@@ -32,7 +34,7 @@ export default function AdminLeads() {
   }, []);
 
   async function load() {
-    const [{ data: regs }, { data: leads }] = await Promise.all([
+    const [{ data: regs }, { data: leads }, { data: sg }] = await Promise.all([
       supabase
         .from("class_registrations")
         .select("*")
@@ -43,9 +45,15 @@ export default function AdminLeads() {
         .select("*")
         .order("created_at", { ascending: false })
         .limit(100),
+      supabase
+        .from("startguide_leads")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(100),
     ]);
     setPending(regs || []);
     setOtherLeads(leads || []);
+    setStartguide(sg || []);
   }
 
   return (
@@ -53,14 +61,15 @@ export default function AdminLeads() {
       <div>
         <h1 className="text-3xl font-bold text-emerald-950 tracking-tight">Leads</h1>
         <p className="text-stone-600 mt-1">
-          {pending.length} väntar på aktivering · {otherLeads.length} startguide-/info-leads
+          {pending.length} väntar på aktivering · {otherLeads.length + startguide.length} övriga leads
         </p>
       </div>
 
       <Tabs defaultValue="pending" className="w-full">
         <TabsList>
           <TabsTrigger value="pending">Klassregistreringar ({pending.length})</TabsTrigger>
-          <TabsTrigger value="other">Startguide & info ({otherLeads.length})</TabsTrigger>
+          <TabsTrigger value="other">Info-leads ({otherLeads.length})</TabsTrigger>
+          <TabsTrigger value="startguide">Startguide ({startguide.length})</TabsTrigger>
         </TabsList>
 
         <TabsContent value="pending">
@@ -157,6 +166,47 @@ export default function AdminLeads() {
                           </a>
                         </TableCell>
                         <TableCell className="text-sm">{l.school_name || "–"}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="startguide">
+          <Card>
+            <CardContent className="p-0">
+              {startguide.length === 0 ? (
+                <div className="p-8 text-center text-stone-500">Inga startguide-anmälningar än.</div>
+              ) : (
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Datum</TableHead>
+                      <TableHead>Namn</TableHead>
+                      <TableHead>Mejl</TableHead>
+                      <TableHead>Skola</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {startguide.map((l) => (
+                      <TableRow key={l.id}>
+                        <TableCell className="text-sm text-stone-600">
+                          {new Date(l.created_at).toLocaleDateString("sv-SE")}
+                        </TableCell>
+                        <TableCell>{l.name}</TableCell>
+                        <TableCell>
+                          <a
+                            href={`mailto:${l.email}`}
+                            className="text-amber-700 hover:underline inline-flex items-center gap-1"
+                          >
+                            <Mail className="h-3 w-3" aria-hidden="true" />
+                            {l.email}
+                          </a>
+                        </TableCell>
+                        <TableCell className="text-sm">{l.school_name}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
