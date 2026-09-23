@@ -28,10 +28,7 @@ const BodySchema = z.object({
   environment: z.enum(["sandbox", "live"]),
 });
 
-const PRICE_LOOKUPS = {
-  gold: "kaffe_gold_169",
-  crema: "kaffe_crema_249",
-} as const;
+const FALLBACK_PRICES = { gold: 155, crema: 295 } as const;
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
