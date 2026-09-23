@@ -12,11 +12,11 @@ export type Pricing = {
 };
 
 export const DEFAULT_PRICING: Pricing = {
-  price_gold_consumer: 169,
-  price_crema_consumer: 249,
-  price_gold_class: 119,
-  price_crema_class: 179,
-  margin_gold: 50,
+  price_gold_consumer: 155,
+  price_crema_consumer: 295,
+  price_gold_class: 115,
+  price_crema_class: 225,
+  margin_gold: 40,
   margin_crema: 70,
   repurchase_bonus: 15,
 };
