@@ -110,25 +110,44 @@ Deno.serve(async (req) => {
       .single();
     if (orderError) throw orderError;
 
-    // Build line items via Stripe lookup_keys
-    const stripe = createStripeClient(body.environment as StripeEnv);
-    const lineItems: { price: string; quantity: number }[] = [];
-    const wantedKeys: string[] = [];
-    if (body.qtyGold > 0) wantedKeys.push(PRICE_LOOKUPS.gold);
-    if (body.qtyCrema > 0) wantedKeys.push(PRICE_LOOKUPS.crema);
+    // Prices always come from pricing_settings (never from the client)
+    const { data: pricingRow } = await supabase
+      .from("pricing_settings")
+      .select("price_gold_consumer, price_crema_consumer")
+      .eq("id", 1)
+      .maybeSingle();
+    const goldPrice = Number(pricingRow?.price_gold_consumer ?? FALLBACK_PRICES.gold);
+    const cremaPrice = Number(pricingRow?.price_crema_consumer ?? FALLBACK_PRICES.crema);
 
-    const prices = await stripe.prices.list({ lookup_keys: wantedKeys, active: true });
-    const priceByLookup = new Map(prices.data.map((p) => [p.lookup_key ?? "", p.id]));
+    const stripe = createStripeClient(body.environment as StripeEnv);
+    const lineItems: {
+      price_data: {
+        currency: string;
+        unit_amount: number;
+        product_data: { name: string; description?: string };
+      };
+      quantity: number;
+    }[] = [];
 
     if (body.qtyGold > 0) {
-      const id = priceByLookup.get(PRICE_LOOKUPS.gold);
-      if (!id) throw new Error("Pris saknas för Gold");
-      lineItems.push({ price: id, quantity: body.qtyGold });
+      lineItems.push({
+        price_data: {
+          currency: "sek",
+          unit_amount: Math.round(goldPrice * 100),
+          product_data: { name: "Caffè Gondoliere Gold – 500 g" },
+        },
+        quantity: body.qtyGold,
+      });
     }
     if (body.qtyCrema > 0) {
-      const id = priceByLookup.get(PRICE_LOOKUPS.crema);
-      if (!id) throw new Error("Pris saknas för Crema");
-      lineItems.push({ price: id, quantity: body.qtyCrema });
+      lineItems.push({
+        price_data: {
+          currency: "sek",
+          unit_amount: Math.round(cremaPrice * 100),
+          product_data: { name: "Caffè Gondoliere Crema – 1 kg hela bönor" },
+        },
+        quantity: body.qtyCrema,
+      });
     }
 
     const session = await stripe.checkout.sessions.create({
