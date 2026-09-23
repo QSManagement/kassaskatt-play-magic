@@ -130,7 +130,7 @@ export default function OverviewTab({ klass }: Props) {
           </CardHeader>
           <CardContent>
             <p className="text-3xl font-bold text-emerald-950">{displayGold}</p>
-            <p className="text-xs text-stone-500 mt-1">påsar</p>
+            <p className="text-xs text-stone-500 mt-1">förpackningar</p>
           </CardContent>
         </Card>
 
@@ -143,7 +143,7 @@ export default function OverviewTab({ klass }: Props) {
           </CardHeader>
           <CardContent>
             <p className="text-3xl font-bold text-emerald-950">{displayCrema}</p>
-            <p className="text-xs text-stone-500 mt-1">påsar</p>
+            <p className="text-xs text-stone-500 mt-1">förpackningar</p>
           </CardContent>
         </Card>
 
@@ -203,7 +203,7 @@ export default function OverviewTab({ klass }: Props) {
               <div className="flex-1">
                 <p className="text-base font-semibold text-emerald-950">Er klasskod</p>
                 <p className="text-sm text-stone-600 mt-1">
-                  Dela med era kunder. När de återköper kaffe på qlasskassan.se/aterkop och anger koden får ni 15 kr per påse — automatiskt.
+                  Dela med era kunder. När de återköper kaffe på qlasskassan.se/aterkop och anger koden får ni 15 kr per förpackning — automatiskt.
                   Välj gärna en kod som är lätt att komma ihåg, t.ex. <code className="font-mono">SOLSKOLAN-3A</code>.
                 </p>
               </div>
@@ -290,7 +290,7 @@ export default function OverviewTab({ klass }: Props) {
                 <div>
                   <p className="text-base font-semibold text-emerald-950">Återköpsblad med klasskod</p>
                   <p className="text-sm text-stone-600 mt-1">
-                    Dela ut till nöjda kunder så de kan återbeställa online och ge er {pricing.repurchase_bonus} kr/påse i bonus.
+                    Dela ut till nöjda kunder så de kan återbeställa online och ge er {pricing.repurchase_bonus} kr/förpackning i bonus.
                   </p>
                 </div>
               </div>

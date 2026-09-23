@@ -40,7 +40,7 @@ const ClassActivatedEmail = ({ name, className, schoolName, loginUrl, classCode,
               <a href={repurchaseUrl ?? 'https://qlasskassan.se/aterkop'} style={link}>
                 qlasskassan.se/aterkop
               </a>{' '}
-              och anger koden får ni <strong>15 kr per påse</strong> i bonus — automatiskt.
+              och anger koden får ni <strong>15 kr per förpackning</strong> i bonus — automatiskt.
             </Text>
           </Section>
         )}

@@ -97,7 +97,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
     const g = Math.max(0, parseInt(editGoldStr) || 0);
     const c = Math.max(0, parseInt(editCremaStr) || 0);
     if (g === 0 && c === 0) {
-      toast.error("Lägg till minst en påse");
+      toast.error("Lägg till minst en förpackning");
       return;
     }
     setSavingEdit(true);
@@ -182,7 +182,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (qtyGold === 0 && qtyCrema === 0) {
-      toast.error("Lägg till minst en påse innan du skickar");
+      toast.error("Lägg till minst en förpackning innan du skickar");
       return;
     }
     if (!deliveryRecipient.trim() || !deliveryAddress.trim() || !deliveryPostalCode.trim() || !deliveryCity.trim()) {
@@ -254,7 +254,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                   placeholder="0"
                   onChange={(e) => setQtyGoldStr(e.target.value.replace(/[^0-9]/g, ""))}
                 />
-                <p className="text-xs text-stone-500">{pricing.price_gold_class} kr/påse · {pricing.margin_gold} kr till klassen</p>
+                <p className="text-xs text-stone-500">{pricing.price_gold_class} kr/förpackning · {pricing.margin_gold} kr till klassen</p>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="qty_crema">Crema bönor 1kg</Label>
@@ -266,7 +266,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                   placeholder="0"
                   onChange={(e) => setQtyCremaStr(e.target.value.replace(/[^0-9]/g, ""))}
                 />
-                <p className="text-xs text-stone-500">{pricing.price_crema_class} kr/påse · {pricing.margin_crema} kr till klassen</p>
+                <p className="text-xs text-stone-500">{pricing.price_crema_class} kr/förpackning · {pricing.margin_crema} kr till klassen</p>
               </div>
             </div>
 
@@ -276,7 +276,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                 <h3 className="font-semibold text-emerald-950 text-sm">Leveransadress</h3>
               </div>
               <p className="text-xs text-stone-600">
-                Vart ska vi leverera påsarna? Vanligtvis till skolan.
+                Vart ska vi leverera förpackningarna? Vanligtvis till skolan.
               </p>
               <div className="space-y-2">
                 <Label htmlFor="delivery_recipient">Mottagare (skola/kontaktperson) *</Label>
@@ -488,7 +488,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
           <DialogHeader>
             <DialogTitle>Redigera beställning</DialogTitle>
             <DialogDescription>
-              Justera antalet påsar. Totalerna räknas om automatiskt.
+              Justera antalet förpackningar. Totalerna räknas om automatiskt.
             </DialogDescription>
           </DialogHeader>
           {editOrder && (() => {

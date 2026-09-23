@@ -131,7 +131,7 @@ export default function AdminOverview() {
               <p className="text-emerald-300 text-sm mt-1">Klassens andel</p>
             </div>
             <div>
-              <p className="text-emerald-200 text-xs uppercase tracking-wide">Sålda påsar</p>
+              <p className="text-emerald-200 text-xs uppercase tracking-wide">Sålda förpackningar</p>
               <p className="text-4xl font-bold mt-2 tracking-tight">
                 {(stats.totalSoldGold + stats.totalSoldCrema).toLocaleString("sv-SE")}
               </p>

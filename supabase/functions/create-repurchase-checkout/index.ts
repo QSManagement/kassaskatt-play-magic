@@ -56,7 +56,7 @@ Deno.serve(async (req) => {
     const body = parsed.data;
 
     if (body.qtyGold + body.qtyCrema === 0) {
-      return new Response(JSON.stringify({ error: "Du måste välja minst en påse" }), {
+      return new Response(JSON.stringify({ error: "Du måste välja minst en förpackning" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
