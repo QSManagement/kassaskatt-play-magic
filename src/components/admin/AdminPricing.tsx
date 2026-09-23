@@ -84,7 +84,7 @@ export default function AdminPricing() {
           <AlertTriangle className="h-5 w-5 text-amber-700 shrink-0 mt-0.5" />
           <div className="text-sm text-amber-900 space-y-1">
             <p><strong>Befintliga ordrar påverkas inte</strong> — totaler är låsta vid skapande.</p>
-            <p><strong>Konsumentpriserna (återköp)</strong> måste även justeras i Stripe (lookup keys <code>kaffe_gold_169</code> / <code>kaffe_crema_249</code>) annars debiteras föräldrarna det gamla priset trots att hemsidan visar det nya.</p>
+            <p><strong>Konsumentpriserna (återköp)</strong> måste även justeras i Stripe (lookup keys <code>kaffe_gold</code> / <code>kaffe_crema</code>) annars debiteras föräldrarna det gamla priset trots att hemsidan visar det nya.</p>
             <p><strong>PDF-säljbladen</strong> uppdateras inte automatiskt — be utvecklaren regenerera dem om du ändrar priser som syns där.</p>
           </div>
         </CardContent>

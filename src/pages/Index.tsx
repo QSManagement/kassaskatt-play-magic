@@ -403,7 +403,7 @@ export default function Index() {
                   <div className="h-2 bg-emerald-200 rounded-full overflow-hidden">
                     <div className="h-full bg-emerald-700 rounded-full" style={{ width: '30%' }}></div>
                   </div>
-                  <div className="text-xs text-emerald-700 mt-1 font-medium">Sälj 8 förpackningar = 400 kr till klassen</div>
+                  <div className="text-xs text-emerald-700 mt-1 font-medium">Sälj 8 förpackningar = 320 kr till klassen</div>
                 </div>
                 <ul className="space-y-2 text-sm text-emerald-900/80">
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> 100% Arabica · malet filterkaffe</li>
@@ -607,7 +607,7 @@ export default function Index() {
               ['Återkommande kunder', 'Ja, automatiskt', 'Sällan', 'Sällan'],
               ['Förbrukningsvara', 'Ja — köps om varje månad', 'Nej', 'Nej'],
               ['Premium-känsla', 'Hög', 'Låg', 'Mellan'],
-              ['Förpackningar/boxar för 15 000 kr', '~190', '~600', '~290'],
+              ['Förpackningar/boxar för 15 000 kr', '~270', '~600', '~290'],
               ['Återköpsbonus efter kampanj', `Ja — ${pricing.repurchase_bonus} kr/förpackning i 6 mån`, 'Nej', 'Nej'],
             ].map((row, i) => (
               <div key={i} className={`grid grid-cols-4 text-sm border-t border-stone-200 ${i % 2 === 0 ? 'bg-white' : 'bg-stone-50'}`}>

@@ -32,7 +32,7 @@ const StartguideEmail = ({ name, schoolName }: StartguideProps) => (
             <strong>1. Anmäl klassen</strong> — fyll i anmälan på qlasskassan.se. Vi går igenom anmälan inom 24 timmar.
           </Text>
           <Text style={text}>
-            <strong>2. Sälj premiumkaffe</strong> — eleverna säljer Caffè Gondoliere Gold (50 kr/förpackning till klassen) och Crema (70 kr/förpackning).
+            <strong>2. Sälj premiumkaffe</strong> — eleverna säljer Caffè Gondoliere Gold (40 kr/förpackning till klassen) och Crema (70 kr/förpackning).
           </Text>
           <Text style={text}>
             <strong>3. Lägg ordern</strong> — när ni samlat in beställningarna lägger ni en gemensam order via dashboarden.
