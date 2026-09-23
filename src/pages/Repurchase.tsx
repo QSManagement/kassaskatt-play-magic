@@ -120,7 +120,7 @@ export default function Repurchase() {
       return;
     }
     if (totalBags === 0) {
-      toast.error("Välj minst en påse kaffe");
+      toast.error("Välj minst en förpackning kaffe");
       return;
     }
 
@@ -226,7 +226,7 @@ export default function Repurchase() {
           </h1>
           <p className="text-stone-600 max-w-xl mx-auto">
             Ange klasskoden från säljbladet, välj kaffe och betala — klassen får{" "}
-            <strong>{pricing.repurchase_bonus} kr per påse</strong> i bonus, helt automatiskt.
+            <strong>{pricing.repurchase_bonus} kr per förpackning</strong> i bonus, helt automatiskt.
           </p>
         </div>
 
@@ -368,7 +368,7 @@ export default function Repurchase() {
         <Card className="border-emerald-200 bg-white">
           <CardContent className="pt-6 space-y-3">
             <div className="flex justify-between text-sm">
-              <span className="text-stone-600">Antal påsar</span>
+              <span className="text-stone-600">Antal förpackningar</span>
               <span>{totalBags} st</span>
             </div>
             <div className="flex justify-between text-sm">
@@ -441,7 +441,7 @@ function ProductRow({
         <div className="min-w-0">
           <p className="font-medium text-emerald-950 truncate">{name}</p>
           <p className="text-xs text-stone-500 truncate">{subtitle}</p>
-          <p className="text-sm text-emerald-900 mt-0.5">{price} kr / påse</p>
+          <p className="text-sm text-emerald-900 mt-0.5">{price} kr / förpackning</p>
         </div>
       </div>
       <div className="flex items-center gap-2 flex-shrink-0">

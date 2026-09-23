@@ -161,7 +161,7 @@ export default function AdminOrders() {
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <p className="text-xs text-stone-600">Påsar</p>
+            <p className="text-xs text-stone-600">Förpackningar</p>
             <p className="text-2xl font-bold text-emerald-950">{totals.gold + totals.crema}</p>
           </CardContent>
         </Card>

@@ -47,7 +47,7 @@ const RepurchaseNotificationEmail = ({
             <Text style={bonusLabel}>Bonus till klassen</Text>
             <Text style={bonusValue}>+{bonusToClass.toLocaleString('sv-SE')} kr</Text>
             <Text style={bonusHelp}>
-              {totalBags} påse{totalBags === 1 ? '' : 'r'} kaffe
+              {totalBags} förpackning{totalBags === 1 ? '' : 'ar'} kaffe
               {qtyGold > 0 ? ` · ${qtyGold} Gold` : ''}
               {qtyCrema > 0 ? ` · ${qtyCrema} Crema` : ''}
             </Text>

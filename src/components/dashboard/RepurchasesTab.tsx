@@ -54,7 +54,7 @@ export default function RepurchasesTab({ klass }: Props) {
           <p>
             Varje gång en av era kunder återköper kaffe på{" "}
             <a href={`/aterkop?kod=${klass.class_code ?? ""}`} target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline">qlasskassan.se/aterkop</a>{" "}
-            med er klasskod inom 6 månader får er klass <strong>15 kr per påse</strong> — automatiskt.
+            med er klasskod inom 6 månader får er klass <strong>15 kr per förpackning</strong> — automatiskt.
           </p>
           <p>Vi mejlar er en månadsrapport så ni kan följa utvecklingen.</p>
         </CardContent>

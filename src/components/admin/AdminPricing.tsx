@@ -10,13 +10,13 @@ import { clearPricingCache, DEFAULT_PRICING, type Pricing } from "@/hooks/usePri
 import { useAuth } from "@/lib/AuthContext";
 
 const fields: { key: keyof Pricing; label: string; help?: string }[] = [
-  { key: "price_gold_consumer", label: "Konsumentpris Gold (återköp)", help: "Kr per påse vid återköp via klasskod. OBS: matchas mot pris i Stripe." },
-  { key: "price_crema_consumer", label: "Konsumentpris Crema (återköp)", help: "Kr per påse vid återköp via klasskod. OBS: matchas mot pris i Stripe." },
-  { key: "price_gold_class", label: "Klassens inköpspris Gold", help: "Pris klassen faktureras per Gold-påse." },
-  { key: "price_crema_class", label: "Klassens inköpspris Crema", help: "Pris klassen faktureras per Crema-påse." },
-  { key: "margin_gold", label: "Klassens marginal Gold", help: "Belopp per Gold-påse som tillfaller klassen." },
-  { key: "margin_crema", label: "Klassens marginal Crema", help: "Belopp per Crema-påse som tillfaller klassen." },
-  { key: "repurchase_bonus", label: "Återköpsbonus per påse", help: "Bonus till klassen för varje återköpt påse i 6-månadersfönstret." },
+  { key: "price_gold_consumer", label: "Konsumentpris Gold (återköp)", help: "Kr per förpackning vid återköp via klasskod." },
+  { key: "price_crema_consumer", label: "Konsumentpris Crema (återköp)", help: "Kr per förpackning vid återköp via klasskod." },
+  { key: "price_gold_class", label: "Klassens inköpspris Gold", help: "Pris klassen faktureras per Gold-förpackning." },
+  { key: "price_crema_class", label: "Klassens inköpspris Crema", help: "Pris klassen faktureras per Crema-förpackning." },
+  { key: "margin_gold", label: "Klassens marginal Gold", help: "Belopp per Gold-förpackning som tillfaller klassen." },
+  { key: "margin_crema", label: "Klassens marginal Crema", help: "Belopp per Crema-förpackning som tillfaller klassen." },
+  { key: "repurchase_bonus", label: "Återköpsbonus per förpackning", help: "Bonus till klassen för varje återköpt förpackning i 6-månadersfönstret." },
 ];
 
 export default function AdminPricing() {
@@ -84,7 +84,7 @@ export default function AdminPricing() {
           <AlertTriangle className="h-5 w-5 text-amber-700 shrink-0 mt-0.5" />
           <div className="text-sm text-amber-900 space-y-1">
             <p><strong>Befintliga ordrar påverkas inte</strong> — totaler är låsta vid skapande.</p>
-            <p><strong>Konsumentpriserna (återköp)</strong> måste även justeras i Stripe (lookup keys <code>kaffe_gold_169</code> / <code>kaffe_crema_249</code>) annars debiteras föräldrarna det gamla priset trots att hemsidan visar det nya.</p>
+            <p><strong>Konsumentpriserna (återköp)</strong> används direkt i betalningen — föräldrarna debiteras alltid det pris du sparar här.</p>
             <p><strong>PDF-säljbladen</strong> uppdateras inte automatiskt — be utvecklaren regenerera dem om du ändrar priser som syns där.</p>
           </div>
         </CardContent>

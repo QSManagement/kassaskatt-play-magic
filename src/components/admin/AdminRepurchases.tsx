@@ -261,7 +261,7 @@ function RepurchaseForm({
           </Select>
         </div>
         <div className="space-y-2">
-          <Label>Antal påsar</Label>
+          <Label>Antal förpackningar</Label>
           <Input
             type="number"
             min={1}

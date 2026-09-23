@@ -147,7 +147,7 @@ export default function Index() {
             {/* I1: Sifferstrip */}
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium text-emerald-900/80 mb-6">
               <span className="inline-flex items-center gap-2">
-                <span className="text-amber-700 font-bold">+{pricing.repurchase_bonus} kr/påse</span>
+                <span className="text-amber-700 font-bold">+{pricing.repurchase_bonus} kr/förpackning</span>
                 <span className="text-emerald-900/60">Återköpsbonus</span>
               </span>
               <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-amber-400" aria-hidden="true"></span>
@@ -175,7 +175,7 @@ export default function Index() {
               </button>
             </div>
             <div className="flex flex-wrap items-center gap-6 text-sm text-emerald-900/70">
-              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Upp till {pricing.margin_crema} kr per påse till klassen</div>
+              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Upp till {pricing.margin_crema} kr per förpackning till klassen</div>
               <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Faktura till föreningen, 14 dagar</div>
               <div className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Inget osålt — vi rullar exakt volym</div>
             </div>
@@ -299,17 +299,17 @@ export default function Index() {
 
               <div>
                 <div className="flex justify-between items-baseline mb-3">
-                  <label className="font-semibold text-emerald-950">Påsar per elev</label>
+                  <label className="font-semibold text-emerald-950">Förpackningar per elev</label>
                   <span className="text-3xl font-bold text-emerald-900">{bagsPerStudent}</span>
                 </div>
                 <input
                   type="range" min="3" max="20" value={bagsPerStudent}
                   onChange={(e) => setBagsPerStudent(Number(e.target.value))}
                   className="w-full h-2 bg-stone-200 rounded-full appearance-none cursor-pointer accent-emerald-800"
-                  aria-label="Påsar per elev"
+                  aria-label="Förpackningar per elev"
                 />
                 <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>3</span><span>20</span></div>
-                <div className="text-xs text-emerald-900/60 mt-2">Snitt hos våra klasser: 8 påsar/elev</div>
+                <div className="text-xs text-emerald-900/60 mt-2">Snitt hos våra klasser: 8 förpackningar/elev</div>
               </div>
 
               <div>
@@ -335,7 +335,7 @@ export default function Index() {
                   {totalEarnings.toLocaleString('sv-SE')}
                   <span className="text-2xl text-amber-200/70 ml-2">kr</span>
                 </div>
-                <div className="text-amber-200/60 text-sm mb-3">Baserat på {totalBags} sålda påsar</div>
+                <div className="text-amber-200/60 text-sm mb-3">Baserat på {totalBags} sålda förpackningar</div>
                 <div className="inline-flex items-center gap-2 bg-amber-300/15 text-amber-200 px-3 py-1.5 rounded-full text-xs font-medium mb-8">
                   <Repeat className="w-3 h-3" aria-hidden="true" />
                   + ungefär {reorderEarnings.toLocaleString('sv-SE')} kr extra från Återköpsklubben (6 mån)
@@ -345,14 +345,14 @@ export default function Index() {
                   <div className="flex justify-between items-center">
                     <span className="text-amber-100/80 text-sm flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-amber-300"></span>
-                      Crema ({goldBags} påsar × {pricing.margin_crema} kr)
+                      Crema ({goldBags} förpackningar × {pricing.margin_crema} kr)
                     </span>
                     <span className="font-bold">{goldEarnings.toLocaleString('sv-SE')} kr</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-amber-100/80 text-sm flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                      Gold ({classicBags} påsar × {pricing.margin_gold} kr)
+                      Gold ({classicBags} förpackningar × {pricing.margin_gold} kr)
                     </span>
                     <span className="font-bold">{classicEarnings.toLocaleString('sv-SE')} kr</span>
                   </div>
@@ -397,17 +397,17 @@ export default function Index() {
                 <p className="text-emerald-900/70 mb-6">Premium 100% Arabica malet filterkaffe. Mjuk, aromatisk och välbalanserad — en klassiker för bryggkaffe hemma och på kontoret.</p>
                 <div className="bg-emerald-50 rounded-2xl p-5 mb-6">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-emerald-900">Klassen tjänar per påse</span>
+                    <span className="text-sm font-medium text-emerald-900">Klassen tjänar per förpackning</span>
                     <span className="text-3xl font-bold text-emerald-800">{pricing.margin_gold} kr</span>
                   </div>
                   <div className="h-2 bg-emerald-200 rounded-full overflow-hidden">
                     <div className="h-full bg-emerald-700 rounded-full" style={{ width: '30%' }}></div>
                   </div>
-                  <div className="text-xs text-emerald-700 mt-1 font-medium">Sälj 8 påsar = 400 kr till klassen</div>
+                  <div className="text-xs text-emerald-700 mt-1 font-medium">Sälj 8 förpackningar = 320 kr till klassen</div>
                 </div>
                 <ul className="space-y-2 text-sm text-emerald-900/80">
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> 100% Arabica · malet filterkaffe</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> 500 g påse</li>
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> 500 g förpackning</li>
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Rainforest Alliance-certifierad</li>
                 </ul>
               </div>
@@ -434,17 +434,17 @@ export default function Index() {
                 <p className="text-emerald-900/70 mb-6">100% Arabica i hela bönor. Balanserad, len och nötig med naturlig sötma och len crema — lyxvalet för espresso och fullautomater.</p>
                 <div className="bg-amber-50 rounded-2xl p-5 mb-6">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-amber-900">Klassen tjänar per påse</span>
+                    <span className="text-sm font-medium text-amber-900">Klassen tjänar per förpackning</span>
                     <span className="text-3xl font-bold text-amber-800">{pricing.margin_crema} kr</span>
                   </div>
                   <div className="h-2 bg-amber-200 rounded-full overflow-hidden">
                     <div className="h-full bg-amber-600 rounded-full" style={{ width: '28%' }}></div>
                   </div>
-                  <div className="text-xs text-amber-800 mt-1 font-medium">Sälj 8 påsar = 560 kr till klassen</div>
+                  <div className="text-xs text-amber-800 mt-1 font-medium">Sälj 8 förpackningar = 560 kr till klassen</div>
                 </div>
                 <ul className="space-y-2 text-sm text-emerald-900/80">
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-amber-700" aria-hidden="true" /> 100% Arabica</li>
-                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-amber-700" aria-hidden="true" /> Hela bönor · 1 kg påse</li>
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-amber-700" aria-hidden="true" /> Hela bönor · 1 kg förpackning</li>
                   <li className="flex items-center gap-2"><Check className="w-4 h-4 text-amber-700" aria-hidden="true" /> Rainforest Alliance-certifierad</li>
                 </ul>
               </div>
@@ -470,12 +470,12 @@ export default function Index() {
                 Klassen får pengar <span className="italic text-amber-700">även</span> efter att försäljningen är slut
               </h2>
               <p className="text-lg text-emerald-900/80 mb-8 leading-relaxed">
-                Det här är vår superkraft. Varje klass får en unik klasskod. Återköper kunderna kaffet på <strong>qlasskassan.se/aterkop</strong> med koden inom 6 månader får klassen <strong>15 kr per påse</strong> — automatiskt, utan att eleverna lyfter ett finger.
+                Det här är vår superkraft. Varje klass får en unik klasskod. Återköper kunderna kaffet på <strong>qlasskassan.se/aterkop</strong> med koden inom 6 månader får klassen <strong>15 kr per förpackning</strong> — automatiskt, utan att eleverna lyfter ett finger.
               </p>
               <div className="bg-white rounded-2xl p-6 border border-amber-200 mb-8">
                 <div className="text-sm font-semibold text-emerald-900 mb-4">Räkneexempel återköp</div>
                 <div className="space-y-3 text-sm">
-                  <div className="flex justify-between items-center"><span className="text-emerald-900/70">Klassen säljer 200 påsar</span><span className="font-medium">200 påsar</span></div>
+                  <div className="flex justify-between items-center"><span className="text-emerald-900/70">Klassen säljer 200 förpackningar</span><span className="font-medium">200 förpackningar</span></div>
                   <div className="flex justify-between items-center"><span className="text-emerald-900/70">30 % återköper i snitt 2 ggr på 6 mån</span><span className="font-medium">120 återköp</span></div>
                   <div className="flex justify-between items-center pt-3 border-t border-stone-200"><span className="font-semibold text-emerald-900">Bonus till klassen</span><span className="text-2xl font-bold text-amber-700">+1 800 kr</span></div>
                 </div>
@@ -603,12 +603,12 @@ export default function Index() {
               <div className="p-5 text-center">Kryddor</div>
             </div>
             {[
-              ['Marginal till klassen', `${pricing.margin_gold}–${pricing.margin_crema} kr/påse`, '20–30 kr/box', '49–54 kr/box'],
+              ['Marginal till klassen', `${pricing.margin_gold}–${pricing.margin_crema} kr/förpackning`, '20–30 kr/box', '49–54 kr/box'],
               ['Återkommande kunder', 'Ja, automatiskt', 'Sällan', 'Sällan'],
               ['Förbrukningsvara', 'Ja — köps om varje månad', 'Nej', 'Nej'],
               ['Premium-känsla', 'Hög', 'Låg', 'Mellan'],
-              ['Påsar/boxar för 15 000 kr', '~190', '~600', '~290'],
-              ['Återköpsbonus efter kampanj', `Ja — ${pricing.repurchase_bonus} kr/påse i 6 mån`, 'Nej', 'Nej'],
+              ['Förpackningar/boxar för 15 000 kr', '~270', '~600', '~290'],
+              ['Återköpsbonus efter kampanj', `Ja — ${pricing.repurchase_bonus} kr/förpackning i 6 mån`, 'Nej', 'Nej'],
             ].map((row, i) => (
               <div key={i} className={`grid grid-cols-4 text-sm border-t border-stone-200 ${i % 2 === 0 ? 'bg-white' : 'bg-stone-50'}`}>
                 <div className="p-5 font-medium text-emerald-950">{row[0]}</div>
@@ -640,7 +640,7 @@ export default function Index() {
             {[
               { icon: ClipboardList, title: 'Beställningar först, leverans sedan', desc: 'Klassen samlar in beställningar och pengar från familj, grannar och vänner. Inga osålda lager, inget svinn.' },
               { icon: Wallet, title: 'Faktura mot föreningens konto', desc: 'När ni skickat in beställningen fakturerar vi föreningen för exakt volym — 14 dagars betaltid. Klassen behåller sin marginal direkt.' },
-              { icon: Truck, title: 'Vi levererar till skolan', desc: 'Fri leverans till skolan på beställningar över 50 påsar. Ni packar och delar ut själva — eleverna sköter sin runda i området.' },
+              { icon: Truck, title: 'Vi levererar till skolan', desc: 'Fri leverans till skolan på beställningar över 50 förpackningar. Ni packar och delar ut själva — eleverna sköter sin runda i området.' },
               { icon: Sparkles, title: 'Återköpsklubben ingår alltid', desc: 'När er kampanj är slut fortsätter klassen tjäna 15 kr per återköp i 6 månader — automatiskt, utan att ni gör något.' },
             ].map((f, i) => (
               <div key={i} className="text-center bg-white border border-stone-200 rounded-3xl p-7 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
@@ -670,11 +670,11 @@ export default function Index() {
               { q: 'Hur går betalningen till?', a: 'Klassen samlar in pengar från kunderna (Swish till föreningens konto). När ni skickar in den samlade beställningen till oss fakturerar vi föreningen för vår del — med 14 dagars betaltid. Klassen behåller mellanskillnaden direkt.' },
               { q: 'Vad händer om en kund ångrar sig?', a: 'Eftersom ni samlar in beställningar och pengar innan vi packar och kör så händer det sällan. Skulle det ändå göra det, hör av er — vi löser det.' },
               { q: 'Måste klassen ha en förening?', a: 'Ja, vi fakturerar mot ett organisationsnummer (oftast föräldraföreningen). Saknar ni det går det att registrera en enkel ideell förening på 30 minuter — vi skickar instruktioner i startguiden.' },
-              { q: 'Kostar det något att starta?', a: 'Nej. Registrering, säljmaterial och all support är gratis. Ni betalar bara för de påsar ni faktiskt beställer.' },
-              { q: 'Hur funkar Återköpsklubben rent tekniskt?', a: 'Varje klass får en unik klasskod (står på säljbladet). När en kund handlar på qlasskassan.se/aterkop och anger koden får klassen 15 kr per påse — i 6 månader. Vi mejlar er en månadsrapport.' },
+              { q: 'Kostar det något att starta?', a: 'Nej. Registrering, säljmaterial och all support är gratis. Ni betalar bara för de förpackningar ni faktiskt beställer.' },
+              { q: 'Hur funkar Återköpsklubben rent tekniskt?', a: 'Varje klass får en unik klasskod (står på säljbladet). När en kund handlar på qlasskassan.se/aterkop och anger koden får klassen 15 kr per förpackning — i 6 månader. Vi mejlar er en månadsrapport.' },
               { q: 'Är kaffet faktiskt premium?', a: 'Caffè Gondoliere är ett av Europas största rosterier, certifierat av Rainforest Alliance. Crema är 100 % höglands-Arabica i hela bönor. Provsmaka själva — vi skickar gratis sample-paket till intresserade lärare på begäran.' },
               { q: 'Vad om vi vill avbryta?', a: 'Inga bindningstider. Ni bestämmer själva när och hur mycket ni säljer. Skickar ni inte in en beställning så kostar det inget.' },
-              { q: 'Hur mycket tjänar en typisk klass?', a: '25 elever som säljer 8 påsar var med 60 % Crema-mix landar på cirka 11 600 kr vid utlämning. Sen tickar Återköpsklubben på i 6 månader — vanligtvis 1 500–2 500 kr extra.' },
+              { q: 'Hur mycket tjänar en typisk klass?', a: '25 elever som säljer 8 förpackningar var med 60 % Crema-mix landar på cirka 11 600 kr vid utlämning. Sen tickar Återköpsklubben på i 6 månader — vanligtvis 1 500–2 500 kr extra.' },
             ].map((item, i) => (
               <AccordionItem key={i} value={`item-${i}`} className="border-b border-stone-200 last:border-0">
                 <AccordionTrigger className="text-left text-emerald-950 font-semibold py-5 hover:no-underline hover:text-amber-700">
