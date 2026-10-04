@@ -41,6 +41,10 @@ export default function SalesLogTab({ klass }: Props) {
 
   useEffect(() => {
     load();
+    void (async () => {
+      const { data } = await supabase.rpc("list_class_hellofresh_signups", { _code: klass.class_code });
+      setHfCount((data || []).length);
+    })();
     const channel = supabase
       .channel(`sales-${klass.id}`)
       .on(
