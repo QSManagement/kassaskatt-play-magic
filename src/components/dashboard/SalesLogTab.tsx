@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Trash2, Search, Download } from "lucide-react";
+import { Trash2, Search, Download, Salad } from "lucide-react";
 
 interface Sale {
   id: string;
@@ -24,6 +24,7 @@ interface Props {
 
 export default function SalesLogTab({ klass }: Props) {
   const [sales, setSales] = useState<Sale[]>([]);
+  const [hfCount, setHfCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("");
 
