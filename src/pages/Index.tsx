@@ -9,6 +9,7 @@ import { StartguideDialog } from '@/components/registration/StartguideDialog';
 import { Logo } from '@/components/Logo';
 import coffeeGold from '@/assets/coffee-gold.png';
 import coffeeCrema from '@/assets/coffee-crema.png';
+import hfBox from '@/assets/hellofresh/hellofresh-box.webp';
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from '@/components/ui/accordion';
@@ -734,6 +735,7 @@ export default function Index() {
               { q: 'Måste klassen ha en förening?', a: 'Ja, vi fakturerar mot ett organisationsnummer (oftast föräldraföreningen). Saknar ni det går det att registrera en enkel ideell förening på 30 minuter — vi skickar instruktioner i startguiden.' },
               { q: 'Kostar det något att starta?', a: 'Nej. Registrering, säljmaterial och all support är gratis. Ni betalar bara för de förpackningar ni faktiskt beställer.' },
               { q: 'Hur funkar Återköpsklubben rent tekniskt?', a: 'Varje klass får en unik klasskod (står på säljbladet). När en kund handlar på qlasskassan.se/aterkop och anger koden får klassen 15 kr per förpackning — i 6 månader. Vi mejlar er en månadsrapport.' },
+              { q: 'Vad är HelloFresh-samarbetet?', a: 'Klassen får en egen HelloFresh-länk. Kunderna anmäler sig själva via länken — ni hanterar inga varor eller pengar. Klassen får en fast ersättning per godkänd anmälan, och allt följs upp automatiskt i er dashboard.' },
               { q: 'Är kaffet faktiskt premium?', a: 'Caffè Gondoliere är ett av Europas största rosterier, certifierat av Rainforest Alliance. Crema är 100 % höglands-Arabica i hela bönor. Provsmaka själva — vi skickar gratis sample-paket till intresserade lärare på begäran.' },
               { q: 'Vad om vi vill avbryta?', a: 'Inga bindningstider. Ni bestämmer själva när och hur mycket ni säljer. Skickar ni inte in en beställning så kostar det inget.' },
               { q: 'Hur mycket tjänar en typisk klass?', a: '25 elever som säljer 8 förpackningar var med 60 % Crema-mix landar på cirka 11 600 kr vid utlämning. Sen tickar Återköpsklubben på i 6 månader — vanligtvis 1 500–2 500 kr extra.' },
@@ -797,6 +799,7 @@ export default function Index() {
               <ul className="space-y-2 text-sm">
                 <li><a href="#sa-funkar" className="hover:text-amber-300 transition">Så funkar det</a></li>
                 <li><a href="#aterkop" className="hover:text-amber-300 transition">Återköpsklubben</a></li>
+                <li><a href="/hellofresh" className="hover:text-amber-300 transition">HelloFresh</a></li>
                 <li><a href="#faq" className="hover:text-amber-300 transition">Vanliga frågor</a></li>
               </ul>
             </div>
