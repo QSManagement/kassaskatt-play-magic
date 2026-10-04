@@ -20,7 +20,7 @@ export const DEFAULT_PRICING: Pricing = {
   margin_gold: 40,
   margin_crema: 70,
   repurchase_bonus: 15,
-  margin_hellofresh: 200,
+  margin_hellofresh: 150,
 };
 
 let cache: Pricing | null = null;
