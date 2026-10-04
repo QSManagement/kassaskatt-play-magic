@@ -9,6 +9,7 @@ import {
   Sparkles,
   Package,
   ArrowRight,
+  Salad,
 } from "lucide-react";
 
 interface Stats {
@@ -19,6 +20,8 @@ interface Stats {
   totalRevenue: number;
   totalToClasses: number;
   repurchaseTotal: number;
+  hellofreshSignups: number;
+  hellofreshTotal: number;
   ordersThisMonth: number;
   topClasses: Array<{ id: string; name: string; total: number }>;
 }
@@ -41,6 +44,7 @@ export default function AdminOverview() {
       { data: orders },
       { count: ordersThisMonth },
       { data: repurchases },
+      { data: hfSignups },
     ] = await Promise.all([
       supabase
         .from("class_registrations")
@@ -55,6 +59,7 @@ export default function AdminOverview() {
         .select("id", { count: "exact", head: true })
         .gte("created_at", startOfMonth.toISOString()),
       supabase.from("repurchases").select("bonus_to_class"),
+      supabase.from("hellofresh_signups").select("commission_to_class, status").neq("status", "rejected"),
     ]);
 
     const activeClasses = (classes ?? []).filter((c) => c.status === "active").length;
@@ -63,6 +68,8 @@ export default function AdminOverview() {
     const totalRevenue = (orders ?? []).reduce((s, o) => s + Number(o.total_to_invoice || 0), 0);
     const totalToClasses = (orders ?? []).reduce((s, o) => s + Number(o.total_to_class || 0), 0);
     const repurchaseTotal = (repurchases ?? []).reduce((s, r) => s + Number(r.bonus_to_class || 0), 0);
+    const hellofreshSignups = (hfSignups ?? []).length;
+    const hellofreshTotal = (hfSignups ?? []).reduce((s, h) => s + Number(h.commission_to_class || 0), 0);
 
     const topClasses = (classes ?? [])
       .filter((c) => c.status === "active" && Number(c.total_to_class) > 0)
@@ -82,6 +89,8 @@ export default function AdminOverview() {
       totalRevenue,
       totalToClasses,
       repurchaseTotal,
+      hellofreshSignups,
+      hellofreshTotal,
       ordersThisMonth: ordersThisMonth || 0,
       topClasses,
     });
@@ -98,10 +107,17 @@ export default function AdminOverview() {
         <p className="text-stone-600 mt-1">Allt du behöver veta om Qlasskassan just nu.</p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <KpiCard icon={GraduationCap} label="Aktiva klasser" value={stats.activeClasses} color="emerald" />
         <KpiCard icon={Inbox} label="Väntande leads" value={stats.pendingLeads} color="amber" link="/admin/leads" />
         <KpiCard icon={Package} label="Ordrar denna månad" value={stats.ordersThisMonth} color="emerald" link="/admin/ordrar" />
+        <KpiCard
+          icon={Salad}
+          label="HelloFresh-anmälningar"
+          value={`${stats.hellofreshSignups} · ${stats.hellofreshTotal.toLocaleString("sv-SE")} kr`}
+          color="emerald"
+          link="/admin/hellofresh"
+        />
         <KpiCard
           icon={Sparkles}
           label="Återköpsbonus"
