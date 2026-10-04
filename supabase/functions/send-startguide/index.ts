@@ -10,6 +10,7 @@ const Body = z.object({
   name: z.string().trim().min(2).max(120),
   email: z.string().trim().email().max(255),
   school_name: z.string().trim().min(2).max(120),
+  product: z.enum(["kaffe", "hellofresh"]).optional().default("kaffe"),
 });
 
 Deno.serve(async (req) => {
@@ -20,7 +21,7 @@ Deno.serve(async (req) => {
     if (!parsed.success) {
       return json({ error: parsed.error.flatten().fieldErrors }, 400);
     }
-    const { name, email, school_name } = parsed.data;
+    const { name, email, school_name, product } = parsed.data;
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -51,9 +52,9 @@ Deno.serve(async (req) => {
       "send-transactional-email",
       {
         body: {
-          templateName: "startguide",
+          templateName: product === "hellofresh" ? "startguide-hellofresh" : "startguide",
           recipientEmail: email,
-          idempotencyKey: `startguide-${email}-${Date.now()}`,
+          idempotencyKey: `startguide-${product}-${email}-${Date.now()}`,
           templateData: { name, schoolName: school_name },
         },
       },

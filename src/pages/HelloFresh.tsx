@@ -4,6 +4,7 @@ import {
   ArrowRight, Check, Sparkles, Package, Users, TrendingUp, Calculator, Salad,
 } from "lucide-react";
 import { RegistrationDialog } from "@/components/registration/RegistrationDialog";
+import { StartguideDialog } from "@/components/registration/StartguideDialog";
 import { Logo } from "@/components/Logo";
 import SiteNav from "@/components/site/SiteNav";
 import SiteFooter from "@/components/site/SiteFooter";
@@ -36,6 +37,7 @@ export default function HelloFresh() {
   const pricing = usePricing();
   const m = pricing.margin_hellofresh;
   const [regOpen, setRegOpen] = useState(false);
+  const [guideOpen, setGuideOpen] = useState(false);
   const [students, setStudents] = useState(25);
   const [customersPerStudent, setCustomersPerStudent] = useState(2);
 
@@ -96,6 +98,12 @@ export default function HelloFresh() {
               >
                 Kom igång gratis
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" aria-hidden="true" />
+              </button>
+              <button
+                onClick={() => setGuideOpen(true)}
+                className="bg-white text-emerald-950 px-7 py-4 rounded-full font-semibold hover:bg-stone-100 transition border border-stone-200"
+              >
+                Få startguide via mail
               </button>
               <Link
                 to="/logga-in"
@@ -376,6 +384,7 @@ export default function HelloFresh() {
 
       <SiteFooter />
       <RegistrationDialog open={regOpen} onOpenChange={setRegOpen} />
+      <StartguideDialog open={guideOpen} onOpenChange={setGuideOpen} product="hellofresh" />
     </div>
   );
 }
