@@ -1,7 +1,7 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetDescription } from "@/components/ui/sheet";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { HelpCircle, LayoutDashboard, ShoppingBag, Users, Sparkles, Settings, Share2, Mail } from "lucide-react";
+import { HelpCircle, LayoutDashboard, ShoppingBag, Users, Sparkles, Settings, Share2, Mail, Salad } from "lucide-react";
 
 export default function HelpDialog() {
   return (
@@ -59,6 +59,19 @@ export default function HelpDialog() {
                   Klicka på <strong>Dela elevlänk</strong> för att få en länk + QR-kod att skicka till eleverna. De rapporterar sin egen försäljning direkt — antalet adderas automatiskt på deras totalsumma här.
                 </span>
               </p>
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="hellofresh">
+            <AccordionTrigger className="text-emerald-950">
+              <span className="flex items-center gap-2">
+                <Salad className="h-4 w-4" aria-hidden="true" /> HelloFresh
+              </span>
+            </AccordionTrigger>
+            <AccordionContent className="text-stone-600 space-y-2">
+              <p>Klassen kan även tjäna pengar på HelloFresh. Kunderna anmäler sig själva via er unika länk — ni behöver inte ta emot några uppgifter.</p>
+              <p>Under fliken <em>HelloFresh</em> hittar ni länken, QR-koden och en affisch att skriva ut. Där ser ni också alla anmälningar och status.</p>
+              <p>Ersättningen betalas ut per godkänd anmälan och summeras automatiskt i er översikt.</p>
             </AccordionContent>
           </AccordionItem>
 

@@ -9,7 +9,7 @@ import { Loader2, AlertTriangle } from "lucide-react";
 import { clearPricingCache, DEFAULT_PRICING, type Pricing } from "@/hooks/usePricing";
 import { useAuth } from "@/lib/AuthContext";
 
-const fields: { key: keyof Pricing; label: string; help?: string }[] = [
+const coffeeFields: { key: keyof Pricing; label: string; help?: string }[] = [
   { key: "price_gold_consumer", label: "Konsumentpris Gold (återköp)", help: "Kr per förpackning vid återköp via klasskod." },
   { key: "price_crema_consumer", label: "Konsumentpris Crema (återköp)", help: "Kr per förpackning vid återköp via klasskod." },
   { key: "price_gold_class", label: "Klassens inköpspris Gold", help: "Pris klassen faktureras per Gold-förpackning." },
@@ -17,6 +17,10 @@ const fields: { key: keyof Pricing; label: string; help?: string }[] = [
   { key: "margin_gold", label: "Klassens marginal Gold", help: "Belopp per Gold-förpackning som tillfaller klassen." },
   { key: "margin_crema", label: "Klassens marginal Crema", help: "Belopp per Crema-förpackning som tillfaller klassen." },
   { key: "repurchase_bonus", label: "Återköpsbonus per förpackning", help: "Bonus till klassen för varje återköpt förpackning i 6-månadersfönstret." },
+];
+
+const hellofreshFields: { key: keyof Pricing; label: string; help?: string }[] = [
+  { key: "margin_hellofresh", label: "Ersättning per HelloFresh-sälj", help: "Betalas ut till klassen per godkänd anmälan. Låses på anmälan när den skapas. Ingen återköpsbonus på HelloFresh." },
 ];
 
 export default function AdminPricing() {
@@ -45,6 +49,7 @@ export default function AdminPricing() {
         margin_gold: Number(data.margin_gold),
         margin_crema: Number(data.margin_crema),
         repurchase_bonus: Number(data.repurchase_bonus),
+        margin_hellofresh: Number(data.margin_hellofresh),
       };
       setValues(v);
       setUpdatedAt(data.updated_at as string);
@@ -96,7 +101,29 @@ export default function AdminPricing() {
           <CardDescription>{updatedAt ? `Senast uppdaterad: ${new Date(updatedAt).toLocaleString("sv-SE")}` : ""}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          {fields.map((f) => (
+          <h3 className="text-lg font-semibold text-emerald-950 pt-1">Kaffe</h3>
+          {coffeeFields.map((f) => (
+            <div key={f.key} className="grid md:grid-cols-2 gap-4 items-start">
+              <div>
+                <Label htmlFor={f.key} className="text-emerald-950">{f.label}</Label>
+                {f.help && <p className="text-xs text-stone-500 mt-1">{f.help}</p>}
+              </div>
+              <div className="flex items-center gap-2">
+                <Input
+                  id={f.key}
+                  type="number"
+                  min={0}
+                  step="1"
+                  value={values[f.key]}
+                  onChange={(e) => setValues((v) => ({ ...v, [f.key]: Number(e.target.value) || 0 }))}
+                />
+                <span className="text-sm text-stone-500">kr</span>
+              </div>
+            </div>
+          ))}
+
+          <h3 className="text-lg font-semibold text-emerald-950 pt-6 border-t border-stone-200">HelloFresh</h3>
+          {hellofreshFields.map((f) => (
             <div key={f.key} className="grid md:grid-cols-2 gap-4 items-start">
               <div>
                 <Label htmlFor={f.key} className="text-emerald-950">{f.label}</Label>

@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Logo } from "@/components/Logo";
 import { toast } from "sonner";
-import { CheckCircle2, Coffee } from "lucide-react";
+import { CheckCircle2, Coffee, Salad } from "lucide-react";
+import HelloFreshSignupForm from "@/components/hellofresh/HelloFreshSignupForm";
 
 interface StudentRow {
   class_id: string;
@@ -32,6 +33,7 @@ export default function StudentReport() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState<{ name: string; gold: number; crema: number } | null>(null);
   const [notFound, setNotFound] = useState(false);
+  const [product, setProduct] = useState<"kaffe" | "hellofresh">("kaffe");
 
   useEffect(() => {
     if (!code) return;
@@ -129,7 +131,44 @@ export default function StudentReport() {
           <p className="text-stone-600">{classInfo?.class_name}</p>
         </div>
 
-        {success ? (
+        <div className="grid grid-cols-2 gap-2 mb-6" role="tablist" aria-label="Välj produkt">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={product === "kaffe"}
+            onClick={() => setProduct("kaffe")}
+            className={`flex items-center justify-center gap-2 rounded-lg border px-4 py-3 text-sm font-semibold transition-colors ${
+              product === "kaffe"
+                ? "bg-emerald-900 text-white border-emerald-900"
+                : "bg-white text-stone-600 border-stone-300 hover:border-emerald-400"
+            }`}
+          >
+            <Coffee className="h-4 w-4" aria-hidden="true" />
+            Kaffe
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={product === "hellofresh"}
+            onClick={() => setProduct("hellofresh")}
+            className={`flex items-center justify-center gap-2 rounded-lg border px-4 py-3 text-sm font-semibold transition-colors ${
+              product === "hellofresh"
+                ? "bg-hf-green text-white border-hf-green"
+                : "bg-white text-stone-600 border-stone-300 hover:border-hf-green"
+            }`}
+          >
+            <Salad className="h-4 w-4" aria-hidden="true" />
+            HelloFresh
+          </button>
+        </div>
+
+        {product === "hellofresh" ? (
+          <HelloFreshSignupForm
+            classCode={code!}
+            className={classInfo?.class_name}
+            source="student_report"
+          />
+        ) : success ? (
           <Card>
             <CardContent className="pt-6 text-center space-y-4">
               <CheckCircle2 className="h-14 w-14 text-emerald-600 mx-auto" aria-hidden="true" />

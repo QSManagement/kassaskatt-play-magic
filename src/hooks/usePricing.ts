@@ -9,6 +9,7 @@ export type Pricing = {
   margin_gold: number;
   margin_crema: number;
   repurchase_bonus: number;
+  margin_hellofresh: number;
 };
 
 export const DEFAULT_PRICING: Pricing = {
@@ -19,6 +20,7 @@ export const DEFAULT_PRICING: Pricing = {
   margin_gold: 40,
   margin_crema: 70,
   repurchase_bonus: 15,
+  margin_hellofresh: 200,
 };
 
 let cache: Pricing | null = null;
@@ -27,7 +29,7 @@ let inflight: Promise<Pricing> | null = null;
 async function fetchPricing(): Promise<Pricing> {
   const { data, error } = await supabase
     .from("pricing_settings")
-    .select("price_gold_consumer, price_crema_consumer, price_gold_class, price_crema_class, margin_gold, margin_crema, repurchase_bonus")
+    .select("price_gold_consumer, price_crema_consumer, price_gold_class, price_crema_class, margin_gold, margin_crema, repurchase_bonus, margin_hellofresh")
     .eq("id", 1)
     .maybeSingle();
   if (error || !data) return DEFAULT_PRICING;
@@ -39,6 +41,7 @@ async function fetchPricing(): Promise<Pricing> {
     margin_gold: Number(data.margin_gold),
     margin_crema: Number(data.margin_crema),
     repurchase_bonus: Number(data.repurchase_bonus),
+    margin_hellofresh: Number(data.margin_hellofresh),
   };
   cache = out;
   return out;

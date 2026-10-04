@@ -148,7 +148,10 @@ export default function AdminClasses() {
                       <StatusBadge status={c.status} />
                     </TableCell>
                     <TableCell className="text-right font-semibold text-emerald-900">
-                      {Number(c.total_to_class || 0).toLocaleString("sv-SE")} kr
+                      {(Number(c.total_to_class || 0) + Number(c.total_hellofresh_to_class || 0)).toLocaleString("sv-SE")} kr
+                      {Number(c.total_sold_hellofresh || 0) > 0 && (
+                        <div className="text-xs font-normal text-stone-500">varav {c.total_sold_hellofresh} HelloFresh</div>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}

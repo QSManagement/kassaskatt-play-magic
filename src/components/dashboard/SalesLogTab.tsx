@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Trash2, Search, Download } from "lucide-react";
+import { Trash2, Search, Download, Salad } from "lucide-react";
 
 interface Sale {
   id: string;
@@ -24,6 +24,7 @@ interface Props {
 
 export default function SalesLogTab({ klass }: Props) {
   const [sales, setSales] = useState<Sale[]>([]);
+  const [hfCount, setHfCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("");
 
@@ -40,6 +41,10 @@ export default function SalesLogTab({ klass }: Props) {
 
   useEffect(() => {
     load();
+    void (async () => {
+      const { data } = await supabase.rpc("get_class_hellofresh_signups", { _class_id: klass.id });
+      setHfCount((data || []).length);
+    })();
     const channel = supabase
       .channel(`sales-${klass.id}`)
       .on(
@@ -126,8 +131,14 @@ export default function SalesLogTab({ klass }: Props) {
           <div>
             <CardTitle className="text-emerald-950">Försäljningar</CardTitle>
             <p className="text-sm text-stone-600 mt-1">
-              Varje gång en elev rapporterar via elevlänken hamnar det här — med kund, adress och datum.
+              Varje gång en elev rapporterar kaffe via elevlänken hamnar det här — med kund, adress och datum.
             </p>
+            {hfCount > 0 && (
+              <p className="text-xs text-stone-500 mt-2 flex items-center gap-1.5">
+                <Salad className="h-3.5 w-3.5 text-emerald-700" aria-hidden="true" />
+                HelloFresh-anmälningar ({hfCount}) visas under fliken HelloFresh.
+              </p>
+            )}
           </div>
           <Button onClick={exportCsv} variant="outline" size="sm" disabled={sales.length === 0}>
             <Download className="h-4 w-4 mr-2" aria-hidden="true" />
