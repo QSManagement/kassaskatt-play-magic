@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Trash2, UserPlus, Share2, Copy, Check } from "lucide-react";
+import { Trash2, UserPlus, Share2, Copy, Check, Salad } from "lucide-react";
+import { usePricing } from "@/hooks/usePricing";
 import { QRCodeSVG } from "qrcode.react";
 
 interface Props {
@@ -13,7 +14,9 @@ interface Props {
 }
 
 export default function StudentsTab({ klass }: Props) {
+  const pricing = usePricing();
   const [students, setStudents] = useState<any[]>([]);
+  const [hfCounts, setHfCounts] = useState<Record<string, number>>({});
   const [newName, setNewName] = useState("");
   const [loading, setLoading] = useState(true);
   const [drafts, setDrafts] = useState<Record<string, { gold: string; crema: string }>>({});
@@ -55,8 +58,19 @@ export default function StudentsTab({ klass }: Props) {
     setLoading(false);
   }
 
+  async function loadHfCounts() {
+    const { data } = await supabase.rpc("list_class_hellofresh_signups", { _code: klass.class_code });
+    const counts: Record<string, number> = {};
+    for (const row of data || []) {
+      const sid = (row as any).student_id;
+      if (sid) counts[sid] = (counts[sid] || 0) + 1;
+    }
+    setHfCounts(counts);
+  }
+
   useEffect(() => {
     loadStudents();
+    void loadHfCounts();
     // Live-uppdatera när elever rapporterar via publika länken
     const channel = supabase
       .channel(`students-${klass.id}`)
@@ -149,7 +163,10 @@ export default function StudentsTab({ klass }: Props) {
                 </DialogHeader>
                 <div className="space-y-4">
                   <p className="text-sm text-stone-600">
-                    Dela länken eller QR-koden med klassen. Eleverna väljer sitt namn och fyller i hur mycket de sålt — det adderas automatiskt till deras totalsumma här.
+                    Dela länken eller QR-koden med klassen. Eleverna väljer sitt namn och fyller i hur mycket kaffe de sålt — det adderas automatiskt till deras totalsumma här.
+                  </p>
+                  <p className="text-xs text-stone-500">
+                    Eleven kan även välja HelloFresh i samma formulär — då fyller kunden i sina egna uppgifter.
                   </p>
                   <div className="flex items-center gap-2">
                     <Input value={reportUrl} readOnly className="font-mono text-sm" />
@@ -190,7 +207,15 @@ export default function StudentsTab({ klass }: Props) {
             <div className="space-y-2">
               {students.map((s) => (
                 <div key={s.id} className="grid grid-cols-12 gap-2 items-center border border-stone-200 rounded-lg p-3">
-                  <div className="col-span-5 font-medium text-emerald-950">{s.name}</div>
+                  <div className="col-span-5 font-medium text-emerald-950">
+                    {s.name}
+                    {(hfCounts[s.id] || 0) > 0 && (
+                      <span className="ml-2 inline-flex items-center gap-1 text-xs font-medium bg-hf-soft text-emerald-900 rounded-full px-2 py-0.5 align-middle">
+                        <Salad className="h-3 w-3" aria-hidden="true" />
+                        {hfCounts[s.id]} HelloFresh
+                      </span>
+                    )}
+                  </div>
                   <div className="col-span-3">
                     <label className="text-xs text-stone-500 block">Gold</label>
                     <Input
@@ -223,10 +248,13 @@ export default function StudentsTab({ klass }: Props) {
                 </div>
               ))}
 
-              <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 mt-4 flex justify-between text-sm">
+              <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 mt-4 flex justify-between text-sm flex-wrap gap-2">
                 <span className="text-stone-700">Totalt sålda av eleverna:</span>
                 <span className="font-semibold text-emerald-900">
                   {totalGold} Gold · {totalCrema} Crema
+                  {Object.values(hfCounts).reduce((a, b) => a + b, 0) > 0 && (
+                    <> · {Object.values(hfCounts).reduce((a, b) => a + b, 0)} HelloFresh ({(Object.values(hfCounts).reduce((a, b) => a + b, 0) * pricing.margin_hellofresh).toLocaleString("sv-SE")} kr)</>
+                  )}
                 </span>
               </div>
             </div>
