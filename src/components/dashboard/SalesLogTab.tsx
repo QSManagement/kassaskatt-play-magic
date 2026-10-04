@@ -42,7 +42,7 @@ export default function SalesLogTab({ klass }: Props) {
   useEffect(() => {
     load();
     void (async () => {
-      const { data } = await supabase.rpc("list_class_hellofresh_signups", { _code: klass.class_code });
+      const { data } = await supabase.rpc("get_class_hellofresh_signups", { _class_id: klass.id });
       setHfCount((data || []).length);
     })();
     const channel = supabase

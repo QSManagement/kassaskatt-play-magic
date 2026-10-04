@@ -59,7 +59,7 @@ export default function StudentsTab({ klass }: Props) {
   }
 
   async function loadHfCounts() {
-    const { data } = await supabase.rpc("list_class_hellofresh_signups", { _code: klass.class_code });
+    const { data } = await supabase.rpc("get_class_hellofresh_signups", { _class_id: klass.id });
     const counts: Record<string, number> = {};
     for (const row of data || []) {
       const sid = (row as any).student_id;

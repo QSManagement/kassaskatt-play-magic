@@ -164,8 +164,9 @@ export default function StudentReport() {
 
         {product === "hellofresh" ? (
           <HelloFreshSignupForm
-            classCode={code}
-            students={students.map((s) => ({ student_id: s.id, student_name: s.name }))}
+            classCode={code!}
+            className={classInfo?.class_name}
+            source="student_report"
           />
         ) : success ? (
           <Card>
