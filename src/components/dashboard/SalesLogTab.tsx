@@ -131,8 +131,14 @@ export default function SalesLogTab({ klass }: Props) {
           <div>
             <CardTitle className="text-emerald-950">Försäljningar</CardTitle>
             <p className="text-sm text-stone-600 mt-1">
-              Varje gång en elev rapporterar via elevlänken hamnar det här — med kund, adress och datum.
+              Varje gång en elev rapporterar kaffe via elevlänken hamnar det här — med kund, adress och datum.
             </p>
+            {hfCount > 0 && (
+              <p className="text-xs text-stone-500 mt-2 flex items-center gap-1.5">
+                <Salad className="h-3.5 w-3.5 text-emerald-700" aria-hidden="true" />
+                HelloFresh-anmälningar ({hfCount}) visas under fliken HelloFresh.
+              </p>
+            )}
           </div>
           <Button onClick={exportCsv} variant="outline" size="sm" disabled={sales.length === 0}>
             <Download className="h-4 w-4 mr-2" aria-hidden="true" />
