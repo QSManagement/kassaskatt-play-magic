@@ -313,10 +313,11 @@ export default function AdminClassDetail() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <StatCard label="Total insamlat" value={`${Number(klass.total_to_class || 0).toLocaleString("sv-SE")} kr`} />
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <StatCard label="Totalt insamlat" value={`${(Number(klass.total_to_class || 0) + Number(klass.total_hellofresh_to_class || 0)).toLocaleString("sv-SE")} kr`} />
         <StatCard label="Gold sålda" value={klass.total_sold_gold || 0} />
         <StatCard label="Crema sålda" value={klass.total_sold_crema || 0} />
+        <StatCard label="HelloFresh" value={`${Number(klass.total_sold_hellofresh || 0)} st · ${Number(klass.total_hellofresh_to_class || 0).toLocaleString("sv-SE")} kr`} />
         <StatCard label="Återköpsbonus" value={`${repurchaseTotal.toLocaleString("sv-SE")} kr`} />
       </div>
 
