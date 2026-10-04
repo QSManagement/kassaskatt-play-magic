@@ -59,8 +59,8 @@ export default function ProfitCalculator({
                 <label className="font-semibold text-emerald-950">Förpackningar per elev</label>
                 <span className="text-3xl font-bold text-emerald-900">{bagsPerStudent}</span>
               </div>
-              <input type="range" min="3" max="20" value={bagsPerStudent} onChange={(e) => setBagsPerStudent(Number(e.target.value))} className={`${slider} accent-emerald-800`} aria-label="Förpackningar per elev" />
-              <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>3</span><span>20</span></div>
+              <input type="range" min="1" max="50" value={bagsPerStudent} onChange={(e) => setBagsPerStudent(Number(e.target.value))} className={`${slider} accent-emerald-800`} aria-label="Förpackningar per elev" />
+              <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>1</span><span>50</span></div>
               <div className="text-xs text-emerald-900/60 mt-2">Snitt hos våra klasser: 8 förpackningar/elev</div>
             </div>
             <div>
