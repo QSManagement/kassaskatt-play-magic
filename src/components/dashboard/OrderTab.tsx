@@ -213,6 +213,12 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
 
   return (
     <div className="space-y-6">
+      <div className="flex items-start gap-3 bg-hf-soft border border-emerald-200 rounded-lg p-4">
+        <Info className="h-5 w-5 text-emerald-800 shrink-0 mt-0.5" aria-hidden="true" />
+        <p className="text-sm text-emerald-950">
+          Den här fliken gäller <strong>kaffebeställningar</strong>. HelloFresh-anmälningar sköter kunderna själva via er länk — se fliken <strong>HelloFresh</strong> för länk, QR-kod och status.
+        </p>
+      </div>
       <Card>
         <CardHeader>
           <CardTitle className="text-emerald-950">Skicka in beställning</CardTitle>
