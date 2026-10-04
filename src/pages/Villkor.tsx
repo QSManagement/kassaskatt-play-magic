@@ -35,10 +35,13 @@ export default function Villkor() {
         <h2 className="text-2xl font-bold text-emerald-950 mt-8 mb-3">7. Ansvarsbegränsning</h2>
         <p>Vårt ansvar är begränsat till varans värde. Vi ansvarar inte för indirekta skador eller utebliven vinst.</p>
 
-        <h2 className="text-2xl font-bold text-emerald-950 mt-8 mb-3">8. Personuppgifter</h2>
+        <h2 className="text-2xl font-bold text-emerald-950 mt-8 mb-3">8. HelloFresh-samarbete</h2>
+        <p>Klasser kan även förmedla HelloFresh-anmälningar via en unik länk. Kunden anmäler sig själv och godkänner att uppgifterna delas med HelloFresh. Avtal om matkasse tecknas direkt mellan kunden och HelloFresh — Qlasskassan ansvarar inte för HelloFresh produkter, leveranser eller abonnemang. Klassens ersättning betalas ut per godkänd anmälan.</p>
+
+        <h2 className="text-2xl font-bold text-emerald-950 mt-8 mb-3">9. Personuppgifter</h2>
         <p>Vi behandlar personuppgifter i enlighet med vår <Link to="/integritetspolicy" className="text-emerald-900 underline">integritetspolicy</Link>.</p>
 
-        <h2 className="text-2xl font-bold text-emerald-950 mt-8 mb-3">9. Tvist</h2>
+        <h2 className="text-2xl font-bold text-emerald-950 mt-8 mb-3">10. Tvist</h2>
         <p>Svensk lag tillämpas. Tvist prövas i första hand i svensk allmän domstol. Konsumenter kan även vända sig till Allmänna reklamationsnämnden (ARN), arn.se.</p>
       </main>
     </div>
