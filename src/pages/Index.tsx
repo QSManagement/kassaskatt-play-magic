@@ -20,6 +20,7 @@ const NAV_LINKS = [
   { href: '#produkter', label: 'Produkter' },
   { href: '#kalkylator', label: 'Räkna ut' },
   { href: '#aterkop', label: 'Återköpsklubben' },
+  { href: '/hellofresh', label: 'HelloFresh' },
   { href: '#faq', label: 'Frågor' },
 ];
 
@@ -27,6 +28,7 @@ export default function Index() {
   const [students, setStudents] = useState(25);
   const [bagsPerStudent, setBagsPerStudent] = useState(10);
   const [goldRatio, setGoldRatio] = useState(60);
+  const [hfCustomers, setHfCustomers] = useState(5);
   const [scrolled, setScrolled] = useState(0);
   const [regOpen, setRegOpen] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
@@ -47,6 +49,8 @@ export default function Index() {
   const classicEarnings = classicBags * pricing.margin_gold;
   const totalEarnings = goldEarnings + classicEarnings;
   const reorderEarnings = Math.round(totalEarnings * 0.05);
+  const hfEarnings = hfCustomers * pricing.margin_hellofresh;
+  const grandTotal = totalEarnings + hfEarnings;
 
   return (
     <div className="min-h-screen bg-stone-50" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
@@ -325,6 +329,21 @@ export default function Index() {
                 />
                 <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>Bara Gold</span><span>Bara Crema</span></div>
               </div>
+
+              <div>
+                <div className="flex justify-between items-baseline mb-3">
+                  <label className="font-semibold text-emerald-950">HelloFresh-kunder</label>
+                  <span className="text-3xl font-bold text-emerald-900">{hfCustomers}</span>
+                </div>
+                <input
+                  type="range" min="0" max="30" value={hfCustomers}
+                  onChange={(e) => setHfCustomers(Number(e.target.value))}
+                  className="w-full h-2 bg-stone-200 rounded-full appearance-none cursor-pointer accent-emerald-800"
+                  aria-label="Antal HelloFresh-kunder"
+                />
+                <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>0</span><span>30</span></div>
+                <div className="text-xs text-emerald-900/60 mt-2">{pricing.margin_hellofresh} kr till klassen per godkänd anmälan — kunderna anmäler sig själva via er länk.</div>
+              </div>
             </div>
 
             {/* Output */}
@@ -332,10 +351,10 @@ export default function Index() {
               <div>
                 <div className="text-amber-200/70 text-sm font-medium mb-2">Total intäkt till klasskassan</div>
                 <div className="text-6xl md:text-7xl font-bold tracking-tight mb-2">
-                  {totalEarnings.toLocaleString('sv-SE')}
+                  {grandTotal.toLocaleString('sv-SE')}
                   <span className="text-2xl text-amber-200/70 ml-2">kr</span>
                 </div>
-                <div className="text-amber-200/60 text-sm mb-3">Baserat på {totalBags} sålda förpackningar</div>
+                <div className="text-amber-200/60 text-sm mb-3">Baserat på {totalBags} sålda förpackningar{hfCustomers > 0 ? ` + ${hfCustomers} HelloFresh-kunder` : ''}</div>
                 <div className="inline-flex items-center gap-2 bg-amber-300/15 text-amber-200 px-3 py-1.5 rounded-full text-xs font-medium mb-8">
                   <Repeat className="w-3 h-3" aria-hidden="true" />
                   + ungefär {reorderEarnings.toLocaleString('sv-SE')} kr extra från Återköpsklubben (6 mån)
@@ -356,6 +375,15 @@ export default function Index() {
                     </span>
                     <span className="font-bold">{classicEarnings.toLocaleString('sv-SE')} kr</span>
                   </div>
+                  {hfCustomers > 0 && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-amber-100/80 text-sm flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-lime-300"></span>
+                        HelloFresh ({hfCustomers} kunder × {pricing.margin_hellofresh} kr)
+                      </span>
+                      <span className="font-bold">{hfEarnings.toLocaleString('sv-SE')} kr</span>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -374,11 +402,11 @@ export default function Index() {
           <div className="text-center mb-16">
             <div className="text-sm font-semibold text-amber-700 uppercase tracking-widest mb-3">Sortimentet</div>
             <h2 className="text-4xl md:text-5xl font-bold text-emerald-950 max-w-3xl mx-auto leading-tight">
-              Två sorter — båda lika lättsålda
+              Tre sätt att fylla klasskassan
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Gold (basprodukt) */}
             <div className="bg-white rounded-3xl overflow-hidden border border-stone-200 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
               <div className="bg-gradient-to-br from-stone-100 to-stone-50 h-72 flex items-center justify-center relative overflow-hidden">
@@ -478,8 +506,42 @@ export default function Index() {
                   <div className="flex justify-between items-center"><span className="text-emerald-900/70">Klassen säljer 200 förpackningar</span><span className="font-medium">200 förpackningar</span></div>
                   <div className="flex justify-between items-center"><span className="text-emerald-900/70">30 % återköper i snitt 2 ggr på 6 mån</span><span className="font-medium">120 återköp</span></div>
                   <div className="flex justify-between items-center pt-3 border-t border-stone-200"><span className="font-semibold text-emerald-900">Bonus till klassen</span><span className="text-2xl font-bold text-amber-700">+1 800 kr</span></div>
-                </div>
+            </div>
+
+            {/* HelloFresh */}
+            <div className="bg-white rounded-3xl overflow-hidden border border-stone-200 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
+              <div className="bg-gradient-to-br from-lime-50 to-stone-50 h-72 flex items-center justify-center relative overflow-hidden">
+                <img
+                  src={hfBox}
+                  alt="HelloFresh matkasse med färska ingredienser och receptkort"
+                  className="h-64 w-auto object-contain drop-shadow-xl transform group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
               </div>
+              <div className="p-8">
+                <div className="flex items-baseline justify-between mb-2">
+                  <h3 className="text-2xl font-bold text-emerald-950">HelloFresh</h3>
+                  <div className="text-sm font-semibold text-emerald-800 bg-hf-soft px-3 py-1 rounded-full">Nyhet</div>
+                </div>
+                <p className="text-emerald-900/70 mb-6">Sälj matkassar utan att hantera varor eller pengar — kunderna anmäler sig själva via er unika länk och HelloFresh sköter resten.</p>
+                <div className="bg-hf-soft rounded-2xl p-5 mb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium text-emerald-900">Klassen tjänar per kund</span>
+                    <span className="text-3xl font-bold text-emerald-800">{pricing.margin_hellofresh} kr</span>
+                  </div>
+                  <div className="text-xs text-emerald-700 mt-1 font-medium">10 anmälningar = {(10 * pricing.margin_hellofresh).toLocaleString('sv-SE')} kr till klassen</div>
+                </div>
+                <ul className="space-y-2 text-sm text-emerald-900/80 mb-6">
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Inget lager, ingen faktura, ingen administration</li>
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Egen länk, QR-kod och affisch i er dashboard</li>
+                  <li className="flex items-center gap-2"><Check className="w-4 h-4 text-emerald-700" aria-hidden="true" /> Kan kombineras med kaffeförsäljningen</li>
+                </ul>
+                <a href="/hellofresh" className="inline-flex items-center gap-2 text-emerald-800 font-semibold hover:text-emerald-600 transition">
+                  Läs mer om HelloFresh <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+          </div>
               <button onClick={() => setRegOpen(true)} aria-label="Anmäl er klass" className="bg-emerald-900 text-amber-50 px-7 py-4 rounded-full font-semibold hover:bg-emerald-800 transition shadow-lg flex items-center gap-2 group">
                 Anmäl er klass
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" aria-hidden="true" />
