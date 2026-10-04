@@ -5,13 +5,14 @@ import { signOut } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
-import { LogOut, LayoutDashboard, ShoppingBag, Users, Sparkles, Settings } from "lucide-react";
+import { LogOut, LayoutDashboard, ShoppingBag, Users, Sparkles, Settings, Salad } from "lucide-react";
 import { Receipt } from "lucide-react";
 import { toast } from "sonner";
 
 import OverviewTab from "@/components/dashboard/OverviewTab";
 import OrderTab from "@/components/dashboard/OrderTab";
 import StudentsTab from "@/components/dashboard/StudentsTab";
+import HelloFreshTab from "@/components/dashboard/HelloFreshTab";
 import SalesLogTab from "@/components/dashboard/SalesLogTab";
 import RepurchasesTab from "@/components/dashboard/RepurchasesTab";
 import SettingsTab from "@/components/dashboard/SettingsTab";
@@ -21,6 +22,7 @@ export default function TeacherDashboard() {
   const { classId, user } = useAuth();
   const [klass, setKlass] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [tab, setTab] = useState("overview");
 
   async function reloadKlass() {
     if (!classId) return;
@@ -88,40 +90,43 @@ export default function TeacherDashboard() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 py-8">
-        <Tabs defaultValue="overview" className="w-full">
-          <TabsList
-            className={`grid w-full ${klass.tracking_mode === "per_student" ? "grid-cols-6" : "grid-cols-5"} mb-8 h-auto gap-1`}
-          >
-            <TabsTrigger value="overview" className="flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
+        <Tabs value={tab} onValueChange={(v) => { setTab(v); if (v === "overview") void reloadKlass(); }} className="w-full">
+          <TabsList className="flex justify-start h-auto overflow-x-auto w-full mb-8 gap-1">
+            <TabsTrigger value="overview" className="flex-1 min-w-[76px] flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
               <LayoutDashboard className="h-4 w-4" aria-hidden="true" />
               <span>Översikt</span>
             </TabsTrigger>
-            <TabsTrigger value="order" className="flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
+            <TabsTrigger value="order" className="flex-1 min-w-[76px] flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
               <ShoppingBag className="h-4 w-4" aria-hidden="true" />
               <span>Beställ</span>
             </TabsTrigger>
+            <TabsTrigger value="hellofresh" className="flex-1 min-w-[76px] flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
+              <Salad className="h-4 w-4" aria-hidden="true" />
+              <span>HelloFresh</span>
+            </TabsTrigger>
             {klass.tracking_mode === "per_student" && (
-              <TabsTrigger value="students" className="flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
+              <TabsTrigger value="students" className="flex-1 min-w-[76px] flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
                 <Users className="h-4 w-4" aria-hidden="true" />
                 <span>Elever</span>
               </TabsTrigger>
             )}
-            <TabsTrigger value="sales" className="flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
+            <TabsTrigger value="sales" className="flex-1 min-w-[76px] flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
               <Receipt className="h-4 w-4" aria-hidden="true" />
               <span>Försälj.</span>
             </TabsTrigger>
-            <TabsTrigger value="repurchases" className="flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
+            <TabsTrigger value="repurchases" className="flex-1 min-w-[76px] flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
               <Sparkles className="h-4 w-4" aria-hidden="true" />
               <span>Återköp</span>
             </TabsTrigger>
-            <TabsTrigger value="settings" className="flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
+            <TabsTrigger value="settings" className="flex-1 min-w-[76px] flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
               <Settings className="h-4 w-4" aria-hidden="true" />
               <span>Inställ.</span>
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="overview"><OverviewTab klass={klass} /></TabsContent>
+          <TabsContent value="overview"><OverviewTab klass={klass} onGoToHelloFresh={() => setTab("hellofresh")} /></TabsContent>
           <TabsContent value="order"><OrderTab klass={klass} onOrdersChanged={reloadKlass} /></TabsContent>
+          <TabsContent value="hellofresh"><HelloFreshTab klass={klass} /></TabsContent>
           {klass.tracking_mode === "per_student" && (
             <TabsContent value="students"><StudentsTab klass={klass} /></TabsContent>
           )}
