@@ -11,6 +11,7 @@ import {
   Inbox,
   ShoppingBag,
   Sparkles,
+  Salad,
   Users,
   Settings,
   Tag,
@@ -28,6 +29,7 @@ import AdminRepurchases from "@/components/admin/AdminRepurchases";
 import AdminUsers from "@/components/admin/AdminUsers";
 import AdminSettings from "@/components/admin/AdminSettings";
 import AdminPricing from "@/components/admin/AdminPricing";
+import AdminHelloFresh from "@/components/admin/AdminHelloFresh";
 
 const navItems = [
   { to: "/admin", label: "Översikt", icon: LayoutDashboard, exact: true },
@@ -35,6 +37,7 @@ const navItems = [
   { to: "/admin/leads", label: "Leads", icon: Inbox },
   { to: "/admin/ordrar", label: "Ordrar", icon: ShoppingBag },
   { to: "/admin/aterkop", label: "Återköp", icon: Sparkles },
+  { to: "/admin/hellofresh", label: "HelloFresh", icon: Salad },
   { to: "/admin/anvandare", label: "Användare", icon: Users },
   { to: "/admin/priser", label: "Priser", icon: Tag },
   { to: "/admin/installningar", label: "Inställningar", icon: Settings },
@@ -160,6 +163,7 @@ export default function AdminDashboard() {
             <Route path="leads" element={<AdminLeads />} />
             <Route path="ordrar" element={<AdminOrders />} />
             <Route path="aterkop" element={<AdminRepurchases />} />
+            <Route path="hellofresh" element={<AdminHelloFresh />} />
             <Route path="anvandare" element={<AdminUsers />} />
             <Route path="priser" element={<AdminPricing />} />
             <Route path="installningar" element={<AdminSettings />} />
