@@ -15,6 +15,7 @@ import dishesLight from "@/assets/hellofresh/hellofresh-dishes-light.webp";
 import dishesBlue from "@/assets/hellofresh/hellofresh-dishes-blue.webp";
 import recipeCards from "@/assets/hellofresh/hellofresh-recipe-cards.webp";
 import hfLogo from "@/assets/hellofresh/hellofresh-logo.png";
+import hfLogoLight from "@/assets/hellofresh/hellofresh-logo-light.png";
 
 export function HelloFreshLockup({ light }: { light?: boolean }) {
   return (
@@ -22,12 +23,10 @@ export function HelloFreshLockup({ light }: { light?: boolean }) {
       <Logo size="sm" variant={light ? "light" : "dark"} />
       <span className={`font-light text-2xl ${light ? "text-emerald-300" : "text-stone-400"}`} aria-hidden="true">×</span>
       <img
-        src={light ? undefined : hfLogo}
-        srcSet={undefined}
+        src={light ? hfLogoLight : hfLogo}
         alt="HelloFresh"
         className="h-7 w-auto"
         loading="lazy"
-        style={light ? { filter: "brightness(0) invert(1)" } : undefined}
       />
     </div>
   );
