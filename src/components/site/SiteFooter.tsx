@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Logo } from "@/components/Logo";
 
 export default function SiteFooter() {
@@ -10,25 +11,23 @@ export default function SiteFooter() {
               <Logo size="md" variant="light" showTagline />
             </div>
             <p className="text-sm leading-relaxed">
-              Premium kaffe och matkassar för klassinsamlingar. Auktoriserad svensk återförsäljare av Caffè Gondoliere.
+              Premiumkaffe från Caffè Gondoliere och HelloFresh matkassar för klassinsamlingar — ett konto, en klasskod. Auktoriserad svensk återförsäljare av Caffè Gondoliere.
             </p>
           </div>
           <div>
             <div className="font-semibold text-amber-50 mb-4 text-sm">Produkter</div>
             <ul className="space-y-2 text-sm">
-              <li>Gold 500g</li>
-              <li>Crema 1 kg bönor</li>
-              <li>
-                <a href="/hellofresh" className="hover:text-amber-300 transition">HelloFresh matkassar</a>
-              </li>
+              <li><Link to="/kaffe" className="hover:text-amber-300 transition">Kaffe – Gold &amp; Crema</Link></li>
+              <li><Link to="/hellofresh" className="hover:text-amber-300 transition">HelloFresh matkassar</Link></li>
             </ul>
           </div>
           <div>
             <div className="font-semibold text-amber-50 mb-4 text-sm">Information</div>
             <ul className="space-y-2 text-sm">
-              <li><a href="/#sa-funkar" className="hover:text-amber-300 transition">Så funkar det</a></li>
-              <li><a href="/#aterkop" className="hover:text-amber-300 transition">Återköpsklubben</a></li>
-              <li><a href="/#faq" className="hover:text-amber-300 transition">Vanliga frågor</a></li>
+              <li><Link to="/#sa-funkar" className="hover:text-amber-300 transition">Så funkar det</Link></li>
+              <li><Link to="/kaffe#aterkop" className="hover:text-amber-300 transition">Återköpsklubben</Link></li>
+              <li><Link to="/#faq" className="hover:text-amber-300 transition">Vanliga frågor</Link></li>
+              <li><Link to="/logga-in" className="hover:text-amber-300 transition">Logga in</Link></li>
             </ul>
           </div>
           <div>
@@ -40,10 +39,10 @@ export default function SiteFooter() {
         </div>
         <div className="pt-8 border-t border-emerald-800 text-xs flex flex-wrap justify-between gap-4">
           <div>© 2026 Qlasskassan · Drivs av Scandinavian Coffee AB</div>
-          <div className="flex gap-6">
-            <a href="/villkor" className="hover:text-amber-300 transition">Allmänna villkor</a>
-            <a href="/integritetspolicy" className="hover:text-amber-300 transition">Integritetspolicy</a>
-            <a href="/cookies" className="hover:text-amber-300 transition">Cookies</a>
+          <div className="flex flex-wrap gap-6">
+            <Link to="/villkor" className="hover:text-amber-300 transition">Allmänna villkor</Link>
+            <Link to="/integritetspolicy" className="hover:text-amber-300 transition">Integritetspolicy</Link>
+            <Link to="/cookies" className="hover:text-amber-300 transition">Cookies</Link>
           </div>
         </div>
       </div>

@@ -19,6 +19,8 @@ import Villkor from "./pages/Villkor.tsx";
 import Cookies from "./pages/Cookies.tsx";
 import StudentReport from "./pages/StudentReport.tsx";
 import HelloFresh from "./pages/HelloFresh.tsx";
+import Kaffe from "./pages/Kaffe.tsx";
+import ScrollToHash from "@/components/site/ScrollToHash";
 import HelloFreshSignup from "./pages/HelloFreshSignup.tsx";
 import HelloFreshPoster from "./pages/HelloFreshPoster.tsx";
 import { AuthProvider, useAuth } from "@/lib/AuthContext";
@@ -48,6 +50,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToHash />
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Index />} />
@@ -61,6 +64,7 @@ const App = () => (
             <Route path="/villkor" element={<Villkor />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/salj/:code" element={<StudentReport />} />
+            <Route path="/kaffe" element={<Kaffe />} />
             <Route path="/hellofresh" element={<HelloFresh />} />
             <Route path="/hellofresh/anmal" element={<HelloFreshSignup />} />
             <Route path="/hellofresh/anmal/:code" element={<HelloFreshSignup />} />
