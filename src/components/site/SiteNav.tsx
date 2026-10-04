@@ -130,7 +130,7 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
                   className={`rounded-2xl p-3 bg-hf-soft border ${onHf ? "border-emerald-700" : "border-hf-lime/60"} flex flex-col`}
                 >
                   <img src={hfBox} alt="" className="h-16 w-auto object-contain self-center mb-2 rounded-lg" />
-                  <span className="font-bold text-emerald-950 inline-flex items-center gap-1">HelloFresh <NewBadge /></span>
+                  <span className="font-bold text-emerald-950 inline-flex flex-wrap items-center gap-1">HelloFresh <NewBadge /></span>
                   <span className="text-xs text-emerald-900">{pricing.margin_hellofresh} kr/kund</span>
                 </Link>
               </div>
