@@ -134,7 +134,7 @@ export default function HelloFresh() {
       </section>
 
       {/* Så funkar det */}
-      <section className="py-24 px-6">
+      <section id="sa-funkar" className="py-24 px-6 scroll-mt-28">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <div className="text-sm font-semibold text-emerald-700 uppercase tracking-widest mb-3">Så funkar det</div>
@@ -293,9 +293,9 @@ export default function HelloFresh() {
               <p className="text-emerald-900/70 mb-4">
                 Upp till {pricing.margin_crema} kr/förpackning + {pricing.repurchase_bonus} kr återköpsbonus i 6 månader.
               </p>
-              <a href="/#produkter" className="text-emerald-800 font-semibold underline decoration-amber-400 decoration-2 underline-offset-4 hover:text-amber-700 transition">
-                Se kaffet på startsidan →
-              </a>
+              <Link to="/kaffe" className="text-emerald-800 font-semibold underline decoration-amber-400 decoration-2 underline-offset-4 hover:text-amber-700 transition">
+                Utforska kaffet →
+              </Link>
             </div>
             <div className="relative bg-white rounded-3xl p-8 border-2 border-hf-lime hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
               <img
@@ -319,7 +319,7 @@ export default function HelloFresh() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 px-6 bg-white border-t border-stone-200">
+      <section id="faq" className="scroll-mt-28 py-24 px-6 bg-white border-t border-stone-200">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <div className="text-sm font-semibold text-emerald-700 uppercase tracking-widest mb-3">FAQ</div>
