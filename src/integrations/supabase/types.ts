@@ -33,8 +33,10 @@ export type Database = {
           school_name: string
           status: string
           student_count: number
+          total_hellofresh_to_class: number
           total_sold_crema: number
           total_sold_gold: number
+          total_sold_hellofresh: number
           total_to_class: number
           tracking_mode: string
           updated_at: string
@@ -58,8 +60,10 @@ export type Database = {
           school_name: string
           status?: string
           student_count: number
+          total_hellofresh_to_class?: number
           total_sold_crema?: number
           total_sold_gold?: number
+          total_sold_hellofresh?: number
           total_to_class?: number
           tracking_mode?: string
           updated_at?: string
@@ -83,8 +87,10 @@ export type Database = {
           school_name?: string
           status?: string
           student_count?: number
+          total_hellofresh_to_class?: number
           total_sold_crema?: number
           total_sold_gold?: number
+          total_sold_hellofresh?: number
           total_to_class?: number
           tracking_mode?: string
           updated_at?: string
@@ -178,6 +184,108 @@ export type Database = {
           used_at?: string | null
         }
         Relationships: []
+      }
+      hellofresh_signups: {
+        Row: {
+          admin_notes: string | null
+          approved_at: string | null
+          city: string
+          class_id: string
+          commission_to_class: number
+          consent_at: string
+          consent_text: string
+          created_at: string
+          customer_email: string
+          customer_first_name: string
+          customer_last_name: string
+          customer_phone: string
+          delivery_notes: string | null
+          extra: Json
+          hellofresh_reference: string | null
+          id: string
+          paid_out_at: string | null
+          postal_code: string
+          rejected_at: string | null
+          rejection_reason: string | null
+          source: string
+          status: string
+          street_address: string
+          student_id: string | null
+          student_name: string | null
+          updated_at: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          approved_at?: string | null
+          city: string
+          class_id: string
+          commission_to_class?: number
+          consent_at: string
+          consent_text: string
+          created_at?: string
+          customer_email: string
+          customer_first_name: string
+          customer_last_name: string
+          customer_phone: string
+          delivery_notes?: string | null
+          extra?: Json
+          hellofresh_reference?: string | null
+          id?: string
+          paid_out_at?: string | null
+          postal_code: string
+          rejected_at?: string | null
+          rejection_reason?: string | null
+          source?: string
+          status?: string
+          street_address: string
+          student_id?: string | null
+          student_name?: string | null
+          updated_at?: string
+        }
+        Update: {
+          admin_notes?: string | null
+          approved_at?: string | null
+          city?: string
+          class_id?: string
+          commission_to_class?: number
+          consent_at?: string
+          consent_text?: string
+          created_at?: string
+          customer_email?: string
+          customer_first_name?: string
+          customer_last_name?: string
+          customer_phone?: string
+          delivery_notes?: string | null
+          extra?: Json
+          hellofresh_reference?: string | null
+          id?: string
+          paid_out_at?: string | null
+          postal_code?: string
+          rejected_at?: string | null
+          rejection_reason?: string | null
+          source?: string
+          status?: string
+          street_address?: string
+          student_id?: string | null
+          student_name?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hellofresh_signups_class_id_fkey"
+            columns: ["class_id"]
+            isOneToOne: false
+            referencedRelation: "class_registrations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "hellofresh_signups_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       orders: {
         Row: {
@@ -288,6 +396,7 @@ export type Database = {
           id: number
           margin_crema: number
           margin_gold: number
+          margin_hellofresh: number
           price_crema_class: number
           price_crema_consumer: number
           price_gold_class: number
@@ -300,6 +409,7 @@ export type Database = {
           id?: number
           margin_crema?: number
           margin_gold?: number
+          margin_hellofresh?: number
           price_crema_class?: number
           price_crema_consumer?: number
           price_gold_class?: number
@@ -312,6 +422,7 @@ export type Database = {
           id?: number
           margin_crema?: number
           margin_gold?: number
+          margin_hellofresh?: number
           price_crema_class?: number
           price_crema_consumer?: number
           price_gold_class?: number
@@ -618,6 +729,19 @@ export type Database = {
         Returns: number
       }
       generate_class_code: { Args: never; Returns: string }
+      get_class_hellofresh_signups: {
+        Args: { _class_id: string }
+        Returns: {
+          city: string
+          commission_to_class: number
+          created_at: string
+          customer_display_name: string
+          id: string
+          status: string
+          student_id: string
+          student_name: string
+        }[]
+      }
       get_user_class_id: { Args: { _user_id: string }; Returns: string }
       has_role: {
         Args: {
@@ -645,6 +769,25 @@ export type Database = {
           source_queue: string
         }
         Returns: number
+      }
+      normalize_se_phone: { Args: { p: string }; Returns: string }
+      public_create_hellofresh_signup: {
+        Args: {
+          _city: string
+          _code: string
+          _consent?: boolean
+          _delivery_notes?: string
+          _email: string
+          _extra?: Json
+          _first_name: string
+          _last_name: string
+          _phone: string
+          _postal_code: string
+          _source?: string
+          _street: string
+          _student_name: string
+        }
+        Returns: string
       }
       public_list_class_students: {
         Args: { _code: string }
