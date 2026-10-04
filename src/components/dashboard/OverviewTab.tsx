@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
-import { Coffee, TrendingUp, Calendar, Sparkles, FileText, Download } from "lucide-react";
+import { Coffee, TrendingUp, Calendar, Sparkles, FileText, Download, Salad } from "lucide-react";
 import { Ticket, Copy, Pencil, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,9 +11,10 @@ import { usePricing } from "@/hooks/usePricing";
 
 interface Props {
   klass: any;
+  onGoToHelloFresh?: () => void;
 }
 
-export default function OverviewTab({ klass }: Props) {
+export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
   const [repurchaseTotal, setRepurchaseTotal] = useState(0);
   const [editingCode, setEditingCode] = useState(false);
   const [codeDraft, setCodeDraft] = useState(klass.class_code ?? "");
@@ -34,7 +35,9 @@ export default function OverviewTab({ klass }: Props) {
 
   const displayGold = Number(klass.total_sold_gold || 0);
   const displayCrema = Number(klass.total_sold_crema || 0);
-  const totalEarned = Number(klass.total_to_class || 0) + repurchaseTotal;
+  const hellofreshCount = Number(klass.total_sold_hellofresh || 0);
+  const hellofreshTotal = Number(klass.total_hellofresh_to_class || 0);
+  const totalEarned = Number(klass.total_to_class || 0) + hellofreshTotal + repurchaseTotal;
   const goal = klass.goal_amount || 0;
   const progressPct = goal > 0 ? Math.min(100, (totalEarned / goal) * 100) : 0;
 
@@ -120,7 +123,7 @@ export default function OverviewTab({ klass }: Props) {
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <Card>
           <CardHeader className="pb-2">
             <div className="flex items-center gap-2 text-stone-600 text-sm">
@@ -163,6 +166,19 @@ export default function OverviewTab({ klass }: Props) {
         <Card>
           <CardHeader className="pb-2">
             <div className="flex items-center gap-2 text-stone-600 text-sm">
+              <Salad className="h-4 w-4" aria-hidden="true" />
+              HelloFresh
+            </div>
+          </CardHeader>
+          <CardContent>
+            <p className="text-3xl font-bold text-emerald-950">{hellofreshCount}</p>
+            <p className="text-xs text-stone-500 mt-1">kunder · {hellofreshTotal.toLocaleString("sv-SE")} kr</p>
+          </CardContent>
+        </Card>
+
+        <Card className="col-span-2 md:col-span-1">
+          <CardHeader className="pb-2">
+            <div className="flex items-center gap-2 text-stone-600 text-sm">
               <Calendar className="h-4 w-4" aria-hidden="true" />
               Kampanj
             </div>
@@ -203,7 +219,8 @@ export default function OverviewTab({ klass }: Props) {
               <div className="flex-1">
                 <p className="text-base font-semibold text-emerald-950">Er klasskod</p>
                 <p className="text-sm text-stone-600 mt-1">
-                  Dela med era kunder. När de återköper kaffe på qlasskassan.se/aterkop och anger koden får ni 15 kr per förpackning — automatiskt.
+                  Dela med era kunder. När de återköper kaffe på qlasskassan.se/aterkop och anger koden får ni {pricing.repurchase_bonus} kr per förpackning — automatiskt.
+                  Samma kod används i er HelloFresh-länk.
                   Välj gärna en kod som är lätt att komma ihåg, t.ex. <code className="font-mono">SOLSKOLAN-3A</code>.
                 </p>
               </div>
@@ -299,6 +316,22 @@ export default function OverviewTab({ klass }: Props) {
                   <Download className="h-4 w-4 mr-2" aria-hidden="true" />
                   Ladda ner återköpsblad (PDF)
                 </a>
+              </Button>
+            </div>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pt-4 border-t border-amber-200">
+              <div className="flex items-start gap-3">
+                <div className="p-2 bg-hf-soft rounded-lg">
+                  <Salad className="h-5 w-5 text-emerald-800" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="text-base font-semibold text-emerald-950">HelloFresh: kundlänk, QR-kod och affisch</p>
+                  <p className="text-sm text-stone-600 mt-1">
+                    Kunderna anmäler sig själva via er länk — klassen får {pricing.margin_hellofresh} kr per godkänd kund.
+                  </p>
+                </div>
+              </div>
+              <Button variant="outline" className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 shrink-0" onClick={onGoToHelloFresh}>
+                Öppna HelloFresh-fliken
               </Button>
             </div>
           </div>
