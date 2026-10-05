@@ -36,13 +36,13 @@ const StartguideHFEmail = ({ name, schoolName }: StartguideProps) => (
         </Section>
 
         <Section style={{ textAlign: 'center', margin: '28px 0 12px' }}>
-          <Button href="https://qlasskassan.se/__l5e/assets-v1/5a1206df-9c2b-441f-a035-359331aea5cc/qlasskassan-matkassar-startguide.pdf" style={pdfButton}>📄 Ladda ner startguide (PDF)</Button>
+          <Button href="https://qlasskassan.se/__l5e/assets-v1/5a1206df-9c2b-441f-a035-359331aea5cc/qlasskassan-matkassar-startguide.pdf" style={pdfButton}>Ladda ner startguide (PDF)</Button>
         </Section>
         <Section style={{ textAlign: 'center', margin: '12px 0' }}>
-          <Button href="https://qlasskassan.se/__l5e/assets-v1/93b560e0-df91-46f0-a9b6-bb7695d22501/qlasskassan-matkassar.pdf" style={pdfButton}>📄 Säljblad (PDF)</Button>
+          <Button href="https://qlasskassan.se/__l5e/assets-v1/93b560e0-df91-46f0-a9b6-bb7695d22501/qlasskassan-matkassar.pdf" style={pdfButton}>Säljblad (PDF)</Button>
         </Section>
         <Section style={{ textAlign: 'center', margin: '12px 0' }}>
-          <Button href="https://qlasskassan.se/__l5e/assets-v1/0a57d13e-922b-4f8a-8824-b3b6b4a6dbfb/qlasskassan-matkassar-avtal.pdf" style={pdfButton}>📄 Samarbetsavtal (PDF)</Button>
+          <Button href="https://qlasskassan.se/__l5e/assets-v1/0a57d13e-922b-4f8a-8824-b3b6b4a6dbfb/qlasskassan-matkassar-avtal.pdf" style={pdfButton}>Samarbetsavtal (PDF)</Button>
         </Section>
         <Section style={{ textAlign: 'center', margin: '24px 0 32px' }}>
           <Button href="https://qlasskassan.se/matkassar" style={button}>Registrera klassen</Button>
