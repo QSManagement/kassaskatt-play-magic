@@ -15,8 +15,8 @@ export default function ProfitCalculator({
   const [students, setStudents] = useState(25);
   const [goldPerStudent, setGoldPerStudent] = useState(4);
   const [cremaPerStudent, setCremaPerStudent] = useState(6);
-  const [hfCustomersRaw, setHfCustomers] = useState(5);
-  const hfCustomers = includeHelloFresh && hfOn ? hfCustomersRaw : 0;
+  const [hfPerStudent, setHfPerStudent] = useState(1);
+  const hfCustomers = includeHelloFresh && hfOn ? students * hfPerStudent : 0;
 
   const goldBags = coffeeOn ? students * goldPerStudent : 0;
   const cremaBags = coffeeOn ? students * cremaPerStudent : 0;
