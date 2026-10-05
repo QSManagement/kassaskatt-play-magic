@@ -21,9 +21,8 @@ const sizeMap: Record<LogoSize, string> = {
 
 /**
  * Qlasskassan logo lockup. The artwork already contains the wordmark and
- * tagline, so we render it as a single image. On dark backgrounds we drop
- * a soft amber glow behind it instead of stamping it on a coloured plate,
- * which is what made it look "boxed" before.
+ * tagline, so we render it as a single image. A light backing keeps the
+ * blue wordmark and gold tagline readable on dark backgrounds.
  */
 export function Logo({
   size = "sm",
