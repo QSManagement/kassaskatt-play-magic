@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { HelloFreshLockup } from "./HelloFresh";
-import HelloFreshSignupForm from "@/components/matkassar/HelloFreshSignupForm";
+import HelloFreshSignupForm from "@/components/hellofresh/HelloFreshSignupForm";
 import { usePricing } from "@/hooks/usePricing";
 import dishesBlue from "@/assets/matkassar/meal-kit.jpg";
 

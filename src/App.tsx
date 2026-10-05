@@ -70,7 +70,7 @@ const App = () => (
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/salj/:code" element={<StudentReport />} />
             <Route path="/kaffe" element={<Kaffe />} />
-            <Route path="/matkassar/*" element={<LegacyMealKitRedirect />} />
+            <Route path="/hellofresh/*" element={<LegacyMealKitRedirect />} />
             <Route path="/matkassar" element={<HelloFresh />} />
             <Route path="/matkassar/anmal" element={<HelloFreshSignup />} />
             <Route path="/matkassar/anmal/:code" element={<HelloFreshSignup />} />

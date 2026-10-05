@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Logo } from "@/components/Logo";
 import { toast } from "sonner";
 import { CheckCircle2, Coffee, Salad } from "lucide-react";
-import HelloFreshSignupForm from "@/components/matkassar/HelloFreshSignupForm";
+import HelloFreshSignupForm from "@/components/hellofresh/HelloFreshSignupForm";
 
 interface StudentRow {
   class_id: string;
@@ -46,8 +46,7 @@ export default function StudentReport() {
         setClassInfo({ school_name: rows[0].school_name, class_name: rows[0].class_name });
         setStudents(
           rows
-            .filter((r) => r.student_id && r.student_name)
-            .map((r) => ({ id: r.student_id!, name: r.student_name! })),
+            .flatMap((r) => r.student_id && r.student_name ? [{ id: r.student_id, name: r.student_name }] : []),
         );
       }
       setLoading(false);
@@ -164,7 +163,7 @@ export default function StudentReport() {
 
         {product === "hellofresh" ? (
           <HelloFreshSignupForm
-            classCode={code!}
+            classCode={code ?? ""}
             className={classInfo?.class_name}
             source="student_report"
           />

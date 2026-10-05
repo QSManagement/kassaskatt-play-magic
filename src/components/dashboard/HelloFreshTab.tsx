@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { Copy, Check, Download, Printer, UserPlus, Share2 } from "lucide-react";
 import { QRCodeSVG, QRCodeCanvas } from "qrcode.react";
 import { usePricing } from "@/hooks/usePricing";
-import HelloFreshSignupForm from "@/components/matkassar/HelloFreshSignupForm";
+import HelloFreshSignupForm from "@/components/hellofresh/HelloFreshSignupForm";
 import boxImg from "@/assets/matkassar/meal-kit.jpg";
 
 interface SignupRow {
