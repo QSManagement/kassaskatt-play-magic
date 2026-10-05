@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowRight, Check, Sparkles, Package, Users, TrendingUp, Calculator, Salad,
+  ArrowRight, Check, Sparkles, Package, Users, TrendingUp, Salad,
 } from "lucide-react";
 import { RegistrationDialog } from "@/components/registration/RegistrationDialog";
 import { StartguideDialog } from "@/components/registration/StartguideDialog";
@@ -17,6 +17,8 @@ import dishesBlue from "@/assets/hellofresh/hellofresh-dishes-blue.webp";
 import recipeCards from "@/assets/hellofresh/hellofresh-recipe-cards.webp";
 import hfLogo from "@/assets/hellofresh/hellofresh-logo.png";
 import hfLogoLight from "@/assets/hellofresh/hellofresh-logo-light.png";
+import ProfitCalculator from "@/components/site/ProfitCalculator";
+
 
 export function HelloFreshLockup({ light }: { light?: boolean }) {
   return (
@@ -38,8 +40,6 @@ export default function HelloFresh() {
   const m = pricing.margin_hellofresh;
   const [regOpen, setRegOpen] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
-  const [students, setStudents] = useState(25);
-  const [customersPerStudent, setCustomersPerStudent] = useState(2);
 
   useEffect(() => {
     document.title = "HelloFresh-försäljning för klasser – Qlasskassan";
@@ -55,7 +55,6 @@ export default function HelloFresh() {
     };
   }, [m]);
 
-  const total = students * customersPerStudent * m;
 
   return (
     <div className="min-h-screen bg-stone-50" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
@@ -220,74 +219,8 @@ export default function HelloFresh() {
         </div>
       </section>
 
-      {/* Kalkylator */}
-      <section className="py-24 px-6 bg-gradient-to-br from-brand-950 via-brand-900 to-brand-950 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-hf-lime rounded-full blur-3xl"></div>
-        </div>
-        <div className="max-w-6xl mx-auto relative">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-hf-lime/20 text-hf-lime px-4 py-1.5 rounded-full text-sm font-medium mb-4">
-              <Calculator className="w-4 h-4" aria-hidden="true" /> Räkna ut er potential
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-amber-50 mb-4 leading-tight">
-              Hur mycket kan klassen tjäna på HelloFresh?
-            </h2>
-          </div>
-          <div className="bg-amber-50 rounded-3xl p-8 md:p-12 shadow-2xl grid md:grid-cols-2 gap-12">
-            <div className="space-y-8">
-              <div>
-                <div className="flex justify-between items-baseline mb-3">
-                  <label className="font-semibold text-brand-950">Antal elever i klassen</label>
-                  <span className="text-3xl font-bold text-brand-900">{students}</span>
-                </div>
-                <input
-                  type="range" min="10" max="50" value={students}
-                  onChange={(e) => setStudents(Number(e.target.value))}
-                  className="w-full h-2 bg-stone-200 rounded-full appearance-none cursor-pointer accent-brand-800"
-                  aria-label="Antal elever"
-                />
-                <div className="flex justify-between text-xs text-brand-900/50 mt-1"><span>10</span><span>50</span></div>
-              </div>
-              <div>
-                <div className="flex justify-between items-baseline mb-3">
-                  <label className="font-semibold text-brand-950">Kunder per elev</label>
-                  <span className="text-3xl font-bold text-brand-900">{customersPerStudent}</span>
-                </div>
-                <input
-                  type="range" min="1" max="5" value={customersPerStudent}
-                  onChange={(e) => setCustomersPerStudent(Number(e.target.value))}
-                  className="w-full h-2 bg-stone-200 rounded-full appearance-none cursor-pointer accent-brand-800"
-                  aria-label="Kunder per elev"
-                />
-                <div className="flex justify-between text-xs text-brand-900/50 mt-1"><span>1</span><span>5</span></div>
-              </div>
-            </div>
-            <div className="bg-brand-950 rounded-2xl p-8 text-amber-50 flex flex-col justify-between">
-              <div>
-                <div className="text-hf-lime text-sm font-medium mb-2">Totalt till klasskassan</div>
-                <div className="text-6xl md:text-7xl font-bold tracking-tight mb-2">
-                  {total.toLocaleString("sv-SE")}
-                  <span className="text-2xl text-amber-200/70 ml-2">kr</span>
-                </div>
-                <div className="text-amber-200/60 text-sm mb-3">
-                  {students} elever × {customersPerStudent} kunder × {m} kr
-                </div>
-                <p className="text-amber-200/60 text-xs pt-6 border-t border-brand-800">
-                  Ingen återköpsbonus på HelloFresh — kombinera med kaffet för största möjliga klasskassa.
-                </p>
-              </div>
-              <button
-                onClick={() => setRegOpen(true)}
-                className="mt-8 bg-hf-lime text-brand-950 px-6 py-4 rounded-full font-bold hover:brightness-95 transition flex items-center justify-center gap-2 group"
-              >
-                Starta er försäljning nu
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" aria-hidden="true" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ProfitCalculator includeHelloFresh includeCoffee={false} accent="lime" onRegister={() => setRegOpen(true)} />
+
 
       {/* Kombo */}
       <section className="py-24 px-6">
