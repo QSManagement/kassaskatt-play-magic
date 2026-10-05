@@ -13,14 +13,14 @@ export default function ProfitCalculator({
   const [coffeeOn, setCoffeeOn] = useState(true);
   const [hfOn, setHfOn] = useState(true);
   const [students, setStudents] = useState(25);
-  const [bagsPerStudent, setBagsPerStudent] = useState(10);
-  const [cremaRatio, setCremaRatio] = useState(60);
+  const [goldPerStudent, setGoldPerStudent] = useState(4);
+  const [cremaPerStudent, setCremaPerStudent] = useState(6);
   const [hfCustomersRaw, setHfCustomers] = useState(5);
   const hfCustomers = includeHelloFresh && hfOn ? hfCustomersRaw : 0;
 
-  const totalBags = coffeeOn ? students * bagsPerStudent : 0;
-  const cremaBags = Math.round(totalBags * (cremaRatio / 100));
-  const goldBags = totalBags - cremaBags;
+  const goldBags = coffeeOn ? students * goldPerStudent : 0;
+  const cremaBags = coffeeOn ? students * cremaPerStudent : 0;
+  const totalBags = goldBags + cremaBags;
   const cremaEarnings = cremaBags * pricing.margin_crema;
   const goldEarnings = goldBags * pricing.margin_gold;
   const coffeeEarnings = cremaEarnings + goldEarnings;
