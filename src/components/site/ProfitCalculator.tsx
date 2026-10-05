@@ -13,14 +13,14 @@ export default function ProfitCalculator({
   const [coffeeOn, setCoffeeOn] = useState(true);
   const [hfOn, setHfOn] = useState(true);
   const [students, setStudents] = useState(25);
-  const [bagsPerStudent, setBagsPerStudent] = useState(10);
-  const [cremaRatio, setCremaRatio] = useState(60);
+  const [goldPerStudent, setGoldPerStudent] = useState(4);
+  const [cremaPerStudent, setCremaPerStudent] = useState(6);
   const [hfCustomersRaw, setHfCustomers] = useState(5);
   const hfCustomers = includeHelloFresh && hfOn ? hfCustomersRaw : 0;
 
-  const totalBags = coffeeOn ? students * bagsPerStudent : 0;
-  const cremaBags = Math.round(totalBags * (cremaRatio / 100));
-  const goldBags = totalBags - cremaBags;
+  const goldBags = coffeeOn ? students * goldPerStudent : 0;
+  const cremaBags = coffeeOn ? students * cremaPerStudent : 0;
+  const totalBags = goldBags + cremaBags;
   const cremaEarnings = cremaBags * pricing.margin_crema;
   const goldEarnings = goldBags * pricing.margin_gold;
   const coffeeEarnings = cremaEarnings + goldEarnings;
@@ -97,20 +97,19 @@ export default function ProfitCalculator({
               <>
                 <div>
                   <div className="flex justify-between items-baseline mb-3">
-                    <label className="font-semibold text-brand-950">Förpackningar per elev</label>
-                    <span className="text-3xl font-bold text-brand-900">{bagsPerStudent}</span>
+                    <label className="font-semibold text-brand-950">Antal Gold per elev</label>
+                    <span className="text-3xl font-bold text-brand-900">{goldPerStudent}</span>
                   </div>
-                  <input type="range" min="0" max="50" value={bagsPerStudent} onChange={(e) => setBagsPerStudent(Number(e.target.value))} className={`${slider} accent-brand-800`} aria-label="Förpackningar per elev" />
+                  <input type="range" min="0" max="50" value={goldPerStudent} onChange={(e) => setGoldPerStudent(Number(e.target.value))} className={`${slider} accent-brand-800`} aria-label="Antal Gold per elev" />
                   <div className="flex justify-between text-xs text-brand-900/50 mt-1"><span>0</span><span>50</span></div>
-                  <div className="text-xs text-brand-900/60 mt-2">Snitt hos våra klasser: 8 förpackningar/elev</div>
                 </div>
                 <div>
                   <div className="flex justify-between items-baseline mb-3">
-                    <label className="font-semibold text-brand-950">Andel Crema (premium)</label>
-                    <span className="text-3xl font-bold text-brand-900">{cremaRatio}%</span>
+                    <label className="font-semibold text-brand-950">Antal Crema per elev</label>
+                    <span className="text-3xl font-bold text-brand-900">{cremaPerStudent}</span>
                   </div>
-                  <input type="range" min="0" max="100" value={cremaRatio} onChange={(e) => setCremaRatio(Number(e.target.value))} className={`${slider} accent-amber-700`} aria-label="Andel Crema" />
-                  <div className="flex justify-between text-xs text-brand-900/50 mt-1"><span>Bara Gold</span><span>Bara Crema</span></div>
+                  <input type="range" min="0" max="50" value={cremaPerStudent} onChange={(e) => setCremaPerStudent(Number(e.target.value))} className={`${slider} accent-amber-700`} aria-label="Antal Crema per elev" />
+                  <div className="flex justify-between text-xs text-brand-900/50 mt-1"><span>0</span><span>50</span></div>
                 </div>
               </>
             )}
