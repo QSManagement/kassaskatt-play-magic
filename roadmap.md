@@ -1,5 +1,5 @@
-# Logo replacement
-- [ ] Replace website logo and favicon with supplied artwork.
-- [ ] Replace branding in emails and generated/exported documents.
-- [ ] Update all existing Qlasskassan PDFs and branded banner, including current download links.
-- [ ] Visually verify website and every updated document page.
+# Matkassar
+- [ ] Replace provider marketing name and logos across website, dashboards, emails and documents.
+- [ ] Add neutral imagery and new public links while preserving existing sales data and legacy links.
+- [ ] Refresh PDF downloads and deploy email templates.
+- [ ] Verify pages, calculator, documents and email rendering.
