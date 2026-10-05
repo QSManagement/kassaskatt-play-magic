@@ -15,8 +15,8 @@ export default function ProfitCalculator({
   const [students, setStudents] = useState(25);
   const [goldPerStudent, setGoldPerStudent] = useState(4);
   const [cremaPerStudent, setCremaPerStudent] = useState(6);
-  const [hfCustomersRaw, setHfCustomers] = useState(5);
-  const hfCustomers = includeHelloFresh && hfOn ? hfCustomersRaw : 0;
+  const [hfPerStudent, setHfPerStudent] = useState(1);
+  const hfCustomers = includeHelloFresh && hfOn ? students * hfPerStudent : 0;
 
   const goldBags = coffeeOn ? students * goldPerStudent : 0;
   const cremaBags = coffeeOn ? students * cremaPerStudent : 0;
@@ -116,12 +116,12 @@ export default function ProfitCalculator({
             {includeHelloFresh && hfOn && (
               <div>
                 <div className="flex justify-between items-baseline mb-3">
-                  <label className="font-semibold text-brand-950">HelloFresh-kunder</label>
-                  <span className="text-3xl font-bold text-brand-900">{hfCustomersRaw}</span>
+                  <label className="font-semibold text-brand-950">HelloFresh-kunder per elev</label>
+                  <span className="text-3xl font-bold text-brand-900">{hfPerStudent}</span>
                 </div>
-                <input type="range" min="0" max="50" value={hfCustomersRaw} onChange={(e) => setHfCustomers(Number(e.target.value))} className={`${slider} accent-brand-800`} aria-label="Antal HelloFresh-kunder" />
+                <input type="range" min="0" max="50" value={hfPerStudent} onChange={(e) => setHfPerStudent(Number(e.target.value))} className={`${slider} accent-brand-800`} aria-label="Antal HelloFresh-kunder per elev" />
                 <div className="flex justify-between text-xs text-brand-900/50 mt-1"><span>0</span><span>50</span></div>
-                <div className="text-xs text-brand-900/60 mt-2">{pricing.margin_hellofresh} kr till klassen per godkänd anmälan — kunderna anmäler sig själva via er länk.</div>
+                <div className="text-xs text-brand-900/60 mt-2">{students} {students === 1 ? "elev" : "elever"} × {hfPerStudent} = {hfCustomers} kunder totalt. {pricing.margin_hellofresh} kr till klassen per godkänd anmälan — kunderna anmäler sig själva via er länk.</div>
               </div>
             )}
           </div>
@@ -165,7 +165,7 @@ export default function ProfitCalculator({
                   <div className="flex justify-between items-center gap-3">
                     <span className="text-amber-100/80 text-sm flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-hf-lime shrink-0"></span>
-                      HelloFresh ({hfCustomers} kunder × {pricing.margin_hellofresh} kr)
+                      HelloFresh ({hfPerStudent} per elev × {students} {students === 1 ? "elev" : "elever"} × {pricing.margin_hellofresh} kr)
                     </span>
                     <span className="font-bold whitespace-nowrap">{hfEarnings.toLocaleString("sv-SE")} kr</span>
                   </div>
