@@ -1,4 +1,5 @@
 import * as React from 'npm:react@18.3.1'
+import { EmailBrand } from '../email-brand.tsx'
 import {
   Body, Container, Head, Heading, Html, Preview, Section, Text, Button, Hr,
 } from 'npm:@react-email/components@0.0.22'
@@ -17,6 +18,7 @@ const StartguideHFEmail = ({ name, schoolName }: StartguideProps) => (
     <Preview>Här är er startguide till {SITE_NAME}</Preview>
     <Body style={main}>
       <Container style={container}>
+        <EmailBrand />
         <Heading style={h1}>
           {name ? `Hej ${name}!` : 'Hej!'}
         </Heading>

@@ -53,7 +53,7 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 md:py-4 flex items-center justify-between gap-4">
-        <Link to="/" aria-label="Qlasskassan – startsida" className="relative -mb-8 md:-mb-10 flex items-center shrink-0">
+        <Link to="/" aria-label="Qlasskassan – startsida" className="flex items-center shrink-0">
           <Logo size="sm" variant="dark" />
         </Link>
         <div className="hidden lg:flex items-center gap-5 text-sm font-medium text-emerald-950">

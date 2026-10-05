@@ -1,6 +1,7 @@
 /// <reference types="npm:@types/react@18.3.1" />
 
 import * as React from 'npm:react@18.3.1'
+import { EmailBrand } from '../email-brand.tsx'
 
 import {
   Body,
@@ -32,6 +33,7 @@ export const SignupEmail = ({
     <Preview>Bekräfta din e-post för Qlasskassan</Preview>
     <Body style={main}>
       <Container style={container}>
+        <EmailBrand />
         <Heading style={h1}>Bekräfta din e-post</Heading>
         <Text style={text}>
           Tack för att du registrerat din klass på{' '}
