@@ -20,7 +20,7 @@ const coffeeFields: { key: keyof Pricing; label: string; help?: string }[] = [
 ];
 
 const hellofreshFields: { key: keyof Pricing; label: string; help?: string }[] = [
-  { key: "margin_hellofresh", label: "Ersättning per matkassekund", help: "Betalas ut till klassen per godkänd anmälan. Låses på anmälan när den skapas. Ingen återköpsbonus på HelloFresh." },
+  { key: "margin_hellofresh", label: "Ersättning per matkassekund", help: "Betalas ut till klassen per godkänd anmälan. Låses på anmälan när den skapas. Ingen återköpsbonus på matkassar." },
 ];
 
 export default function AdminPricing() {

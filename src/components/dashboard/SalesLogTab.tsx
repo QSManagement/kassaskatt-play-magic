@@ -136,7 +136,7 @@ export default function SalesLogTab({ klass }: Props) {
             {hfCount > 0 && (
               <p className="text-xs text-stone-500 mt-2 flex items-center gap-1.5">
                 <Salad className="h-3.5 w-3.5 text-brand-700" aria-hidden="true" />
-                Matkasseanmälningar ({hfCount}) visas under fliken HelloFresh.
+                Matkasseanmälningar ({hfCount}) visas under fliken Matkassar.
               </p>
             )}
           </div>

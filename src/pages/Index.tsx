@@ -174,7 +174,7 @@ export default function Index() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { num: '01', icon: Package, title: 'Registrera klassen', desc: 'Gratis och tar 2 minuter. Ett konto och en klasskod för både kaffe och HelloFresh.', color: 'bg-amber-100' },
+              { num: '01', icon: Package, title: 'Registrera klassen', desc: 'Gratis och tar 2 minuter. Ett konto och en klasskod för både kaffe och matkassar.', color: 'bg-amber-100' },
               { num: '02', icon: Users, title: 'Sälj det som passar er', desc: 'Kaffe via säljblad och elevlänk. Matkassar via klassens egen länk och QR-kod — kunden anmäler sig själv.', color: 'bg-brand-50' },
               { num: '03', icon: TrendingUp, title: 'Pengarna kommer in', desc: `Kaffe: ni samlar in betalt och vi fakturerar föreningen. Matkassar: vi betalar ut ${pricing.margin_hellofresh} kr per godkänd kund.`, color: 'bg-stone-200' },
             ].map((step) => (
