@@ -167,7 +167,7 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
           <CardHeader className="pb-2">
             <div className="flex items-center gap-2 text-stone-600 text-sm">
               <Salad className="h-4 w-4" aria-hidden="true" />
-              HelloFresh
+              Matkassar
             </div>
           </CardHeader>
           <CardContent>
@@ -220,7 +220,7 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
                 <p className="text-base font-semibold text-brand-950">Er klasskod</p>
                 <p className="text-sm text-stone-600 mt-1">
                   Dela med era kunder. När de återköper kaffe på qlasskassan.se/aterkop och anger koden får ni {pricing.repurchase_bonus} kr per förpackning — automatiskt.
-                  Samma kod används i er HelloFresh-länk.
+                  Samma kod används i er matkasselänk.
                   Välj gärna en kod som är lätt att komma ihåg, t.ex. <code className="font-mono">SOLSKOLAN-3A</code>.
                 </p>
               </div>
@@ -320,18 +320,18 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
             </div>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pt-4 border-t border-amber-200">
               <div className="flex items-start gap-3">
-                <div className="p-2 bg-hf-soft rounded-lg">
+                <div className="p-2 bg-brand-50 rounded-lg">
                   <Salad className="h-5 w-5 text-brand-800" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-base font-semibold text-brand-950">HelloFresh: kundlänk, QR-kod och affisch</p>
+                  <p className="text-base font-semibold text-brand-950">Matkassar: kundlänk, QR-kod och affisch</p>
                   <p className="text-sm text-stone-600 mt-1">
                     Kunderna anmäler sig själva via er länk — klassen får {pricing.margin_hellofresh} kr per godkänd kund.
                   </p>
                 </div>
               </div>
               <Button variant="outline" className="border-brand-300 text-brand-900 hover:bg-brand-50 shrink-0" onClick={onGoToHelloFresh}>
-                Öppna HelloFresh-fliken
+                Öppna Matkassar-fliken
               </Button>
             </div>
           </div>

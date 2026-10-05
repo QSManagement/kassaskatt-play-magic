@@ -3,7 +3,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { usePricing } from "@/hooks/usePricing";
 import coffeeGold from "@/assets/coffee-gold.png";
 import coffeeCrema from "@/assets/coffee-crema.png";
-import hfBox from "@/assets/hellofresh/hellofresh-box.webp";
+import hfBox from "@/assets/matkassar/meal-kit.jpg";
 
 const cardBase =
   "bg-white rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group relative flex flex-col h-full";
@@ -88,17 +88,17 @@ export function CremaCard({ showLink = true }: { showLink?: boolean }) {
 export function HelloFreshCard() {
   const pricing = usePricing();
   return (
-    <div className={`${cardBase} border-2 border-hf-lime/60`}>
-      <div className="bg-hf-soft h-72 flex items-center justify-center relative overflow-hidden">
-        <img src={hfBox} alt="HelloFresh matkasse med färska ingredienser och receptkort" className="h-64 w-auto object-contain drop-shadow-xl rounded-2xl transform group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+    <div className={`${cardBase} border-2 border-brand-300/60`}>
+      <div className="bg-brand-50 h-72 flex items-center justify-center relative overflow-hidden">
+        <img src={hfBox} alt="Matkassar matkasse med färska ingredienser och receptkort" className="h-64 w-auto object-contain drop-shadow-xl rounded-2xl transform group-hover:scale-105 transition-transform duration-300" loading="lazy" />
       </div>
       <div className="p-8 flex flex-col flex-1">
         <div className="flex items-baseline justify-between mb-2">
-          <h3 className="text-2xl font-bold text-brand-950">HelloFresh</h3>
-          <div className="text-sm font-bold text-brand-950 bg-hf-lime px-3 py-1 rounded-full">Nyhet</div>
+          <h3 className="text-2xl font-bold text-brand-950">Matkassar</h3>
+          <div className="text-sm font-bold text-brand-950 bg-brand-300 px-3 py-1 rounded-full">Nyhet</div>
         </div>
-        <p className="text-brand-900/70 mb-6">Sälj matkassar utan att hantera varor eller pengar — kunderna anmäler sig själva via er unika länk och HelloFresh sköter resten.</p>
-        <div className="bg-hf-soft rounded-2xl p-5 mb-6">
+        <p className="text-brand-900/70 mb-6">Sälj matkassar utan att hantera varor eller pengar — kunderna anmäler sig själva via er unika länk och leverantören sköter resten.</p>
+        <div className="bg-brand-50 rounded-2xl p-5 mb-6">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium text-brand-900">Klassen tjänar per kund</span>
             <span className="text-3xl font-bold text-brand-800">{pricing.margin_hellofresh} kr</span>
@@ -110,8 +110,8 @@ export function HelloFreshCard() {
           <li className="flex items-center gap-2"><Check className="w-4 h-4 text-brand-700" aria-hidden="true" /> Egen länk, QR-kod och affisch i er dashboard</li>
           <li className="flex items-center gap-2"><Check className="w-4 h-4 text-brand-700" aria-hidden="true" /> Kan kombineras med kaffeförsäljningen</li>
         </ul>
-        <Link to="/hellofresh" className="mt-auto inline-flex items-center gap-2 text-brand-800 font-semibold hover:text-brand-600 transition">
-          Läs mer om HelloFresh <ArrowRight className="w-4 h-4" aria-hidden="true" />
+        <Link to="/matkassar" className="mt-auto inline-flex items-center gap-2 text-brand-800 font-semibold hover:text-brand-600 transition">
+          Läs mer om Matkassar <ArrowRight className="w-4 h-4" aria-hidden="true" />
         </Link>
       </div>
     </div>

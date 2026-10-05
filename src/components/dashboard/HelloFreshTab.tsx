@@ -10,8 +10,7 @@ import { Copy, Check, Download, Printer, UserPlus, Share2 } from "lucide-react";
 import { QRCodeSVG, QRCodeCanvas } from "qrcode.react";
 import { usePricing } from "@/hooks/usePricing";
 import HelloFreshSignupForm from "@/components/hellofresh/HelloFreshSignupForm";
-import hfLogo from "@/assets/hellofresh/hellofresh-logo.png";
-import boxImg from "@/assets/hellofresh/hellofresh-box.webp";
+import boxImg from "@/assets/matkassar/meal-kit.jpg";
 
 interface SignupRow {
   id: string;
@@ -56,12 +55,12 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
   const [registerOpen, setRegisterOpen] = useState(false);
   const qrRef = useRef<HTMLDivElement>(null);
 
-  const customerLink = `https://qlasskassan.se/hellofresh/anmal/${klass.class_code}`;
-  const posterUrl = `/hellofresh/affisch/${klass.class_code}`;
+  const customerLink = `https://qlasskassan.se/matkassar/anmal/${klass.class_code}`;
+  const posterUrl = `/matkassar/affisch/${klass.class_code}`;
 
   async function load() {
     const { data, error } = await supabase.rpc("get_class_hellofresh_signups", { _class_id: klass.id });
-    if (error) toast.error("Kunde inte ladda HelloFresh-anmälningar");
+    if (error) toast.error("Kunde inte ladda Matkasseanmälningar");
     else setSignups((data ?? []) as SignupRow[]);
     setLoading(false);
   }
@@ -87,7 +86,7 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
     if (!canvas) return;
     const a = document.createElement("a");
     a.href = canvas.toDataURL("image/png");
-    a.download = `hellofresh-qr-${klass.class_code}.png`;
+    a.download = `matkassar-qr-${klass.class_code}.png`;
     a.click();
   }
 
@@ -101,9 +100,9 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
 
   return (
     <div className="space-y-6">
-      <Card className="border-hf-lime border-2 bg-hf-soft">
+      <Card className="border-brand-300 border-2 bg-brand-50">
         <CardContent className="pt-6 flex items-center gap-4 flex-wrap">
-          <img src={hfLogo} alt="HelloFresh" className="h-8 w-auto" loading="lazy" />
+          
           <p className="text-sm text-brand-950">
             <strong>{pricing.margin_hellofresh} kr per kund</strong> · ingen faktura · ingen återköpsbonus
           </p>
@@ -205,7 +204,7 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
             <p className="text-stone-500">Laddar...</p>
           ) : filtered.length === 0 ? (
             <div className="text-center py-8 space-y-4">
-              <img src={boxImg} alt="HelloFresh-låda full av grönsaker" className="w-40 mx-auto rounded-2xl" loading="lazy" />
+              <img src={boxImg} alt="Matkasse med färska råvaror – exempelbild" className="w-40 mx-auto rounded-2xl" loading="lazy" />
               <p className="text-stone-500 text-sm">
                 {signups.length === 0 ? "Inga kunder än — dela länken med klassen!" : "Inga anmälningar med den statusen."}
               </p>

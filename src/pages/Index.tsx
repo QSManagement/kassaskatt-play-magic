@@ -9,8 +9,7 @@ import ProfitCalculator from '@/components/site/ProfitCalculator';
 import { GoldCard, CremaCard, HelloFreshCard } from '@/components/site/ProductCards';
 import coffeeGold from '@/assets/coffee-gold.png';
 import coffeeCrema from '@/assets/coffee-crema.png';
-import hfBox from '@/assets/hellofresh/hellofresh-box.webp';
-import hfLogo from '@/assets/hellofresh/hellofresh-logo.png';
+import hfBox from "@/assets/matkassar/meal-kit.jpg";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { usePricing } from '@/hooks/usePricing';
 
@@ -20,13 +19,13 @@ export default function Index() {
   const pricing = usePricing();
 
   useEffect(() => {
-    document.title = 'Qlasskassan – Sälj kaffe och HelloFresh till klasskassan';
+    document.title = 'Qlasskassan – Sälj kaffe och Matkassar till klasskassan';
   }, []);
 
   const compareRows: { label: string; kaffe: string; hf: string }[] = [
     { label: 'Klassen får', kaffe: `${pricing.margin_gold}–${pricing.margin_crema} kr per förpackning`, hf: `${pricing.margin_hellofresh} kr per godkänd kund` },
     { label: 'Så säljer ni', kaffe: 'Säljblad + elevlänk, ni samlar in beställningar', hf: 'Kunden anmäler sig via klassens länk/QR' },
-    { label: 'Betalning', kaffe: 'Kunden betalar klassen, vi fakturerar föreningen (14 dagar)', hf: 'Kunden betalar HelloFresh, vi betalar ut till klassen' },
+    { label: 'Betalning', kaffe: 'Kunden betalar klassen, vi fakturerar föreningen (14 dagar)', hf: 'Kunden betalar matkasseleverantören, vi betalar ut till klassen' },
     { label: 'Leverans', kaffe: 'Till skolan, ni delar ut', hf: 'Hem till kunden' },
     { label: 'Återköpsbonus', kaffe: `${pricing.repurchase_bonus} kr/förp i 6 mån`, hf: 'Nej' },
     { label: 'Passar när', kaffe: 'Ni vill sälja något folk köper om och om igen', hf: 'Ni vill slippa hantera varor och pengar' },
@@ -40,26 +39,26 @@ export default function Index() {
       <section className="relative pt-32 pb-12 px-6 overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-20 -right-20 w-96 h-96 bg-amber-200/40 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 -left-20 w-96 h-96 bg-hf-lime/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 -left-20 w-96 h-96 bg-brand-300/20 rounded-full blur-3xl"></div>
         </div>
 
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div>
             <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-900 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
               <Sparkles className="w-4 h-4" aria-hidden="true" />
-              Kaffe + HelloFresh — samma konto
+              Kaffe + Matkassar — samma konto
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-brand-950 leading-[1.05] tracking-tight mb-6">
               Bygg er klasskassa med <span className="italic text-amber-700">kaffe</span> och{' '}
-              <span className="bg-hf-lime px-2 rounded-lg">matkassar</span>
+              <span className="bg-brand-300 px-2 rounded-lg">matkassar</span>
             </h1>
             <p className="text-lg text-brand-900/80 mb-6 leading-relaxed">
-              Sälj premiumkaffe från Caffè Gondoliere och HelloFresh matkassar — produkter familjer faktiskt vill ha. Välj det ena eller kör båda.
+              Sälj premiumkaffe från Caffè Gondoliere och Matkassar — produkter familjer faktiskt vill ha. Välj det ena eller kör båda.
             </p>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium text-brand-900/80 mb-8">
               <span><span className="text-amber-700 font-bold">Upp till {pricing.margin_crema} kr</span>/förpackning</span>
               <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-amber-400" aria-hidden="true"></span>
-              <span><span className="text-brand-900 font-bold">{pricing.margin_hellofresh} kr</span> per HelloFresh-kund</span>
+              <span><span className="text-brand-900 font-bold">{pricing.margin_hellofresh} kr</span> per matkassekund</span>
               <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-amber-400" aria-hidden="true"></span>
               <span><span className="text-brand-900 font-bold">0 kr</span> att starta</span>
             </div>
@@ -75,7 +74,7 @@ export default function Index() {
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-brand-900/70">
               <div className="flex items-center gap-2"><Check className="w-4 h-4 text-brand-700" aria-hidden="true" /> Ett konto och en klasskod för båda</div>
               <div className="flex items-center gap-2"><Check className="w-4 h-4 text-brand-700" aria-hidden="true" /> Kaffe: faktura till föreningen, 14 dagar</div>
-              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-brand-700" aria-hidden="true" /> HelloFresh: inget lager, ingen faktura</div>
+              <div className="flex items-center gap-2"><Check className="w-4 h-4 text-brand-700" aria-hidden="true" /> Matkassar: inget lager, ingen faktura</div>
             </div>
           </div>
 
@@ -96,19 +95,19 @@ export default function Index() {
                 <span className="mt-auto text-sm font-semibold text-amber-800 group-hover:text-amber-600">Utforska kaffet →</span>
               </div>
             </Link>
-            <Link to="/hellofresh" className="group rounded-3xl bg-hf-soft border-2 border-hf-lime/60 p-4 md:p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col md:flex-row md:items-center gap-3 md:gap-6 relative">
-              <span className="absolute top-3 right-3 bg-hf-lime text-brand-950 text-[10px] md:text-xs font-bold px-2 py-0.5 rounded-full">Nyhet</span>
+            <Link to="/matkassar" className="group rounded-3xl bg-brand-50 border-2 border-brand-300/60 p-4 md:p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col md:flex-row md:items-center gap-3 md:gap-6 relative">
+              <span className="absolute top-3 right-3 bg-brand-300 text-brand-950 text-[10px] md:text-xs font-bold px-2 py-0.5 rounded-full">Nyhet</span>
               <div className="h-24 md:h-36 md:w-40 shrink-0 flex items-center justify-center">
-                <img src={hfBox} alt="HelloFresh matkasse" className="h-20 md:h-32 w-auto object-contain rounded-xl drop-shadow-lg" />
+                <img src={hfBox} alt="Matkassar matkasse" className="h-20 md:h-32 w-auto object-contain rounded-xl drop-shadow-lg" />
               </div>
               <div className="flex flex-col flex-1">
                 <div className="flex items-center gap-2 text-xl md:text-2xl font-bold text-brand-950 mb-1">
-                  <Salad className="w-5 h-5 text-hf-green" aria-hidden="true" /> HelloFresh
+                  <Salad className="w-5 h-5 text-brand-700" aria-hidden="true" /> Matkassar
                 </div>
                 <p className="text-xs md:text-sm text-brand-900/80 mb-3">
                   {pricing.margin_hellofresh} kr per kund · inget lager, ingen faktura
                 </p>
-                <span className="mt-auto text-sm font-semibold text-brand-800 group-hover:text-brand-600">Utforska HelloFresh →</span>
+                <span className="mt-auto text-sm font-semibold text-brand-800 group-hover:text-brand-600">Utforska Matkassar →</span>
               </div>
             </Link>
           </div>
@@ -146,7 +145,7 @@ export default function Index() {
           </div>
           <span className="hidden sm:block w-px h-8 bg-stone-300" aria-hidden="true" />
           <div className="flex items-center gap-3">
-            I samarbete med <img src={hfLogo} alt="HelloFresh" className="h-7 w-auto" loading="lazy" />
+            Matkassar med hemleverans 
           </div>
         </div>
       </section>
@@ -175,9 +174,9 @@ export default function Index() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { num: '01', icon: Package, title: 'Registrera klassen', desc: 'Gratis och tar 2 minuter. Ett konto och en klasskod för både kaffe och HelloFresh.', color: 'bg-amber-100' },
-              { num: '02', icon: Users, title: 'Sälj det som passar er', desc: 'Kaffe via säljblad och elevlänk. HelloFresh via klassens egen länk och QR-kod — kunden anmäler sig själv.', color: 'bg-hf-soft' },
-              { num: '03', icon: TrendingUp, title: 'Pengarna kommer in', desc: `Kaffe: ni samlar in betalt och vi fakturerar föreningen. HelloFresh: vi betalar ut ${pricing.margin_hellofresh} kr per godkänd kund.`, color: 'bg-stone-200' },
+              { num: '01', icon: Package, title: 'Registrera klassen', desc: 'Gratis och tar 2 minuter. Ett konto och en klasskod för både kaffe och matkassar.', color: 'bg-amber-100' },
+              { num: '02', icon: Users, title: 'Sälj det som passar er', desc: 'Kaffe via säljblad och elevlänk. Matkassar via klassens egen länk och QR-kod — kunden anmäler sig själv.', color: 'bg-brand-50' },
+              { num: '03', icon: TrendingUp, title: 'Pengarna kommer in', desc: `Kaffe: ni samlar in betalt och vi fakturerar föreningen. Matkassar: vi betalar ut ${pricing.margin_hellofresh} kr per godkänd kund.`, color: 'bg-stone-200' },
             ].map((step) => (
               <div key={step.num} className="bg-stone-50 rounded-3xl p-8 border border-stone-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                 <div className={`${step.color} w-14 h-14 rounded-2xl flex items-center justify-center mb-6`}>
@@ -192,12 +191,12 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Kaffe eller HelloFresh? */}
+      {/* Kaffe eller Matkassar? */}
       <section className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <div className="text-sm font-semibold text-amber-700 uppercase tracking-widest mb-3">Välj rätt</div>
-            <h2 className="text-4xl md:text-5xl font-bold text-brand-950 leading-tight">Kaffe eller HelloFresh?</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-brand-950 leading-tight">Kaffe eller Matkassar?</h2>
           </div>
 
           {/* Desktop: tabell */}
@@ -205,13 +204,13 @@ export default function Index() {
             <div className="grid grid-cols-3 text-sm font-semibold">
               <div className="p-5 bg-stone-100"></div>
               <div className="p-5 text-center bg-amber-700 text-amber-50 flex items-center justify-center gap-2"><Coffee className="w-4 h-4" aria-hidden="true" /> Kaffe</div>
-              <div className="p-5 text-center bg-hf-lime text-brand-950 flex items-center justify-center gap-2"><Salad className="w-4 h-4" aria-hidden="true" /> HelloFresh</div>
+              <div className="p-5 text-center bg-brand-300 text-brand-950 flex items-center justify-center gap-2"><Salad className="w-4 h-4" aria-hidden="true" /> Matkassar</div>
             </div>
             {compareRows.map((r, i) => (
               <div key={r.label} className={`grid grid-cols-3 text-sm border-t border-stone-200 ${i % 2 === 0 ? 'bg-white' : 'bg-stone-50'}`}>
                 <div className="p-5 font-medium text-brand-950">{r.label}</div>
                 <div className="p-5 text-center text-brand-900/80 bg-amber-50/50">{r.kaffe}</div>
-                <div className="p-5 text-center text-brand-900/80 bg-hf-soft/40">{r.hf}</div>
+                <div className="p-5 text-center text-brand-900/80 bg-brand-50/40">{r.hf}</div>
               </div>
             ))}
           </div>
@@ -220,7 +219,7 @@ export default function Index() {
           <div className="md:hidden space-y-4">
             {([
               { key: 'kaffe', title: 'Kaffe', icon: Coffee, head: 'bg-amber-700 text-amber-50' },
-              { key: 'hf', title: 'HelloFresh', icon: Salad, head: 'bg-hf-lime text-brand-950' },
+              { key: 'hf', title: 'Matkassar', icon: Salad, head: 'bg-brand-300 text-brand-950' },
             ] as const).map((col) => (
               <div key={col.key} className="bg-white rounded-3xl overflow-hidden border border-stone-200">
                 <div className={`${col.head} px-5 py-3 font-bold flex items-center gap-2`}>
@@ -244,8 +243,8 @@ export default function Index() {
               <Link to="/kaffe" className="bg-amber-700 text-amber-50 px-6 py-3 rounded-full font-semibold hover:bg-amber-800 transition inline-flex items-center gap-2">
                 <Coffee className="w-4 h-4" aria-hidden="true" /> Utforska kaffet
               </Link>
-              <Link to="/hellofresh" className="bg-hf-lime text-brand-950 px-6 py-3 rounded-full font-semibold hover:brightness-95 transition inline-flex items-center gap-2">
-                <Salad className="w-4 h-4" aria-hidden="true" /> Utforska HelloFresh
+              <Link to="/matkassar" className="bg-brand-300 text-brand-950 px-6 py-3 rounded-full font-semibold hover:brightness-95 transition inline-flex items-center gap-2">
+                <Salad className="w-4 h-4" aria-hidden="true" /> Utforska Matkassar
               </Link>
             </div>
           </div>
@@ -301,8 +300,8 @@ export default function Index() {
           <Accordion type="single" collapsible className="bg-white border border-stone-200 rounded-3xl px-6 md:px-8">
             {[
               { q: 'Kostar det något att starta?', a: 'Nej. Registrering, säljmaterial och all support är gratis. Ni betalar bara för de förpackningar ni faktiskt beställer.' },
-              { q: 'Måste klassen ha en förening?', a: 'Ja. För kaffet fakturerar vi föreningen, för HelloFresh betalar vi ut till föreningens konto. Oftast är det föräldraföreningen. Saknar ni det går det att registrera en enkel ideell förening på 30 minuter — vi skickar instruktioner i startguiden.' },
-              { q: 'Kan vi sälja både kaffe och HelloFresh?', a: 'Ja. Ni använder samma konto, samma klasskod och samma dashboard för båda. Kör det ena, det andra eller båda samtidigt.' },
+              { q: 'Måste klassen ha en förening?', a: 'Ja. För kaffet fakturerar vi föreningen, för Matkassar betalar vi ut till föreningens konto. Oftast är det föräldraföreningen. Saknar ni det går det att registrera en enkel ideell förening på 30 minuter — vi skickar instruktioner i startguiden.' },
+              { q: 'Kan vi sälja både kaffe och Matkassar?', a: 'Ja. Ni använder samma konto, samma klasskod och samma dashboard för båda. Kör det ena, det andra eller båda samtidigt.' },
               { q: 'Hur länge tar en typisk försäljning?', a: 'Ni bestämmer själva hur länge ni säljer – allt från några dagar till hela terminen. När ni skickat in den samlade beställningen levererar vi inom 5 arbetsdagar. Många klasser kör flera säljperioder per läsår.' },
               { q: 'Vad om vi vill avbryta?', a: 'Inga bindningstider. Ni bestämmer själva när och hur mycket ni säljer. Skickar ni inte in en beställning så kostar det inget.' },
               { q: 'Hur mycket tjänar en typisk klass?', a: '25 elever som säljer 8 förpackningar var med 60 % Crema-mix landar på cirka 11 600 kr vid utlämning. Sen tickar Återköpsklubben på i 6 månader — vanligtvis 1 500–2 500 kr extra.' },
@@ -317,7 +316,7 @@ export default function Index() {
             Fler frågor om{' '}
             <Link to="/kaffe#faq" className="font-semibold text-amber-800 underline decoration-amber-400 underline-offset-4">kaffet →</Link>{' '}
             eller{' '}
-            <Link to="/hellofresh#faq" className="font-semibold text-brand-800 underline decoration-hf-lime underline-offset-4">HelloFresh →</Link>
+            <Link to="/matkassar#faq" className="font-semibold text-brand-800 underline decoration-brand-300 underline-offset-4">Matkassar →</Link>
           </p>
         </div>
       </section>
@@ -329,7 +328,7 @@ export default function Index() {
           <div className="relative">
             <h2 className="text-4xl md:text-5xl font-bold text-amber-50 mb-6 leading-tight">Redo att starta er klasskassa?</h2>
             <p className="text-amber-100/80 text-lg mb-10 max-w-xl mx-auto">
-              Registrera klassen gratis på 2 minuter — sälj kaffe, HelloFresh eller båda.
+              Registrera klassen gratis på 2 minuter — sälj kaffe, Matkassar eller båda.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <button onClick={() => setRegOpen(true)} className="bg-amber-300 text-brand-950 px-7 py-4 rounded-full font-bold hover:bg-amber-200 transition shadow-xl flex items-center gap-2 group">

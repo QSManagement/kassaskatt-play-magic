@@ -17,6 +17,7 @@ import { template as repurchaseNotification } from './repurchase-notification.ts
 
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'startguide': startguide,
+  'startguide-matkassar': startguideHF,
   'startguide-hellofresh': startguideHF,
   'registration-welcome': registrationWelcome,
   'class-activated': classActivated,

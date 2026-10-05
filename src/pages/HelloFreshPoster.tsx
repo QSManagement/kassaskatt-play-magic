@@ -7,7 +7,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { Printer } from "lucide-react";
 import { HelloFreshLockup } from "./HelloFresh";
 import { usePricing } from "@/hooks/usePricing";
-import boxImg from "@/assets/hellofresh/hellofresh-box.webp";
+import boxImg from "@/assets/matkassar/meal-kit.jpg";
 
 interface ClassInfo {
   id: string;
@@ -24,7 +24,7 @@ export default function HelloFreshPoster() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = "HelloFresh-affisch – Qlasskassan";
+    document.title = "Matkassar – affisch – Qlasskassan";
     if (!code) return;
     (async () => {
       const { data, error } = await supabase.rpc("lookup_class_by_code", { _code: code });
@@ -54,7 +54,7 @@ export default function HelloFreshPoster() {
     );
   }
 
-  const url = `https://qlasskassan.se/hellofresh/anmal/${klass.class_code}`;
+  const url = `https://qlasskassan.se/matkassar/anmal/${klass.class_code}`;
 
   return (
     <div className="min-h-screen bg-stone-100 print:bg-white">
@@ -81,11 +81,11 @@ export default function HelloFreshPoster() {
 
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-5xl font-bold text-brand-950 leading-tight mb-3">
-              Stötta {klass.class_name} — bli HelloFresh-kund
+              Stötta {klass.class_name} — bli matkassekund
             </h1>
             <p className="text-xl text-brand-900/80">
               Klassen får{" "}
-              <span className="bg-hf-lime px-2 py-0.5 rounded font-bold text-brand-950">
+              <span className="bg-brand-300 px-2 py-0.5 rounded font-bold text-brand-950">
                 {pricing.margin_hellofresh} kr
               </span>{" "}
               när du anmäler dig
@@ -94,7 +94,7 @@ export default function HelloFreshPoster() {
 
           <img
             src={boxImg}
-            alt="HelloFresh-låda full av färska grönsaker"
+            alt="Matkasse med färska råvaror – exempelbild"
             className="rounded-3xl w-full max-w-md mx-auto object-cover mb-8"
           />
 
@@ -108,7 +108,7 @@ export default function HelloFreshPoster() {
               <p className="text-lg text-brand-950 font-semibold">
                 Skanna QR-koden eller gå till:
               </p>
-              <p className="font-mono text-brand-900 break-all bg-hf-soft border border-hf-lime rounded-xl p-3">
+              <p className="font-mono text-brand-900 break-all bg-brand-50 border border-brand-300 rounded-xl p-3">
                 {url}
               </p>
               <ul className="text-brand-900/80 space-y-2 text-left">

@@ -65,12 +65,12 @@ export default function HelpDialog() {
           <AccordionItem value="hellofresh">
             <AccordionTrigger className="text-brand-950">
               <span className="flex items-center gap-2">
-                <Salad className="h-4 w-4" aria-hidden="true" /> HelloFresh
+                <Salad className="h-4 w-4" aria-hidden="true" /> Matkassar
               </span>
             </AccordionTrigger>
             <AccordionContent className="text-stone-600 space-y-2">
-              <p>Klassen kan även tjäna pengar på HelloFresh. Kunderna anmäler sig själva via er unika länk — ni behöver inte ta emot några uppgifter.</p>
-              <p>Under fliken <em>HelloFresh</em> hittar ni länken, QR-koden och en affisch att skriva ut. Där ser ni också alla anmälningar och status.</p>
+              <p>Klassen kan även tjäna pengar på matkassar. Kunderna anmäler sig själva via er unika länk — ni behöver inte ta emot några uppgifter.</p>
+              <p>Under fliken <em>Matkassar</em> hittar ni länken, QR-koden och en affisch att skriva ut. Där ser ni också alla anmälningar och status.</p>
               <p>Ersättningen betalas ut per godkänd anmälan och summeras automatiskt i er översikt.</p>
             </AccordionContent>
           </AccordionItem>

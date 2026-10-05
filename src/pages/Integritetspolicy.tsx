@@ -59,7 +59,7 @@ export default function Integritetspolicy() {
           <li><strong>Stripe:</strong> betalningar för återköp.</li>
           <li><strong>Resend:</strong> utskick av transaktions- och marknadsmejl.</li>
           <li><strong>Caffè Gondoliere / fraktpartner:</strong> tillverkning och leverans.</li>
-          <li><strong>HelloFresh:</strong> vid anmälan via klassens HelloFresh-länk delas namn, kontakt- och adressuppgifter med HelloFresh för att kunna starta leveransen. Delning sker endast efter ditt uttryckliga samtycke i anmälningsformuläret.</li>
+          <li><strong>HelloFresh:</strong> vid anmälan via klassens matkasselänk delas namn, kontakt- och adressuppgifter med HelloFresh för att kunna starta leveransen. Delning sker endast efter ditt uttryckliga samtycke i anmälningsformuläret.</li>
         </ul>
         <p className="mt-3">Vissa underbiträden kan innebära överföring till tredje land (t.ex. USA). Sådan överföring sker i så fall med EU-kommissionens standardavtalsklausuler (SCC).</p>
 
@@ -68,7 +68,7 @@ export default function Integritetspolicy() {
           <li>Lärarkonto: så länge kontot är aktivt + 12 månader.</li>
           <li>Leads (startguide): 24 månader.</li>
           <li>Bokföringsunderlag: 7 år enligt bokföringslagen.</li>
-          <li>HelloFresh-anmälningar: så länge klassens kampanj är aktiv + 12 månader.</li>
+          <li>Matkasseanmälningar: så länge klassens kampanj är aktiv + 12 månader.</li>
           <li>E-postsuppression och avregistreringar: tills vidare.</li>
         </ul>
 

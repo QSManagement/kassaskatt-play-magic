@@ -37,7 +37,7 @@ const navItems = [
   { to: "/admin/leads", label: "Leads", icon: Inbox },
   { to: "/admin/ordrar", label: "Ordrar", icon: ShoppingBag },
   { to: "/admin/aterkop", label: "Återköp", icon: Sparkles },
-  { to: "/admin/hellofresh", label: "HelloFresh", icon: Salad },
+  { to: "/admin/matkassar", label: "Matkassar", icon: Salad },
   { to: "/admin/anvandare", label: "Användare", icon: Users },
   { to: "/admin/priser", label: "Priser", icon: Tag },
   { to: "/admin/installningar", label: "Inställningar", icon: Settings },
@@ -163,7 +163,8 @@ export default function AdminDashboard() {
             <Route path="leads" element={<AdminLeads />} />
             <Route path="ordrar" element={<AdminOrders />} />
             <Route path="aterkop" element={<AdminRepurchases />} />
-            <Route path="hellofresh" element={<AdminHelloFresh />} />
+            <Route path="matkassar" element={<AdminHelloFresh />} />
+            <Route path="hellofresh" element={<Navigate to="/admin/matkassar" replace />} />
             <Route path="anvandare" element={<AdminUsers />} />
             <Route path="priser" element={<AdminPricing />} />
             <Route path="installningar" element={<AdminSettings />} />

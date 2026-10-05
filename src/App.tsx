@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import type { JSX } from "react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
@@ -25,6 +25,16 @@ import HelloFreshSignup from "./pages/HelloFreshSignup.tsx";
 import HelloFreshPoster from "./pages/HelloFreshPoster.tsx";
 import { AuthProvider, useAuth } from "@/lib/AuthContext";
 
+import mealKitSheet from "@/assets/documents/qlasskassan-matkassar.pdf.asset.json";
+import mealKitGuide from "@/assets/documents/qlasskassan-matkassar-startguide.pdf.asset.json";
+import mealKitAgreement from "@/assets/documents/qlasskassan-matkassar-avtal.pdf.asset.json";
+import { useEffect } from "react";
+
+function DocumentRedirect({ url }: { url: string }) {
+  useEffect(() => { window.location.replace(url); }, [url]);
+  return <a href={url}>Öppna PDF</a>;
+}
+
 const queryClient = new QueryClient();
 
 function ProtectedTeacher({ children }: { children: JSX.Element }) {
@@ -42,6 +52,11 @@ function ProtectedAdmin({ children }: { children: JSX.Element }) {
   if (!user) return <Navigate to="/logga-in" replace />;
   if (role !== "admin") return <Navigate to="/" replace />;
   return children;
+}
+
+function LegacyMealKitRedirect() {
+  const location = useLocation();
+  return <Navigate to={`${location.pathname.replace("/hellofresh", "/matkassar")}${location.search}${location.hash}`} replace />;
 }
 
 const App = () => (
@@ -64,11 +79,18 @@ const App = () => (
             <Route path="/villkor" element={<Villkor />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/salj/:code" element={<StudentReport />} />
+            <Route path="/qlasskassan-hellofresh.pdf" element={<DocumentRedirect url={mealKitSheet.url} />} />
+            <Route path="/qlasskassan-matkassar.pdf" element={<DocumentRedirect url={mealKitSheet.url} />} />
+            <Route path="/qlasskassan-hellofresh-startguide.pdf" element={<DocumentRedirect url={mealKitGuide.url} />} />
+            <Route path="/qlasskassan-matkassar-startguide.pdf" element={<DocumentRedirect url={mealKitGuide.url} />} />
+            <Route path="/qlasskassan-hellofresh-avtal.pdf" element={<DocumentRedirect url={mealKitAgreement.url} />} />
+            <Route path="/qlasskassan-matkassar-avtal.pdf" element={<DocumentRedirect url={mealKitAgreement.url} />} />
             <Route path="/kaffe" element={<Kaffe />} />
-            <Route path="/hellofresh" element={<HelloFresh />} />
-            <Route path="/hellofresh/anmal" element={<HelloFreshSignup />} />
-            <Route path="/hellofresh/anmal/:code" element={<HelloFreshSignup />} />
-            <Route path="/hellofresh/affisch/:code" element={<HelloFreshPoster />} />
+            <Route path="/hellofresh/*" element={<LegacyMealKitRedirect />} />
+            <Route path="/matkassar" element={<HelloFresh />} />
+            <Route path="/matkassar/anmal" element={<HelloFreshSignup />} />
+            <Route path="/matkassar/anmal/:code" element={<HelloFreshSignup />} />
+            <Route path="/matkassar/affisch/:code" element={<HelloFreshPoster />} />
             <Route
               path="/dashboard/*"
               element={

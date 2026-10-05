@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, X, LogIn, Coffee, Salad } from "lucide-react";
 import { usePricing } from "@/hooks/usePricing";
 import coffeeCrema from "@/assets/coffee-crema.png";
-import hfBox from "@/assets/hellofresh/hellofresh-box.webp";
+import hfBox from "@/assets/matkassar/meal-kit.jpg";
 
 const LINKS = [
   { href: "/#sa-funkar", label: "Så funkar det" },
@@ -15,7 +15,7 @@ const LINKS = [
 
 function NewBadge() {
   return (
-    <span className="bg-hf-lime text-brand-950 text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+    <span className="bg-brand-300 text-brand-950 text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
       Ny
     </span>
   );
@@ -23,8 +23,8 @@ function NewBadge() {
 
 export function HelloFreshBadgeLink({ onClick }: { onClick?: () => void }) {
   return (
-    <Link to="/hellofresh" onClick={onClick} className="inline-flex items-center gap-1.5 hover:text-amber-700 transition">
-      HelloFresh
+    <Link to="/matkassar" onClick={onClick} className="inline-flex items-center gap-1.5 hover:text-amber-700 transition">
+      Matkassar
       <NewBadge />
     </Link>
   );
@@ -36,7 +36,7 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
   const { pathname } = useLocation();
   const pricing = usePricing();
   const onKaffe = pathname === "/kaffe";
-  const onHf = pathname === "/hellofresh";
+  const onHf = pathname === "/matkassar";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY);
@@ -64,10 +64,10 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
             <Coffee className="w-4 h-4" aria-hidden="true" /> Kaffe
           </Link>
           <Link
-            to="/hellofresh"
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition hover:text-brand-700 ${onHf ? "bg-hf-soft" : ""}`}
+            to="/matkassar"
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition hover:text-brand-700 ${onHf ? "bg-brand-50" : ""}`}
           >
-            <Salad className="w-4 h-4" aria-hidden="true" /> HelloFresh <NewBadge />
+            <Salad className="w-4 h-4" aria-hidden="true" /> Matkassar <NewBadge />
           </Link>
           <span className="w-px h-5 bg-stone-300" aria-hidden="true" />
           {LINKS.map((l) => (
@@ -125,12 +125,12 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
                   <span className="text-xs text-amber-900">Upp till {pricing.margin_crema} kr/förp</span>
                 </Link>
                 <Link
-                  to="/hellofresh"
+                  to="/matkassar"
                   onClick={close}
-                  className={`rounded-2xl p-3 bg-hf-soft border ${onHf ? "border-brand-700" : "border-hf-lime/60"} flex flex-col`}
+                  className={`rounded-2xl p-3 bg-brand-50 border ${onHf ? "border-brand-700" : "border-brand-300/60"} flex flex-col`}
                 >
                   <img src={hfBox} alt="" className="h-16 w-auto object-contain self-center mb-2 rounded-lg" />
-                  <span className="font-bold text-brand-950 inline-flex flex-wrap items-center gap-1">HelloFresh <NewBadge /></span>
+                  <span className="font-bold text-brand-950 inline-flex flex-wrap items-center gap-1">Matkassar <NewBadge /></span>
                   <span className="text-xs text-brand-900">{pricing.margin_hellofresh} kr/kund</span>
                 </Link>
               </div>

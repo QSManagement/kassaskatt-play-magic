@@ -102,7 +102,7 @@ export default function TeacherDashboard() {
             </TabsTrigger>
             <TabsTrigger value="hellofresh" className="flex-1 min-w-[76px] flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">
               <Salad className="h-4 w-4" aria-hidden="true" />
-              <span>HelloFresh</span>
+              <span>Matkassar</span>
             </TabsTrigger>
             {klass.tracking_mode === "per_student" && (
               <TabsTrigger value="students" className="flex-1 min-w-[76px] flex-col md:flex-row gap-1 md:gap-2 py-2 md:py-3 text-[11px] md:text-sm">

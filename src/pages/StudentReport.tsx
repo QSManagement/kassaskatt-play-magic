@@ -46,8 +46,7 @@ export default function StudentReport() {
         setClassInfo({ school_name: rows[0].school_name, class_name: rows[0].class_name });
         setStudents(
           rows
-            .filter((r) => r.student_id && r.student_name)
-            .map((r) => ({ id: r.student_id!, name: r.student_name! })),
+            .flatMap((r) => r.student_id && r.student_name ? [{ id: r.student_id, name: r.student_name }] : []),
         );
       }
       setLoading(false);
@@ -153,18 +152,18 @@ export default function StudentReport() {
             onClick={() => setProduct("hellofresh")}
             className={`flex items-center justify-center gap-2 rounded-lg border px-4 py-3 text-sm font-semibold transition-colors ${
               product === "hellofresh"
-                ? "bg-hf-green text-white border-hf-green"
-                : "bg-white text-stone-600 border-stone-300 hover:border-hf-green"
+                ? "bg-brand-700 text-white border-brand-700"
+                : "bg-white text-stone-600 border-stone-300 hover:border-brand-700"
             }`}
           >
             <Salad className="h-4 w-4" aria-hidden="true" />
-            HelloFresh
+            Matkassar
           </button>
         </div>
 
         {product === "hellofresh" ? (
           <HelloFreshSignupForm
-            classCode={code!}
+            classCode={code ?? ""}
             className={classInfo?.class_name}
             source="student_report"
           />

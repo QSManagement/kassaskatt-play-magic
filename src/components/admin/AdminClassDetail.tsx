@@ -317,7 +317,7 @@ export default function AdminClassDetail() {
         <StatCard label="Totalt insamlat" value={`${(Number(klass.total_to_class || 0) + Number(klass.total_hellofresh_to_class || 0)).toLocaleString("sv-SE")} kr`} />
         <StatCard label="Gold sålda" value={klass.total_sold_gold || 0} />
         <StatCard label="Crema sålda" value={klass.total_sold_crema || 0} />
-        <StatCard label="HelloFresh" value={`${Number(klass.total_sold_hellofresh || 0)} st · ${Number(klass.total_hellofresh_to_class || 0).toLocaleString("sv-SE")} kr`} />
+        <StatCard label="Matkassar" value={`${Number(klass.total_sold_hellofresh || 0)} st · ${Number(klass.total_hellofresh_to_class || 0).toLocaleString("sv-SE")} kr`} />
         <StatCard label="Återköpsbonus" value={`${repurchaseTotal.toLocaleString("sv-SE")} kr`} />
       </div>
 
