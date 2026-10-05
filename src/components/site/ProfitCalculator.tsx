@@ -85,16 +85,16 @@ export default function ProfitCalculator({
               {productToggle(coffeeOn, () => setCoffeeOn(!coffeeOn), <Coffee className="w-5 h-5 text-amber-700" aria-hidden="true" />, "Kaffe")}
               {includeHelloFresh && productToggle(hfOn, () => setHfOn(!hfOn), <Salad className="w-5 h-5 text-hf-lime" aria-hidden="true" />, "HelloFresh")}
             </div>
+            <div>
+              <div className="flex justify-between items-baseline mb-3">
+                <label className="font-semibold text-brand-950">Antal elever i klassen</label>
+                <span className="text-3xl font-bold text-brand-900">{students}</span>
+              </div>
+              <input type="range" min="0" max="50" value={students} onChange={(e) => setStudents(Number(e.target.value))} className={`${slider} accent-brand-800`} aria-label="Antal elever" />
+              <div className="flex justify-between text-xs text-brand-900/50 mt-1"><span>0</span><span>50</span></div>
+            </div>
             {coffeeOn && (
               <>
-                <div>
-                  <div className="flex justify-between items-baseline mb-3">
-                    <label className="font-semibold text-brand-950">Antal elever i klassen</label>
-                    <span className="text-3xl font-bold text-brand-900">{students}</span>
-                  </div>
-                  <input type="range" min="0" max="50" value={students} onChange={(e) => setStudents(Number(e.target.value))} className={`${slider} accent-brand-800`} aria-label="Antal elever" />
-                  <div className="flex justify-between text-xs text-brand-900/50 mt-1"><span>0</span><span>50</span></div>
-                </div>
                 <div>
                   <div className="flex justify-between items-baseline mb-3">
                     <label className="font-semibold text-brand-950">Förpackningar per elev</label>

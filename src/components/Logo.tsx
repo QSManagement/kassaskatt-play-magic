@@ -30,7 +30,7 @@ export function Logo({
   className,
 }: LogoProps) {
   return (
-    <span className={cn("inline-flex max-w-full items-center", sizeMap[size], variant === "light" && "rounded-md bg-background p-2", className)}>
+    <span className={cn("inline-flex max-w-full items-center", sizeMap[size], variant === "light" && "drop-shadow-[0_1px_6px_rgba(255,255,255,0.25)]", className)}>
       <img
         src={logoFull}
         alt="Qlasskassan – Sveriges starkaste insamlingskoncept"
