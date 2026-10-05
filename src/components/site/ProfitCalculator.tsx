@@ -106,12 +106,11 @@ export default function ProfitCalculator({
 
         <div className="bg-amber-50 rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl grid md:grid-cols-2 gap-12">
           <div className="space-y-8">
-            {toggleCount > 1 && (
-              <div className={`grid ${toggleCount > 1 ? "grid-cols-2" : "grid-cols-1"} gap-3`}>
-                {showCoffee && productToggle(coffeeOn, () => setCoffeeOn(!coffeeOn), <Coffee className="w-5 h-5 text-amber-700" aria-hidden="true" />, "Kaffe")}
-                {showHf && productToggle(hfOn, () => setHfOn(!hfOn), <Salad className="w-5 h-5 text-hf-lime" aria-hidden="true" />, "HelloFresh")}
-              </div>
-            )}
+            <div className={`grid ${toggleCount > 1 ? "grid-cols-2" : "grid-cols-1"} gap-3`}>
+              {showCoffee && productToggle(coffeeOn, () => setCoffeeOn(!coffeeOn), <Coffee className="w-5 h-5 text-amber-700" aria-hidden="true" />, "Kaffe")}
+              {showHf && productToggle(hfOn, () => setHfOn(!hfOn), <Salad className="w-5 h-5 text-hf-lime" aria-hidden="true" />, "HelloFresh")}
+            </div>
+
             <div>
               <div className="flex justify-between items-baseline mb-3">
                 <label className="font-semibold text-brand-950">Antal elever i klassen</label>
