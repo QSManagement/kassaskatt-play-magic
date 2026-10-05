@@ -1,6 +1,7 @@
 /// <reference types="npm:@types/react@18.3.1" />
 
 import * as React from 'npm:react@18.3.1'
+import { EmailBrand } from '../email-brand.tsx'
 
 import {
   Body,
@@ -27,6 +28,7 @@ export const RecoveryEmail = ({
     <Preview>Återställ ditt lösenord för Qlasskassan</Preview>
     <Body style={main}>
       <Container style={container}>
+        <EmailBrand />
         <Heading style={h1}>Återställ ditt lösenord</Heading>
         <Text style={text}>
           Vi fick en begäran om att återställa ditt lösenord för Qlasskassan.

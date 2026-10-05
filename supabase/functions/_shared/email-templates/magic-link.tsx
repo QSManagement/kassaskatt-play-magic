@@ -1,6 +1,7 @@
 /// <reference types="npm:@types/react@18.3.1" />
 
 import * as React from 'npm:react@18.3.1'
+import { EmailBrand } from '../email-brand.tsx'
 
 import {
   Body,
@@ -27,6 +28,7 @@ export const MagicLinkEmail = ({
     <Preview>Din inloggningslänk till Qlasskassan</Preview>
     <Body style={main}>
       <Container style={container}>
+        <EmailBrand />
         <Heading style={h1}>Din inloggningslänk</Heading>
         <Text style={text}>
           Klicka på knappen nedan för att logga in på Qlasskassan. Länken

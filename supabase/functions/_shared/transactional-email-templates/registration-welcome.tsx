@@ -1,4 +1,5 @@
 import * as React from 'npm:react@18.3.1'
+import { EmailBrand } from '../email-brand.tsx'
 import {
   Body, Container, Head, Heading, Html, Preview, Section, Text, Hr,
 } from 'npm:@react-email/components@0.0.22'
@@ -18,6 +19,7 @@ const RegistrationWelcomeEmail = ({ name, className, schoolName }: WelcomeProps)
     <Preview>Tack för er anmälan till {SITE_NAME}</Preview>
     <Body style={main}>
       <Container style={container}>
+        <EmailBrand />
         <Heading style={h1}>
           {name ? `Tack ${name}!` : 'Tack för er anmälan!'}
         </Heading>
