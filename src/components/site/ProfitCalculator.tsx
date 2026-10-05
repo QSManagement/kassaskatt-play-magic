@@ -165,7 +165,7 @@ export default function ProfitCalculator({
                   <div className="flex justify-between items-center gap-3">
                     <span className="text-amber-100/80 text-sm flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-hf-lime shrink-0"></span>
-                      HelloFresh ({hfCustomers} kunder × {pricing.margin_hellofresh} kr)
+                      HelloFresh ({hfPerStudent} per elev × {students} {students === 1 ? "elev" : "elever"} × {pricing.margin_hellofresh} kr)
                     </span>
                     <span className="font-bold whitespace-nowrap">{hfEarnings.toLocaleString("sv-SE")} kr</span>
                   </div>
