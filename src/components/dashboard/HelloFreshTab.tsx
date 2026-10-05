@@ -37,9 +37,9 @@ function StatusBadge({ status }: { status: string }) {
     case "pending":
       return <Badge variant="outline" className="bg-amber-100 text-amber-800 border-amber-200">Väntar</Badge>;
     case "approved":
-      return <Badge variant="outline" className="bg-emerald-100 text-emerald-800 border-emerald-200">Godkänd</Badge>;
+      return <Badge variant="outline" className="bg-green-100 text-green-800 border-green-200">Godkänd</Badge>;
     case "paid_out":
-      return <Badge className="bg-emerald-700 text-white border-emerald-700">Utbetald</Badge>;
+      return <Badge className="bg-green-700 text-white border-green-700">Utbetald</Badge>;
     case "rejected":
       return <Badge variant="outline" className="bg-stone-100 text-stone-400 border-stone-200 line-through">Avvisad</Badge>;
     default:
@@ -104,7 +104,7 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
       <Card className="border-hf-lime border-2 bg-hf-soft">
         <CardContent className="pt-6 flex items-center gap-4 flex-wrap">
           <img src={hfLogo} alt="HelloFresh" className="h-8 w-auto" loading="lazy" />
-          <p className="text-sm text-emerald-950">
+          <p className="text-sm text-brand-950">
             <strong>{pricing.margin_hellofresh} kr per kund</strong> · ingen faktura · ingen återköpsbonus
           </p>
         </CardContent>
@@ -113,7 +113,7 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="pb-2"><p className="text-sm text-stone-600">Anmälda kunder</p></CardHeader>
-          <CardContent><p className="text-3xl font-bold text-emerald-950">{active.length}</p></CardContent>
+          <CardContent><p className="text-3xl font-bold text-brand-950">{active.length}</p></CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-2"><p className="text-sm text-stone-600">Väntar</p></CardHeader>
@@ -125,14 +125,14 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
         <Card>
           <CardHeader className="pb-2"><p className="text-sm text-stone-600">Godkänt</p></CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-emerald-700">{approved.length}</p>
+            <p className="text-3xl font-bold text-brand-700">{approved.length}</p>
             <p className="text-xs text-stone-500 mt-1">{sum(approved).toLocaleString("sv-SE")} kr</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-2"><p className="text-sm text-stone-600">Utbetalt</p></CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-emerald-950">{sum(paidOut).toLocaleString("sv-SE")}</p>
+            <p className="text-3xl font-bold text-brand-950">{sum(paidOut).toLocaleString("sv-SE")}</p>
             <p className="text-xs text-stone-500 mt-1">kr</p>
           </CardContent>
         </Card>
@@ -140,7 +140,7 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-emerald-950 flex items-center gap-2">
+          <CardTitle className="text-brand-950 flex items-center gap-2">
             <Share2 className="h-5 w-5" aria-hidden="true" />
             Dela och samla in kunder
           </CardTitle>
@@ -167,7 +167,7 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
                   Skriv ut affisch
                 </a>
               </Button>
-              <Button size="sm" className="bg-emerald-900 hover:bg-emerald-800" onClick={() => setRegisterOpen(true)}>
+              <Button size="sm" className="bg-brand-900 hover:bg-brand-800" onClick={() => setRegisterOpen(true)}>
                 <UserPlus className="h-4 w-4 mr-2" aria-hidden="true" />
                 Registrera kund åt någon
               </Button>
@@ -182,7 +182,7 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
       <Card>
         <CardHeader>
           <div className="flex items-start justify-between gap-3 flex-wrap">
-            <CardTitle className="text-emerald-950">Anmälningar</CardTitle>
+            <CardTitle className="text-brand-950">Anmälningar</CardTitle>
             <div className="flex gap-2 flex-wrap">
               {STATUS_FILTERS.map((f) => (
                 <button
@@ -190,8 +190,8 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
                   onClick={() => setFilter(f.value)}
                   className={`px-3 py-1 rounded-full text-xs font-medium border transition ${
                     filter === f.value
-                      ? "bg-emerald-900 text-white border-emerald-900"
-                      : "bg-white text-stone-600 border-stone-200 hover:border-emerald-300"
+                      ? "bg-brand-900 text-white border-brand-900"
+                      : "bg-white text-stone-600 border-stone-200 hover:border-brand-300"
                   }`}
                 >
                   {f.label}
@@ -216,7 +216,7 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
                 <div key={s.id} className="border border-stone-200 rounded-lg p-3 flex items-center justify-between gap-3 flex-wrap">
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-semibold text-emerald-950">{s.customer_display_name}</span>
+                      <span className="font-semibold text-brand-950">{s.customer_display_name}</span>
                       <StatusBadge status={s.status} />
                     </div>
                     <p className="text-xs text-stone-500 mt-0.5">
@@ -224,7 +224,7 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
                       {s.student_name && <> · via {s.student_name}</>}
                     </p>
                   </div>
-                  <span className="font-bold text-emerald-900 shrink-0">
+                  <span className="font-bold text-brand-900 shrink-0">
                     {Number(s.commission_to_class).toLocaleString("sv-SE")} kr
                   </span>
                 </div>
@@ -232,7 +232,7 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
             </div>
           )}
           <p className="text-xs text-stone-500 mt-4">
-            Fel på en anmälan? Mejla <a href="mailto:kontakt@scandinaviancoffee.se" className="text-emerald-700 underline">kontakt@scandinaviancoffee.se</a>
+            Fel på en anmälan? Mejla <a href="mailto:kontakt@scandinaviancoffee.se" className="text-brand-700 underline">kontakt@scandinaviancoffee.se</a>
           </p>
         </CardContent>
       </Card>
@@ -240,7 +240,7 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
       <Dialog open={registerOpen} onOpenChange={setRegisterOpen}>
         <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-emerald-950">Registrera kund åt någon</DialogTitle>
+            <DialogTitle className="text-brand-950">Registrera kund åt någon</DialogTitle>
           </DialogHeader>
           <p className="text-sm text-stone-600 -mt-2">
             För pappersbeställningar — kunden måste ha godkänt att uppgifterna delas med HelloFresh.

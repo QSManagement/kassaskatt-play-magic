@@ -115,9 +115,9 @@ export default function HelloFreshSignupForm({
   if (successName) {
     return (
       <div className="text-center space-y-4 py-6">
-        <CheckCircle2 className="h-14 w-14 text-emerald-600 mx-auto" aria-hidden="true" />
+        <CheckCircle2 className="h-14 w-14 text-brand-600 mx-auto" aria-hidden="true" />
         <div>
-          <h3 className="text-xl font-bold text-emerald-950">Tack {successName}!</h3>
+          <h3 className="text-xl font-bold text-brand-950">Tack {successName}!</h3>
           <p className="text-stone-600 mt-1">
             Din anmälan är skickad.{className ? ` ${className} får ${pricing.margin_hellofresh} kr när den är godkänd.` : ""}
           </p>
@@ -150,7 +150,7 @@ export default function HelloFreshSignupForm({
       </div>
 
       <div>
-        <Label htmlFor="hf-student" className="text-emerald-950">
+        <Label htmlFor="hf-student" className="text-brand-950">
           Vilken elev köper du av? <span className="text-stone-400 font-normal">(valfritt)</span>
         </Label>
         <Input
@@ -167,7 +167,7 @@ export default function HelloFreshSignupForm({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {FIELDS.map((f) => (
           <div key={f.name} className={f.half ? "" : "sm:col-span-2"}>
-            <Label htmlFor={`hf-${f.name}`} className="text-emerald-950">
+            <Label htmlFor={`hf-${f.name}`} className="text-brand-950">
               {f.label}
               {f.required && " *"}
             </Label>
@@ -195,7 +195,7 @@ export default function HelloFreshSignupForm({
           {source === "teacher"
             ? "Kunden har godkänt att uppgifterna delas med HelloFresh."
             : "Jag godkänner att Qlasskassan delar mina uppgifter med HelloFresh så att de kan kontakta mig och starta min leverans."}{" "}
-          Läs mer i <Link to="/integritetspolicy" className="text-emerald-700 underline">integritetspolicyn</Link>.
+          Läs mer i <Link to="/integritetspolicy" className="text-brand-700 underline">integritetspolicyn</Link>.
         </Label>
       </div>
       {errors.consent && <p className="text-sm text-red-600 -mt-2">{errors.consent.message}</p>}
@@ -204,7 +204,7 @@ export default function HelloFreshSignupForm({
         <div className="bg-red-50 border border-red-200 text-red-800 text-sm rounded-xl p-4">{serverError}</div>
       )}
 
-      <Button type="submit" disabled={isSubmitting} className="w-full bg-emerald-900 hover:bg-emerald-800 rounded-full py-6 text-base font-semibold">
+      <Button type="submit" disabled={isSubmitting} className="w-full bg-brand-900 hover:bg-brand-800 rounded-full py-6 text-base font-semibold">
         {isSubmitting && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
         Skicka anmälan
       </Button>

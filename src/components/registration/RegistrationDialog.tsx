@@ -143,10 +143,10 @@ export function RegistrationDialog({ open, onOpenChange }: Props) {
     <Dialog open={open} onOpenChange={(o) => !o && handleClose()}>
       <DialogContent className="max-w-xl bg-stone-50 border-stone-200">
         <DialogHeader>
-          <DialogTitle className="text-emerald-950 text-2xl font-bold">
+          <DialogTitle className="text-brand-950 text-2xl font-bold">
             {step === 4 ? "Välkommen till Qlasskassan!" : "Registrera er klass"}
           </DialogTitle>
-          <DialogDescription className="text-emerald-900/70">
+          <DialogDescription className="text-brand-900/70">
             {step < 4 && `Steg ${step} av 3`}
             {step === 4 && "Vi har skickat en startguide till din e-post."}
           </DialogDescription>
@@ -155,7 +155,7 @@ export function RegistrationDialog({ open, onOpenChange }: Props) {
         {step < 4 && (
           <div className="flex gap-1.5 mt-2 mb-4">
             {[1, 2, 3].map((n) => (
-              <div key={n} className={`h-1.5 flex-1 rounded-full ${n <= step ? "bg-emerald-800" : "bg-stone-200"}`} />
+              <div key={n} className={`h-1.5 flex-1 rounded-full ${n <= step ? "bg-brand-800" : "bg-stone-200"}`} />
             ))}
           </div>
         )}
@@ -168,7 +168,7 @@ export function RegistrationDialog({ open, onOpenChange }: Props) {
               <Field id="student_count" label="Antal elever" type="number" value={data.student_count} onChange={upd("student_count")} error={errors.student_count} />
             </div>
             <div>
-              <Label htmlFor="fundraising_goal" className="text-emerald-950 font-medium">Mål med insamlingen <span className="text-emerald-900/50 font-normal">(valfritt)</span></Label>
+              <Label htmlFor="fundraising_goal" className="text-brand-950 font-medium">Mål med insamlingen <span className="text-brand-900/50 font-normal">(valfritt)</span></Label>
               <Textarea id="fundraising_goal" value={data.fundraising_goal} onChange={upd("fundraising_goal")} placeholder="Klassresa till Berlin våren 2027" className="mt-1 bg-white border-stone-200" rows={2} />
             </div>
           </div>
@@ -185,7 +185,7 @@ export function RegistrationDialog({ open, onOpenChange }: Props) {
 
         {step === 3 && (
           <div className="space-y-4">
-            <p className="text-sm text-emerald-900/70 -mt-2">Klassens förening hanterar pengarna. Vi behöver uppgifterna för faktura och utbetalning.</p>
+            <p className="text-sm text-brand-900/70 -mt-2">Klassens förening hanterar pengarna. Vi behöver uppgifterna för faktura och utbetalning.</p>
             <Field id="association_name" label="Föreningens namn" value={data.association_name} onChange={upd("association_name")} error={errors.association_name} placeholder="Klass 6B förening" />
             <Field id="organization_number" label="Organisationsnummer" value={data.organization_number} onChange={upd("organization_number")} error={errors.organization_number} placeholder="802400-1234" />
             <Field id="bank_account" label="Bankgiro eller kontonummer" value={data.bank_account} onChange={upd("bank_account")} error={errors.bank_account} placeholder="1234-5678" />
@@ -194,23 +194,23 @@ export function RegistrationDialog({ open, onOpenChange }: Props) {
 
         {step === 4 && (
           <div className="text-center py-6">
-            <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Check className="w-8 h-8 text-emerald-800" />
+            <div className="w-16 h-16 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Check className="w-8 h-8 text-brand-800" />
             </div>
-            <p className="text-emerald-900/80 mb-2">Ditt konto är skapat och vi har skickat startguiden till <strong>{data.contact_email}</strong>.</p>
-            <p className="text-sm text-emerald-900/60 mb-2">Hittar du inte mejlet? Kolla skräpposten/spam-mappen.</p>
-            <p className="text-sm text-emerald-900/60">Logga in på dashboarden för att komma igång.</p>
+            <p className="text-brand-900/80 mb-2">Ditt konto är skapat och vi har skickat startguiden till <strong>{data.contact_email}</strong>.</p>
+            <p className="text-sm text-brand-900/60 mb-2">Hittar du inte mejlet? Kolla skräpposten/spam-mappen.</p>
+            <p className="text-sm text-brand-900/60">Logga in på dashboarden för att komma igång.</p>
           </div>
         )}
 
         {step < 4 && (
           <div className="flex justify-between mt-6">
             <button onClick={() => step > 1 ? setStep(step - 1) : handleClose()} disabled={submitting}
-              className="text-emerald-900 px-5 py-2.5 rounded-full text-sm font-medium hover:bg-stone-200 transition flex items-center gap-1.5 disabled:opacity-50">
+              className="text-brand-900 px-5 py-2.5 rounded-full text-sm font-medium hover:bg-stone-200 transition flex items-center gap-1.5 disabled:opacity-50">
               <ArrowLeft className="w-4 h-4" /> {step === 1 ? "Avbryt" : "Tillbaka"}
             </button>
             <button onClick={step === 3 ? submit : next} disabled={submitting}
-              className="bg-emerald-900 text-amber-50 px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-800 transition shadow-sm flex items-center gap-2 disabled:opacity-60">
+              className="bg-brand-900 text-amber-50 px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-800 transition shadow-sm flex items-center gap-2 disabled:opacity-60">
               {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
               {step === 3 ? "Slutför registrering" : "Nästa"}
               {!submitting && step < 3 && <ArrowRight className="w-4 h-4" />}
@@ -219,7 +219,7 @@ export function RegistrationDialog({ open, onOpenChange }: Props) {
         )}
 
         {step === 4 && (
-          <button onClick={handleClose} className="bg-emerald-900 text-amber-50 px-6 py-3 rounded-full text-sm font-semibold hover:bg-emerald-800 transition mt-2">
+          <button onClick={handleClose} className="bg-brand-900 text-amber-50 px-6 py-3 rounded-full text-sm font-semibold hover:bg-brand-800 transition mt-2">
             Stäng
           </button>
         )}
@@ -231,7 +231,7 @@ export function RegistrationDialog({ open, onOpenChange }: Props) {
 function Field({ id, label, value, onChange, error, type = "text", placeholder }: any) {
   return (
     <div>
-      <Label htmlFor={id} className="text-emerald-950 font-medium">{label}</Label>
+      <Label htmlFor={id} className="text-brand-950 font-medium">{label}</Label>
       <Input id={id} type={type} value={value} onChange={onChange} placeholder={placeholder}
         className={`mt-1 bg-white border-stone-200 ${error ? "border-red-400" : ""}`} />
       {error && <p className="text-xs text-red-600 mt-1">{error}</p>}

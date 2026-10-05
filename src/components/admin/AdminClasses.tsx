@@ -25,7 +25,7 @@ export function StatusBadge({ status }: { status: string }) {
   const map: Record<string, { label: string; className: string }> = {
     pending: { label: "Väntande", className: "bg-amber-100 text-amber-800 border-amber-200" },
     lead: { label: "Lead", className: "bg-stone-100 text-stone-700 border-stone-200" },
-    active: { label: "Aktiv", className: "bg-emerald-100 text-emerald-800 border-emerald-200" },
+    active: { label: "Aktiv", className: "bg-green-100 text-green-800 border-green-200" },
     completed: { label: "Avslutad", className: "bg-stone-100 text-stone-600 border-stone-200" },
     cancelled: { label: "Avbruten", className: "bg-red-50 text-red-700 border-red-200" },
   };
@@ -74,7 +74,7 @@ export default function AdminClasses() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-emerald-950 tracking-tight">Klasser</h1>
+        <h1 className="text-3xl font-bold text-brand-950 tracking-tight">Klasser</h1>
         <p className="text-stone-600 mt-1">
           {classes.length} klasser totalt · {classes.filter((c) => c.status === "active").length} aktiva
         </p>
@@ -133,7 +133,7 @@ export default function AdminClasses() {
                       window.location.href = `/admin/klasser/${c.id}`;
                     }}
                   >
-                    <TableCell className="font-medium text-emerald-950">
+                    <TableCell className="font-medium text-brand-950">
                       <Link to={`/admin/klasser/${c.id}`} className="hover:underline">
                         {c.school_name}
                         {c.class_name && <span className="text-stone-500 ml-2">· {c.class_name}</span>}
@@ -147,7 +147,7 @@ export default function AdminClasses() {
                     <TableCell>
                       <StatusBadge status={c.status} />
                     </TableCell>
-                    <TableCell className="text-right font-semibold text-emerald-900">
+                    <TableCell className="text-right font-semibold text-brand-900">
                       {(Number(c.total_to_class || 0) + Number(c.total_hellofresh_to_class || 0)).toLocaleString("sv-SE")} kr
                       {Number(c.total_sold_hellofresh || 0) > 0 && (
                         <div className="text-xs font-normal text-stone-500">varav {c.total_sold_hellofresh} HelloFresh</div>

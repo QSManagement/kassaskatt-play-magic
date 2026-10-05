@@ -76,7 +76,7 @@ export default function ResetPassword() {
         </div>
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl text-emerald-950">Sätt nytt lösenord</CardTitle>
+            <CardTitle className="text-2xl text-brand-950">Sätt nytt lösenord</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -104,7 +104,7 @@ export default function ResetPassword() {
                   autoComplete="new-password"
                 />
               </div>
-              <Button type="submit" className="w-full bg-emerald-900 hover:bg-emerald-800" disabled={loading}>
+              <Button type="submit" className="w-full bg-brand-900 hover:bg-brand-800" disabled={loading}>
                 {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Spara lösenord
               </Button>

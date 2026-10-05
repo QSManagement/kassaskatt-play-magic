@@ -145,7 +145,7 @@ export default function StudentsTab({ klass }: Props) {
         <CardHeader>
           <div className="flex items-start justify-between gap-3 flex-wrap">
             <div>
-              <CardTitle className="text-emerald-950">Eleverna</CardTitle>
+              <CardTitle className="text-brand-950">Eleverna</CardTitle>
               <p className="text-sm text-stone-600 mt-1">
                 Skriv in vad varje elev sålt — eller dela elevlänken så rapporterar de själva.
               </p>
@@ -159,7 +159,7 @@ export default function StudentsTab({ klass }: Props) {
               </DialogTrigger>
               <DialogContent className="max-w-md">
                 <DialogHeader>
-                  <DialogTitle className="text-emerald-950">Elevernas rapporteringslänk</DialogTitle>
+                  <DialogTitle className="text-brand-950">Elevernas rapporteringslänk</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-4">
                   <p className="text-sm text-stone-600">
@@ -193,7 +193,7 @@ export default function StudentsTab({ klass }: Props) {
               onChange={(e) => setNewName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && addStudent()}
             />
-            <Button onClick={addStudent} className="bg-emerald-900 hover:bg-emerald-800">
+            <Button onClick={addStudent} className="bg-brand-900 hover:bg-brand-800">
               <UserPlus className="h-4 w-4 mr-2" aria-hidden="true" />
               Lägg till
             </Button>
@@ -207,10 +207,10 @@ export default function StudentsTab({ klass }: Props) {
             <div className="space-y-2">
               {students.map((s) => (
                 <div key={s.id} className="grid grid-cols-12 gap-2 items-center border border-stone-200 rounded-lg p-3">
-                  <div className="col-span-5 font-medium text-emerald-950">
+                  <div className="col-span-5 font-medium text-brand-950">
                     {s.name}
                     {(hfCounts[s.id] || 0) > 0 && (
-                      <span className="ml-2 inline-flex items-center gap-1 text-xs font-medium bg-hf-soft text-emerald-900 rounded-full px-2 py-0.5 align-middle">
+                      <span className="ml-2 inline-flex items-center gap-1 text-xs font-medium bg-hf-soft text-brand-900 rounded-full px-2 py-0.5 align-middle">
                         <Salad className="h-3 w-3" aria-hidden="true" />
                         {hfCounts[s.id]} HelloFresh
                       </span>
@@ -248,9 +248,9 @@ export default function StudentsTab({ klass }: Props) {
                 </div>
               ))}
 
-              <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 mt-4 flex justify-between text-sm flex-wrap gap-2">
+              <div className="bg-brand-50 border border-brand-200 rounded-lg p-3 mt-4 flex justify-between text-sm flex-wrap gap-2">
                 <span className="text-stone-700">Totalt sålda av eleverna:</span>
-                <span className="font-semibold text-emerald-900">
+                <span className="font-semibold text-brand-900">
                   {totalGold} Gold · {totalCrema} Crema
                   {Object.values(hfCounts).reduce((a, b) => a + b, 0) > 0 && (
                     <> · {Object.values(hfCounts).reduce((a, b) => a + b, 0)} HelloFresh ({(Object.values(hfCounts).reduce((a, b) => a + b, 0) * pricing.margin_hellofresh).toLocaleString("sv-SE")} kr)</>

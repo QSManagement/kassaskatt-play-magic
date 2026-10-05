@@ -65,9 +65,9 @@ function StatusBadge({ status }: { status: string }) {
     case "pending":
       return <Badge variant="outline" className="bg-amber-100 text-amber-800 border-amber-200">Väntar</Badge>;
     case "approved":
-      return <Badge variant="outline" className="bg-emerald-100 text-emerald-800 border-emerald-200">Godkänd</Badge>;
+      return <Badge variant="outline" className="bg-green-100 text-green-800 border-green-200">Godkänd</Badge>;
     case "paid_out":
-      return <Badge className="bg-emerald-700 text-white border-emerald-700">Utbetald</Badge>;
+      return <Badge className="bg-green-700 text-white border-green-700">Utbetald</Badge>;
     case "rejected":
       return <Badge variant="outline" className="bg-stone-100 text-stone-500 border-stone-200">Avvisad</Badge>;
     default:
@@ -261,7 +261,7 @@ export default function AdminHelloFresh() {
       <div className="flex items-center gap-4 flex-wrap">
         <img src={hfLogo} alt="HelloFresh" className="h-8 w-auto" loading="lazy" />
         <div>
-          <h1 className="text-2xl font-bold text-emerald-950">HelloFresh-anmälningar</h1>
+          <h1 className="text-2xl font-bold text-brand-950">HelloFresh-anmälningar</h1>
           <p className="text-sm text-stone-600">Godkänn, avvisa och betala ut ersättning till klasserna.</p>
         </div>
       </div>
@@ -277,14 +277,14 @@ export default function AdminHelloFresh() {
         <Card>
           <CardHeader className="pb-2"><p className="text-sm text-stone-600">Att betala ut</p></CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-emerald-700">{approvedRows.length}</p>
+            <p className="text-3xl font-bold text-brand-700">{approvedRows.length}</p>
             <p className="text-xs text-stone-500 mt-1">{sum(approvedRows).toLocaleString("sv-SE")} kr</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-2"><p className="text-sm text-stone-600">Utbetalt totalt</p></CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-emerald-950">{sum(paidOut).toLocaleString("sv-SE")}</p>
+            <p className="text-3xl font-bold text-brand-950">{sum(paidOut).toLocaleString("sv-SE")}</p>
             <p className="text-xs text-stone-500 mt-1">kr</p>
           </CardContent>
         </Card>
@@ -332,8 +332,8 @@ export default function AdminHelloFresh() {
       </div>
 
       {selected.size > 0 && (
-        <div className="flex items-center gap-3 flex-wrap bg-emerald-50 border border-emerald-200 rounded-xl p-3">
-          <span className="text-sm text-emerald-900 font-medium">{selected.size} markerade</span>
+        <div className="flex items-center gap-3 flex-wrap bg-brand-50 border border-brand-200 rounded-xl p-3">
+          <span className="text-sm text-brand-900 font-medium">{selected.size} markerade</span>
           <Button
             size="sm"
             variant="outline"
@@ -390,12 +390,12 @@ export default function AdminHelloFresh() {
                         {new Date(s.created_at).toLocaleDateString("sv-SE")}
                       </TableCell>
                       <TableCell className="text-sm">
-                        <Link to={`/admin/klasser/${s.class_id}`} className="text-emerald-800 hover:underline">
+                        <Link to={`/admin/klasser/${s.class_id}`} className="text-brand-800 hover:underline">
                           {c?.school_name} {c?.class_name}
                         </Link>
                       </TableCell>
                       <TableCell className="text-sm">{s.student_name ?? "—"}</TableCell>
-                      <TableCell className="text-sm font-medium text-emerald-950 whitespace-nowrap">
+                      <TableCell className="text-sm font-medium text-brand-950 whitespace-nowrap">
                         {s.customer_first_name} {s.customer_last_name}
                       </TableCell>
                       <TableCell className="text-sm">{s.customer_email}</TableCell>
@@ -405,7 +405,7 @@ export default function AdminHelloFresh() {
                       </TableCell>
                       <TableCell className="text-xs text-stone-500">{s.source}</TableCell>
                       <TableCell><StatusBadge status={s.status} /></TableCell>
-                      <TableCell className="text-right font-semibold text-emerald-900 whitespace-nowrap">
+                      <TableCell className="text-right font-semibold text-brand-900 whitespace-nowrap">
                         {Number(s.commission_to_class).toLocaleString("sv-SE")} kr
                       </TableCell>
                       <TableCell>
@@ -454,7 +454,7 @@ export default function AdminHelloFresh() {
       {/* Utbetalningsunderlag */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-emerald-950 flex items-center gap-2">
+          <CardTitle className="text-brand-950 flex items-center gap-2">
             <Wallet className="h-5 w-5" aria-hidden="true" />
             Utbetalningsunderlag
           </CardTitle>
@@ -469,7 +469,7 @@ export default function AdminHelloFresh() {
               return (
                 <div key={classId} className="border border-stone-200 rounded-xl p-4 flex items-center justify-between gap-4 flex-wrap">
                   <div>
-                    <p className="font-semibold text-emerald-950">{c?.school_name} · {c?.class_name}</p>
+                    <p className="font-semibold text-brand-950">{c?.school_name} · {c?.class_name}</p>
                     <p className="text-sm text-stone-600">
                       {c?.association_name} · org.nr {c?.organization_number} · konto {c?.bank_account}
                     </p>
@@ -479,7 +479,7 @@ export default function AdminHelloFresh() {
                   </div>
                   <Button
                     disabled={busy}
-                    className="bg-emerald-900 hover:bg-emerald-800"
+                    className="bg-brand-900 hover:bg-brand-800"
                     onClick={() => setStatus(info.rows, "paid_out")}
                   >
                     Markera som utbetalt
@@ -495,7 +495,7 @@ export default function AdminHelloFresh() {
       <Dialog open={!!rejectTarget} onOpenChange={(o) => !o && setRejectTarget(null)}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className="text-emerald-950">Avvisa anmälan</DialogTitle>
+            <DialogTitle className="text-brand-950">Avvisa anmälan</DialogTitle>
           </DialogHeader>
           <p className="text-sm text-stone-600">
             {rejectTarget?.customer_first_name} {rejectTarget?.customer_last_name} avvisas och räknas bort från klassens totalsumma.
@@ -527,7 +527,7 @@ export default function AdminHelloFresh() {
       <Dialog open={!!editTarget} onOpenChange={(o) => !o && setEditTarget(null)}>
         <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-emerald-950">Redigera anmälan</DialogTitle>
+            <DialogTitle className="text-brand-950">Redigera anmälan</DialogTitle>
           </DialogHeader>
           {editTarget && (
             <div className="space-y-3">
@@ -564,7 +564,7 @@ export default function AdminHelloFresh() {
               </div>
               <DialogFooter>
                 <Button variant="outline" onClick={() => setEditTarget(null)}>Avbryt</Button>
-                <Button className="bg-emerald-900 hover:bg-emerald-800" disabled={busy} onClick={saveEdit}>
+                <Button className="bg-brand-900 hover:bg-brand-800" disabled={busy} onClick={saveEdit}>
                   Spara
                 </Button>
               </DialogFooter>

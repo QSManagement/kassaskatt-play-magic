@@ -99,7 +99,7 @@ export default function AdminRepurchases() {
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4 flex-col md:flex-row">
         <div>
-          <h1 className="text-3xl font-bold text-emerald-950 tracking-tight">Återköpsklubben</h1>
+          <h1 className="text-3xl font-bold text-brand-950 tracking-tight">Återköpsklubben</h1>
           <p className="text-stone-600 mt-1">
             {repurchases.length} återköp · {total.toLocaleString("sv-SE")} kr utbetalt
           </p>
@@ -107,7 +107,7 @@ export default function AdminRepurchases() {
 
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-emerald-900 hover:bg-emerald-800">
+            <Button className="bg-brand-900 hover:bg-brand-800">
               <Plus className="h-4 w-4 mr-2" aria-hidden="true" />
               Registrera återköp
             </Button>
@@ -149,7 +149,7 @@ export default function AdminRepurchases() {
                     <TableCell>
                       <Link
                         to={`/admin/klasser/${r.class_id}`}
-                        className="hover:underline text-emerald-950 font-medium"
+                        className="hover:underline text-brand-950 font-medium"
                       >
                         {r.class_registrations?.school_name}
                         {r.class_registrations?.class_name && (
@@ -287,7 +287,7 @@ function RepurchaseForm({
 
       <Button
         type="submit"
-        className="w-full bg-emerald-900 hover:bg-emerald-800"
+        className="w-full bg-brand-900 hover:bg-brand-800"
         disabled={!form.class_id}
       >
         Spara återköp

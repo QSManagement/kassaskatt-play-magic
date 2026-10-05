@@ -83,21 +83,21 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
 
   return (
     <div className="space-y-6">
-      <Card className="bg-gradient-to-br from-emerald-950 to-emerald-900 text-white border-0 overflow-hidden">
+      <Card className="bg-gradient-to-br from-brand-950 to-brand-900 text-white border-0 overflow-hidden">
         <CardContent className="pt-8 pb-8">
           <div className="flex items-baseline justify-between mb-4">
             <div>
-              <p className="text-emerald-200 text-sm uppercase tracking-wide">Insamlat hittills</p>
+              <p className="text-brand-200 text-sm uppercase tracking-wide">Insamlat hittills</p>
               <div className="flex items-baseline gap-3 mt-2">
                 <span className="text-5xl font-bold tracking-tight">
                   {totalEarned.toLocaleString("sv-SE")}
                 </span>
-                <span className="text-2xl text-emerald-200">kr</span>
+                <span className="text-2xl text-brand-200">kr</span>
               </div>
             </div>
             {goal > 0 && (
               <div className="text-right">
-                <p className="text-emerald-200 text-sm">Mål</p>
+                <p className="text-brand-200 text-sm">Mål</p>
                 <p className="text-2xl font-bold">{goal.toLocaleString("sv-SE")} kr</p>
               </div>
             )}
@@ -105,20 +105,20 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
 
           {goal > 0 && (
             <>
-              <div className="h-2 bg-emerald-800 rounded-full overflow-hidden mb-2">
+              <div className="h-2 bg-brand-800 rounded-full overflow-hidden mb-2">
                 <div
                   className="h-full bg-amber-400 transition-all duration-700"
                   style={{ width: `${progressPct}%` }}
                 />
               </div>
-              <p className="text-sm text-emerald-200">
+              <p className="text-sm text-brand-200">
                 {progressPct.toFixed(0)} % av målet — {(goal - totalEarned).toLocaleString("sv-SE")} kr kvar
               </p>
             </>
           )}
 
           {klass.fundraising_goal && (
-            <p className="mt-4 text-emerald-100 italic">"{klass.fundraising_goal}"</p>
+            <p className="mt-4 text-brand-100 italic">"{klass.fundraising_goal}"</p>
           )}
         </CardContent>
       </Card>
@@ -132,7 +132,7 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
             </div>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-emerald-950">{displayGold}</p>
+            <p className="text-3xl font-bold text-brand-950">{displayGold}</p>
             <p className="text-xs text-stone-500 mt-1">förpackningar</p>
           </CardContent>
         </Card>
@@ -145,7 +145,7 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
             </div>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-emerald-950">{displayCrema}</p>
+            <p className="text-3xl font-bold text-brand-950">{displayCrema}</p>
             <p className="text-xs text-stone-500 mt-1">förpackningar</p>
           </CardContent>
         </Card>
@@ -171,7 +171,7 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
             </div>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-emerald-950">{hellofreshCount}</p>
+            <p className="text-3xl font-bold text-brand-950">{hellofreshCount}</p>
             <p className="text-xs text-stone-500 mt-1">kunder · {hellofreshTotal.toLocaleString("sv-SE")} kr</p>
           </CardContent>
         </Card>
@@ -184,7 +184,7 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
             </div>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-emerald-950">
+            <p className="text-3xl font-bold text-brand-950">
               {daysLeft !== null ? daysLeft : "–"}
             </p>
             <p className="text-xs text-stone-500 mt-1">dagar kvar</p>
@@ -197,11 +197,11 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
           <div className="flex items-start justify-between">
             <div>
               <p className="text-sm text-stone-600">Kampanjstatus</p>
-              <p className="text-lg font-semibold text-emerald-950 mt-1 capitalize">
+              <p className="text-lg font-semibold text-brand-950 mt-1 capitalize">
                 {klass.status === "active" ? "Aktiv" : klass.status}
               </p>
             </div>
-            <Badge variant="outline" className="border-emerald-300 text-emerald-700">
+            <Badge variant="outline" className="border-brand-300 text-brand-700">
               <TrendingUp className="h-3 w-3 mr-1" aria-hidden="true" />
               {klass.tracking_mode === "per_student" ? "Per elev" : "Sammanlagt"}
             </Badge>
@@ -210,14 +210,14 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
       </Card>
 
       {currentCode && (
-        <Card className="border-emerald-200 bg-gradient-to-br from-emerald-50 to-amber-50">
+        <Card className="border-brand-200 bg-gradient-to-br from-brand-50 to-amber-50">
           <CardContent className="pt-6 space-y-4">
             <div className="flex items-start gap-3">
-              <div className="p-2 bg-emerald-100 rounded-lg">
-                <Ticket className="h-5 w-5 text-emerald-700" aria-hidden="true" />
+              <div className="p-2 bg-brand-100 rounded-lg">
+                <Ticket className="h-5 w-5 text-brand-700" aria-hidden="true" />
               </div>
               <div className="flex-1">
-                <p className="text-base font-semibold text-emerald-950">Er klasskod</p>
+                <p className="text-base font-semibold text-brand-950">Er klasskod</p>
                 <p className="text-sm text-stone-600 mt-1">
                   Dela med era kunder. När de återköper kaffe på qlasskassan.se/aterkop och anger koden får ni {pricing.repurchase_bonus} kr per förpackning — automatiskt.
                   Samma kod används i er HelloFresh-länk.
@@ -226,7 +226,7 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
               </div>
             </div>
             {editingCode ? (
-              <div className="flex items-center gap-2 bg-white border border-emerald-200 rounded-lg p-3">
+              <div className="flex items-center gap-2 bg-white border border-brand-200 rounded-lg p-3">
                 <Input
                   value={codeDraft}
                   onChange={(e) => setCodeDraft(e.target.value.toUpperCase())}
@@ -235,7 +235,7 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
                   className="font-mono text-lg tracking-wider uppercase flex-1"
                   autoFocus
                 />
-                <Button size="sm" onClick={saveCode} disabled={savingCode} className="bg-emerald-900 hover:bg-emerald-800 text-amber-50">
+                <Button size="sm" onClick={saveCode} disabled={savingCode} className="bg-brand-900 hover:bg-brand-800 text-amber-50">
                   <Check className="h-3 w-3 mr-1" /> Spara
                 </Button>
                 <Button size="sm" variant="ghost" onClick={() => { setEditingCode(false); setCodeDraft(currentCode); }}>
@@ -243,8 +243,8 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
                 </Button>
               </div>
             ) : (
-              <div className="flex items-center gap-2 bg-white border border-emerald-200 rounded-lg p-3">
-                <code className="font-mono text-2xl font-bold text-emerald-900 flex-1 tracking-wider">
+              <div className="flex items-center gap-2 bg-white border border-brand-200 rounded-lg p-3">
+                <code className="font-mono text-2xl font-bold text-brand-900 flex-1 tracking-wider">
                   {currentCode}
                 </code>
                 <Button
@@ -286,13 +286,13 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
                   <FileText className="h-5 w-5 text-amber-700" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-base font-semibold text-emerald-950">Säljblad / beställningsblankett</p>
+                  <p className="text-base font-semibold text-brand-950">Säljblad / beställningsblankett</p>
                   <p className="text-sm text-stone-600 mt-1">
                     Skriv ut och dela ut till eleverna — kunden fyller i namn, antal och summa.
                   </p>
                 </div>
               </div>
-              <Button asChild className="bg-emerald-950 hover:bg-emerald-900 text-amber-50 shrink-0">
+              <Button asChild className="bg-brand-950 hover:bg-brand-900 text-amber-50 shrink-0">
                 <a href="/qlasskassan-saljblad.pdf" download target="_blank" rel="noopener noreferrer">
                   <Download className="h-4 w-4 mr-2" aria-hidden="true" />
                   Ladda ner säljblad (PDF)
@@ -305,13 +305,13 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
                   <Sparkles className="h-5 w-5 text-amber-700" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-base font-semibold text-emerald-950">Återköpsblad med klasskod</p>
+                  <p className="text-base font-semibold text-brand-950">Återköpsblad med klasskod</p>
                   <p className="text-sm text-stone-600 mt-1">
                     Dela ut till nöjda kunder så de kan återbeställa online och ge er {pricing.repurchase_bonus} kr/förpackning i bonus.
                   </p>
                 </div>
               </div>
-              <Button asChild variant="outline" className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 shrink-0">
+              <Button asChild variant="outline" className="border-brand-300 text-brand-900 hover:bg-brand-50 shrink-0">
                 <a href="/qlasskassan-aterkop.pdf" download target="_blank" rel="noopener noreferrer">
                   <Download className="h-4 w-4 mr-2" aria-hidden="true" />
                   Ladda ner återköpsblad (PDF)
@@ -321,16 +321,16 @@ export default function OverviewTab({ klass, onGoToHelloFresh }: Props) {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pt-4 border-t border-amber-200">
               <div className="flex items-start gap-3">
                 <div className="p-2 bg-hf-soft rounded-lg">
-                  <Salad className="h-5 w-5 text-emerald-800" aria-hidden="true" />
+                  <Salad className="h-5 w-5 text-brand-800" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-base font-semibold text-emerald-950">HelloFresh: kundlänk, QR-kod och affisch</p>
+                  <p className="text-base font-semibold text-brand-950">HelloFresh: kundlänk, QR-kod och affisch</p>
                   <p className="text-sm text-stone-600 mt-1">
                     Kunderna anmäler sig själva via er länk — klassen får {pricing.margin_hellofresh} kr per godkänd kund.
                   </p>
                 </div>
               </div>
-              <Button variant="outline" className="border-emerald-300 text-emerald-900 hover:bg-emerald-50 shrink-0" onClick={onGoToHelloFresh}>
+              <Button variant="outline" className="border-brand-300 text-brand-900 hover:bg-brand-50 shrink-0" onClick={onGoToHelloFresh}>
                 Öppna HelloFresh-fliken
               </Button>
             </div>

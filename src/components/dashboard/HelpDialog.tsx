@@ -14,7 +14,7 @@ export default function HelpDialog() {
       </SheetTrigger>
       <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
         <SheetHeader>
-          <SheetTitle className="text-emerald-950">Så fungerar din dashboard</SheetTitle>
+          <SheetTitle className="text-brand-950">Så fungerar din dashboard</SheetTitle>
           <SheetDescription>
             Klicka på en rubrik för att se förklaringen.
           </SheetDescription>
@@ -22,7 +22,7 @@ export default function HelpDialog() {
 
         <Accordion type="single" collapsible className="mt-4">
           <AccordionItem value="overview">
-            <AccordionTrigger className="text-emerald-950">
+            <AccordionTrigger className="text-brand-950">
               <span className="flex items-center gap-2">
                 <LayoutDashboard className="h-4 w-4" aria-hidden="true" /> Översikt
               </span>
@@ -34,7 +34,7 @@ export default function HelpDialog() {
           </AccordionItem>
 
           <AccordionItem value="order">
-            <AccordionTrigger className="text-emerald-950">
+            <AccordionTrigger className="text-brand-950">
               <span className="flex items-center gap-2">
                 <ShoppingBag className="h-4 w-4" aria-hidden="true" /> Beställning
               </span>
@@ -46,15 +46,15 @@ export default function HelpDialog() {
           </AccordionItem>
 
           <AccordionItem value="students">
-            <AccordionTrigger className="text-emerald-950">
+            <AccordionTrigger className="text-brand-950">
               <span className="flex items-center gap-2">
                 <Users className="h-4 w-4" aria-hidden="true" /> Eleverna
               </span>
             </AccordionTrigger>
             <AccordionContent className="text-stone-600 space-y-2">
               <p>Lägg till eleverna i klassen och håll koll på vad var och en sålt. Bra för att se vem som sålt mest eller belöna prestationer.</p>
-              <p className="flex items-start gap-2 bg-emerald-50 border border-emerald-200 rounded-md p-3">
-                <Share2 className="h-4 w-4 text-emerald-700 mt-0.5 shrink-0" aria-hidden="true" />
+              <p className="flex items-start gap-2 bg-brand-50 border border-brand-200 rounded-md p-3">
+                <Share2 className="h-4 w-4 text-brand-700 mt-0.5 shrink-0" aria-hidden="true" />
                 <span>
                   Klicka på <strong>Dela elevlänk</strong> för att få en länk + QR-kod att skicka till eleverna. De rapporterar sin egen försäljning direkt — antalet adderas automatiskt på deras totalsumma här.
                 </span>
@@ -63,7 +63,7 @@ export default function HelpDialog() {
           </AccordionItem>
 
           <AccordionItem value="hellofresh">
-            <AccordionTrigger className="text-emerald-950">
+            <AccordionTrigger className="text-brand-950">
               <span className="flex items-center gap-2">
                 <Salad className="h-4 w-4" aria-hidden="true" /> HelloFresh
               </span>
@@ -76,7 +76,7 @@ export default function HelpDialog() {
           </AccordionItem>
 
           <AccordionItem value="repurchases">
-            <AccordionTrigger className="text-emerald-950">
+            <AccordionTrigger className="text-brand-950">
               <span className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4" aria-hidden="true" /> Återköp
               </span>
@@ -88,7 +88,7 @@ export default function HelpDialog() {
           </AccordionItem>
 
           <AccordionItem value="settings">
-            <AccordionTrigger className="text-emerald-950">
+            <AccordionTrigger className="text-brand-950">
               <span className="flex items-center gap-2">
                 <Settings className="h-4 w-4" aria-hidden="true" /> Inställningar
               </span>
@@ -100,13 +100,13 @@ export default function HelpDialog() {
           </AccordionItem>
 
           <AccordionItem value="contact">
-            <AccordionTrigger className="text-emerald-950">
+            <AccordionTrigger className="text-brand-950">
               <span className="flex items-center gap-2">
                 <Mail className="h-4 w-4" aria-hidden="true" /> Behöver du hjälp?
               </span>
             </AccordionTrigger>
             <AccordionContent className="text-stone-600">
-              <p>Hör av dig till <a href="mailto:kontakt@scandinaviancoffee.se" className="text-emerald-700 underline">kontakt@scandinaviancoffee.se</a> så hjälper vi dig.</p>
+              <p>Hör av dig till <a href="mailto:kontakt@scandinaviancoffee.se" className="text-brand-700 underline">kontakt@scandinaviancoffee.se</a> så hjälper vi dig.</p>
             </AccordionContent>
           </AccordionItem>
         </Accordion>

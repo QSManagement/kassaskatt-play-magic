@@ -59,7 +59,7 @@ export default function AdminUsers() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-emerald-950 tracking-tight">Användare</h1>
+        <h1 className="text-3xl font-bold text-brand-950 tracking-tight">Användare</h1>
         <p className="text-stone-600 mt-1">
           {admins.length} admin · {teachers.length} lärare
         </p>
@@ -67,7 +67,7 @@ export default function AdminUsers() {
 
       <Card>
         <CardContent className="p-6">
-          <h2 className="font-semibold text-emerald-950 mb-4">Admins</h2>
+          <h2 className="font-semibold text-brand-950 mb-4">Admins</h2>
           {admins.length === 0 ? (
             <p className="text-stone-500 text-sm">Inga admins.</p>
           ) : (
@@ -91,7 +91,7 @@ export default function AdminUsers() {
                     <TableCell>
                       <Badge
                         variant="outline"
-                        className="bg-emerald-100 text-emerald-800 border-emerald-200"
+                        className="bg-brand-100 text-brand-800 border-brand-200"
                       >
                         Admin
                       </Badge>
@@ -106,7 +106,7 @@ export default function AdminUsers() {
 
       <Card>
         <CardContent className="p-6">
-          <h2 className="font-semibold text-emerald-950 mb-4">Lärare</h2>
+          <h2 className="font-semibold text-brand-950 mb-4">Lärare</h2>
           {teachers.length === 0 ? (
             <p className="text-stone-500 text-sm">
               <Users className="h-6 w-6 inline mr-2 text-stone-300" aria-hidden="true" />

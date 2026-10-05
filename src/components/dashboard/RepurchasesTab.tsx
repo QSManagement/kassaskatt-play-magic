@@ -48,7 +48,7 @@ export default function RepurchasesTab({ klass }: Props) {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-emerald-950 text-lg">Hur det funkar</CardTitle>
+          <CardTitle className="text-brand-950 text-lg">Hur det funkar</CardTitle>
         </CardHeader>
         <CardContent className="text-sm text-stone-700 space-y-2">
           <p>
@@ -62,7 +62,7 @@ export default function RepurchasesTab({ klass }: Props) {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-emerald-950 text-lg">Återköp ({repurchases.length})</CardTitle>
+          <CardTitle className="text-brand-950 text-lg">Återköp ({repurchases.length})</CardTitle>
         </CardHeader>
         <CardContent>
           {loading ? (
@@ -78,7 +78,7 @@ export default function RepurchasesTab({ klass }: Props) {
               {repurchases.map((r) => (
                 <div key={r.id} className="flex items-center justify-between border-b border-stone-100 py-3 last:border-0">
                   <div>
-                    <p className="text-sm font-medium text-emerald-950">
+                    <p className="text-sm font-medium text-brand-950">
                       {r.quantity}× {r.product === "gold" ? "Gold malet" : "Crema bönor"}
                     </p>
                     <p className="text-xs text-stone-500">

@@ -73,7 +73,7 @@ export default function SettingsTab({ klass, user, onUpdated }: Props) {
     <div className="space-y-6 max-w-2xl">
       <Card>
         <CardHeader>
-          <CardTitle className="text-emerald-950">Kontaktuppgifter</CardTitle>
+          <CardTitle className="text-brand-950">Kontaktuppgifter</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
@@ -91,7 +91,7 @@ export default function SettingsTab({ klass, user, onUpdated }: Props) {
                 type="button"
                 variant={trackingMode === "aggregate" ? "default" : "outline"}
                 onClick={() => setTrackingMode("aggregate")}
-                className={trackingMode === "aggregate" ? "bg-emerald-900 hover:bg-emerald-800" : ""}
+                className={trackingMode === "aggregate" ? "bg-brand-900 hover:bg-brand-800" : ""}
               >
                 Sammanlagt
               </Button>
@@ -99,7 +99,7 @@ export default function SettingsTab({ klass, user, onUpdated }: Props) {
                 type="button"
                 variant={trackingMode === "per_student" ? "default" : "outline"}
                 onClick={() => setTrackingMode("per_student")}
-                className={trackingMode === "per_student" ? "bg-emerald-900 hover:bg-emerald-800" : ""}
+                className={trackingMode === "per_student" ? "bg-brand-900 hover:bg-brand-800" : ""}
               >
                 Per elev
               </Button>
@@ -108,7 +108,7 @@ export default function SettingsTab({ klass, user, onUpdated }: Props) {
               Per-elev-läge visar en flik där du kan registrera vad varje elev sålt.
             </p>
           </div>
-          <Button onClick={saveContact} disabled={saving} className="bg-emerald-900 hover:bg-emerald-800">
+          <Button onClick={saveContact} disabled={saving} className="bg-brand-900 hover:bg-brand-800">
             {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Spara
           </Button>
@@ -117,7 +117,7 @@ export default function SettingsTab({ klass, user, onUpdated }: Props) {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-emerald-950">Förening</CardTitle>
+          <CardTitle className="text-brand-950">Förening</CardTitle>
           <p className="text-sm text-stone-600">
             Vi behöver dessa uppgifter för faktureringen. Dubbelkolla att de stämmer.
           </p>
@@ -135,7 +135,7 @@ export default function SettingsTab({ klass, user, onUpdated }: Props) {
             <Label htmlFor="bank_account">Bankgiro</Label>
             <Input id="bank_account" value={bankAccount} onChange={(e) => setBankAccount(e.target.value)} />
           </div>
-          <Button onClick={saveAssociation} disabled={savingAssoc} className="bg-emerald-900 hover:bg-emerald-800">
+          <Button onClick={saveAssociation} disabled={savingAssoc} className="bg-brand-900 hover:bg-brand-800">
             {savingAssoc && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Spara föreningsuppgifter
           </Button>
@@ -144,12 +144,12 @@ export default function SettingsTab({ klass, user, onUpdated }: Props) {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-emerald-950">Säkerhet</CardTitle>
+          <CardTitle className="text-brand-950">Säkerhet</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="flex justify-between items-center">
             <div>
-              <p className="font-medium text-emerald-950">Mejl</p>
+              <p className="font-medium text-brand-950">Mejl</p>
               <p className="text-sm text-stone-600">{user?.email}</p>
             </div>
           </div>

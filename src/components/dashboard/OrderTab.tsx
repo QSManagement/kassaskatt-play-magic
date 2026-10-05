@@ -213,15 +213,15 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-start gap-3 bg-hf-soft border border-emerald-200 rounded-lg p-4">
-        <Info className="h-5 w-5 text-emerald-800 shrink-0 mt-0.5" aria-hidden="true" />
-        <p className="text-sm text-emerald-950">
+      <div className="flex items-start gap-3 bg-hf-soft border border-brand-200 rounded-lg p-4">
+        <Info className="h-5 w-5 text-brand-800 shrink-0 mt-0.5" aria-hidden="true" />
+        <p className="text-sm text-brand-950">
           Den här fliken gäller <strong>kaffebeställningar</strong>. HelloFresh-anmälningar sköter kunderna själva via er länk — se fliken <strong>HelloFresh</strong> för länk, QR-kod och status.
         </p>
       </div>
       <Card>
         <CardHeader>
-          <CardTitle className="text-emerald-950">Skicka in beställning</CardTitle>
+          <CardTitle className="text-brand-950">Skicka in beställning</CardTitle>
           <p className="text-sm text-stone-600">
             Räkna ihop hur mycket klassen sålt totalt och skicka in beställningen.
             Vi fakturerar föreningen och levererar till skolan inom 5 arbetsdagar.
@@ -230,8 +230,8 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             {studentTotals && (studentTotals.gold > 0 || studentTotals.crema > 0) && (
-              <div className="flex items-center justify-between bg-emerald-50 border border-emerald-200 rounded-lg p-3 text-sm">
-                <div className="text-emerald-900">
+              <div className="flex items-center justify-between bg-brand-50 border border-brand-200 rounded-lg p-3 text-sm">
+                <div className="text-brand-900">
                   Eleverna har sålt totalt{" "}
                   <strong>{studentTotals.gold} Gold</strong> och{" "}
                   <strong>{studentTotals.crema} Crema</strong>.
@@ -278,8 +278,8 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
 
             <div className="space-y-3 border border-stone-200 rounded-lg p-4 bg-stone-50">
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-emerald-900" aria-hidden="true" />
-                <h3 className="font-semibold text-emerald-950 text-sm">Leveransadress</h3>
+                <MapPin className="h-4 w-4 text-brand-900" aria-hidden="true" />
+                <h3 className="font-semibold text-brand-950 text-sm">Leveransadress</h3>
               </div>
               <p className="text-xs text-stone-600">
                 Vart ska vi leverera förpackningarna? Vanligtvis till skolan.
@@ -328,10 +328,10 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
               </div>
             </div>
 
-            <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 space-y-2">
+            <div className="bg-brand-50 border border-brand-200 rounded-lg p-4 space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-stone-700">Klassen tjänar:</span>
-                <span className="font-semibold text-emerald-900">{totalToClass.toLocaleString("sv-SE")} kr</span>
+                <span className="font-semibold text-brand-900">{totalToClass.toLocaleString("sv-SE")} kr</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-stone-700">Vår faktura till föreningen:</span>
@@ -344,7 +344,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                   </span>
                 </span>
               </div>
-              <div className="flex justify-between text-xs text-stone-500 pt-2 border-t border-emerald-200">
+              <div className="flex justify-between text-xs text-stone-500 pt-2 border-t border-brand-200">
                 <span>Totalt klassen sålt för:</span>
                 <span>{(totalToClass + totalToInvoice).toLocaleString("sv-SE")} kr</span>
               </div>
@@ -362,7 +362,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
             <Button
               type="submit"
               disabled={submitting || (qtyGold === 0 && qtyCrema === 0)}
-              className="w-full bg-emerald-900 hover:bg-emerald-800"
+              className="w-full bg-brand-900 hover:bg-brand-800"
             >
               {submitting ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -377,7 +377,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-emerald-950 text-lg flex items-center gap-2">
+          <CardTitle className="text-brand-950 text-lg flex items-center gap-2">
             <Package className="h-5 w-5" aria-hidden="true" />
             Tidigare beställningar
           </CardTitle>
@@ -406,7 +406,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                     }`}
                   >
                     <div className="min-w-0">
-                      <p className={`font-medium ${isCancelled ? "text-stone-500 line-through" : "text-emerald-950"}`}>
+                      <p className={`font-medium ${isCancelled ? "text-stone-500 line-through" : "text-brand-950"}`}>
                         {o.qty_gold} Gold + {o.qty_crema} Crema
                       </p>
                       <p className="text-xs text-stone-500 mt-1">
@@ -429,7 +429,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="text-right">
-                        <p className={`font-semibold ${isCancelled ? "text-stone-400" : "text-emerald-900"}`}>
+                        <p className={`font-semibold ${isCancelled ? "text-stone-400" : "text-brand-900"}`}>
                           {Number(o.total_to_class).toLocaleString("sv-SE")} kr
                         </p>
                         <Badge variant="outline" className="text-xs mt-1">
@@ -528,10 +528,10 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
                     />
                   </div>
                 </div>
-                <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 space-y-1 text-sm">
+                <div className="bg-brand-50 border border-brand-200 rounded-lg p-3 space-y-1 text-sm">
                   <div className="flex justify-between">
                     <span className="text-stone-700">Klassen tjänar:</span>
-                    <span className="font-semibold text-emerald-900">{tClass.toLocaleString("sv-SE")} kr</span>
+                    <span className="font-semibold text-brand-900">{tClass.toLocaleString("sv-SE")} kr</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-stone-700">Faktura till föreningen:</span>
@@ -545,7 +545,7 @@ export default function OrderTab({ klass, onOrdersChanged }: Props) {
             <Button variant="outline" onClick={() => setEditOrder(null)} disabled={savingEdit}>
               Avbryt
             </Button>
-            <Button onClick={saveEdit} disabled={savingEdit} className="bg-emerald-900 hover:bg-emerald-800">
+            <Button onClick={saveEdit} disabled={savingEdit} className="bg-brand-900 hover:bg-brand-800">
               {savingEdit && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Spara ändringar
             </Button>

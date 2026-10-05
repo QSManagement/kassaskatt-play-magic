@@ -101,8 +101,8 @@ const main = {
   fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
 }
 const container = { padding: '32px 24px', maxWidth: '560px', margin: '0 auto' }
-const h1 = { fontSize: '26px', fontWeight: 'bold', color: '#052e16', margin: '0 0 16px' }
-const h2 = { fontSize: '18px', fontWeight: 'bold', color: '#052e16', margin: '0 0 12px' }
+const h1 = { fontSize: '26px', fontWeight: 'bold', color: '#0B1D45', margin: '0 0 16px' }
+const h2 = { fontSize: '18px', fontWeight: 'bold', color: '#0B1D45', margin: '0 0 12px' }
 const text = { fontSize: '15px', color: '#1c1917', lineHeight: '1.6', margin: '0 0 14px' }
 const card = {
   backgroundColor: '#fffbeb',
@@ -112,7 +112,7 @@ const card = {
   margin: '20px 0',
 }
 const button = {
-  backgroundColor: '#052e16',
+  backgroundColor: '#0B1D45',
   color: '#fef3c7',
   padding: '12px 28px',
   borderRadius: '999px',
@@ -135,8 +135,8 @@ const hr = { borderColor: '#e7e5e4', margin: '32px 0 20px' }
 const footer = { fontSize: '13px', color: '#78716c', margin: '0 0 8px' }
 const link = { color: '#b45309', textDecoration: 'underline' }
 const codeCard = {
-  backgroundColor: '#ecfdf5',
-  border: '1px solid #a7f3d0',
+  backgroundColor: '#F0F5FD',
+  border: '1px solid #C0D3F5',
   borderRadius: '12px',
   padding: '18px 22px',
   margin: '20px 0 24px',
@@ -144,7 +144,7 @@ const codeCard = {
 }
 const codeLabel = {
   fontSize: '12px',
-  color: '#047857',
+  color: '#17469E',
   textTransform: 'uppercase' as const,
   letterSpacing: '0.08em',
   margin: '0 0 6px',
@@ -152,7 +152,7 @@ const codeLabel = {
 const codeValue = {
   fontSize: '28px',
   fontWeight: 'bold' as const,
-  color: '#052e16',
+  color: '#0B1D45',
   letterSpacing: '0.08em',
   margin: '0 0 10px',
   fontFamily: 'ui-monospace, Menlo, Consolas, monospace',

@@ -103,13 +103,13 @@ export default function StudentReport() {
       <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4">
         <Card className="max-w-md w-full">
           <CardHeader>
-            <CardTitle className="text-emerald-950">Klassen hittades inte</CardTitle>
+            <CardTitle className="text-brand-950">Klassen hittades inte</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-stone-600 mb-4">
               Klasskoden <strong>{code}</strong> finns inte eller så är klassen inte aktiv. Kontrollera länken med din lärare.
             </p>
-            <Link to="/" className="text-emerald-700 underline">Till startsidan</Link>
+            <Link to="/" className="text-brand-700 underline">Till startsidan</Link>
           </CardContent>
         </Card>
       </div>
@@ -127,7 +127,7 @@ export default function StudentReport() {
 
       <main className="max-w-2xl mx-auto px-4 py-8">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-emerald-950">{classInfo?.school_name}</h1>
+          <h1 className="text-2xl font-bold text-brand-950">{classInfo?.school_name}</h1>
           <p className="text-stone-600">{classInfo?.class_name}</p>
         </div>
 
@@ -139,8 +139,8 @@ export default function StudentReport() {
             onClick={() => setProduct("kaffe")}
             className={`flex items-center justify-center gap-2 rounded-lg border px-4 py-3 text-sm font-semibold transition-colors ${
               product === "kaffe"
-                ? "bg-emerald-900 text-white border-emerald-900"
-                : "bg-white text-stone-600 border-stone-300 hover:border-emerald-400"
+                ? "bg-brand-900 text-white border-brand-900"
+                : "bg-white text-stone-600 border-stone-300 hover:border-brand-400"
             }`}
           >
             <Coffee className="h-4 w-4" aria-hidden="true" />
@@ -171,9 +171,9 @@ export default function StudentReport() {
         ) : success ? (
           <Card>
             <CardContent className="pt-6 text-center space-y-4">
-              <CheckCircle2 className="h-14 w-14 text-emerald-600 mx-auto" aria-hidden="true" />
+              <CheckCircle2 className="h-14 w-14 text-brand-600 mx-auto" aria-hidden="true" />
               <div>
-                <h2 className="text-xl font-bold text-emerald-950">Tack {success.name}!</h2>
+                <h2 className="text-xl font-bold text-brand-950">Tack {success.name}!</h2>
                 <p className="text-stone-600 mt-1">
                   Du rapporterade <strong>{success.gold}</strong> Gold och <strong>{success.crema}</strong> Crema.
                 </p>
@@ -187,7 +187,7 @@ export default function StudentReport() {
         ) : (
           <Card>
             <CardHeader>
-              <CardTitle className="text-emerald-950 flex items-center gap-2">
+              <CardTitle className="text-brand-950 flex items-center gap-2">
                 <Coffee className="h-5 w-5" aria-hidden="true" />
                 Rapportera din försäljning
               </CardTitle>
@@ -283,7 +283,7 @@ export default function StudentReport() {
                 <Button
                   type="submit"
                   disabled={submitting}
-                  className="w-full bg-emerald-900 hover:bg-emerald-800"
+                  className="w-full bg-brand-900 hover:bg-brand-800"
                 >
                   {submitting ? "Skickar..." : "Rapportera"}
                 </Button>

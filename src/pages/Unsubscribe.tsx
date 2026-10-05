@@ -70,11 +70,11 @@ export default function Unsubscribe() {
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-100">
                   <MailX className="h-8 w-8 text-amber-700" />
                 </div>
-                <h1 className="text-2xl font-bold text-emerald-950">Avregistrera mejl</h1>
+                <h1 className="text-2xl font-bold text-brand-950">Avregistrera mejl</h1>
                 <p className="text-stone-700">
                   Klicka på knappen nedan för att avregistrera dig från utskick från Qlasskassan.
                 </p>
-                <Button onClick={confirm} className="bg-emerald-900 hover:bg-emerald-800 text-amber-50 w-full">
+                <Button onClick={confirm} className="bg-brand-900 hover:bg-brand-800 text-amber-50 w-full">
                   Bekräfta avregistrering
                 </Button>
               </>
@@ -87,10 +87,10 @@ export default function Unsubscribe() {
             )}
             {state.kind === "done" && (
               <>
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100">
-                  <CheckCircle2 className="h-8 w-8 text-emerald-700" />
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-100">
+                  <CheckCircle2 className="h-8 w-8 text-brand-700" />
                 </div>
-                <h1 className="text-2xl font-bold text-emerald-950">Du är avregistrerad</h1>
+                <h1 className="text-2xl font-bold text-brand-950">Du är avregistrerad</h1>
                 <p className="text-stone-700">Du kommer inte längre få mejl från oss.</p>
               </>
             )}
@@ -99,7 +99,7 @@ export default function Unsubscribe() {
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-stone-100">
                   <CheckCircle2 className="h-8 w-8 text-stone-500" />
                 </div>
-                <h1 className="text-2xl font-bold text-emerald-950">Redan avregistrerad</h1>
+                <h1 className="text-2xl font-bold text-brand-950">Redan avregistrerad</h1>
                 <p className="text-stone-700">Den här mejladressen är redan avregistrerad.</p>
               </>
             )}
@@ -108,7 +108,7 @@ export default function Unsubscribe() {
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100">
                   <AlertCircle className="h-8 w-8 text-red-700" />
                 </div>
-                <h1 className="text-2xl font-bold text-emerald-950">Länken fungerade inte</h1>
+                <h1 className="text-2xl font-bold text-brand-950">Länken fungerade inte</h1>
                 <p className="text-stone-700">
                   {state.kind === "error" ? state.message : "Länken är ogiltig eller har gått ut."}
                 </p>

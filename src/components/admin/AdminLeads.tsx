@@ -59,7 +59,7 @@ export default function AdminLeads() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-emerald-950 tracking-tight">Leads</h1>
+        <h1 className="text-3xl font-bold text-brand-950 tracking-tight">Leads</h1>
         <p className="text-stone-600 mt-1">
           {pending.length} väntar på aktivering · {otherLeads.length + startguide.length} övriga leads
         </p>
@@ -98,7 +98,7 @@ export default function AdminLeads() {
                           {new Date(p.created_at).toLocaleDateString("sv-SE")}
                         </TableCell>
                         <TableCell>
-                          <div className="font-medium text-emerald-950">{p.school_name}</div>
+                          <div className="font-medium text-brand-950">{p.school_name}</div>
                           {p.class_name && (
                             <div className="text-xs text-stone-500">
                               {p.class_name} · {p.student_count} elever

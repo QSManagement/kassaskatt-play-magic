@@ -40,7 +40,7 @@ export function OrderStatusBadge({
 }) {
   if (deliveryStatus === "delivered")
     return (
-      <Badge variant="outline" className="bg-emerald-100 text-emerald-800 border-emerald-200">
+      <Badge variant="outline" className="bg-green-100 text-green-800 border-green-200">
         Levererad
       </Badge>
     );
@@ -52,7 +52,7 @@ export function OrderStatusBadge({
     );
   if (invoiceStatus === "paid")
     return (
-      <Badge variant="outline" className="bg-emerald-100 text-emerald-800 border-emerald-200">
+      <Badge variant="outline" className="bg-green-100 text-green-800 border-green-200">
         Betald
       </Badge>
     );
@@ -210,7 +210,7 @@ export default function AdminClassDetail() {
     <div className="space-y-6">
       <Link
         to="/admin/klasser"
-        className="inline-flex items-center gap-2 text-sm text-stone-600 hover:text-emerald-900"
+        className="inline-flex items-center gap-2 text-sm text-stone-600 hover:text-brand-900"
       >
         <ArrowLeft className="h-4 w-4" aria-hidden="true" />
         Tillbaka till klasser
@@ -219,7 +219,7 @@ export default function AdminClassDetail() {
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
         <div>
           <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-3xl font-bold text-emerald-950 tracking-tight">{klass.school_name}</h1>
+            <h1 className="text-3xl font-bold text-brand-950 tracking-tight">{klass.school_name}</h1>
             <StatusBadge status={klass.status} />
           </div>
           <p className="text-stone-600 mt-1">
@@ -236,7 +236,7 @@ export default function AdminClassDetail() {
               }}
             >
               <AlertDialogTrigger asChild>
-                <Button className="bg-emerald-900 hover:bg-emerald-800">
+                <Button className="bg-brand-900 hover:bg-brand-800">
                   <CheckCircle2 className="h-4 w-4 mr-2" aria-hidden="true" />
                   Aktivera klass
                 </Button>
@@ -267,7 +267,7 @@ export default function AdminClassDetail() {
                 </div>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Avbryt</AlertDialogCancel>
-                  <AlertDialogAction onClick={activate} className="bg-emerald-900 hover:bg-emerald-800">
+                  <AlertDialogAction onClick={activate} className="bg-brand-900 hover:bg-brand-800">
                     Ja, aktivera
                   </AlertDialogAction>
                 </AlertDialogFooter>
@@ -279,7 +279,7 @@ export default function AdminClassDetail() {
               variant="outline"
               onClick={resendActivationEmail}
               disabled={resending}
-              className="border-emerald-200 text-emerald-900 hover:bg-emerald-50"
+              className="border-brand-200 text-brand-900 hover:bg-brand-50"
             >
               <Send className="h-4 w-4 mr-2" aria-hidden="true" />
               {resending ? "Skickar…" : "Skicka om aktiveringsmejl"}
@@ -331,7 +331,7 @@ export default function AdminClassDetail() {
         <TabsContent value="info" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg text-emerald-950">Kontakt</CardTitle>
+              <CardTitle className="text-lg text-brand-950">Kontakt</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 text-sm">
               <DetailRow icon={Mail} label="Mejl" value={klass.contact_email} />
@@ -342,7 +342,7 @@ export default function AdminClassDetail() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg text-emerald-950">Förening (för fakturering)</CardTitle>
+              <CardTitle className="text-lg text-brand-950">Förening (för fakturering)</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 text-sm">
               <DetailRow icon={Building2} label="Föreningsnamn" value={klass.association_name} />
@@ -353,7 +353,7 @@ export default function AdminClassDetail() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg text-emerald-950">Mål och kampanj</CardTitle>
+              <CardTitle className="text-lg text-brand-950">Mål och kampanj</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 text-sm">
               <DetailRow
@@ -482,7 +482,7 @@ function StatCard({ label, value }: { label: string; value: string | number }) {
     <Card>
       <CardContent className="pt-6">
         <p className="text-stone-600 text-xs uppercase tracking-wide">{label}</p>
-        <p className="text-2xl font-bold text-emerald-950 mt-1">{value}</p>
+        <p className="text-2xl font-bold text-brand-950 mt-1">{value}</p>
       </CardContent>
     </Card>
   );
@@ -503,7 +503,7 @@ function DetailRow({
         {Icon && <Icon className="h-4 w-4" aria-hidden="true" />}
         <span>{label}</span>
       </div>
-      <span className="font-medium text-emerald-950 text-right">{value || "–"}</span>
+      <span className="font-medium text-brand-950 text-right">{value || "–"}</span>
     </div>
   );
 }
