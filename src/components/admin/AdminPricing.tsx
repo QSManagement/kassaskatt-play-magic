@@ -20,7 +20,7 @@ const coffeeFields: { key: keyof Pricing; label: string; help?: string }[] = [
 ];
 
 const hellofreshFields: { key: keyof Pricing; label: string; help?: string }[] = [
-  { key: "margin_hellofresh", label: "Ersättning per HelloFresh-sälj", help: "Betalas ut till klassen per godkänd anmälan. Låses på anmälan när den skapas. Ingen återköpsbonus på HelloFresh." },
+  { key: "margin_hellofresh", label: "Ersättning per matkassekund", help: "Betalas ut till klassen per godkänd anmälan. Låses på anmälan när den skapas. Ingen återköpsbonus på HelloFresh." },
 ];
 
 export default function AdminPricing() {
@@ -122,7 +122,7 @@ export default function AdminPricing() {
             </div>
           ))}
 
-          <h3 className="text-lg font-semibold text-brand-950 pt-6 border-t border-stone-200">HelloFresh</h3>
+          <h3 className="text-lg font-semibold text-brand-950 pt-6 border-t border-stone-200">Matkassar</h3>
           {hellofreshFields.map((f) => (
             <div key={f.key} className="grid md:grid-cols-2 gap-4 items-start">
               <div>

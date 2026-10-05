@@ -11,14 +11,14 @@ export default function SiteFooter() {
               <Logo size="md" variant="light" showTagline />
             </div>
             <p className="text-sm leading-relaxed">
-              Premiumkaffe från Caffè Gondoliere och HelloFresh matkassar för klassinsamlingar — ett konto, en klasskod. Auktoriserad svensk återförsäljare av Caffè Gondoliere.
+              Premiumkaffe från Caffè Gondoliere och Matkassar för klassinsamlingar — ett konto, en klasskod. Auktoriserad svensk återförsäljare av Caffè Gondoliere.
             </p>
           </div>
           <div>
             <div className="font-semibold text-amber-50 mb-4 text-sm">Produkter</div>
             <ul className="space-y-2 text-sm">
               <li><Link to="/kaffe" className="hover:text-amber-300 transition">Kaffe – Gold &amp; Crema</Link></li>
-              <li><Link to="/hellofresh" className="hover:text-amber-300 transition">HelloFresh matkassar</Link></li>
+              <li><Link to="/matkassar" className="hover:text-amber-300 transition">Matkassar</Link></li>
             </ul>
           </div>
           <div>

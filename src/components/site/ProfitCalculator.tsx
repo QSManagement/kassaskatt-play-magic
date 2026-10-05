@@ -36,17 +36,17 @@ export default function ProfitCalculator({
   const grandTotal = coffeeEarnings + hfEarnings;
 
   const toggleCount = (showCoffee ? 1 : 0) + (showHf ? 1 : 0);
-  const headingScope = showHf && !showCoffee ? " på HelloFresh" : "";
+  const headingScope = showHf && !showCoffee ? " på Matkassar" : "";
   const bagsText = totalBags > 0 ? `${totalBags} sålda förpackning${totalBags === 1 ? "" : "ar"}` : "";
-  const customersText = hfCustomers > 0 ? `${hfCustomers} HelloFresh-kund${hfCustomers === 1 ? "" : "er"}` : "";
+  const customersText = hfCustomers > 0 ? `${hfCustomers} matkassekund${hfCustomers === 1 ? "" : "er"}` : "";
   const basis = [bagsText, customersText].filter(Boolean).join(" + ");
 
-  const glow = accent === "lime" ? "bg-hf-lime" : "bg-amber-300";
-  const chip = accent === "lime" ? "bg-hf-lime/20 text-hf-lime" : "bg-amber-300/20 text-amber-200";
-  const italic = accent === "lime" ? "text-hf-lime" : "text-amber-300";
+  const glow = accent === "lime" ? "bg-brand-300" : "bg-amber-300";
+  const chip = accent === "lime" ? "bg-brand-300/20 text-brand-300" : "bg-amber-300/20 text-amber-200";
+  const italic = accent === "lime" ? "text-brand-300" : "text-amber-300";
   const cta =
     accent === "lime"
-      ? "bg-hf-lime text-brand-950 hover:brightness-95"
+      ? "bg-brand-300 text-brand-950 hover:brightness-95"
       : "bg-amber-300 text-brand-950 hover:bg-amber-200";
 
   const slider = "w-full h-2 bg-stone-200 rounded-full appearance-none cursor-pointer";
@@ -108,7 +108,7 @@ export default function ProfitCalculator({
           <div className="space-y-8">
             <div className={`grid ${toggleCount > 1 ? "grid-cols-2" : "grid-cols-1"} gap-3`}>
               {showCoffee && productToggle(coffeeOn, () => setCoffeeOn(!coffeeOn), <Coffee className="w-5 h-5 text-amber-700" aria-hidden="true" />, "Kaffe")}
-              {showHf && productToggle(hfOn, () => setHfOn(!hfOn), <Salad className="w-5 h-5 text-hf-lime" aria-hidden="true" />, "HelloFresh")}
+              {showHf && productToggle(hfOn, () => setHfOn(!hfOn), <Salad className="w-5 h-5 text-brand-700" aria-hidden="true" />, "Matkassar")}
             </div>
 
             <div>
@@ -142,10 +142,10 @@ export default function ProfitCalculator({
             {showHf && hfOn && (
               <div>
                 <div className="flex justify-between items-baseline mb-3">
-                  <label className="font-semibold text-brand-950">HelloFresh-kunder per elev</label>
+                  <label className="font-semibold text-brand-950">matkassekunder per elev</label>
                   <span className="text-3xl font-bold text-brand-900">{hfPerStudent}</span>
                 </div>
-                <input type="range" min="0" max="50" value={hfPerStudent} onChange={(e) => setHfPerStudent(Number(e.target.value))} className={`${slider} accent-brand-800`} aria-label="Antal HelloFresh-kunder per elev" />
+                <input type="range" min="0" max="50" value={hfPerStudent} onChange={(e) => setHfPerStudent(Number(e.target.value))} className={`${slider} accent-brand-800`} aria-label="Antal matkassekunder per elev" />
                 <div className="flex justify-between text-xs text-brand-900/50 mt-1"><span>0</span><span>50</span></div>
                 <div className="text-xs text-brand-900/60 mt-2">{students} {students === 1 ? "elev" : "elever"} × {hfPerStudent} = {hfCustomers} kunder totalt. {pricing.margin_hellofresh} kr till klassen per godkänd anmälan — kunderna anmäler sig själva via er länk.</div>
               </div>
@@ -190,8 +190,8 @@ export default function ProfitCalculator({
                 {hfCustomers > 0 && (
                   <div className="flex justify-between items-center gap-3">
                     <span className="text-amber-100/80 text-sm flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-hf-lime shrink-0"></span>
-                      HelloFresh ({hfPerStudent} per elev × {students} {students === 1 ? "elev" : "elever"} × {pricing.margin_hellofresh} kr)
+                      <span className="w-2 h-2 rounded-full bg-brand-300 shrink-0"></span>
+                      Matkassar ({hfPerStudent} per elev × {students} {students === 1 ? "elev" : "elever"} × {pricing.margin_hellofresh} kr)
                     </span>
                     <span className="font-bold whitespace-nowrap">{hfEarnings.toLocaleString("sv-SE")} kr</span>
                   </div>
@@ -199,17 +199,17 @@ export default function ProfitCalculator({
                 {grandTotal === 0 && (
                   <div className="text-amber-100/60 text-sm">
                     {toggleCount > 1
-                      ? "Bocka i kaffe eller HelloFresh för att räkna."
+                      ? "Bocka i kaffe eller Matkassar för att räkna."
                       : "Räkna upp antalet per elev för att se summan."}
                   </div>
                 )}
               </div>
               {!showCoffee && (
                 <p className="text-amber-200/60 text-xs pt-6 border-t border-brand-800">
-                  Ingen återköpsbonus på HelloFresh —{" "}
+                  Ingen återköpsbonus på Matkassar —{" "}
                   <Link
                     to="/kaffe"
-                    className="underline decoration-hf-lime decoration-2 underline-offset-4 hover:text-hf-lime"
+                    className="underline decoration-brand-300 decoration-2 underline-offset-4 hover:text-brand-300"
                   >
                     kombinera med kaffet
                   </Link>{" "}

@@ -13,7 +13,7 @@ const schema = z.object({
   school_name: z.string().trim().min(2, "Skola krävs").max(120),
 });
 
-interface Props { open: boolean; onOpenChange: (open: boolean) => void; product?: "kaffe" | "hellofresh"; }
+interface Props { open: boolean; onOpenChange: (open: boolean) => void; product?: "kaffe" | "matkassar"; }
 
 export function StartguideDialog({ open, onOpenChange, product = "kaffe" }: Props) {
   const [name, setName] = useState("");
@@ -41,7 +41,7 @@ export function StartguideDialog({ open, onOpenChange, product = "kaffe" }: Prop
     try {
       // Log lead (non-blocking, best-effort)
       supabase.from("qlasskassan_leads").insert({
-        source: product === "hellofresh" ? "startguide_hellofresh" : "startguide",
+        source: product === "matkassar" ? "startguide_matkassar" : "startguide",
         name: r.data.name,
         email: r.data.email,
         school_name: r.data.school_name,
@@ -66,7 +66,7 @@ export function StartguideDialog({ open, onOpenChange, product = "kaffe" }: Prop
       <DialogContent className="max-w-md bg-stone-50 border-stone-200">
         <DialogHeader>
           <DialogTitle className="text-brand-950 text-2xl font-bold">
-            {done ? "Mailet är på väg!" : (product === "hellofresh" ? "Få HelloFresh-startguiden" : "Få startguiden")}
+            {done ? "Mailet är på väg!" : (product === "matkassar" ? "Få Matkassar – startguiden" : "Få startguiden")}
           </DialogTitle>
           <DialogDescription className="text-brand-900/70">
             {done ? "Kolla din inkorg om en stund." : "Vi mailar dig en PDF med allt ni behöver för att komma igång."}

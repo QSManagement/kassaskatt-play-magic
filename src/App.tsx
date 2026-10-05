@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import type { JSX } from "react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
@@ -44,6 +44,11 @@ function ProtectedAdmin({ children }: { children: JSX.Element }) {
   return children;
 }
 
+function LegacyMealKitRedirect() {
+  const location = useLocation();
+  return <Navigate to={`${location.pathname.replace("/hellofresh", "/matkassar")}${location.search}${location.hash}`} replace />;
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -65,10 +70,11 @@ const App = () => (
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/salj/:code" element={<StudentReport />} />
             <Route path="/kaffe" element={<Kaffe />} />
-            <Route path="/hellofresh" element={<HelloFresh />} />
-            <Route path="/hellofresh/anmal" element={<HelloFreshSignup />} />
-            <Route path="/hellofresh/anmal/:code" element={<HelloFreshSignup />} />
-            <Route path="/hellofresh/affisch/:code" element={<HelloFreshPoster />} />
+            <Route path="/matkassar/*" element={<LegacyMealKitRedirect />} />
+            <Route path="/matkassar" element={<HelloFresh />} />
+            <Route path="/matkassar/anmal" element={<HelloFreshSignup />} />
+            <Route path="/matkassar/anmal/:code" element={<HelloFreshSignup />} />
+            <Route path="/matkassar/affisch/:code" element={<HelloFreshPoster />} />
             <Route
               path="/dashboard/*"
               element={

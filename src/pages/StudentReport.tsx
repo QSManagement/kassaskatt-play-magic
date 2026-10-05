@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Logo } from "@/components/Logo";
 import { toast } from "sonner";
 import { CheckCircle2, Coffee, Salad } from "lucide-react";
-import HelloFreshSignupForm from "@/components/hellofresh/HelloFreshSignupForm";
+import HelloFreshSignupForm from "@/components/matkassar/HelloFreshSignupForm";
 
 interface StudentRow {
   class_id: string;
@@ -153,12 +153,12 @@ export default function StudentReport() {
             onClick={() => setProduct("hellofresh")}
             className={`flex items-center justify-center gap-2 rounded-lg border px-4 py-3 text-sm font-semibold transition-colors ${
               product === "hellofresh"
-                ? "bg-hf-green text-white border-hf-green"
-                : "bg-white text-stone-600 border-stone-300 hover:border-hf-green"
+                ? "bg-brand-700 text-white border-brand-700"
+                : "bg-white text-stone-600 border-stone-300 hover:border-brand-700"
             }`}
           >
             <Salad className="h-4 w-4" aria-hidden="true" />
-            HelloFresh
+            Matkassar
           </button>
         </div>
 

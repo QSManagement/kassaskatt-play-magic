@@ -19,7 +19,6 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Download, Search, Loader2, Pencil, Wallet } from "lucide-react";
-import hfLogo from "@/assets/hellofresh/hellofresh-logo.png";
 
 interface Signup {
   id: string;
@@ -238,7 +237,7 @@ export default function AdminHelloFresh() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "hellofresh-anmalningar.csv";
+    a.download = "matkassar-anmalningar.csv";
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -259,9 +258,9 @@ export default function AdminHelloFresh() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4 flex-wrap">
-        <img src={hfLogo} alt="HelloFresh" className="h-8 w-auto" loading="lazy" />
+        
         <div>
-          <h1 className="text-2xl font-bold text-brand-950">HelloFresh-anmälningar</h1>
+          <h1 className="text-2xl font-bold text-brand-950">Matkasseanmälningar</h1>
           <p className="text-sm text-stone-600">Godkänn, avvisa och betala ut ersättning till klasserna.</p>
         </div>
       </div>
@@ -327,7 +326,7 @@ export default function AdminHelloFresh() {
         </Select>
         <Button variant="outline" onClick={exportCsv} disabled={filtered.length === 0}>
           <Download className="h-4 w-4 mr-2" aria-hidden="true" />
-          Exportera CSV (till HelloFresh)
+          Exportera CSV (till Matkassar)
         </Button>
       </div>
 
@@ -542,7 +541,7 @@ export default function AdminHelloFresh() {
                   ["city", "Ort"],
                   ["delivery_notes", "Leveransinfo"],
                   ["student_name", "Elev"],
-                  ["hellofresh_reference", "HelloFresh-referens"],
+                  ["hellofresh_reference", "Leverantörsreferens"],
                 ] as [keyof Signup, string][]
               ).map(([key, label]) => (
                 <div key={key}>

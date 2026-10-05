@@ -35,8 +35,8 @@ export default function Villkor() {
         <h2 className="text-2xl font-bold text-brand-950 mt-8 mb-3">7. Ansvarsbegränsning</h2>
         <p>Vårt ansvar är begränsat till varans värde. Vi ansvarar inte för indirekta skador eller utebliven vinst.</p>
 
-        <h2 className="text-2xl font-bold text-brand-950 mt-8 mb-3">8. HelloFresh-samarbete</h2>
-        <p>Klasser kan även förmedla HelloFresh-anmälningar via en unik länk. Kunden anmäler sig själv och godkänner att uppgifterna delas med HelloFresh. Avtal om matkasse tecknas direkt mellan kunden och HelloFresh — Qlasskassan ansvarar inte för HelloFresh produkter, leveranser eller abonnemang. Klassens ersättning betalas ut per godkänd anmälan.</p>
+        <h2 className="text-2xl font-bold text-brand-950 mt-8 mb-3">8. Matkasseförsäljning</h2>
+        <p>Klasser kan även förmedla Matkasseanmälningar via en unik länk. Kunden anmäler sig själv och godkänner att uppgifterna delas med HelloFresh. Avtal om matkasse tecknas direkt mellan kunden och matkasseleverantören — Qlasskassan ansvarar inte för matkasseleverantörens produkter, leveranser eller abonnemang. Klassens ersättning betalas ut per godkänd anmälan.</p>
 
         <h2 className="text-2xl font-bold text-brand-950 mt-8 mb-3">9. Personuppgifter</h2>
         <p>Vi behandlar personuppgifter i enlighet med vår <Link to="/integritetspolicy" className="text-brand-900 underline">integritetspolicy</Link>.</p>

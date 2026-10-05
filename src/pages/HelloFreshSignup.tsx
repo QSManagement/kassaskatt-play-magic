@@ -5,9 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { HelloFreshLockup } from "./HelloFresh";
-import HelloFreshSignupForm from "@/components/hellofresh/HelloFreshSignupForm";
+import HelloFreshSignupForm from "@/components/matkassar/HelloFreshSignupForm";
 import { usePricing } from "@/hooks/usePricing";
-import dishesBlue from "@/assets/hellofresh/hellofresh-dishes-blue.webp";
+import dishesBlue from "@/assets/matkassar/meal-kit.jpg";
 
 interface ClassInfo {
   id: string;
@@ -29,7 +29,7 @@ export default function HelloFreshSignup() {
   const elevParam = searchParams.get("elev") ?? undefined;
 
   useEffect(() => {
-    document.title = "Anmäl dig till HelloFresh – Qlasskassan";
+    document.title = "Anmäl dig till Matkassar – Qlasskassan";
   }, []);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function HelloFreshSignup() {
                 onSubmit={(e) => {
                   e.preventDefault();
                   const c = codeInput.trim();
-                  if (c) navigate(`/hellofresh/anmal/${encodeURIComponent(c)}`);
+                  if (c) navigate(`/matkassar/anmal/${encodeURIComponent(c)}`);
                 }}
                 className="space-y-4"
               >
@@ -105,7 +105,7 @@ export default function HelloFreshSignup() {
             <p className="text-stone-600 mb-4">
               Klasskoden <strong>{code}</strong> finns inte eller så är klassen inte aktiv. Kontrollera länken med din lärare.
             </p>
-            <Link to="/hellofresh/anmal" className="text-brand-700 underline">Försök med en annan kod</Link>
+            <Link to="/matkassar/anmal" className="text-brand-700 underline">Försök med en annan kod</Link>
           </CardContent>
         </Card>
       </div>
@@ -122,26 +122,26 @@ export default function HelloFreshSignup() {
 
       <img
         src={dishesBlue}
-        alt="HelloFresh-rätter på turkos bakgrund"
+        alt="Matkassar-rätter på turkos bakgrund"
         className="w-full h-40 object-cover"
       />
 
       <main className="max-w-2xl mx-auto px-4 py-8 space-y-6">
-        <Card className="border-hf-lime border-2 bg-hf-soft">
+        <Card className="border-brand-300 border-2 bg-brand-50">
           <CardContent className="pt-6">
             <p className="text-brand-950">
               Du stöttar <strong>{klass.class_name}</strong> på <strong>{klass.school_name}</strong> — klassen
-              får <span className="bg-hf-lime px-1.5 py-0.5 rounded font-bold">{pricing.margin_hellofresh} kr</span>{" "}
-              när du blir HelloFresh-kund.
+              får <span className="bg-brand-300 px-1.5 py-0.5 rounded font-bold">{pricing.margin_hellofresh} kr</span>{" "}
+              när du blir matkassekund.
             </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-brand-950">Anmäl dig till HelloFresh</CardTitle>
+            <CardTitle className="text-brand-950">Anmäl dig till Matkassar</CardTitle>
             <p className="text-sm text-stone-600">
-              Fyll i dina uppgifter så skickar vi dem till HelloFresh, som kontaktar dig och startar din leverans. Du betalar HelloFresh direkt.
+              Fyll i dina uppgifter så skickar vi dem till matkasseleverantören, som kontaktar dig och startar din leverans. Du betalar matkasseleverantören direkt.
             </p>
           </CardHeader>
           <CardContent>

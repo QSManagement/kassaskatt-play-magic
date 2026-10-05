@@ -27,7 +27,7 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-// Fältkonfiguration — lägg till HelloFresh-specifika fält här så sparas de i `extra`.
+// Fältkonfiguration — lägg till Matkassar-specifika fält här så sparas de i `extra`.
 const FIELDS: {
   name: keyof FormValues;
   label: string;

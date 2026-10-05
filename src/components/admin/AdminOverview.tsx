@@ -113,10 +113,10 @@ export default function AdminOverview() {
         <KpiCard icon={Package} label="Ordrar denna månad" value={stats.ordersThisMonth} color="brand" link="/admin/ordrar" />
         <KpiCard
           icon={Salad}
-          label="HelloFresh-anmälningar"
+          label="Matkasseanmälningar"
           value={`${stats.hellofreshSignups} · ${stats.hellofreshTotal.toLocaleString("sv-SE")} kr`}
           color="brand"
-          link="/admin/hellofresh"
+          link="/admin/matkassar"
         />
         <KpiCard
           icon={Sparkles}

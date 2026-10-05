@@ -13,7 +13,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { usePricing } from "@/hooks/usePricing";
 import coffeeGold from "@/assets/coffee-gold.png";
 import coffeeCrema from "@/assets/coffee-crema.png";
-import dishesBlue from "@/assets/hellofresh/hellofresh-dishes-blue.webp";
+import dishesBlue from "@/assets/matkassar/meal-kit.jpg";
 
 export default function Kaffe() {
   const pricing = usePricing();
@@ -277,7 +277,7 @@ export default function Kaffe() {
       <section className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-brand-950 leading-tight">Kaffe + HelloFresh = bästa kombon</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-brand-950 leading-tight">Kaffe + Matkassar = bästa kombon</h2>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white rounded-3xl p-8 border-2 border-amber-300 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
@@ -292,12 +292,12 @@ export default function Kaffe() {
             <div className="relative bg-white rounded-3xl p-8 border border-stone-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
               <img src={dishesBlue} alt="" className="absolute inset-0 w-full h-full object-cover opacity-10" loading="lazy" />
               <div className="relative">
-                <h3 className="text-2xl font-bold text-brand-950 mb-3">HelloFresh matkassar</h3>
+                <h3 className="text-2xl font-bold text-brand-950 mb-3">Matkassar</h3>
                 <p className="text-brand-900/70 mb-4">
                   {pricing.margin_hellofresh} kr per kund, levereras hem till kunden. Ingen faktura, inget lager.
                 </p>
-                <Link to="/hellofresh" className="text-brand-800 font-semibold underline decoration-hf-lime decoration-2 underline-offset-4 hover:text-brand-600 transition">
-                  Utforska HelloFresh →
+                <Link to="/matkassar" className="text-brand-800 font-semibold underline decoration-brand-300 decoration-2 underline-offset-4 hover:text-brand-600 transition">
+                  Utforska Matkassar →
                 </Link>
               </div>
             </div>

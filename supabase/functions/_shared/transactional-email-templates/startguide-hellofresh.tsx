@@ -29,9 +29,9 @@ const StartguideHFEmail = ({ name, schoolName }: StartguideProps) => (
         </Text>
 
         <Section style={card}>
-          <Heading as="h2" style={h2}>Så funkar HelloFresh-försäljningen</Heading>
+          <Heading as="h2" style={h2}>Så funkar Matkasseförsäljningen</Heading>
           <Text style={text}><strong>1. Registrera klassen</strong> — gratis på qlasskassan.se, samma konto som kaffet.</Text>
-          <Text style={text}><strong>2. Dela klassens länk</strong> — kunden anmäler sig på en minut och betalar HelloFresh direkt.</Text>
+          <Text style={text}><strong>2. Dela klassens länk</strong> — kunden anmäler sig på en minut och betalar matkasseleverantören direkt.</Text>
           <Text style={text}><strong>3. Klassen får 150 kr</strong> — per godkänd ny kund, utbetalt till föreningens konto.</Text>
         </Section>
 
@@ -45,7 +45,7 @@ const StartguideHFEmail = ({ name, schoolName }: StartguideProps) => (
           <Button href="https://qlasskassan.se/qlasskassan-hellofresh-avtal.pdf" style={pdfButton}>📄 Samarbetsavtal (PDF)</Button>
         </Section>
         <Section style={{ textAlign: 'center', margin: '24px 0 32px' }}>
-          <Button href="https://qlasskassan.se/hellofresh" style={button}>Registrera klassen</Button>
+          <Button href="https://qlasskassan.se/matkassar" style={button}>Registrera klassen</Button>
         </Section>
 
         <Hr style={hr} />
@@ -63,8 +63,8 @@ const StartguideHFEmail = ({ name, schoolName }: StartguideProps) => (
 
 export const template = {
   component: StartguideHFEmail,
-  subject: 'Er HelloFresh-startguide från Qlasskassan',
-  displayName: 'Startguide HelloFresh',
+  subject: 'Er Matkassar – startguide från Qlasskassan',
+  displayName: 'Startguide Matkassar',
   previewData: { name: 'Anna', schoolName: 'Solskolan' },
 } satisfies TemplateEntry
 
@@ -77,8 +77,8 @@ const h1 = { fontSize: '26px', fontWeight: 'bold', color: '#0B1D45', margin: '0 
 const h2 = { fontSize: '18px', fontWeight: 'bold', color: '#0B1D45', margin: '0 0 12px' }
 const text = { fontSize: '15px', color: '#1c1917', lineHeight: '1.6', margin: '0 0 14px' }
 const card = {
-  backgroundColor: '#eef8e4',
-  border: '1px solid #9be15d',
+  backgroundColor: '#edf4ff',
+  border: '1px solid #bfd3f6',
   borderRadius: '12px',
   padding: '20px 22px',
   margin: '20px 0',

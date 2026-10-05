@@ -166,7 +166,7 @@ export default function StudentsTab({ klass }: Props) {
                     Dela länken eller QR-koden med klassen. Eleverna väljer sitt namn och fyller i hur mycket kaffe de sålt — det adderas automatiskt till deras totalsumma här.
                   </p>
                   <p className="text-xs text-stone-500">
-                    Eleven kan även välja HelloFresh i samma formulär — då fyller kunden i sina egna uppgifter.
+                    Eleven kan även välja Matkassar i samma formulär — då fyller kunden i sina egna uppgifter.
                   </p>
                   <div className="flex items-center gap-2">
                     <Input value={reportUrl} readOnly className="font-mono text-sm" />
@@ -210,9 +210,9 @@ export default function StudentsTab({ klass }: Props) {
                   <div className="col-span-5 font-medium text-brand-950">
                     {s.name}
                     {(hfCounts[s.id] || 0) > 0 && (
-                      <span className="ml-2 inline-flex items-center gap-1 text-xs font-medium bg-hf-soft text-brand-900 rounded-full px-2 py-0.5 align-middle">
+                      <span className="ml-2 inline-flex items-center gap-1 text-xs font-medium bg-brand-50 text-brand-900 rounded-full px-2 py-0.5 align-middle">
                         <Salad className="h-3 w-3" aria-hidden="true" />
-                        {hfCounts[s.id]} HelloFresh
+                        {hfCounts[s.id]} Matkassar
                       </span>
                     )}
                   </div>
@@ -253,7 +253,7 @@ export default function StudentsTab({ klass }: Props) {
                 <span className="font-semibold text-brand-900">
                   {totalGold} Gold · {totalCrema} Crema
                   {Object.values(hfCounts).reduce((a, b) => a + b, 0) > 0 && (
-                    <> · {Object.values(hfCounts).reduce((a, b) => a + b, 0)} HelloFresh ({(Object.values(hfCounts).reduce((a, b) => a + b, 0) * pricing.margin_hellofresh).toLocaleString("sv-SE")} kr)</>
+                    <> · {Object.values(hfCounts).reduce((a, b) => a + b, 0)} Matkassar ({(Object.values(hfCounts).reduce((a, b) => a + b, 0) * pricing.margin_hellofresh).toLocaleString("sv-SE")} kr)</>
                   )}
                 </span>
               </div>

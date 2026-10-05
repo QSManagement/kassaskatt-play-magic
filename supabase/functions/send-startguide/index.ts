@@ -10,7 +10,7 @@ const Body = z.object({
   name: z.string().trim().min(2).max(120),
   email: z.string().trim().email().max(255),
   school_name: z.string().trim().min(2).max(120),
-  product: z.enum(["kaffe", "hellofresh"]).optional().default("kaffe"),
+  product: z.enum(["kaffe", "matkassar", "hellofresh"]).optional().default("kaffe"),
 });
 
 Deno.serve(async (req) => {
@@ -52,7 +52,7 @@ Deno.serve(async (req) => {
       "send-transactional-email",
       {
         body: {
-          templateName: product === "hellofresh" ? "startguide-hellofresh" : "startguide",
+          templateName: product !== "kaffe" ? "startguide-matkassar" : "startguide",
           recipientEmail: email,
           idempotencyKey: `startguide-${product}-${email}-${Date.now()}`,
           templateData: { name, schoolName: school_name },
