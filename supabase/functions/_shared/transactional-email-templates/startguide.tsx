@@ -45,7 +45,7 @@ const StartguideEmail = ({ name, schoolName }: StartguideProps) => (
         </Section>
 
         <Section style={{ textAlign: 'center', margin: '32px 0' }}>
-          <Button href="https://qlasskassan.se/__l5e/assets-v1/2e97f8c4-dca8-4684-b867-1d755d24582a/qlasskassan-startguide-priser-2026.pdf" style={pdfButton}>
+          <Button href="https://qlasskassan.se/__l5e/assets-v1/ad622c41-f20c-4337-810b-abebcca7c8e6/qlasskassan-startguide-logo2026.pdf" style={pdfButton}>
             📄 Ladda ner startguide (PDF)
           </Button>
         </Section>
