@@ -51,16 +51,16 @@ export default function ProfitCalculator({
                 <label className="font-semibold text-emerald-950">Antal elever i klassen</label>
                 <span className="text-3xl font-bold text-emerald-900">{students}</span>
               </div>
-              <input type="range" min="10" max="50" value={students} onChange={(e) => setStudents(Number(e.target.value))} className={`${slider} accent-emerald-800`} aria-label="Antal elever" />
-              <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>10</span><span>50</span></div>
+              <input type="range" min="1" max="50" value={students} onChange={(e) => setStudents(Number(e.target.value))} className={`${slider} accent-emerald-800`} aria-label="Antal elever" />
+              <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>1</span><span>50</span></div>
             </div>
             <div>
               <div className="flex justify-between items-baseline mb-3">
                 <label className="font-semibold text-emerald-950">Förpackningar per elev</label>
                 <span className="text-3xl font-bold text-emerald-900">{bagsPerStudent}</span>
               </div>
-              <input type="range" min="1" max="50" value={bagsPerStudent} onChange={(e) => setBagsPerStudent(Number(e.target.value))} className={`${slider} accent-emerald-800`} aria-label="Förpackningar per elev" />
-              <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>1</span><span>50</span></div>
+              <input type="range" min="0" max="50" value={bagsPerStudent} onChange={(e) => setBagsPerStudent(Number(e.target.value))} className={`${slider} accent-emerald-800`} aria-label="Förpackningar per elev" />
+              <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>0</span><span>50</span></div>
               <div className="text-xs text-emerald-900/60 mt-2">Snitt hos våra klasser: 8 förpackningar/elev</div>
             </div>
             <div>
@@ -77,8 +77,8 @@ export default function ProfitCalculator({
                   <label className="font-semibold text-emerald-950">HelloFresh-kunder</label>
                   <span className="text-3xl font-bold text-emerald-900">{hfCustomersRaw}</span>
                 </div>
-                <input type="range" min="0" max="30" value={hfCustomersRaw} onChange={(e) => setHfCustomers(Number(e.target.value))} className={`${slider} accent-emerald-800`} aria-label="Antal HelloFresh-kunder" />
-                <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>0</span><span>30</span></div>
+                <input type="range" min="0" max="50" value={hfCustomersRaw} onChange={(e) => setHfCustomers(Number(e.target.value))} className={`${slider} accent-emerald-800`} aria-label="Antal HelloFresh-kunder" />
+                <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>0</span><span>50</span></div>
                 <div className="text-xs text-emerald-900/60 mt-2">{pricing.margin_hellofresh} kr till klassen per godkänd anmälan — kunderna anmäler sig själva via er länk.</div>
               </div>
             )}
