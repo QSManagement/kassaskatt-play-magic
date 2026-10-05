@@ -69,12 +69,14 @@ export default function HelloFresh() {
         </div>
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 bg-hf-soft text-emerald-950 px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-hf-lime/40">
-              <Sparkles className="w-4 h-4" aria-hidden="true" />
-              Nyhet i Qlasskassan
-            </div>
-            <div className="mb-6">
-              <HelloFreshLockup />
+            {/* Qlasskassan-loggan finns redan i menyn, här visas bara partnern */}
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-6">
+              <span className="inline-flex items-center gap-1.5 bg-hf-soft text-brand-950 px-3 py-1 rounded-full text-sm font-medium border border-hf-lime/40">
+                <Sparkles className="w-4 h-4" aria-hidden="true" />
+                Nyhet
+              </span>
+              <span className="text-sm text-brand-900/60">I samarbete med</span>
+              <img src={hfLogo} alt="HelloFresh" className="h-6 w-auto" />
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-emerald-950 leading-[1.05] tracking-tight mb-6">
               Sälj HelloFresh —{" "}
@@ -131,12 +133,12 @@ export default function HelloFresh() {
       {/* Trust strip */}
       <section className="py-10 border-y border-stone-200 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center text-xs uppercase tracking-widest text-emerald-900/50 mb-6">I samarbete med</div>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            <img src={hfLogo} alt="HelloFresh" className="h-8 w-auto" loading="lazy" />
-            <div className="text-sm text-emerald-900/60">Färska råvaror</div>
-            <div className="text-sm text-emerald-900/60">Recept steg för steg</div>
-            <div className="text-sm text-emerald-900/60">Levereras hem till dörren</div>
+          <div className="flex flex-wrap justify-center items-center gap-x-10 gap-y-3">
+            {["Färska råvaror", "Recept steg för steg", "Levereras hem till dörren"].map((t) => (
+              <div key={t} className="flex items-center gap-2 text-sm font-medium text-brand-900/70">
+                <Check className="w-4 h-4 text-hf-green" aria-hidden="true" /> {t}
+              </div>
+            ))}
           </div>
         </div>
       </section>

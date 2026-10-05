@@ -102,7 +102,9 @@ export default function Index() {
                 <img src={hfBox} alt="HelloFresh matkasse" className="h-20 md:h-32 w-auto object-contain rounded-xl drop-shadow-lg" />
               </div>
               <div className="flex flex-col flex-1">
-                <img src={hfLogo} alt="HelloFresh" className="h-5 md:h-6 w-auto self-start mb-2" />
+                <div className="flex items-center gap-2 text-xl md:text-2xl font-bold text-brand-950 mb-1">
+                  <Salad className="w-5 h-5 text-hf-green" aria-hidden="true" /> HelloFresh
+                </div>
                 <p className="text-xs md:text-sm text-emerald-900/80 mb-3">
                   {pricing.margin_hellofresh} kr per kund · inget lager, ingen faktura
                 </p>

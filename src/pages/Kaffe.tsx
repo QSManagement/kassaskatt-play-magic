@@ -172,7 +172,9 @@ export default function Kaffe() {
             <div className="relative">
               <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-amber-200">
                 <div className="flex items-center gap-3 mb-6">
-                  <Logo size="md" variant="dark" showWordmark={false} />
+                  <div className="w-12 h-12 rounded-2xl bg-brand-900 text-amber-300 flex items-center justify-center shrink-0" aria-hidden="true">
+                    <Repeat className="w-6 h-6" />
+                  </div>
                   <div>
                     <div className="font-bold text-emerald-950">Klass 6B - Lindbladskolan</div>
                     <div className="text-xs text-emerald-900/60">Aktiv återköpsklubb</div>
