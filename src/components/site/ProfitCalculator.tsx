@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Calculator, Repeat } from "lucide-react";
+import { ArrowRight, Calculator, Coffee, Repeat, Salad } from "lucide-react";
 import { usePricing } from "@/hooks/usePricing";
 
 export default function ProfitCalculator({
@@ -10,13 +10,15 @@ export default function ProfitCalculator({
   onRegister: () => void;
 }) {
   const pricing = usePricing();
+  const [coffeeOn, setCoffeeOn] = useState(true);
+  const [hfOn, setHfOn] = useState(true);
   const [students, setStudents] = useState(25);
   const [bagsPerStudent, setBagsPerStudent] = useState(10);
   const [cremaRatio, setCremaRatio] = useState(60);
   const [hfCustomersRaw, setHfCustomers] = useState(5);
-  const hfCustomers = includeHelloFresh ? hfCustomersRaw : 0;
+  const hfCustomers = includeHelloFresh && hfOn ? hfCustomersRaw : 0;
 
-  const totalBags = students * bagsPerStudent;
+  const totalBags = coffeeOn ? students * bagsPerStudent : 0;
   const cremaBags = Math.round(totalBags * (cremaRatio / 100));
   const goldBags = totalBags - cremaBags;
   const cremaEarnings = cremaBags * pricing.margin_crema;
@@ -27,6 +29,39 @@ export default function ProfitCalculator({
   const grandTotal = coffeeEarnings + hfEarnings;
 
   const slider = "w-full h-2 bg-stone-200 rounded-full appearance-none cursor-pointer";
+  const checkboxBase = "flex items-center gap-3 px-4 py-3 rounded-2xl border-2 transition cursor-pointer select-none text-left";
+  const checkboxOn = "border-emerald-900 bg-white shadow-sm";
+  const checkboxOff = "border-stone-300 bg-stone-100 opacity-70";
+
+  const productToggle = (
+    checked: boolean,
+    onToggle: () => void,
+    icon: React.ReactNode,
+    label: string,
+  ) => (
+    <button
+      type="button"
+      role="checkbox"
+      aria-checked={checked}
+      onClick={onToggle}
+      className={`${checkboxBase} ${checked ? checkboxOn : checkboxOff}`}
+    >
+      <span
+        className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 ${
+          checked ? "border-emerald-900 bg-emerald-900 text-white" : "border-stone-400"
+        }`}
+        aria-hidden="true"
+      >
+        {checked && (
+          <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="3">
+            <path d="M4 12l5 5L20 6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        )}
+      </span>
+      {icon}
+      <span className="font-semibold text-emerald-950">{label}</span>
+    </button>
+  );
 
   return (
     <section id="kalkylator" className="scroll-mt-28 py-24 px-6 bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-950 relative overflow-hidden">
@@ -41,37 +76,45 @@ export default function ProfitCalculator({
           <h2 className="text-4xl md:text-5xl font-bold text-amber-50 mb-4 leading-tight">
             Hur mycket kan <span className="italic text-amber-300">er klass</span> tjäna?
           </h2>
-          <p className="text-amber-100/70 text-lg">Justera och se direkt hur mycket som hamnar i kassan.</p>
+          <p className="text-amber-100/70 text-lg">Välj vad ni vill sälja och justera — se direkt hur mycket som hamnar i kassan.</p>
         </div>
 
         <div className="bg-amber-50 rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl grid md:grid-cols-2 gap-12">
           <div className="space-y-8">
-            <div>
-              <div className="flex justify-between items-baseline mb-3">
-                <label className="font-semibold text-emerald-950">Antal elever i klassen</label>
-                <span className="text-3xl font-bold text-emerald-900">{students}</span>
-              </div>
-              <input type="range" min="1" max="50" value={students} onChange={(e) => setStudents(Number(e.target.value))} className={`${slider} accent-emerald-800`} aria-label="Antal elever" />
-              <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>1</span><span>50</span></div>
+            <div className="grid grid-cols-2 gap-3">
+              {productToggle(coffeeOn, () => setCoffeeOn(!coffeeOn), <Coffee className="w-5 h-5 text-amber-700" aria-hidden="true" />, "Kaffe")}
+              {includeHelloFresh && productToggle(hfOn, () => setHfOn(!hfOn), <Salad className="w-5 h-5 text-hf-lime" aria-hidden="true" />, "HelloFresh")}
             </div>
-            <div>
-              <div className="flex justify-between items-baseline mb-3">
-                <label className="font-semibold text-emerald-950">Förpackningar per elev</label>
-                <span className="text-3xl font-bold text-emerald-900">{bagsPerStudent}</span>
-              </div>
-              <input type="range" min="0" max="50" value={bagsPerStudent} onChange={(e) => setBagsPerStudent(Number(e.target.value))} className={`${slider} accent-emerald-800`} aria-label="Förpackningar per elev" />
-              <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>0</span><span>50</span></div>
-              <div className="text-xs text-emerald-900/60 mt-2">Snitt hos våra klasser: 8 förpackningar/elev</div>
-            </div>
-            <div>
-              <div className="flex justify-between items-baseline mb-3">
-                <label className="font-semibold text-emerald-950">Andel Crema (premium)</label>
-                <span className="text-3xl font-bold text-emerald-900">{cremaRatio}%</span>
-              </div>
-              <input type="range" min="0" max="100" value={cremaRatio} onChange={(e) => setCremaRatio(Number(e.target.value))} className={`${slider} accent-amber-700`} aria-label="Andel Crema" />
-              <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>Bara Gold</span><span>Bara Crema</span></div>
-            </div>
-            {includeHelloFresh && (
+            {coffeeOn && (
+              <>
+                <div>
+                  <div className="flex justify-between items-baseline mb-3">
+                    <label className="font-semibold text-emerald-950">Antal elever i klassen</label>
+                    <span className="text-3xl font-bold text-emerald-900">{students}</span>
+                  </div>
+                  <input type="range" min="0" max="50" value={students} onChange={(e) => setStudents(Number(e.target.value))} className={`${slider} accent-emerald-800`} aria-label="Antal elever" />
+                  <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>0</span><span>50</span></div>
+                </div>
+                <div>
+                  <div className="flex justify-between items-baseline mb-3">
+                    <label className="font-semibold text-emerald-950">Förpackningar per elev</label>
+                    <span className="text-3xl font-bold text-emerald-900">{bagsPerStudent}</span>
+                  </div>
+                  <input type="range" min="0" max="50" value={bagsPerStudent} onChange={(e) => setBagsPerStudent(Number(e.target.value))} className={`${slider} accent-emerald-800`} aria-label="Förpackningar per elev" />
+                  <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>0</span><span>50</span></div>
+                  <div className="text-xs text-emerald-900/60 mt-2">Snitt hos våra klasser: 8 förpackningar/elev</div>
+                </div>
+                <div>
+                  <div className="flex justify-between items-baseline mb-3">
+                    <label className="font-semibold text-emerald-950">Andel Crema (premium)</label>
+                    <span className="text-3xl font-bold text-emerald-900">{cremaRatio}%</span>
+                  </div>
+                  <input type="range" min="0" max="100" value={cremaRatio} onChange={(e) => setCremaRatio(Number(e.target.value))} className={`${slider} accent-amber-700`} aria-label="Andel Crema" />
+                  <div className="flex justify-between text-xs text-emerald-900/50 mt-1"><span>Bara Gold</span><span>Bara Crema</span></div>
+                </div>
+              </>
+            )}
+            {includeHelloFresh && hfOn && (
               <div>
                 <div className="flex justify-between items-baseline mb-3">
                   <label className="font-semibold text-emerald-950">HelloFresh-kunder</label>
@@ -94,25 +137,31 @@ export default function ProfitCalculator({
               <div className="text-amber-200/60 text-sm mb-3">
                 Baserat på {totalBags} sålda förpackningar{hfCustomers > 0 ? ` + ${hfCustomers} HelloFresh-kunder` : ""}
               </div>
-              <div className="inline-flex items-center gap-2 bg-amber-300/15 text-amber-200 px-3 py-1.5 rounded-full text-xs font-medium mb-8">
-                <Repeat className="w-3 h-3 shrink-0" aria-hidden="true" />
-                + ungefär {reorderEarnings.toLocaleString("sv-SE")} kr extra från Återköpsklubben på kaffet (6 mån)
-              </div>
+              {coffeeOn && (
+                <div className="inline-flex items-center gap-2 bg-amber-300/15 text-amber-200 px-3 py-1.5 rounded-full text-xs font-medium mb-8">
+                  <Repeat className="w-3 h-3 shrink-0" aria-hidden="true" />
+                  + ungefär {reorderEarnings.toLocaleString("sv-SE")} kr extra från Återköpsklubben på kaffet (6 mån)
+                </div>
+              )}
               <div className="space-y-3 pt-6 border-t border-emerald-800">
-                <div className="flex justify-between items-center gap-3">
-                  <span className="text-amber-100/80 text-sm flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-amber-300 shrink-0"></span>
-                    Crema ({cremaBags} förpackningar × {pricing.margin_crema} kr)
-                  </span>
-                  <span className="font-bold whitespace-nowrap">{cremaEarnings.toLocaleString("sv-SE")} kr</span>
-                </div>
-                <div className="flex justify-between items-center gap-3">
-                  <span className="text-amber-100/80 text-sm flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
-                    Gold ({goldBags} förpackningar × {pricing.margin_gold} kr)
-                  </span>
-                  <span className="font-bold whitespace-nowrap">{goldEarnings.toLocaleString("sv-SE")} kr</span>
-                </div>
+                {coffeeOn && (
+                  <>
+                    <div className="flex justify-between items-center gap-3">
+                      <span className="text-amber-100/80 text-sm flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-amber-300 shrink-0"></span>
+                        Crema ({cremaBags} förpackningar × {pricing.margin_crema} kr)
+                      </span>
+                      <span className="font-bold whitespace-nowrap">{cremaEarnings.toLocaleString("sv-SE")} kr</span>
+                    </div>
+                    <div className="flex justify-between items-center gap-3">
+                      <span className="text-amber-100/80 text-sm flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
+                        Gold ({goldBags} förpackningar × {pricing.margin_gold} kr)
+                      </span>
+                      <span className="font-bold whitespace-nowrap">{goldEarnings.toLocaleString("sv-SE")} kr</span>
+                    </div>
+                  </>
+                )}
                 {hfCustomers > 0 && (
                   <div className="flex justify-between items-center gap-3">
                     <span className="text-amber-100/80 text-sm flex items-center gap-2">
@@ -121,6 +170,9 @@ export default function ProfitCalculator({
                     </span>
                     <span className="font-bold whitespace-nowrap">{hfEarnings.toLocaleString("sv-SE")} kr</span>
                   </div>
+                )}
+                {grandTotal === 0 && (
+                  <div className="text-amber-100/60 text-sm">Bocka i kaffe eller HelloFresh för att räkna.</div>
                 )}
               </div>
             </div>
