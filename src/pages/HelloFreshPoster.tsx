@@ -94,7 +94,7 @@ export default function HelloFreshPoster() {
 
           <img
             src={boxImg}
-            alt="Matkassar-låda full av färska grönsaker"
+            alt="Matkasse med färska råvaror – exempelbild"
             className="rounded-3xl w-full max-w-md mx-auto object-cover mb-8"
           />
 

@@ -66,7 +66,7 @@ export function StartguideDialog({ open, onOpenChange, product = "kaffe" }: Prop
       <DialogContent className="max-w-md bg-stone-50 border-stone-200">
         <DialogHeader>
           <DialogTitle className="text-brand-950 text-2xl font-bold">
-            {done ? "Mailet är på väg!" : (product === "matkassar" ? "Få Matkassar – startguiden" : "Få startguiden")}
+            {done ? "Mailet är på väg!" : (product === "matkassar" ? "Få startguiden för Matkassar" : "Få startguiden")}
           </DialogTitle>
           <DialogDescription className="text-brand-900/70">
             {done ? "Kolla din inkorg om en stund." : "Vi mailar dig en PDF med allt ni behöver för att komma igång."}

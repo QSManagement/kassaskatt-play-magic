@@ -25,6 +25,16 @@ import HelloFreshSignup from "./pages/HelloFreshSignup.tsx";
 import HelloFreshPoster from "./pages/HelloFreshPoster.tsx";
 import { AuthProvider, useAuth } from "@/lib/AuthContext";
 
+import mealKitSheet from "@/assets/documents/qlasskassan-matkassar.pdf.asset.json";
+import mealKitGuide from "@/assets/documents/qlasskassan-matkassar-startguide.pdf.asset.json";
+import mealKitAgreement from "@/assets/documents/qlasskassan-matkassar-avtal.pdf.asset.json";
+import { useEffect } from "react";
+
+function DocumentRedirect({ url }: { url: string }) {
+  useEffect(() => { window.location.replace(url); }, [url]);
+  return <a href={url}>Öppna PDF</a>;
+}
+
 const queryClient = new QueryClient();
 
 function ProtectedTeacher({ children }: { children: JSX.Element }) {
@@ -69,6 +79,12 @@ const App = () => (
             <Route path="/villkor" element={<Villkor />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/salj/:code" element={<StudentReport />} />
+            <Route path="/qlasskassan-hellofresh.pdf" element={<DocumentRedirect url={mealKitSheet.url} />} />
+            <Route path="/qlasskassan-matkassar.pdf" element={<DocumentRedirect url={mealKitSheet.url} />} />
+            <Route path="/qlasskassan-hellofresh-startguide.pdf" element={<DocumentRedirect url={mealKitGuide.url} />} />
+            <Route path="/qlasskassan-matkassar-startguide.pdf" element={<DocumentRedirect url={mealKitGuide.url} />} />
+            <Route path="/qlasskassan-hellofresh-avtal.pdf" element={<DocumentRedirect url={mealKitAgreement.url} />} />
+            <Route path="/qlasskassan-matkassar-avtal.pdf" element={<DocumentRedirect url={mealKitAgreement.url} />} />
             <Route path="/kaffe" element={<Kaffe />} />
             <Route path="/hellofresh/*" element={<LegacyMealKitRedirect />} />
             <Route path="/matkassar" element={<HelloFresh />} />

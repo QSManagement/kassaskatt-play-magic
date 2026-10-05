@@ -122,7 +122,7 @@ export default function HelloFreshSignup() {
 
       <img
         src={dishesBlue}
-        alt="Matkassar-rätter på turkos bakgrund"
+        alt="Matkasse med råvaror och tillagade middagar – exempelbild"
         className="w-full h-40 object-cover"
       />
 

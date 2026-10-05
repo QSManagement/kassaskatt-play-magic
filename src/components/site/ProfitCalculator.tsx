@@ -142,7 +142,7 @@ export default function ProfitCalculator({
             {showHf && hfOn && (
               <div>
                 <div className="flex justify-between items-baseline mb-3">
-                  <label className="font-semibold text-brand-950">matkassekunder per elev</label>
+                  <label className="font-semibold text-brand-950">Matkassekunder per elev</label>
                   <span className="text-3xl font-bold text-brand-900">{hfPerStudent}</span>
                 </div>
                 <input type="range" min="0" max="50" value={hfPerStudent} onChange={(e) => setHfPerStudent(Number(e.target.value))} className={`${slider} accent-brand-800`} aria-label="Antal matkassekunder per elev" />

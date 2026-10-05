@@ -208,7 +208,7 @@ export default function HelloFresh() {
             <div className="relative bg-white rounded-3xl p-8 border-2 border-brand-300 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
               <img
                 src={dishesBlue}
-                alt="Matkassar-rätter på turkos bakgrund"
+                alt="Matkasse med råvaror och tillagade middagar – exempelbild"
                 className="absolute inset-0 w-full h-full object-cover opacity-10"
                 loading="lazy"
               />

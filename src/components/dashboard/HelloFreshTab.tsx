@@ -204,7 +204,7 @@ export default function HelloFreshTab({ klass }: { klass: any }) {
             <p className="text-stone-500">Laddar...</p>
           ) : filtered.length === 0 ? (
             <div className="text-center py-8 space-y-4">
-              <img src={boxImg} alt="Matkassar-låda full av grönsaker" className="w-40 mx-auto rounded-2xl" loading="lazy" />
+              <img src={boxImg} alt="Matkasse med färska råvaror – exempelbild" className="w-40 mx-auto rounded-2xl" loading="lazy" />
               <p className="text-stone-500 text-sm">
                 {signups.length === 0 ? "Inga kunder än — dela länken med klassen!" : "Inga anmälningar med den statusen."}
               </p>
