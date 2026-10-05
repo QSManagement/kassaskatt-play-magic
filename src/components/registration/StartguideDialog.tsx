@@ -65,10 +65,10 @@ export function StartguideDialog({ open, onOpenChange, product = "kaffe" }: Prop
     <Dialog open={open} onOpenChange={(o) => !o && close()}>
       <DialogContent className="max-w-md bg-stone-50 border-stone-200">
         <DialogHeader>
-          <DialogTitle className="text-emerald-950 text-2xl font-bold">
+          <DialogTitle className="text-brand-950 text-2xl font-bold">
             {done ? "Mailet är på väg!" : (product === "hellofresh" ? "Få HelloFresh-startguiden" : "Få startguiden")}
           </DialogTitle>
-          <DialogDescription className="text-emerald-900/70">
+          <DialogDescription className="text-brand-900/70">
             {done ? "Kolla din inkorg om en stund." : "Vi mailar dig en PDF med allt ni behöver för att komma igång."}
           </DialogDescription>
         </DialogHeader>
@@ -79,10 +79,10 @@ export function StartguideDialog({ open, onOpenChange, product = "kaffe" }: Prop
             <Field id="sg-email" label="E-post" type="email" value={email} onChange={(e: any) => setEmail(e.target.value)} error={errors.email} />
             <Field id="sg-school" label="Skola" value={school} onChange={(e: any) => setSchool(e.target.value)} error={errors.school_name} />
             <div className="flex justify-end gap-2 mt-6">
-              <button onClick={close} disabled={submitting} className="text-emerald-900 px-5 py-2.5 rounded-full text-sm font-medium hover:bg-stone-200 transition disabled:opacity-50">
+              <button onClick={close} disabled={submitting} className="text-brand-900 px-5 py-2.5 rounded-full text-sm font-medium hover:bg-stone-200 transition disabled:opacity-50">
                 Avbryt
               </button>
-              <button onClick={submit} disabled={submitting} className="bg-emerald-900 text-amber-50 px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-800 transition shadow-sm flex items-center gap-2 disabled:opacity-60">
+              <button onClick={submit} disabled={submitting} className="bg-brand-900 text-amber-50 px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-800 transition shadow-sm flex items-center gap-2 disabled:opacity-60">
                 {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
                 Skicka guiden
               </button>
@@ -90,11 +90,11 @@ export function StartguideDialog({ open, onOpenChange, product = "kaffe" }: Prop
           </div>
         ) : (
           <div className="text-center py-6">
-            <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Check className="w-7 h-7 text-emerald-800" />
+            <div className="w-14 h-14 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Check className="w-7 h-7 text-brand-800" />
             </div>
-            <p className="text-emerald-900/80 mb-6">Guiden skickas till <strong>{email}</strong>.</p>
-            <button onClick={close} className="bg-emerald-900 text-amber-50 px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-800 transition">
+            <p className="text-brand-900/80 mb-6">Guiden skickas till <strong>{email}</strong>.</p>
+            <button onClick={close} className="bg-brand-900 text-amber-50 px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-800 transition">
               Stäng
             </button>
           </div>
@@ -107,7 +107,7 @@ export function StartguideDialog({ open, onOpenChange, product = "kaffe" }: Prop
 function Field({ id, label, value, onChange, error, type = "text" }: any) {
   return (
     <div>
-      <Label htmlFor={id} className="text-emerald-950 font-medium">{label}</Label>
+      <Label htmlFor={id} className="text-brand-950 font-medium">{label}</Label>
       <Input id={id} type={type} value={value} onChange={onChange} className={`mt-1 bg-white border-stone-200 ${error ? "border-red-400" : ""}`} />
       {error && <p className="text-xs text-red-600 mt-1">{error}</p>}
     </div>

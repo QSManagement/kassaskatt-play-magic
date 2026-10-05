@@ -81,8 +81,8 @@ const main = {
   fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
 }
 const container = { padding: '32px 24px', maxWidth: '560px', margin: '0 auto' }
-const h1 = { fontSize: '26px', fontWeight: 'bold', color: '#052e16', margin: '0 0 16px' }
-const h2 = { fontSize: '18px', fontWeight: 'bold', color: '#052e16', margin: '0 0 12px' }
+const h1 = { fontSize: '26px', fontWeight: 'bold', color: '#0B1D45', margin: '0 0 16px' }
+const h2 = { fontSize: '18px', fontWeight: 'bold', color: '#0B1D45', margin: '0 0 12px' }
 const text = { fontSize: '15px', color: '#1c1917', lineHeight: '1.6', margin: '0 0 14px' }
 const card = {
   backgroundColor: '#fffbeb',
@@ -92,7 +92,7 @@ const card = {
   margin: '20px 0',
 }
 const button = {
-  backgroundColor: '#064e3b',
+  backgroundColor: '#102F6B',
   color: '#fffbeb',
   fontSize: '15px',
   fontWeight: 'bold',

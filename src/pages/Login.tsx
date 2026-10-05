@@ -54,9 +54,9 @@ export default function Login() {
           <Logo size="lg" variant="dark" />
         </Link>
 
-        <Card className="border-emerald-100 shadow-lg">
+        <Card className="border-brand-100 shadow-lg">
           <CardHeader>
-            <CardTitle className="text-2xl text-emerald-950">
+            <CardTitle className="text-2xl text-brand-950">
               {resetMode ? "Återställ lösenord" : "Logga in"}
             </CardTitle>
             <p className="text-sm text-stone-600 mt-1">
@@ -107,7 +107,7 @@ export default function Login() {
 
               <Button
                 type="submit"
-                className="w-full bg-emerald-900 hover:bg-emerald-800"
+                className="w-full bg-brand-900 hover:bg-brand-800"
                 disabled={loading}
               >
                 {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -134,9 +134,9 @@ export default function Login() {
           </CardContent>
         </Card>
         <div className="mt-6 text-center text-xs text-stone-500 space-x-4">
-          <Link to="/integritetspolicy" className="hover:text-emerald-900 hover:underline">Integritetspolicy</Link>
-          <Link to="/villkor" className="hover:text-emerald-900 hover:underline">Villkor</Link>
-          <Link to="/cookies" className="hover:text-emerald-900 hover:underline">Cookies</Link>
+          <Link to="/integritetspolicy" className="hover:text-brand-900 hover:underline">Integritetspolicy</Link>
+          <Link to="/villkor" className="hover:text-brand-900 hover:underline">Villkor</Link>
+          <Link to="/cookies" className="hover:text-brand-900 hover:underline">Cookies</Link>
         </div>
       </div>
     </div>

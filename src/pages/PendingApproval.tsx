@@ -26,7 +26,7 @@ export default function PendingApproval() {
               <Clock className="h-8 w-8 text-amber-700" aria-hidden="true" />
             </div>
 
-            <h1 className="text-2xl font-bold text-emerald-950 mb-3 tracking-tight">
+            <h1 className="text-2xl font-bold text-brand-950 mb-3 tracking-tight">
               Vi granskar er anmälan
             </h1>
 

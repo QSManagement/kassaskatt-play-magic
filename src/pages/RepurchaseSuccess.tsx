@@ -87,16 +87,16 @@ export default function RepurchaseSuccess() {
           <CardContent className="pt-10 pb-10 text-center space-y-6">
             {loading ? (
               <>
-                <Loader2 className="h-10 w-10 mx-auto animate-spin text-emerald-700" />
+                <Loader2 className="h-10 w-10 mx-auto animate-spin text-brand-700" />
                 <p className="text-stone-600">Bekräftar betalning…</p>
               </>
             ) : (
               <>
-                <div className="w-16 h-16 rounded-full bg-emerald-100 mx-auto flex items-center justify-center">
-                  <CheckCircle2 className="h-9 w-9 text-emerald-700" />
+                <div className="w-16 h-16 rounded-full bg-brand-100 mx-auto flex items-center justify-center">
+                  <CheckCircle2 className="h-9 w-9 text-brand-700" />
                 </div>
                 <div className="space-y-2">
-                  <h1 className="text-3xl font-bold text-emerald-950 tracking-tight">
+                  <h1 className="text-3xl font-bold text-brand-950 tracking-tight">
                     Tack för ditt köp!
                   </h1>
                   <p className="text-stone-600 max-w-md mx-auto">
@@ -134,7 +134,7 @@ export default function RepurchaseSuccess() {
                       </span>
                       <span>{order.qty_crema} st</span>
                     </div>
-                    <div className="flex justify-between font-semibold text-emerald-950 pt-1">
+                    <div className="flex justify-between font-semibold text-brand-950 pt-1">
                       <span>Totalt betalt</span>
                       <span>{order.total_to_invoice.toLocaleString("sv-SE")} kr</span>
                     </div>
@@ -142,7 +142,7 @@ export default function RepurchaseSuccess() {
                 )}
 
                 <div className="pt-4">
-                  <Button asChild className="bg-emerald-900 hover:bg-emerald-800">
+                  <Button asChild className="bg-brand-900 hover:bg-brand-800">
                     <Link to="/">Tillbaka till startsidan</Link>
                   </Button>
                 </div>

@@ -80,7 +80,7 @@ export default function AdminPricing() {
   return (
     <div className="space-y-6 max-w-3xl">
       <div>
-        <h1 className="text-2xl font-bold text-emerald-950">Priser</h1>
+        <h1 className="text-2xl font-bold text-brand-950">Priser</h1>
         <p className="text-sm text-stone-600 mt-1">Här ändrar du priser, klassens marginal och återköpsbonus. Ändringar gäller direkt för nya beställningar och uppdaterar texterna på hemsidan.</p>
       </div>
 
@@ -101,11 +101,11 @@ export default function AdminPricing() {
           <CardDescription>{updatedAt ? `Senast uppdaterad: ${new Date(updatedAt).toLocaleString("sv-SE")}` : ""}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <h3 className="text-lg font-semibold text-emerald-950 pt-1">Kaffe</h3>
+          <h3 className="text-lg font-semibold text-brand-950 pt-1">Kaffe</h3>
           {coffeeFields.map((f) => (
             <div key={f.key} className="grid md:grid-cols-2 gap-4 items-start">
               <div>
-                <Label htmlFor={f.key} className="text-emerald-950">{f.label}</Label>
+                <Label htmlFor={f.key} className="text-brand-950">{f.label}</Label>
                 {f.help && <p className="text-xs text-stone-500 mt-1">{f.help}</p>}
               </div>
               <div className="flex items-center gap-2">
@@ -122,11 +122,11 @@ export default function AdminPricing() {
             </div>
           ))}
 
-          <h3 className="text-lg font-semibold text-emerald-950 pt-6 border-t border-stone-200">HelloFresh</h3>
+          <h3 className="text-lg font-semibold text-brand-950 pt-6 border-t border-stone-200">HelloFresh</h3>
           {hellofreshFields.map((f) => (
             <div key={f.key} className="grid md:grid-cols-2 gap-4 items-start">
               <div>
-                <Label htmlFor={f.key} className="text-emerald-950">{f.label}</Label>
+                <Label htmlFor={f.key} className="text-brand-950">{f.label}</Label>
                 {f.help && <p className="text-xs text-stone-500 mt-1">{f.help}</p>}
               </div>
               <div className="flex items-center gap-2">
@@ -144,7 +144,7 @@ export default function AdminPricing() {
           ))}
 
           <div className="pt-4 flex gap-3">
-            <Button onClick={save} disabled={saving} className="bg-emerald-900 hover:bg-emerald-800">
+            <Button onClick={save} disabled={saving} className="bg-brand-900 hover:bg-brand-800">
               {saving && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
               Spara priser
             </Button>

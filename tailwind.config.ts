@@ -57,9 +57,16 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Qlasskassan-blå från loggan
+        brand: {
+          50: "#F0F5FD", 100: "#DEE8FA", 200: "#C0D3F5", 300: "#93B3EC", 400: "#5E8BDD",
+          500: "#3A6BCB", 600: "#2254B5", 700: "#17469E", 800: "#133A85", 900: "#102F6B", 950: "#0B1D45",
+        },
+        // HelloFresh, används bara i HelloFresh-sammanhang
         hf: {
           lime: "#9CDA07",
           soft: "#F3FBE1",
+          green: "#067A46",
         },
       },
       borderRadius: {

@@ -55,13 +55,13 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-stone-50 flex w-full">
-      <aside className="hidden md:flex w-64 bg-emerald-950 text-white flex-col border-r border-emerald-900">
-        <div className="p-6 border-b border-emerald-900">
+      <aside className="hidden md:flex w-64 bg-brand-950 text-white flex-col border-r border-brand-900">
+        <div className="p-6 border-b border-brand-900">
           <Link to="/admin" className="flex items-center gap-3">
             <Logo size="sm" variant="light" />
             <div>
               <p className="font-bold text-lg leading-tight">Qlasskassan</p>
-              <p className="text-xs text-emerald-300 uppercase tracking-wide">Admin</p>
+              <p className="text-xs text-brand-300 uppercase tracking-wide">Admin</p>
             </div>
           </Link>
         </div>
@@ -78,8 +78,8 @@ export default function AdminDashboard() {
                 to={item.to}
                 className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                   isActive
-                    ? "bg-emerald-800 text-white"
-                    : "text-emerald-200 hover:bg-emerald-900 hover:text-white"
+                    ? "bg-brand-800 text-white"
+                    : "text-brand-200 hover:bg-brand-900 hover:text-white"
                 }`}
               >
                 <Icon className="h-4 w-4" aria-hidden="true" />
@@ -89,13 +89,13 @@ export default function AdminDashboard() {
           })}
         </nav>
 
-        <div className="p-4 border-t border-emerald-900">
-          <div className="text-xs text-emerald-300 mb-2 truncate">{user?.email}</div>
+        <div className="p-4 border-t border-brand-900">
+          <div className="text-xs text-brand-300 mb-2 truncate">{user?.email}</div>
           <Button
             variant="ghost"
             size="sm"
             onClick={handleSignOut}
-            className="w-full justify-start text-emerald-200 hover:text-white hover:bg-emerald-900"
+            className="w-full justify-start text-brand-200 hover:text-white hover:bg-brand-900"
           >
             <LogOut className="h-4 w-4 mr-2" aria-hidden="true" />
             Logga ut
@@ -103,7 +103,7 @@ export default function AdminDashboard() {
         </div>
       </aside>
 
-      <div className="md:hidden fixed top-0 left-0 right-0 bg-emerald-950 text-white z-40 px-4 py-3 flex items-center justify-between border-b border-emerald-900">
+      <div className="md:hidden fixed top-0 left-0 right-0 bg-brand-950 text-white z-40 px-4 py-3 flex items-center justify-between border-b border-brand-900">
         <Link to="/admin" className="flex items-center gap-2">
           <Logo size="sm" variant="light" />
           <span className="font-bold">Admin</span>
@@ -112,7 +112,7 @@ export default function AdminDashboard() {
           variant="ghost"
           size="sm"
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="text-emerald-100 hover:bg-emerald-900"
+          className="text-brand-100 hover:bg-brand-900"
         >
           {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </Button>
@@ -124,7 +124,7 @@ export default function AdminDashboard() {
           onClick={() => setSidebarOpen(false)}
         >
           <div
-            className="absolute top-0 left-0 bottom-0 w-72 bg-emerald-950 p-4"
+            className="absolute top-0 left-0 bottom-0 w-72 bg-brand-950 p-4"
             onClick={(e) => e.stopPropagation()}
           >
             <nav className="space-y-1 mt-12">
@@ -135,7 +135,7 @@ export default function AdminDashboard() {
                     key={item.to}
                     to={item.to}
                     onClick={() => setSidebarOpen(false)}
-                    className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-emerald-200 hover:bg-emerald-900 hover:text-white"
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-brand-200 hover:bg-brand-900 hover:text-white"
                   >
                     <Icon className="h-4 w-4" aria-hidden="true" />
                     {item.label}
@@ -144,7 +144,7 @@ export default function AdminDashboard() {
               })}
               <button
                 onClick={handleSignOut}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-emerald-200 hover:bg-emerald-900 hover:text-white"
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-brand-200 hover:bg-brand-900 hover:text-white"
               >
                 <LogOut className="h-4 w-4" aria-hidden="true" />
                 Logga ut

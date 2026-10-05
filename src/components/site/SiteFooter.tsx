@@ -3,7 +3,7 @@ import { Logo } from "@/components/Logo";
 
 export default function SiteFooter() {
   return (
-    <footer className="py-12 px-6 bg-emerald-950 text-amber-100/70">
+    <footer className="py-12 px-6 bg-brand-950 text-amber-100/70">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
@@ -37,7 +37,7 @@ export default function SiteFooter() {
             </ul>
           </div>
         </div>
-        <div className="pt-8 border-t border-emerald-800 text-xs flex flex-wrap justify-between gap-4">
+        <div className="pt-8 border-t border-brand-800 text-xs flex flex-wrap justify-between gap-4">
           <div>© 2026 Qlasskassan · Drivs av Scandinavian Coffee AB</div>
           <div className="flex flex-wrap gap-6">
             <Link to="/villkor" className="hover:text-amber-300 transition">Allmänna villkor</Link>

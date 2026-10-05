@@ -186,7 +186,7 @@ export default function Repurchase() {
             </Link>
             <button
               onClick={() => setClientSecret(null)}
-              className="text-sm text-stone-600 hover:text-emerald-900 inline-flex items-center gap-1"
+              className="text-sm text-stone-600 hover:text-brand-900 inline-flex items-center gap-1"
             >
               <ArrowLeft className="h-4 w-4" /> Tillbaka
             </button>
@@ -221,7 +221,7 @@ export default function Repurchase() {
             <Coffee className="w-4 h-4" aria-hidden="true" />
             Stötta klassen — köp kaffe
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-emerald-950 tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-bold text-brand-950 tracking-tight">
             Återköp för klassen
           </h1>
           <p className="text-stone-600 max-w-xl mx-auto">
@@ -233,7 +233,7 @@ export default function Repurchase() {
         {/* Class code */}
         <Card>
           <CardContent className="pt-6 space-y-3">
-            <Label htmlFor="class-code" className="text-emerald-950 font-semibold">
+            <Label htmlFor="class-code" className="text-brand-950 font-semibold">
               Klasskod
             </Label>
             <div className="relative">
@@ -251,12 +251,12 @@ export default function Repurchase() {
               )}
             </div>
             {klass && (
-              <div className="flex items-start gap-2 rounded-md bg-emerald-50 border border-emerald-200 p-3 text-sm">
-                <CheckCircle2 className="h-5 w-5 text-emerald-700 mt-0.5 flex-shrink-0" />
+              <div className="flex items-start gap-2 rounded-md bg-brand-50 border border-brand-200 p-3 text-sm">
+                <CheckCircle2 className="h-5 w-5 text-brand-700 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="font-semibold text-emerald-950">{klass.school_name}</p>
+                  <p className="font-semibold text-brand-950">{klass.school_name}</p>
                   {klass.class_name && (
-                    <p className="text-emerald-800">{klass.class_name}</p>
+                    <p className="text-brand-800">{klass.class_name}</p>
                   )}
                 </div>
               </div>
@@ -273,7 +273,7 @@ export default function Repurchase() {
         {/* Products */}
         <Card>
           <CardContent className="pt-6 space-y-4">
-            <h2 className="font-semibold text-emerald-950">Välj kaffe</h2>
+            <h2 className="font-semibold text-brand-950">Välj kaffe</h2>
             <ProductRow
               name="Caffè Gondoliere Gold"
               subtitle="500 g malet · 100 % Arabica"
@@ -294,7 +294,7 @@ export default function Repurchase() {
         {/* Delivery */}
         <Card>
           <CardContent className="pt-6 space-y-4">
-            <h2 className="font-semibold text-emerald-950">Leveransadress</h2>
+            <h2 className="font-semibold text-brand-950">Leveransadress</h2>
             <Field
               label="Mottagare"
               value={form.recipient}
@@ -331,7 +331,7 @@ export default function Repurchase() {
         {/* Customer */}
         <Card>
           <CardContent className="pt-6 space-y-4">
-            <h2 className="font-semibold text-emerald-950">Dina uppgifter</h2>
+            <h2 className="font-semibold text-brand-950">Dina uppgifter</h2>
             <Field
               label="Ditt namn"
               value={form.customerName}
@@ -365,7 +365,7 @@ export default function Repurchase() {
         </Card>
 
         {/* Summary */}
-        <Card className="border-emerald-200 bg-white">
+        <Card className="border-brand-200 bg-white">
           <CardContent className="pt-6 space-y-3">
             <div className="flex justify-between text-sm">
               <span className="text-stone-600">Antal förpackningar</span>
@@ -373,11 +373,11 @@ export default function Repurchase() {
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-stone-600">Frakt</span>
-              <span className="text-emerald-700 font-medium">Fri</span>
+              <span className="text-brand-700 font-medium">Fri</span>
             </div>
             <div className="flex justify-between text-base border-t border-stone-200 pt-3">
-              <span className="font-semibold text-emerald-950">Totalt</span>
-              <span className="text-2xl font-bold text-emerald-950">
+              <span className="font-semibold text-brand-950">Totalt</span>
+              <span className="text-2xl font-bold text-brand-950">
                 {total.toLocaleString("sv-SE")} kr
               </span>
             </div>
@@ -398,7 +398,7 @@ export default function Repurchase() {
             <Button
               onClick={handleSubmit}
               disabled={!klass || totalBags === 0 || submitting}
-              className="w-full bg-emerald-900 hover:bg-emerald-800 text-amber-50 h-12 text-base"
+              className="w-full bg-brand-900 hover:bg-brand-800 text-amber-50 h-12 text-base"
             >
               {submitting ? (
                 <>
@@ -439,9 +439,9 @@ function ProductRow({
           <Coffee className="h-5 w-5 text-amber-700" />
         </div>
         <div className="min-w-0">
-          <p className="font-medium text-emerald-950 truncate">{name}</p>
+          <p className="font-medium text-brand-950 truncate">{name}</p>
           <p className="text-xs text-stone-500 truncate">{subtitle}</p>
-          <p className="text-sm text-emerald-900 mt-0.5">{price} kr / förpackning</p>
+          <p className="text-sm text-brand-900 mt-0.5">{price} kr / förpackning</p>
         </div>
       </div>
       <div className="flex items-center gap-2 flex-shrink-0">

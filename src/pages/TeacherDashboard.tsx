@@ -71,7 +71,7 @@ export default function TeacherDashboard() {
           <div className="flex items-center gap-4">
             <Logo size="sm" variant="dark" />
             <div className="hidden md:block">
-              <h1 className="text-lg font-bold text-emerald-950 leading-tight">
+              <h1 className="text-lg font-bold text-brand-950 leading-tight">
                 {klass.school_name}
               </h1>
               <p className="text-sm text-stone-600">

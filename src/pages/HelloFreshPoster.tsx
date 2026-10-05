@@ -43,11 +43,11 @@ export default function HelloFreshPoster() {
       <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4">
         <Card className="max-w-md w-full">
           <CardHeader>
-            <CardTitle className="text-emerald-950">Klassen hittades inte</CardTitle>
+            <CardTitle className="text-brand-950">Klassen hittades inte</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-stone-600 mb-4">Kontrollera klasskoden och försök igen.</p>
-            <Link to="/" className="text-emerald-700 underline">Till startsidan</Link>
+            <Link to="/" className="text-brand-700 underline">Till startsidan</Link>
           </CardContent>
         </Card>
       </div>
@@ -67,7 +67,7 @@ export default function HelloFreshPoster() {
       `}</style>
 
       <div className="no-print max-w-3xl mx-auto px-4 pt-6 flex justify-end">
-        <Button onClick={() => window.print()} className="bg-emerald-900 hover:bg-emerald-800 rounded-full">
+        <Button onClick={() => window.print()} className="bg-brand-900 hover:bg-brand-800 rounded-full">
           <Printer className="h-4 w-4 mr-2" aria-hidden="true" />
           Skriv ut
         </Button>
@@ -80,12 +80,12 @@ export default function HelloFreshPoster() {
           </div>
 
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-5xl font-bold text-emerald-950 leading-tight mb-3">
+            <h1 className="text-3xl md:text-5xl font-bold text-brand-950 leading-tight mb-3">
               Stötta {klass.class_name} — bli HelloFresh-kund
             </h1>
-            <p className="text-xl text-emerald-900/80">
+            <p className="text-xl text-brand-900/80">
               Klassen får{" "}
-              <span className="bg-hf-lime px-2 py-0.5 rounded font-bold text-emerald-950">
+              <span className="bg-hf-lime px-2 py-0.5 rounded font-bold text-brand-950">
                 {pricing.margin_hellofresh} kr
               </span>{" "}
               när du anmäler dig
@@ -100,18 +100,18 @@ export default function HelloFreshPoster() {
 
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="flex justify-center">
-              <div className="bg-white p-4 rounded-2xl border-2 border-emerald-900">
+              <div className="bg-white p-4 rounded-2xl border-2 border-brand-900">
                 <QRCodeSVG value={url} size={220} />
               </div>
             </div>
             <div className="text-center md:text-left space-y-4">
-              <p className="text-lg text-emerald-950 font-semibold">
+              <p className="text-lg text-brand-950 font-semibold">
                 Skanna QR-koden eller gå till:
               </p>
-              <p className="font-mono text-emerald-900 break-all bg-hf-soft border border-hf-lime rounded-xl p-3">
+              <p className="font-mono text-brand-900 break-all bg-hf-soft border border-hf-lime rounded-xl p-3">
                 {url}
               </p>
-              <ul className="text-emerald-900/80 space-y-2 text-left">
+              <ul className="text-brand-900/80 space-y-2 text-left">
                 <li>✓ Matkassar med recept och färska råvaror</li>
                 <li>✓ Levereras hem till dörren</li>
                 <li>✓ Du stöttar {klass.class_name} på {klass.school_name}</li>

@@ -43,7 +43,7 @@ const container = { padding: '20px 25px' }
 const h1 = {
   fontSize: '24px',
   fontWeight: 'bold' as const,
-  color: '#022c22',
+  color: '#0B1D45',
   margin: '0 0 20px',
   letterSpacing: '-0.01em',
 }

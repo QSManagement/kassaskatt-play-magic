@@ -103,19 +103,19 @@ export default function AdminOverview() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-emerald-950 tracking-tight">Översikt</h1>
+        <h1 className="text-3xl font-bold text-brand-950 tracking-tight">Översikt</h1>
         <p className="text-stone-600 mt-1">Allt du behöver veta om Qlasskassan just nu.</p>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <KpiCard icon={GraduationCap} label="Aktiva klasser" value={stats.activeClasses} color="emerald" />
+        <KpiCard icon={GraduationCap} label="Aktiva klasser" value={stats.activeClasses} color="brand" />
         <KpiCard icon={Inbox} label="Väntande leads" value={stats.pendingLeads} color="amber" link="/admin/leads" />
-        <KpiCard icon={Package} label="Ordrar denna månad" value={stats.ordersThisMonth} color="emerald" link="/admin/ordrar" />
+        <KpiCard icon={Package} label="Ordrar denna månad" value={stats.ordersThisMonth} color="brand" link="/admin/ordrar" />
         <KpiCard
           icon={Salad}
           label="HelloFresh-anmälningar"
           value={`${stats.hellofreshSignups} · ${stats.hellofreshTotal.toLocaleString("sv-SE")} kr`}
-          color="emerald"
+          color="brand"
           link="/admin/hellofresh"
         />
         <KpiCard
@@ -127,31 +127,31 @@ export default function AdminOverview() {
         />
       </div>
 
-      <Card className="bg-gradient-to-br from-emerald-950 to-emerald-900 text-white border-0">
+      <Card className="bg-gradient-to-br from-brand-950 to-brand-900 text-white border-0">
         <CardContent className="pt-8 pb-8">
           <div className="grid md:grid-cols-3 gap-6">
             <div>
-              <p className="text-emerald-200 text-xs uppercase tracking-wide">Total fakturerat</p>
+              <p className="text-brand-200 text-xs uppercase tracking-wide">Total fakturerat</p>
               <p className="text-4xl font-bold mt-2 tracking-tight">
                 {stats.totalRevenue.toLocaleString("sv-SE")}{" "}
-                <span className="text-2xl text-emerald-200">kr</span>
+                <span className="text-2xl text-brand-200">kr</span>
               </p>
-              <p className="text-emerald-300 text-sm mt-1">Inkl. moms 6%</p>
+              <p className="text-brand-300 text-sm mt-1">Inkl. moms 6%</p>
             </div>
             <div>
-              <p className="text-emerald-200 text-xs uppercase tracking-wide">Till klasser</p>
+              <p className="text-brand-200 text-xs uppercase tracking-wide">Till klasser</p>
               <p className="text-4xl font-bold mt-2 tracking-tight">
                 {stats.totalToClasses.toLocaleString("sv-SE")}{" "}
-                <span className="text-2xl text-emerald-200">kr</span>
+                <span className="text-2xl text-brand-200">kr</span>
               </p>
-              <p className="text-emerald-300 text-sm mt-1">Klassens andel</p>
+              <p className="text-brand-300 text-sm mt-1">Klassens andel</p>
             </div>
             <div>
-              <p className="text-emerald-200 text-xs uppercase tracking-wide">Sålda förpackningar</p>
+              <p className="text-brand-200 text-xs uppercase tracking-wide">Sålda förpackningar</p>
               <p className="text-4xl font-bold mt-2 tracking-tight">
                 {(stats.totalSoldGold + stats.totalSoldCrema).toLocaleString("sv-SE")}
               </p>
-              <p className="text-emerald-300 text-sm mt-1">
+              <p className="text-brand-300 text-sm mt-1">
                 {stats.totalSoldGold} Gold · {stats.totalSoldCrema} Crema
               </p>
             </div>
@@ -161,7 +161,7 @@ export default function AdminOverview() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-emerald-950">
+          <CardTitle className="flex items-center gap-2 text-brand-950">
             <TrendingUp className="h-5 w-5" aria-hidden="true" />
             Top-presterande klasser
           </CardTitle>
@@ -175,17 +175,17 @@ export default function AdminOverview() {
                 <Link
                   key={c.id}
                   to={`/admin/klasser/${c.id}`}
-                  className="flex items-center justify-between p-3 rounded-lg border border-stone-200 hover:border-emerald-300 hover:bg-emerald-50/50 transition-colors group"
+                  className="flex items-center justify-between p-3 rounded-lg border border-stone-200 hover:border-brand-300 hover:bg-brand-50/50 transition-colors group"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">
+                    <div className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-sm">
                       {i + 1}
                     </div>
-                    <p className="font-medium text-emerald-950">{c.name}</p>
+                    <p className="font-medium text-brand-950">{c.name}</p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <p className="font-bold text-emerald-900">{c.total.toLocaleString("sv-SE")} kr</p>
-                    <ArrowRight className="h-4 w-4 text-stone-400 group-hover:text-emerald-700" aria-hidden="true" />
+                    <p className="font-bold text-brand-900">{c.total.toLocaleString("sv-SE")} kr</p>
+                    <ArrowRight className="h-4 w-4 text-stone-400 group-hover:text-brand-700" aria-hidden="true" />
                   </div>
                 </Link>
               ))}
@@ -201,26 +201,26 @@ interface KpiCardProps {
   icon: typeof GraduationCap;
   label: string;
   value: string | number;
-  color: "emerald" | "amber";
+  color: "brand" | "amber";
   link?: string;
 }
 
 function KpiCard({ icon: Icon, label, value, color, link }: KpiCardProps) {
   const colorClasses =
-    color === "emerald" ? "border-emerald-200 bg-emerald-50/50" : "border-amber-200 bg-amber-50/50";
+    color === "brand" ? "border-brand-200 bg-brand-50/50" : "border-amber-200 bg-amber-50/50";
 
   const content = (
     <Card className={`${colorClasses} hover:shadow-md transition-shadow`}>
       <CardContent className="pt-6">
         <div className="flex items-start justify-between">
           <Icon
-            className={`h-5 w-5 ${color === "emerald" ? "text-emerald-700" : "text-amber-700"}`}
+            className={`h-5 w-5 ${color === "brand" ? "text-brand-700" : "text-amber-700"}`}
             aria-hidden="true"
           />
           {link && <ArrowRight className="h-4 w-4 text-stone-400" aria-hidden="true" />}
         </div>
         <p className="text-stone-600 text-sm mt-3">{label}</p>
-        <p className="text-2xl font-bold text-emerald-950 mt-1">{value}</p>
+        <p className="text-2xl font-bold text-brand-950 mt-1">{value}</p>
       </CardContent>
     </Card>
   );

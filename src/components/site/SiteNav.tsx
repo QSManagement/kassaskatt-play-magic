@@ -15,7 +15,7 @@ const LINKS = [
 
 function NewBadge() {
   return (
-    <span className="bg-hf-lime text-emerald-950 text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+    <span className="bg-hf-lime text-brand-950 text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
       Ny
     </span>
   );
@@ -56,7 +56,7 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
         <Link to="/" aria-label="Qlasskassan – startsida" className="flex items-center shrink-0">
           <Logo size="sm" variant="dark" />
         </Link>
-        <div className="hidden lg:flex items-center gap-5 text-sm font-medium text-emerald-950">
+        <div className="hidden lg:flex items-center gap-5 text-sm font-medium text-brand-950">
           <Link
             to="/kaffe"
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition hover:text-amber-700 ${onKaffe ? "bg-amber-100 text-amber-900" : ""}`}
@@ -65,7 +65,7 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
           </Link>
           <Link
             to="/hellofresh"
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition hover:text-emerald-700 ${onHf ? "bg-hf-soft" : ""}`}
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full transition hover:text-brand-700 ${onHf ? "bg-hf-soft" : ""}`}
           >
             <Salad className="w-4 h-4" aria-hidden="true" /> HelloFresh <NewBadge />
           </Link>
@@ -80,7 +80,7 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
           <Link
             to="/logga-in"
             aria-label="Logga in"
-            className="hidden sm:inline-flex items-center gap-1.5 text-emerald-950 hover:text-amber-700 transition text-sm font-medium px-3 py-2"
+            className="hidden sm:inline-flex items-center gap-1.5 text-brand-950 hover:text-amber-700 transition text-sm font-medium px-3 py-2"
           >
             <LogIn className="w-4 h-4" aria-hidden="true" />
             Logga in
@@ -89,7 +89,7 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
             <button
               onClick={onRegister}
               aria-label="Starta försäljning"
-              className="hidden sm:inline-flex bg-emerald-900 text-amber-50 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-800 transition shadow-sm"
+              className="hidden sm:inline-flex bg-brand-900 text-amber-50 px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-brand-800 transition shadow-sm"
             >
               Starta försäljning
             </button>
@@ -98,7 +98,7 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
             <SheetTrigger asChild>
               <button
                 aria-label="Öppna meny"
-                className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full bg-emerald-900 text-amber-50"
+                className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full bg-brand-900 text-amber-50"
               >
                 <Menu className="w-5 h-5" />
               </button>
@@ -111,7 +111,7 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
                   onClick={close}
                   className="w-9 h-9 rounded-full hover:bg-stone-200 inline-flex items-center justify-center"
                 >
-                  <X className="w-5 h-5 text-emerald-950" />
+                  <X className="w-5 h-5 text-brand-950" />
                 </button>
               </div>
               <div className="grid grid-cols-2 gap-3 mb-6">
@@ -121,17 +121,17 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
                   className={`rounded-2xl p-3 bg-gradient-to-br from-amber-100 to-amber-50 border ${onKaffe ? "border-amber-500" : "border-amber-200"} flex flex-col`}
                 >
                   <img src={coffeeCrema} alt="" className="h-16 w-auto object-contain self-center mb-2" />
-                  <span className="font-bold text-emerald-950 inline-flex items-center gap-1"><Coffee className="w-4 h-4" aria-hidden="true" /> Kaffe</span>
+                  <span className="font-bold text-brand-950 inline-flex items-center gap-1"><Coffee className="w-4 h-4" aria-hidden="true" /> Kaffe</span>
                   <span className="text-xs text-amber-900">Upp till {pricing.margin_crema} kr/förp</span>
                 </Link>
                 <Link
                   to="/hellofresh"
                   onClick={close}
-                  className={`rounded-2xl p-3 bg-hf-soft border ${onHf ? "border-emerald-700" : "border-hf-lime/60"} flex flex-col`}
+                  className={`rounded-2xl p-3 bg-hf-soft border ${onHf ? "border-brand-700" : "border-hf-lime/60"} flex flex-col`}
                 >
                   <img src={hfBox} alt="" className="h-16 w-auto object-contain self-center mb-2 rounded-lg" />
-                  <span className="font-bold text-emerald-950 inline-flex flex-wrap items-center gap-1">HelloFresh <NewBadge /></span>
-                  <span className="text-xs text-emerald-900">{pricing.margin_hellofresh} kr/kund</span>
+                  <span className="font-bold text-brand-950 inline-flex flex-wrap items-center gap-1">HelloFresh <NewBadge /></span>
+                  <span className="text-xs text-brand-900">{pricing.margin_hellofresh} kr/kund</span>
                 </Link>
               </div>
               <nav className="flex flex-col gap-1">
@@ -140,7 +140,7 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
                     key={l.href}
                     to={l.href}
                     onClick={close}
-                    className="px-4 py-3 rounded-xl text-emerald-950 font-medium hover:bg-amber-100 transition"
+                    className="px-4 py-3 rounded-xl text-brand-950 font-medium hover:bg-amber-100 transition"
                   >
                     {l.label}
                   </Link>
@@ -152,7 +152,7 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
                     close();
                     onRegister();
                   }}
-                  className="mt-6 w-full bg-emerald-900 text-amber-50 px-5 py-3 rounded-full text-sm font-semibold hover:bg-emerald-800 transition"
+                  className="mt-6 w-full bg-brand-900 text-amber-50 px-5 py-3 rounded-full text-sm font-semibold hover:bg-brand-800 transition"
                 >
                   Starta försäljning
                 </button>
@@ -160,7 +160,7 @@ export default function SiteNav({ onRegister }: { onRegister?: () => void }) {
               <Link
                 to="/logga-in"
                 onClick={close}
-                className="mt-3 w-full inline-flex items-center justify-center gap-2 border-2 border-emerald-900 text-emerald-900 px-5 py-3 rounded-full text-sm font-semibold hover:bg-emerald-900 hover:text-amber-50 transition"
+                className="mt-3 w-full inline-flex items-center justify-center gap-2 border-2 border-brand-900 text-brand-900 px-5 py-3 rounded-full text-sm font-semibold hover:bg-brand-900 hover:text-amber-50 transition"
               >
                 <LogIn className="w-4 h-4" aria-hidden="true" />
                 Logga in

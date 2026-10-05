@@ -116,7 +116,7 @@ export default function AdminOrders() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-emerald-950 tracking-tight">Ordrar</h1>
+        <h1 className="text-3xl font-bold text-brand-950 tracking-tight">Ordrar</h1>
         <p className="text-stone-600 mt-1">
           {filtered.length} {tab === "class" ? "klassordrar" : "återköpsordrar"} ·{" "}
           {totals.revenue.toLocaleString("sv-SE")} kr {tab === "class" ? "fakturerat" : "intäkt"}
@@ -140,13 +140,13 @@ export default function AdminOrders() {
         <Card>
           <CardContent className="pt-6">
             <p className="text-xs text-stone-600">Antal ordrar</p>
-            <p className="text-2xl font-bold text-emerald-950">{filtered.length}</p>
+            <p className="text-2xl font-bold text-brand-950">{filtered.length}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
             <p className="text-xs text-stone-600">{tab === "class" ? "Total fakturerat" : "Total intäkt"}</p>
-            <p className="text-2xl font-bold text-emerald-950">
+            <p className="text-2xl font-bold text-brand-950">
               {totals.revenue.toLocaleString("sv-SE")} kr
             </p>
           </CardContent>
@@ -154,7 +154,7 @@ export default function AdminOrders() {
         <Card>
           <CardContent className="pt-6">
             <p className="text-xs text-stone-600">Till klasser</p>
-            <p className="text-2xl font-bold text-emerald-950">
+            <p className="text-2xl font-bold text-brand-950">
               {totals.toClass.toLocaleString("sv-SE")} kr
             </p>
           </CardContent>
@@ -162,7 +162,7 @@ export default function AdminOrders() {
         <Card>
           <CardContent className="pt-6">
             <p className="text-xs text-stone-600">Förpackningar</p>
-            <p className="text-2xl font-bold text-emerald-950">{totals.gold + totals.crema}</p>
+            <p className="text-2xl font-bold text-brand-950">{totals.gold + totals.crema}</p>
           </CardContent>
         </Card>
       </div>
@@ -210,10 +210,10 @@ export default function AdminOrders() {
                     </TableCell>
                     <TableCell>
                       {tab === "repurchase" && o.customer_name && (
-                        <p className="font-medium text-emerald-950">{o.customer_name}</p>
+                        <p className="font-medium text-brand-950">{o.customer_name}</p>
                       )}
                       <Link to={`/admin/klasser/${o.class_id}`} className="hover:underline block">
-                        <p className={tab === "repurchase" ? "text-xs text-stone-600" : "font-medium text-emerald-950"}>
+                        <p className={tab === "repurchase" ? "text-xs text-stone-600" : "font-medium text-brand-950"}>
                           {o.class_registrations?.school_name}
                           {o.class_registrations?.class_name && ` · ${o.class_registrations.class_name}`}
                         </p>
@@ -225,7 +225,7 @@ export default function AdminOrders() {
                     <TableCell className="text-sm">
                       {o.qty_gold} G + {o.qty_crema} C
                     </TableCell>
-                    <TableCell className="font-semibold text-emerald-900">
+                    <TableCell className="font-semibold text-brand-900">
                       {Number(o.total_to_invoice).toLocaleString("sv-SE")} kr
                       <span className="block italic text-xs font-normal text-stone-500">
                         varav moms 6 %: {Math.round(Number(o.total_to_invoice) - Number(o.total_to_invoice) / 1.06).toLocaleString("sv-SE")} kr

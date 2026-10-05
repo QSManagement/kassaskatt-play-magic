@@ -57,7 +57,7 @@ export default function HelloFreshSignup() {
         <main className="max-w-md mx-auto px-4 py-12">
           <Card>
             <CardHeader>
-              <CardTitle className="text-emerald-950">Ange klasskod</CardTitle>
+              <CardTitle className="text-brand-950">Ange klasskod</CardTitle>
               <p className="text-sm text-stone-600">
                 Skriv klasskoden du fått av eleven eller läraren, t.ex. <code className="font-mono">KAF-AB12C</code>.
               </p>
@@ -79,7 +79,7 @@ export default function HelloFreshSignup() {
                   maxLength={20}
                   autoFocus
                 />
-                <Button type="submit" className="w-full bg-emerald-900 hover:bg-emerald-800 rounded-full">
+                <Button type="submit" className="w-full bg-brand-900 hover:bg-brand-800 rounded-full">
                   Fortsätt
                 </Button>
               </form>
@@ -99,13 +99,13 @@ export default function HelloFreshSignup() {
       <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4">
         <Card className="max-w-md w-full">
           <CardHeader>
-            <CardTitle className="text-emerald-950">Klassen hittades inte</CardTitle>
+            <CardTitle className="text-brand-950">Klassen hittades inte</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-stone-600 mb-4">
               Klasskoden <strong>{code}</strong> finns inte eller så är klassen inte aktiv. Kontrollera länken med din lärare.
             </p>
-            <Link to="/hellofresh/anmal" className="text-emerald-700 underline">Försök med en annan kod</Link>
+            <Link to="/hellofresh/anmal" className="text-brand-700 underline">Försök med en annan kod</Link>
           </CardContent>
         </Card>
       </div>
@@ -129,7 +129,7 @@ export default function HelloFreshSignup() {
       <main className="max-w-2xl mx-auto px-4 py-8 space-y-6">
         <Card className="border-hf-lime border-2 bg-hf-soft">
           <CardContent className="pt-6">
-            <p className="text-emerald-950">
+            <p className="text-brand-950">
               Du stöttar <strong>{klass.class_name}</strong> på <strong>{klass.school_name}</strong> — klassen
               får <span className="bg-hf-lime px-1.5 py-0.5 rounded font-bold">{pricing.margin_hellofresh} kr</span>{" "}
               när du blir HelloFresh-kund.
@@ -139,7 +139,7 @@ export default function HelloFreshSignup() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-emerald-950">Anmäl dig till HelloFresh</CardTitle>
+            <CardTitle className="text-brand-950">Anmäl dig till HelloFresh</CardTitle>
             <p className="text-sm text-stone-600">
               Fyll i dina uppgifter så skickar vi dem till HelloFresh, som kontaktar dig och startar din leverans. Du betalar HelloFresh direkt.
             </p>
